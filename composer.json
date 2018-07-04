@@ -1,0 +1,33 @@
+{
+	"name": "postfinancecheckout/sdk",
+	"description": "PostFinance Checkout SDK for PHP",
+	"keywords": [
+		"postfinancecheckout",
+		"payment",
+		"php",
+		"sdk",
+		"api"
+	],
+	"homepage": "https://www.postfinance.ch/",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "customweb GmbH",
+			"homepage": "https://customweb.com"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"ext-json": "*",
+		"ext-mbstring": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.8"
+	},
+	"autoload": {
+		"psr-4": { "PostFinanceCheckout\\Sdk\\" : "lib/" }
+	},
+	"autoload-dev": {
+		"psr-4": { "PostFinanceCheckout\\Sdk\\" : "test/" }
+	}
+}
