@@ -303,7 +303,11 @@ final class SocketHttpClient implements IHttpClient {
 			$host = ($request->isSecureConnection() ? $this->getSslProtocol() . '://' : '') . $request->getHost();
 			$port = $request->getPort();
 		}
-		$socket = $host . ':' . $port;
+		
+		$socket = $host;
+		if(!empty($port)){
+			$socket .= ':' . $port;
+		}
 
 		$filePointer = @stream_socket_client($socket, $errno, $errstr, $apiClient->getConnectionTimeout(), STREAM_CLIENT_CONNECT,
 				$this->createStreamContext($apiClient, $request));
