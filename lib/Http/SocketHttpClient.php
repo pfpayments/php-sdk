@@ -299,15 +299,18 @@ final class SocketHttpClient implements IHttpClient {
 		if ($proxyUrl !== null) {
 			$host = parse_url($proxyUrl, PHP_URL_HOST);
 			$port = parse_url($proxyUrl, PHP_URL_PORT);
+			if(empty($port)){
+				throw new ConnectionException($request->getUrl(), $request->getLogToken(), "The Proxy URL must contain a port number.");
+			}
+			
 		} else {
 			$host = ($request->isSecureConnection() ? $this->getSslProtocol() . '://' : '') . $request->getHost();
 			$port = $request->getPort();
-		}
-		
-		$socket = $host;
-		if(!empty($port)){
-			$socket .= ':' . $port;
-		}
+			if(empty($port)){
+				$port = $request->isSecureConnection() ? 443 : 80;
+			}	
+		}			
+		$socket = $host . ':' . $port;
 
 		$filePointer = @stream_socket_client($socket, $errno, $errstr, $apiClient->getConnectionTimeout(), STREAM_CLIENT_CONNECT,
 				$this->createStreamContext($apiClient, $request));
