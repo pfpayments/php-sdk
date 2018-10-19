@@ -130,7 +130,7 @@ class Space  {
 	private $postalAddress;
 
 	/**
-	 * The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
+	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
 	 *
 	 * @var int
 	 */
@@ -389,7 +389,7 @@ class Space  {
 	/**
 	 * Returns requestLimit.
 	 *
-	 * The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
+	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
 	 *
 	 * @return int
 	 */

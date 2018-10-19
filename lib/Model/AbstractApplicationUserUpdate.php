@@ -47,6 +47,7 @@ class AbstractApplicationUserUpdate  {
 	 */
 	private static $swaggerTypes = array(
 		'name' => 'string',
+		'requestLimit' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'	);
 
 	/**
@@ -68,6 +69,13 @@ class AbstractApplicationUserUpdate  {
 	private $name;
 
 	/**
+	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+	 *
+	 * @var int
+	 */
+	private $requestLimit;
+
+	/**
 	 * 
 	 *
 	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
@@ -83,6 +91,9 @@ class AbstractApplicationUserUpdate  {
 	public function __construct(array $data = null) {
 		if (isset($data['name'])) {
 			$this->setName($data['name']);
+		}
+		if (isset($data['requestLimit'])) {
+			$this->setRequestLimit($data['requestLimit']);
 		}
 		if (isset($data['state'])) {
 			$this->setState($data['state']);
@@ -109,6 +120,29 @@ class AbstractApplicationUserUpdate  {
 	 */
 	public function setName($name) {
 		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Returns requestLimit.
+	 *
+	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+	 *
+	 * @return int
+	 */
+	public function getRequestLimit() {
+		return $this->requestLimit;
+	}
+
+	/**
+	 * Sets requestLimit.
+	 *
+	 * @param int $requestLimit
+	 * @return AbstractApplicationUserUpdate
+	 */
+	public function setRequestLimit($requestLimit) {
+		$this->requestLimit = $requestLimit;
 
 		return $this;
 	}

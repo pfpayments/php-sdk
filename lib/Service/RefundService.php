@@ -368,6 +368,116 @@ class RefundService {
 	}
 
 	/**
+	 * Operation getRefundDocumentWithTargetMediaType
+	 *
+	 * getRefundDocumentWithTargetMediaType
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @param int $targetMediaTypeId The id of the target media type for which the refund should be generated for. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\RenderedDocument
+	 */
+	public function getRefundDocumentWithTargetMediaType($spaceId, $id, $targetMediaTypeId) {
+		return $this->getRefundDocumentWithTargetMediaTypeWithHttpInfo($spaceId, $id, $targetMediaTypeId)->getData();
+	}
+
+	/**
+	 * Operation getRefundDocumentWithTargetMediaTypeWithHttpInfo
+	 *
+	 * getRefundDocumentWithTargetMediaType
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @param int $targetMediaTypeId The id of the target media type for which the refund should be generated for. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function getRefundDocumentWithTargetMediaTypeWithHttpInfo($spaceId, $id, $targetMediaTypeId) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getRefundDocumentWithTargetMediaType');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getRefundDocumentWithTargetMediaType');
+		}
+		// verify the required parameter 'targetMediaTypeId' is set
+		if ($targetMediaTypeId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $targetMediaTypeId when calling getRefundDocumentWithTargetMediaType');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+		if ($targetMediaTypeId !== null) {
+			$queryParams['targetMediaTypeId'] = $this->apiClient->getSerializer()->toQueryValue($targetMediaTypeId);
+		}
+
+		// path params
+		$resourcePath = "/refund/getRefundDocumentWithTargetMediaType";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\PostFinanceCheckout\Sdk\Model\RenderedDocument',
+				'/refund/getRefundDocumentWithTargetMediaType'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation read
 	 *
 	 * Read
@@ -511,7 +621,7 @@ class RefundService {
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
 		$queryParams = array();

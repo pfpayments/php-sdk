@@ -27,13 +27,14 @@ namespace PostFinanceCheckout\Sdk\Model;
  * TokenizationnMode model
  *
  * @category    Class
- * @description The tokenization mode controls how tokens are applied on the transaction.
+ * @description The tokenization mode controls how the tokenization of payment information is applied on the transaction.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TokenizationnMode implements IEnum {
 
+	const FORCE_UPDATE = 'FORCE_UPDATE';
 	const FORCE_CREATION = 'FORCE_CREATION';
 	const FORCE_CREATION_WITH_ONE_CLICK_PAYMENT = 'FORCE_CREATION_WITH_ONE_CLICK_PAYMENT';
 	const ALLOW_ONE_CLICK_PAYMENT = 'ALLOW_ONE_CLICK_PAYMENT';

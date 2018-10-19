@@ -49,6 +49,7 @@ class ApplicationUser extends User  {
 	private static $swaggerTypes = array(
 		'name' => 'string',
 		'primaryAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
+		'requestLimit' => 'int',
 	);
 
 	/**
@@ -75,6 +76,13 @@ class ApplicationUser extends User  {
 	 * @var \PostFinanceCheckout\Sdk\Model\Account
 	 */
 	private $primaryAccount;
+
+	/**
+	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+	 *
+	 * @var int
+	 */
+	private $requestLimit;
 
 
 	/**
@@ -136,6 +144,29 @@ class ApplicationUser extends User  {
 	 */
 	public function setPrimaryAccount($primaryAccount) {
 		$this->primaryAccount = $primaryAccount;
+
+		return $this;
+	}
+
+	/**
+	 * Returns requestLimit.
+	 *
+	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+	 *
+	 * @return int
+	 */
+	public function getRequestLimit() {
+		return $this->requestLimit;
+	}
+
+	/**
+	 * Sets requestLimit.
+	 *
+	 * @param int $requestLimit
+	 * @return ApplicationUser
+	 */
+	protected function setRequestLimit($requestLimit) {
+		$this->requestLimit = $requestLimit;
 
 		return $this;
 	}

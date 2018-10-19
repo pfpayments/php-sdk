@@ -47,6 +47,7 @@ class TransactionInvoiceReplacement  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'billingAddress' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
 		'dueOn' => '\DateTime',
 		'externalId' => 'string',
 		'lineItems' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
@@ -63,6 +64,13 @@ class TransactionInvoiceReplacement  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\AddressCreate
+	 */
+	private $billingAddress;
 
 	/**
 	 * The date on which the invoice should be paid on.
@@ -106,6 +114,9 @@ class TransactionInvoiceReplacement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['billingAddress'])) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
 		if (isset($data['dueOn'])) {
 			$this->setDueOn($data['dueOn']);
 		}
@@ -123,6 +134,29 @@ class TransactionInvoiceReplacement  {
 		}
 	}
 
+
+	/**
+	 * Returns billingAddress.
+	 *
+	 * 
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\AddressCreate
+	 */
+	public function getBillingAddress() {
+		return $this->billingAddress;
+	}
+
+	/**
+	 * Sets billingAddress.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billingAddress
+	 * @return TransactionInvoiceReplacement
+	 */
+	public function setBillingAddress($billingAddress) {
+		$this->billingAddress = $billingAddress;
+
+		return $this;
+	}
 
 	/**
 	 * Returns dueOn.

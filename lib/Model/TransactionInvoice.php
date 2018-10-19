@@ -48,6 +48,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 */
 	private static $swaggerTypes = array(
 		'amount' => 'float',
+		'billingAddress' => '\PostFinanceCheckout\Sdk\Model\Address',
 		'completion' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 		'createdOn' => '\DateTime',
 		'derecognizedOn' => '\DateTime',
@@ -82,6 +83,13 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 * @var float
 	 */
 	private $amount;
+
+	/**
+	 * 
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\Address
+	 */
+	private $billingAddress;
 
 	/**
 	 * 
@@ -204,6 +212,9 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['billingAddress'])) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
 		if (isset($data['completion'])) {
 			$this->setCompletion($data['completion']);
 		}
@@ -238,6 +249,29 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 */
 	protected function setAmount($amount) {
 		$this->amount = $amount;
+
+		return $this;
+	}
+
+	/**
+	 * Returns billingAddress.
+	 *
+	 * 
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\Address
+	 */
+	public function getBillingAddress() {
+		return $this->billingAddress;
+	}
+
+	/**
+	 * Sets billingAddress.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\Address $billingAddress
+	 * @return TransactionInvoice
+	 */
+	public function setBillingAddress($billingAddress) {
+		$this->billingAddress = $billingAddress;
 
 		return $this;
 	}
