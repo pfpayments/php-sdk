@@ -50,8 +50,10 @@ class AbstractHumanUserUpdate  {
 		'firstname' => 'string',
 		'language' => 'string',
 		'lastname' => 'string',
+		'mobilePhoneNumber' => 'string',
 		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'timeZone' => 'string'	);
+		'timeZone' => 'string',
+		'twoFactorEnabled' => 'bool'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -95,6 +97,13 @@ class AbstractHumanUserUpdate  {
 	/**
 	 * 
 	 *
+	 * @var string
+	 */
+	private $mobilePhoneNumber;
+
+	/**
+	 * 
+	 *
 	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
 	 */
 	private $state;
@@ -105,6 +114,13 @@ class AbstractHumanUserUpdate  {
 	 * @var string
 	 */
 	private $timeZone;
+
+	/**
+	 * Defines whether two-factor authentication is enabled for this user.
+	 *
+	 * @var bool
+	 */
+	private $twoFactorEnabled;
 
 
 	/**
@@ -125,11 +141,17 @@ class AbstractHumanUserUpdate  {
 		if (isset($data['lastname'])) {
 			$this->setLastname($data['lastname']);
 		}
+		if (isset($data['mobilePhoneNumber'])) {
+			$this->setMobilePhoneNumber($data['mobilePhoneNumber']);
+		}
 		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 		if (isset($data['timeZone'])) {
 			$this->setTimeZone($data['timeZone']);
+		}
+		if (isset($data['twoFactorEnabled'])) {
+			$this->setTwoFactorEnabled($data['twoFactorEnabled']);
 		}
 	}
 
@@ -227,6 +249,29 @@ class AbstractHumanUserUpdate  {
 	}
 
 	/**
+	 * Returns mobilePhoneNumber.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getMobilePhoneNumber() {
+		return $this->mobilePhoneNumber;
+	}
+
+	/**
+	 * Sets mobilePhoneNumber.
+	 *
+	 * @param string $mobilePhoneNumber
+	 * @return AbstractHumanUserUpdate
+	 */
+	public function setMobilePhoneNumber($mobilePhoneNumber) {
+		$this->mobilePhoneNumber = $mobilePhoneNumber;
+
+		return $this;
+	}
+
+	/**
 	 * Returns state.
 	 *
 	 * 
@@ -268,6 +313,29 @@ class AbstractHumanUserUpdate  {
 	 */
 	public function setTimeZone($timeZone) {
 		$this->timeZone = $timeZone;
+
+		return $this;
+	}
+
+	/**
+	 * Returns twoFactorEnabled.
+	 *
+	 * Defines whether two-factor authentication is enabled for this user.
+	 *
+	 * @return bool
+	 */
+	public function getTwoFactorEnabled() {
+		return $this->twoFactorEnabled;
+	}
+
+	/**
+	 * Sets twoFactorEnabled.
+	 *
+	 * @param bool $twoFactorEnabled
+	 * @return AbstractHumanUserUpdate
+	 */
+	public function setTwoFactorEnabled($twoFactorEnabled) {
+		$this->twoFactorEnabled = $twoFactorEnabled;
 
 		return $this;
 	}

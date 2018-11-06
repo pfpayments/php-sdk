@@ -24,7 +24,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use PostFinanceCheckout\Sdk\ValidationException;
 
 /**
- * DocumentTemplateType model
+ * TwoFactorAuthenticationType model
  *
  * @category    Class
  * @description 
@@ -32,14 +32,14 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DocumentTemplateType  {
+class TwoFactorAuthenticationType  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'DocumentTemplateType';
+	private static $swaggerModelName = 'TwoFactorAuthenticationType';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -49,9 +49,9 @@ class DocumentTemplateType  {
 	private static $swaggerTypes = array(
 		'description' => 'map[string,string]',
 		'feature' => 'int',
-		'group' => '\PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup',
+		'icon' => 'string',
 		'id' => 'int',
-		'title' => 'map[string,string]'	);
+		'name' => 'map[string,string]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -81,9 +81,9 @@ class DocumentTemplateType  {
 	/**
 	 * 
 	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
+	 * @var string
 	 */
-	private $group;
+	private $icon;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -97,7 +97,7 @@ class DocumentTemplateType  {
 	 *
 	 * @var map[string,string]
 	 */
-	private $title;
+	private $name;
 
 
 	/**
@@ -109,11 +109,8 @@ class DocumentTemplateType  {
 		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['group'])) {
-			$this->setGroup($data['group']);
-		}
-		if (isset($data['title'])) {
-			$this->setTitle($data['title']);
+		if (isset($data['name'])) {
+			$this->setName($data['name']);
 		}
 	}
 
@@ -133,7 +130,7 @@ class DocumentTemplateType  {
 	 * Sets description.
 	 *
 	 * @param map[string,string] $description
-	 * @return DocumentTemplateType
+	 * @return TwoFactorAuthenticationType
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
@@ -156,7 +153,7 @@ class DocumentTemplateType  {
 	 * Sets feature.
 	 *
 	 * @param int $feature
-	 * @return DocumentTemplateType
+	 * @return TwoFactorAuthenticationType
 	 */
 	protected function setFeature($feature) {
 		$this->feature = $feature;
@@ -165,24 +162,24 @@ class DocumentTemplateType  {
 	}
 
 	/**
-	 * Returns group.
+	 * Returns icon.
 	 *
 	 * 
 	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
+	 * @return string
 	 */
-	public function getGroup() {
-		return $this->group;
+	public function getIcon() {
+		return $this->icon;
 	}
 
 	/**
-	 * Sets group.
+	 * Sets icon.
 	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group
-	 * @return DocumentTemplateType
+	 * @param string $icon
+	 * @return TwoFactorAuthenticationType
 	 */
-	public function setGroup($group) {
-		$this->group = $group;
+	protected function setIcon($icon) {
+		$this->icon = $icon;
 
 		return $this;
 	}
@@ -202,7 +199,7 @@ class DocumentTemplateType  {
 	 * Sets id.
 	 *
 	 * @param int $id
-	 * @return DocumentTemplateType
+	 * @return TwoFactorAuthenticationType
 	 */
 	protected function setId($id) {
 		$this->id = $id;
@@ -211,24 +208,24 @@ class DocumentTemplateType  {
 	}
 
 	/**
-	 * Returns title.
+	 * Returns name.
 	 *
 	 * 
 	 *
 	 * @return map[string,string]
 	 */
-	public function getTitle() {
-		return $this->title;
+	public function getName() {
+		return $this->name;
 	}
 
 	/**
-	 * Sets title.
+	 * Sets name.
 	 *
-	 * @param map[string,string] $title
-	 * @return DocumentTemplateType
+	 * @param map[string,string] $name
+	 * @return TwoFactorAuthenticationType
 	 */
-	public function setTitle($title) {
-		$this->title = $title;
+	public function setName($name) {
+		$this->name = $name;
 
 		return $this;
 	}

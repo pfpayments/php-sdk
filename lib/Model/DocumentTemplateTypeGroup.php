@@ -24,7 +24,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use PostFinanceCheckout\Sdk\ValidationException;
 
 /**
- * DocumentTemplateType model
+ * DocumentTemplateTypeGroup model
  *
  * @category    Class
  * @description 
@@ -32,14 +32,14 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DocumentTemplateType  {
+class DocumentTemplateTypeGroup  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'DocumentTemplateType';
+	private static $swaggerModelName = 'DocumentTemplateTypeGroup';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -47,9 +47,6 @@ class DocumentTemplateType  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'description' => 'map[string,string]',
-		'feature' => 'int',
-		'group' => '\PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup',
 		'id' => 'int',
 		'title' => 'map[string,string]'	);
 
@@ -63,27 +60,6 @@ class DocumentTemplateType  {
 	}
 
 	
-
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $feature;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
-	 */
-	private $group;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -106,86 +82,11 @@ class DocumentTemplateType  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['group'])) {
-			$this->setGroup($data['group']);
-		}
 		if (isset($data['title'])) {
 			$this->setTitle($data['title']);
 		}
 	}
 
-
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return DocumentTemplateType
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-
-		return $this;
-	}
-
-	/**
-	 * Returns feature.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getFeature() {
-		return $this->feature;
-	}
-
-	/**
-	 * Sets feature.
-	 *
-	 * @param int $feature
-	 * @return DocumentTemplateType
-	 */
-	protected function setFeature($feature) {
-		$this->feature = $feature;
-
-		return $this;
-	}
-
-	/**
-	 * Returns group.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
-	 */
-	public function getGroup() {
-		return $this->group;
-	}
-
-	/**
-	 * Sets group.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group
-	 * @return DocumentTemplateType
-	 */
-	public function setGroup($group) {
-		$this->group = $group;
-
-		return $this;
-	}
 
 	/**
 	 * Returns id.
@@ -202,7 +103,7 @@ class DocumentTemplateType  {
 	 * Sets id.
 	 *
 	 * @param int $id
-	 * @return DocumentTemplateType
+	 * @return DocumentTemplateTypeGroup
 	 */
 	protected function setId($id) {
 		$this->id = $id;
@@ -225,7 +126,7 @@ class DocumentTemplateType  {
 	 * Sets title.
 	 *
 	 * @param map[string,string] $title
-	 * @return DocumentTemplateType
+	 * @return DocumentTemplateTypeGroup
 	 */
 	public function setTitle($title) {
 		$this->title = $title;

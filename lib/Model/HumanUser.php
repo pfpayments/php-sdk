@@ -52,9 +52,13 @@ class HumanUser  {
 		'firstname' => 'string',
 		'language' => 'string',
 		'lastname' => 'string',
+		'mobilePhoneNumber' => 'string',
+		'mobilePhoneVerified' => 'bool',
 		'primaryAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
 		'scope' => '\PostFinanceCheckout\Sdk\Model\Scope',
-		'timeZone' => 'string'	);
+		'timeZone' => 'string',
+		'twoFactorEnabled' => 'bool',
+		'twoFactorType' => '\PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -103,6 +107,20 @@ class HumanUser  {
 	private $lastname;
 
 	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $mobilePhoneNumber;
+
+	/**
+	 * Defines whether a users mobile phone number is verified or not.
+	 *
+	 * @var bool
+	 */
+	private $mobilePhoneVerified;
+
+	/**
 	 * The primary account links the user to a specific account.
 	 *
 	 * @var \PostFinanceCheckout\Sdk\Model\Account
@@ -123,6 +141,20 @@ class HumanUser  {
 	 */
 	private $timeZone;
 
+	/**
+	 * Defines whether two-factor authentication is enabled for this user.
+	 *
+	 * @var bool
+	 */
+	private $twoFactorEnabled;
+
+	/**
+	 * 
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType
+	 */
+	private $twoFactorType;
+
 
 	/**
 	 * Constructor.
@@ -135,6 +167,9 @@ class HumanUser  {
 		}
 		if (isset($data['scope'])) {
 			$this->setScope($data['scope']);
+		}
+		if (isset($data['twoFactorType'])) {
+			$this->setTwoFactorType($data['twoFactorType']);
 		}
 	}
 
@@ -255,6 +290,52 @@ class HumanUser  {
 	}
 
 	/**
+	 * Returns mobilePhoneNumber.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getMobilePhoneNumber() {
+		return $this->mobilePhoneNumber;
+	}
+
+	/**
+	 * Sets mobilePhoneNumber.
+	 *
+	 * @param string $mobilePhoneNumber
+	 * @return HumanUser
+	 */
+	protected function setMobilePhoneNumber($mobilePhoneNumber) {
+		$this->mobilePhoneNumber = $mobilePhoneNumber;
+
+		return $this;
+	}
+
+	/**
+	 * Returns mobilePhoneVerified.
+	 *
+	 * Defines whether a users mobile phone number is verified or not.
+	 *
+	 * @return bool
+	 */
+	public function getMobilePhoneVerified() {
+		return $this->mobilePhoneVerified;
+	}
+
+	/**
+	 * Sets mobilePhoneVerified.
+	 *
+	 * @param bool $mobilePhoneVerified
+	 * @return HumanUser
+	 */
+	protected function setMobilePhoneVerified($mobilePhoneVerified) {
+		$this->mobilePhoneVerified = $mobilePhoneVerified;
+
+		return $this;
+	}
+
+	/**
 	 * Returns primaryAccount.
 	 *
 	 * The primary account links the user to a specific account.
@@ -319,6 +400,52 @@ class HumanUser  {
 	 */
 	protected function setTimeZone($timeZone) {
 		$this->timeZone = $timeZone;
+
+		return $this;
+	}
+
+	/**
+	 * Returns twoFactorEnabled.
+	 *
+	 * Defines whether two-factor authentication is enabled for this user.
+	 *
+	 * @return bool
+	 */
+	public function getTwoFactorEnabled() {
+		return $this->twoFactorEnabled;
+	}
+
+	/**
+	 * Sets twoFactorEnabled.
+	 *
+	 * @param bool $twoFactorEnabled
+	 * @return HumanUser
+	 */
+	protected function setTwoFactorEnabled($twoFactorEnabled) {
+		$this->twoFactorEnabled = $twoFactorEnabled;
+
+		return $this;
+	}
+
+	/**
+	 * Returns twoFactorType.
+	 *
+	 * 
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType
+	 */
+	public function getTwoFactorType() {
+		return $this->twoFactorType;
+	}
+
+	/**
+	 * Sets twoFactorType.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType $twoFactorType
+	 * @return HumanUser
+	 */
+	public function setTwoFactorType($twoFactorType) {
+		$this->twoFactorType = $twoFactorType;
 
 		return $this;
 	}

@@ -53,6 +53,7 @@ class Role  {
 		'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
 		'plannedPurgeDate' => '\DateTime',
 		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+		'twoFactorRequired' => 'bool',
 		'version' => 'int'	);
 
 	/**
@@ -107,6 +108,13 @@ class Role  {
 	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
 	 */
 	private $state;
+
+	/**
+	 * Defines whether having been granted this role will force a user to use two-factor authentication.
+	 *
+	 * @var bool
+	 */
+	private $twoFactorRequired;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -277,6 +285,29 @@ class Role  {
 	 */
 	public function setState($state) {
 		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Returns twoFactorRequired.
+	 *
+	 * Defines whether having been granted this role will force a user to use two-factor authentication.
+	 *
+	 * @return bool
+	 */
+	public function getTwoFactorRequired() {
+		return $this->twoFactorRequired;
+	}
+
+	/**
+	 * Sets twoFactorRequired.
+	 *
+	 * @param bool $twoFactorRequired
+	 * @return Role
+	 */
+	protected function setTwoFactorRequired($twoFactorRequired) {
+		$this->twoFactorRequired = $twoFactorRequired;
 
 		return $this;
 	}

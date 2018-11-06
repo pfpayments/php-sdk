@@ -55,7 +55,8 @@ class Permission  {
 		'name' => 'map[string,string]',
 		'parent' => 'int',
 		'pathToRoot' => 'int[]',
-		'title' => 'map[string,string]'	);
+		'title' => 'map[string,string]',
+		'twoFactorRequired' => 'bool'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -130,6 +131,13 @@ class Permission  {
 	 * @var map[string,string]
 	 */
 	private $title;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $twoFactorRequired;
 
 
 	/**
@@ -356,6 +364,29 @@ class Permission  {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+
+		return $this;
+	}
+
+	/**
+	 * Returns twoFactorRequired.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getTwoFactorRequired() {
+		return $this->twoFactorRequired;
+	}
+
+	/**
+	 * Sets twoFactorRequired.
+	 *
+	 * @param bool $twoFactorRequired
+	 * @return Permission
+	 */
+	protected function setTwoFactorRequired($twoFactorRequired) {
+		$this->twoFactorRequired = $twoFactorRequired;
 
 		return $this;
 	}

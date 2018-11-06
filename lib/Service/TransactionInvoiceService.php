@@ -478,6 +478,107 @@ class TransactionInvoiceService {
 	}
 
 	/**
+	 * Operation markAsDerecognized
+	 *
+	 * Mark as Derecognized
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction invoice which should be marked as derecognized. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice
+	 */
+	public function markAsDerecognized($spaceId, $id) {
+		return $this->markAsDerecognizedWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation markAsDerecognizedWithHttpInfo
+	 *
+	 * Mark as Derecognized
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction invoice which should be marked as derecognized. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function markAsDerecognizedWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling markAsDerecognized');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling markAsDerecognized');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/transaction-invoice/markAsDerecognized";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\PostFinanceCheckout\Sdk\Model\TransactionInvoice',
+				'/transaction-invoice/markAsDerecognized'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation markAsPaid
 	 *
 	 * Mark as Paid
