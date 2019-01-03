@@ -54,6 +54,7 @@ class Account  {
 		'parentAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
 		'plannedPurgeDate' => '\DateTime',
 		'restrictedActive' => 'bool',
+		'scope' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\AccountState',
 		'subaccountLimit' => 'int',
 		'type' => '\PostFinanceCheckout\Sdk\Model\AccountType',
@@ -118,6 +119,13 @@ class Account  {
 	 * @var bool
 	 */
 	private $restrictedActive;
+
+	/**
+	 * This is the scope to which the account belongs to.
+	 *
+	 * @var int
+	 */
+	private $scope;
 
 	/**
 	 * 
@@ -329,6 +337,29 @@ class Account  {
 	 */
 	protected function setRestrictedActive($restrictedActive) {
 		$this->restrictedActive = $restrictedActive;
+
+		return $this;
+	}
+
+	/**
+	 * Returns scope.
+	 *
+	 * This is the scope to which the account belongs to.
+	 *
+	 * @return int
+	 */
+	public function getScope() {
+		return $this->scope;
+	}
+
+	/**
+	 * Sets scope.
+	 *
+	 * @param int $scope
+	 * @return Account
+	 */
+	protected function setScope($scope) {
+		$this->scope = $scope;
 
 		return $this;
 	}

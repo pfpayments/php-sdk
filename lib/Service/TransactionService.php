@@ -106,7 +106,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -132,7 +132,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -205,7 +205,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -228,7 +228,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -307,7 +307,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -333,7 +333,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -412,7 +412,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -440,7 +440,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -515,7 +515,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -543,7 +543,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -618,7 +618,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -646,7 +646,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -721,7 +721,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -747,7 +747,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -822,7 +822,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -848,7 +848,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -919,7 +919,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8', 'text/csv'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -947,7 +947,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1016,7 +1016,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1039,7 +1039,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1114,7 +1114,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1140,7 +1140,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1209,7 +1209,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1232,7 +1232,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1307,7 +1307,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
@@ -1333,7 +1333,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1408,7 +1408,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1434,7 +1434,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1509,7 +1509,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
@@ -1535,7 +1535,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1610,7 +1610,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1636,7 +1636,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1711,7 +1711,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array());
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -1737,7 +1737,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1812,7 +1812,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
@@ -1838,7 +1838,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -1907,7 +1907,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
@@ -1930,7 +1930,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -2005,7 +2005,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -2033,7 +2033,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -2108,7 +2108,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
@@ -2136,7 +2136,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call
@@ -2215,7 +2215,7 @@ class TransactionService {
 		// header params
 		$headerParams = array();
 		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if (!is_null($headerAccept)) {
+		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
 		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
@@ -2243,7 +2243,7 @@ class TransactionService {
 		$httpBody = '';
 		if (isset($tempBody)) {
 			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
+		} elseif (!empty($formParams)) {
 			$httpBody = $formParams; // for HTTP post (form)
 		}
 		// make the API Call

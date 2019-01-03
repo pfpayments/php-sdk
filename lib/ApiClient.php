@@ -21,6 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk;
 
+use PostFinanceCheckout\Sdk\ApiException;
+use PostFinanceCheckout\Sdk\VersioningException;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
 use PostFinanceCheckout\Sdk\Http\HttpClientFactory;
 
@@ -407,13 +409,13 @@ final class ApiClient {
 	 * @param string[] $contentType the array of content types
 	 * @return string
 	 */
-	public function selectHeaderContentType($content_type) {
-		if (count($content_type) === 0 or (count($content_type) === 1 and $content_type[0] === '')) {
+	public function selectHeaderContentType($contentType) {
+		if (count($contentType) === 0 or (count($contentType) === 1 and $contentType[0] === '')) {
 			return 'application/json';
-		} elseif (preg_grep("/application\/json/i", $content_type)) {
+		} elseif (preg_grep("/application\/json/i", $contentType)) {
 			return 'application/json';
 		} else {
-			return implode(',', $content_type);
+			return implode(',', $contentType);
 		}
 	}
 

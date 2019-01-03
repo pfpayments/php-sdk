@@ -36,7 +36,7 @@ spl_autoload_register(function ($class) {
 	$prefix = 'PostFinanceCheckout\\Sdk\\';
 
 	// base directory for the namespace prefix
-	$base_dir = __DIR__ . '/lib/';
+	$baseDir = __DIR__ . '/lib/';
 
 	// does the class use the namespace prefix?
 	$len = strlen($prefix);
@@ -46,12 +46,12 @@ spl_autoload_register(function ($class) {
 	}
 
 	// get the relative class name
-	$relative_class = substr($class, $len);
+	$relativeClass = substr($class, $len);
 
 	// replace the namespace prefix with the base directory, replace namespace
 	// separators with directory separators in the relative class name, append
 	// with .php
-	$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+	$file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
 
 	// if the file exists, require it
 	if (file_exists($file)) {

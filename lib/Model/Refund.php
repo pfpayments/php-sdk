@@ -72,6 +72,7 @@ class Refund  {
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
 		'type' => '\PostFinanceCheckout\Sdk\Model\RefundType',
+		'updatedInvoice' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -259,6 +260,13 @@ class Refund  {
 	 * @var \PostFinanceCheckout\Sdk\Model\RefundType
 	 */
 	private $type;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $updatedInvoice;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -887,6 +895,29 @@ class Refund  {
 	 */
 	public function setType($type) {
 		$this->type = $type;
+
+		return $this;
+	}
+
+	/**
+	 * Returns updatedInvoice.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getUpdatedInvoice() {
+		return $this->updatedInvoice;
+	}
+
+	/**
+	 * Sets updatedInvoice.
+	 *
+	 * @param int $updatedInvoice
+	 * @return Refund
+	 */
+	protected function setUpdatedInvoice($updatedInvoice) {
+		$this->updatedInvoice = $updatedInvoice;
 
 		return $this;
 	}

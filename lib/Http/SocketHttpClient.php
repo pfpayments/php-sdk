@@ -21,6 +21,7 @@
 
 namespace PostFinanceCheckout\Sdk\Http;
 
+use PostFinanceCheckout\Sdk\Http\ConnectionException;
 use PostFinanceCheckout\Sdk\ApiClient;
 
 /**
@@ -88,8 +89,7 @@ final class SocketHttpClient implements IHttpClient {
 				$line = $this->readLineFromSocket($apiClient, $request, $socket, 2048);
 				if ($line == "\r\n") {
 					$inBody = true;
-				}
-				else {
+				} else {
 					$parts = explode(':', $line, 2);
 					if (count($parts) == 2) {
 						$headerName = trim(strtolower($parts[0]));
@@ -103,8 +103,7 @@ final class SocketHttpClient implements IHttpClient {
 					}
 				}
 				$responseMessage .= $line;
-			}
-			else {
+			} else {
 				// Check if we can read without chunks
 				if (!$chunked) {
 					$readBytes = 4096;
@@ -117,28 +116,24 @@ final class SocketHttpClient implements IHttpClient {
 						$endReached = true;
 						break;
 					}
-				}
-
-				// Since we have not set any content length we assume that we need to read in chunks.
-				else {
+				} else {
+					// Since we have not set any content length we assume that we need to read in chunks.
 
 					// We have to read the next line to get the chunk length.
 					if ($chunkLength === false) {
 						$line = trim(fgets($socket, 128));
 						$chunkLength = hexdec($line);
-					}
+					} else if ($chunkLength > 0) {
+						// We have to read the chunk, when it is greater than zero. The last one is always 0.
 
-					// We have to read the chunk, when it is greater than zero. The last one is always 0.
-					else if ($chunkLength > 0) {
 						$responseMessage .= $this->readContentFromSocket($apiClient, $request, $socket, $chunkLength);
 
 						// We skip the next line break.
 						fseek($socket, 2, SEEK_CUR);
 						$chunkLength = false;
-					}
+					} else {
+						// The chunk length must be zero. Hence we are finished and we can stop.
 
-					// The chunk length must be zero. Hence we are finished and we can stop.
-					else {
 						$endReached = true;
 						break;
 					}
@@ -148,8 +143,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		if (feof($socket) || $endReached) {
 			return $responseMessage;
-		}
-		else {
+		} else {
 			throw new ConnectionException(null, $request->getLogToken(),
 					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
@@ -178,8 +172,7 @@ final class SocketHttpClient implements IHttpClient {
 			if ($tmp !== false && strlen($tmp) > 0) {
 				$result .= $tmp;
 				$numberOfBytesRead += strlen($tmp);
-			}
-			else {
+			} else {
 				// Wait 100 milliseconds
 				usleep(100 * 1000);
 			}
@@ -188,8 +181,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		if (feof($socket) || $numberOfBytesRead >= $maxNumberOfBytes) {
 			return $result;
-		}
-		else {
+		} else {
 			throw new ConnectionException(null, $request->getLogToken(),
 					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
@@ -214,8 +206,7 @@ final class SocketHttpClient implements IHttpClient {
 			$tmp = fgets($socket, $maxNumberOfBytes);
 			if ($tmp !== false && strlen($tmp) > 0) {
 				$result = $tmp;
-			}
-			else {
+			} else {
 				// Wait 100 milliseconds
 				usleep(100 * 1000);
 			}
@@ -224,8 +215,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		if ($result !== false) {
 			return $result;
-		}
-		else {
+		} else {
 			throw new ConnectionException(null, $request->getLogToken(),
 					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
@@ -299,14 +289,14 @@ final class SocketHttpClient implements IHttpClient {
 		if ($proxyUrl !== null) {
 			$host = parse_url($proxyUrl, PHP_URL_HOST);
 			$port = parse_url($proxyUrl, PHP_URL_PORT);
-			if(empty($port)){
+			if(empty($port)) {
 				throw new ConnectionException($request->getUrl(), $request->getLogToken(), "The Proxy URL must contain a port number.");
 			}
 			
 		} else {
 			$host = ($request->isSecureConnection() ? $this->getSslProtocol() . '://' : '') . $request->getHost();
 			$port = $request->getPort();
-			if(empty($port)){
+			if(empty($port)) {
 				$port = $request->isSecureConnection() ? 443 : 80;
 			}	
 		}			
@@ -405,8 +395,7 @@ final class SocketHttpClient implements IHttpClient {
 				$options['socket'] = array(
 					'bindto' => '0.0.0.0:0'
 				);
-			}
-			elseif ($ipVersion == self::IP_ADDRESS_VERSION_V6) {
+			} elseif ($ipVersion == self::IP_ADDRESS_VERSION_V6) {
 				$options['socket'] = array(
 					'bindto' => '[::]:0'
 				);
@@ -442,11 +431,9 @@ final class SocketHttpClient implements IHttpClient {
 	private function readEnvironmentVariable($name){
 		if (isset($_SERVER[$name])) {
 			return $_SERVER[$name];
-		}
-		else if (isset($_SERVER[strtolower($name)])) {
+		} else if (isset($_SERVER[strtolower($name)])) {
 			return $_SERVER[strtolower($name)];
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

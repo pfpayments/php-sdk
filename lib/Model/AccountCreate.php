@@ -47,7 +47,8 @@ class AccountCreate extends AbstractAccountUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'parentAccount' => 'int'	);
+		'parentAccount' => 'int',
+		'scope' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -67,6 +68,13 @@ class AccountCreate extends AbstractAccountUpdate  {
 	 */
 	private $parentAccount;
 
+	/**
+	 * This is the scope to which the account belongs to.
+	 *
+	 * @var int
+	 */
+	private $scope;
+
 
 	/**
 	 * Constructor.
@@ -78,6 +86,9 @@ class AccountCreate extends AbstractAccountUpdate  {
 
 		if (isset($data['parentAccount'])) {
 			$this->setParentAccount($data['parentAccount']);
+		}
+		if (isset($data['scope'])) {
+			$this->setScope($data['scope']);
 		}
 	}
 
@@ -106,6 +117,29 @@ class AccountCreate extends AbstractAccountUpdate  {
 	}
 
 	/**
+	 * Returns scope.
+	 *
+	 * This is the scope to which the account belongs to.
+	 *
+	 * @return int
+	 */
+	public function getScope() {
+		return $this->scope;
+	}
+
+	/**
+	 * Sets scope.
+	 *
+	 * @param int $scope
+	 * @return AccountCreate
+	 */
+	public function setScope($scope) {
+		$this->scope = $scope;
+
+		return $this;
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -113,6 +147,9 @@ class AccountCreate extends AbstractAccountUpdate  {
 	public function validate() {
 		parent::validate();
 
+		if ($this->getScope() === null) {
+			throw new ValidationException("'scope' can't be null", 'scope', $this);
+		}
 	}
 
 	/**

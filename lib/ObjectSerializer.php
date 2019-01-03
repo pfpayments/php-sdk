@@ -286,8 +286,8 @@ final class ObjectSerializer {
 			$inner = substr($class, 4, -1);
 			$deserialized = array();
 			if (strrpos($inner, ",") !== false) {
-				$subClass_array = explode(',', $inner, 2);
-				$subClass = $subClass_array[1];
+				$subClassArray = explode(',', $inner, 2);
+				$subClass = $subClassArray[1];
 				foreach ($data as $key => $value) {
 					$deserialized[$key] = self::deserialize($value, $subClass, null, $discriminator);
 				}
@@ -327,9 +327,9 @@ final class ObjectSerializer {
 				$filename = tempnam($this->getTempFolderPath(), '');
 			}
 			$deserialized = new \SplFileObject($filename, "w");
-			$byte_written = $deserialized->fwrite($data);
+			$byteWritten = $deserialized->fwrite($data);
 			if ($this->isDebuggingEnabled()) {
-				error_log("[DEBUG] Written $byte_written byte to $filename. Please move the file to a proper folder or delete the temp file after processing.".PHP_EOL, 3, $this->getDebugFile());
+				error_log("[DEBUG] Written $byteWritten byte to $filename. Please move the file to a proper folder or delete the temp file after processing.".PHP_EOL, 3, $this->getDebugFile());
 			}
 
 			return $deserialized;

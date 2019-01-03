@@ -33,4 +33,8 @@ use Exception;
  */
 class VersioningException extends Exception {
 
+	public function __construct() {
+		parent::__construct('A versioning/locking problem occurred during the API call.');
+	}
+
 }
