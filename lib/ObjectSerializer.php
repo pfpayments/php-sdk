@@ -145,6 +145,8 @@ final class ObjectSerializer {
 				$data[$property] = self::sanitizeForSerialization($value);
 			}
 			return $data;
+		} elseif ($data instanceof \stdClass) {
+			return $data;
 		} elseif (is_object($data)) {
 			$values = array();
 			foreach (array_keys($data::swaggerTypes()) as $property) {

@@ -166,7 +166,11 @@ class PaymentProcessor  {
 	 * @return PaymentProcessor
 	 */
 	public function setCompanyName($companyName) {
-		$this->companyName = $companyName;
+		if (is_array($companyName) && empty($companyName)) {
+			$this->companyName = new \stdClass;
+		} else {
+			$this->companyName = $companyName;
+		}
 
 		return $this;
 	}
@@ -189,7 +193,11 @@ class PaymentProcessor  {
 	 * @return PaymentProcessor
 	 */
 	public function setDescription($description) {
-		$this->description = $description;
+		if (is_array($description) && empty($description)) {
+			$this->description = new \stdClass;
+		} else {
+			$this->description = $description;
+		}
 
 		return $this;
 	}
@@ -235,7 +243,11 @@ class PaymentProcessor  {
 	 * @return PaymentProcessor
 	 */
 	public function setHeadquartersLocation($headquartersLocation) {
-		$this->headquartersLocation = $headquartersLocation;
+		if (is_array($headquartersLocation) && empty($headquartersLocation)) {
+			$this->headquartersLocation = new \stdClass;
+		} else {
+			$this->headquartersLocation = $headquartersLocation;
+		}
 
 		return $this;
 	}
@@ -304,7 +316,11 @@ class PaymentProcessor  {
 	 * @return PaymentProcessor
 	 */
 	public function setName($name) {
-		$this->name = $name;
+		if (is_array($name) && empty($name)) {
+			$this->name = new \stdClass;
+		} else {
+			$this->name = $name;
+		}
 
 		return $this;
 	}
@@ -327,7 +343,11 @@ class PaymentProcessor  {
 	 * @return PaymentProcessor
 	 */
 	public function setProductName($productName) {
-		$this->productName = $productName;
+		if (is_array($productName) && empty($productName)) {
+			$this->productName = new \stdClass;
+		} else {
+			$this->productName = $productName;
+		}
 
 		return $this;
 	}

@@ -136,7 +136,11 @@ class DocumentTemplateType  {
 	 * @return DocumentTemplateType
 	 */
 	public function setDescription($description) {
-		$this->description = $description;
+		if (is_array($description) && empty($description)) {
+			$this->description = new \stdClass;
+		} else {
+			$this->description = $description;
+		}
 
 		return $this;
 	}
@@ -228,7 +232,11 @@ class DocumentTemplateType  {
 	 * @return DocumentTemplateType
 	 */
 	public function setTitle($title) {
-		$this->title = $title;
+		if (is_array($title) && empty($title)) {
+			$this->title = new \stdClass;
+		} else {
+			$this->title = $title;
+		}
 
 		return $this;
 	}

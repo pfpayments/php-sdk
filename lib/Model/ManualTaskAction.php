@@ -148,7 +148,11 @@ class ManualTaskAction  {
 	 * @return ManualTaskAction
 	 */
 	public function setLabel($label) {
-		$this->label = $label;
+		if (is_array($label) && empty($label)) {
+			$this->label = new \stdClass;
+		} else {
+			$this->label = $label;
+		}
 
 		return $this;
 	}

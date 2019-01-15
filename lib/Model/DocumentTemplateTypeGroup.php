@@ -129,7 +129,11 @@ class DocumentTemplateTypeGroup  {
 	 * @return DocumentTemplateTypeGroup
 	 */
 	public function setTitle($title) {
-		$this->title = $title;
+		if (is_array($title) && empty($title)) {
+			$this->title = new \stdClass;
+		} else {
+			$this->title = $title;
+		}
 
 		return $this;
 	}

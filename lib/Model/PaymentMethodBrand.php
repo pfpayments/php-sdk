@@ -141,7 +141,11 @@ class PaymentMethodBrand  {
 	 * @return PaymentMethodBrand
 	 */
 	public function setDescription($description) {
-		$this->description = $description;
+		if (is_array($description) && empty($description)) {
+			$this->description = new \stdClass;
+		} else {
+			$this->description = $description;
+		}
 
 		return $this;
 	}
@@ -233,7 +237,11 @@ class PaymentMethodBrand  {
 	 * @return PaymentMethodBrand
 	 */
 	public function setName($name) {
-		$this->name = $name;
+		if (is_array($name) && empty($name)) {
+			$this->name = new \stdClass;
+		} else {
+			$this->name = $name;
+		}
 
 		return $this;
 	}

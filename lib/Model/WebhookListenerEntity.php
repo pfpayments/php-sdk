@@ -137,7 +137,11 @@ class WebhookListenerEntity  {
 	 * @return WebhookListenerEntity
 	 */
 	public function setName($name) {
-		$this->name = $name;
+		if (is_array($name) && empty($name)) {
+			$this->name = new \stdClass;
+		} else {
+			$this->name = $name;
+		}
 
 		return $this;
 	}

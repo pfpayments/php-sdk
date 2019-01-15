@@ -460,7 +460,11 @@ class PaymentMethodConfiguration  {
 	 * @return PaymentMethodConfiguration
 	 */
 	public function setResolvedDescription($resolvedDescription) {
-		$this->resolvedDescription = $resolvedDescription;
+		if (is_array($resolvedDescription) && empty($resolvedDescription)) {
+			$this->resolvedDescription = new \stdClass;
+		} else {
+			$this->resolvedDescription = $resolvedDescription;
+		}
 
 		return $this;
 	}
@@ -506,7 +510,11 @@ class PaymentMethodConfiguration  {
 	 * @return PaymentMethodConfiguration
 	 */
 	public function setResolvedTitle($resolvedTitle) {
-		$this->resolvedTitle = $resolvedTitle;
+		if (is_array($resolvedTitle) && empty($resolvedTitle)) {
+			$this->resolvedTitle = new \stdClass;
+		} else {
+			$this->resolvedTitle = $resolvedTitle;
+		}
 
 		return $this;
 	}

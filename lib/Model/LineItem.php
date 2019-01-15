@@ -285,7 +285,11 @@ class LineItem  {
 	 * @return LineItem
 	 */
 	public function setAttributes($attributes) {
-		$this->attributes = $attributes;
+		if (is_array($attributes) && empty($attributes)) {
+			$this->attributes = new \stdClass;
+		} else {
+			$this->attributes = $attributes;
+		}
 
 		return $this;
 	}
