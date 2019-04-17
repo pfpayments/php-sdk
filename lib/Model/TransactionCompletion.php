@@ -62,6 +62,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		'spaceViewId' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionState',
 		'succeededOn' => '\DateTime',
+		'timeZone' => 'string',
 		'timeoutOn' => '\DateTime',
 		'version' => 'int'	);
 
@@ -180,6 +181,13 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $succeededOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 	/**
 	 * 
@@ -563,6 +571,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	protected function setSucceededOn($succeededOn) {
 		$this->succeededOn = $succeededOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return TransactionCompletion
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

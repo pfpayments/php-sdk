@@ -35,6 +35,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 class TransactionEnvironmentSelectionStrategy implements IEnum {
 
 	const FORCE_TEST_ENVIRONMENT = 'FORCE_TEST_ENVIRONMENT';
+	const FORCE_PRODUCTION_ENVIRONMENT = 'FORCE_PRODUCTION_ENVIRONMENT';
 	const USE_CONFIGURATION = 'USE_CONFIGURATION';
 	
 

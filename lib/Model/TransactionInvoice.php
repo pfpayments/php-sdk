@@ -64,6 +64,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 		'spaceViewId' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\TransactionInvoiceState',
 		'taxAmount' => 'float',
+		'timeZone' => 'string',
 		'version' => 'int'	);
 
 	/**
@@ -195,6 +196,13 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 * @var float
 	 */
 	private $taxAmount;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -617,6 +625,29 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 */
 	protected function setTaxAmount($taxAmount) {
 		$this->taxAmount = $taxAmount;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return TransactionInvoice
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

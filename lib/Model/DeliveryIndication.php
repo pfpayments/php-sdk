@@ -49,6 +49,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'automaticDecisionReason' => '\PostFinanceCheckout\Sdk\Model\DeliveryIndicationDecisionReason',
 		'automaticallyDecidedOn' => '\DateTime',
+		'completion' => 'int',
 		'createdOn' => '\DateTime',
 		'manualDecisionTimeoutOn' => '\DateTime',
 		'manuallyDecidedBy' => 'int',
@@ -82,6 +83,13 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $automaticallyDecidedOn;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $completion;
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
@@ -202,6 +210,29 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 */
 	protected function setAutomaticallyDecidedOn($automaticallyDecidedOn) {
 		$this->automaticallyDecidedOn = $automaticallyDecidedOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns completion.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getCompletion() {
+		return $this->completion;
+	}
+
+	/**
+	 * Sets completion.
+	 *
+	 * @param int $completion
+	 * @return DeliveryIndication
+	 */
+	protected function setCompletion($completion) {
+		$this->completion = $completion;
 
 		return $this;
 	}

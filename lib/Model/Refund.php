@@ -49,6 +49,7 @@ class Refund  {
 	private static $swaggerTypes = array(
 		'amount' => 'float',
 		'baseLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+		'completion' => 'int',
 		'createdBy' => 'int',
 		'createdOn' => '\DateTime',
 		'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
@@ -69,6 +70,7 @@ class Refund  {
 		'state' => '\PostFinanceCheckout\Sdk\Model\RefundState',
 		'succeededOn' => '\DateTime',
 		'taxes' => '\PostFinanceCheckout\Sdk\Model\Tax[]',
+		'timeZone' => 'string',
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
 		'type' => '\PostFinanceCheckout\Sdk\Model\RefundType',
@@ -99,6 +101,13 @@ class Refund  {
 	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
 	 */
 	private $baseLineItems;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $completion;
 
 	/**
 	 * 
@@ -243,6 +252,13 @@ class Refund  {
 	/**
 	 * 
 	 *
+	 * @var string
+	 */
+	private $timeZone;
+
+	/**
+	 * 
+	 *
 	 * @var \DateTime
 	 */
 	private $timeoutOn;
@@ -366,6 +382,29 @@ class Refund  {
 	 */
 	public function setBaseLineItems($baseLineItems) {
 		$this->baseLineItems = $baseLineItems;
+
+		return $this;
+	}
+
+	/**
+	 * Returns completion.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getCompletion() {
+		return $this->completion;
+	}
+
+	/**
+	 * Sets completion.
+	 *
+	 * @param int $completion
+	 * @return Refund
+	 */
+	protected function setCompletion($completion) {
+		$this->completion = $completion;
 
 		return $this;
 	}
@@ -826,6 +865,29 @@ class Refund  {
 	 */
 	public function setTaxes($taxes) {
 		$this->taxes = $taxes;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return Refund
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

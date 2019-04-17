@@ -87,6 +87,7 @@ class Transaction  {
 		'linkedSpaceId' => 'int',
 		'merchantReference' => 'string',
 		'metaData' => 'map[string,string]',
+		'parent' => 'int',
 		'paymentConnectorConfiguration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
 		'plannedPurgeDate' => '\DateTime',
 		'processingOn' => '\DateTime',
@@ -193,7 +194,7 @@ class Transaction  {
 	private $chargeRetryEnabled;
 
 	/**
-	 * The completed amount is the amount which of the succesful completion.
+	 * The completed amount is the total amount which has been captured.
 	 *
 	 * @var float
 	 */
@@ -394,6 +395,13 @@ class Transaction  {
 	 * @var map[string,string]
 	 */
 	private $metaData;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $parent;
 
 	/**
 	 * 
@@ -830,7 +838,7 @@ class Transaction  {
 	/**
 	 * Returns completedAmount.
 	 *
-	 * The completed amount is the amount which of the succesful completion.
+	 * The completed amount is the total amount which has been captured.
 	 *
 	 * @return float
 	 */
@@ -1494,6 +1502,29 @@ class Transaction  {
 		} else {
 			$this->metaData = $metaData;
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns parent.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
+
+	/**
+	 * Sets parent.
+	 *
+	 * @param int $parent
+	 * @return Transaction
+	 */
+	protected function setParent($parent) {
+		$this->parent = $parent;
 
 		return $this;
 	}

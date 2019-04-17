@@ -49,6 +49,7 @@ class LineItemCreate  {
 	private static $swaggerTypes = array(
 		'amountIncludingTax' => 'float',
 		'attributes' => 'map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]',
+		'discountIncludingTax' => 'float',
 		'name' => 'string',
 		'quantity' => 'float',
 		'shippingRequired' => 'bool',
@@ -81,6 +82,13 @@ class LineItemCreate  {
 	 * @var map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]
 	 */
 	private $attributes;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $discountIncludingTax;
 
 	/**
 	 * 
@@ -143,6 +151,9 @@ class LineItemCreate  {
 		}
 		if (isset($data['attributes'])) {
 			$this->setAttributes($data['attributes']);
+		}
+		if (isset($data['discountIncludingTax'])) {
+			$this->setDiscountIncludingTax($data['discountIncludingTax']);
 		}
 		if (isset($data['name'])) {
 			$this->setName($data['name']);
@@ -214,6 +225,29 @@ class LineItemCreate  {
 		} else {
 			$this->attributes = $attributes;
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns discountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getDiscountIncludingTax() {
+		return $this->discountIncludingTax;
+	}
+
+	/**
+	 * Sets discountIncludingTax.
+	 *
+	 * @param float $discountIncludingTax
+	 * @return LineItemCreate
+	 */
+	public function setDiscountIncludingTax($discountIncludingTax) {
+		$this->discountIncludingTax = $discountIncludingTax;
 
 		return $this;
 	}

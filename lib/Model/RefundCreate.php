@@ -47,6 +47,7 @@ class RefundCreate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'completion' => 'int',
 		'externalId' => 'string',
 		'merchantReference' => 'string',
 		'reductions' => '\PostFinanceCheckout\Sdk\Model\LineItemReductionCreate[]',
@@ -63,6 +64,13 @@ class RefundCreate  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $completion;
 
 	/**
 	 * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
@@ -106,6 +114,9 @@ class RefundCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['completion'])) {
+			$this->setCompletion($data['completion']);
+		}
 		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
@@ -123,6 +134,29 @@ class RefundCreate  {
 		}
 	}
 
+
+	/**
+	 * Returns completion.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getCompletion() {
+		return $this->completion;
+	}
+
+	/**
+	 * Sets completion.
+	 *
+	 * @param int $completion
+	 * @return RefundCreate
+	 */
+	public function setCompletion($completion) {
+		$this->completion = $completion;
+
+		return $this;
+	}
 
 	/**
 	 * Returns externalId.
@@ -251,9 +285,6 @@ class RefundCreate  {
 		}
 		if ($this->getReductions() === null) {
 			throw new ValidationException("'reductions' can't be null", 'reductions', $this);
-		}
-		if ($this->getTransaction() === null) {
-			throw new ValidationException("'transaction' can't be null", 'transaction', $this);
 		}
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);

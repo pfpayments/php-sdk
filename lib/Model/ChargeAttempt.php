@@ -63,6 +63,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 		'spaceViewId' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptState',
 		'succeededOn' => '\DateTime',
+		'timeZone' => 'string',
 		'timeoutOn' => '\DateTime',
 		'tokenVersion' => '\PostFinanceCheckout\Sdk\Model\TokenVersion',
 		'userFailureMessage' => 'string',
@@ -190,6 +191,13 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $succeededOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 	/**
 	 * 
@@ -619,6 +627,29 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 */
 	protected function setSucceededOn($succeededOn) {
 		$this->succeededOn = $succeededOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return ChargeAttempt
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

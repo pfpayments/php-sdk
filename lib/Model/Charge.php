@@ -53,6 +53,7 @@ class Charge extends TransactionAwareEntity  {
 		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\ChargeState',
+		'timeZone' => 'string',
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
 		'type' => '\PostFinanceCheckout\Sdk\Model\ChargeType',
@@ -111,6 +112,13 @@ class Charge extends TransactionAwareEntity  {
 	 * @var \PostFinanceCheckout\Sdk\Model\ChargeState
 	 */
 	private $state;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 	/**
 	 * 
@@ -305,6 +313,29 @@ class Charge extends TransactionAwareEntity  {
 	 */
 	public function setState($state) {
 		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return Charge
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

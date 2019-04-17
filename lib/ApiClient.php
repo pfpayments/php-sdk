@@ -183,7 +183,7 @@ final class ApiClient {
 			throw new \InvalidArgumentException('The certificate authority file does not exist.');
 		}
 
-		$this->certificateAuthority = $certificateAuthority;
+		$this->certificateAuthority = $certificateAuthorityFile;
 		return $this;
 	}
 

@@ -34,12 +34,12 @@ namespace PostFinanceCheckout\Sdk\Model;
  */
 class CriteriaOperator implements IEnum {
 
+	const CONTAINS = 'CONTAINS';
 	const EQUALS = 'EQUALS';
 	const GREATER_THAN = 'GREATER_THAN';
 	const GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL';
 	const LESS_THAN = 'LESS_THAN';
 	const LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL';
-	const CONTAINS = 'CONTAINS';
 	const NOT_EQUALS = 'NOT_EQUALS';
 	const NOT_CONTAINS = 'NOT_CONTAINS';
 	const IS_NULL = 'IS_NULL';

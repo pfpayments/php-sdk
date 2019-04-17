@@ -51,6 +51,8 @@ class LineItem  {
 		'amountExcludingTax' => 'float',
 		'amountIncludingTax' => 'float',
 		'attributes' => 'map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttribute]',
+		'discountExcludingTax' => 'float',
+		'discountIncludingTax' => 'float',
 		'name' => 'string',
 		'quantity' => 'float',
 		'shippingRequired' => 'bool',
@@ -59,6 +61,8 @@ class LineItem  {
 		'taxAmountPerUnit' => 'float',
 		'taxes' => '\PostFinanceCheckout\Sdk\Model\Tax[]',
 		'type' => '\PostFinanceCheckout\Sdk\Model\LineItemType',
+		'undiscountedAmountExcludingTax' => 'float',
+		'undiscountedAmountIncludingTax' => 'float',
 		'uniqueId' => 'string',
 		'unitPriceExcludingTax' => 'float',
 		'unitPriceIncludingTax' => 'float'	);
@@ -101,6 +105,20 @@ class LineItem  {
 	 * @var map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttribute]
 	 */
 	private $attributes;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $discountExcludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $discountIncludingTax;
 
 	/**
 	 * 
@@ -157,6 +175,20 @@ class LineItem  {
 	 * @var \PostFinanceCheckout\Sdk\Model\LineItemType
 	 */
 	private $type;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $undiscountedAmountExcludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $undiscountedAmountIncludingTax;
 
 	/**
 	 * The unique id identifies the line item within the set of line items associated with the transaction.
@@ -290,6 +322,52 @@ class LineItem  {
 		} else {
 			$this->attributes = $attributes;
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns discountExcludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getDiscountExcludingTax() {
+		return $this->discountExcludingTax;
+	}
+
+	/**
+	 * Sets discountExcludingTax.
+	 *
+	 * @param float $discountExcludingTax
+	 * @return LineItem
+	 */
+	protected function setDiscountExcludingTax($discountExcludingTax) {
+		$this->discountExcludingTax = $discountExcludingTax;
+
+		return $this;
+	}
+
+	/**
+	 * Returns discountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getDiscountIncludingTax() {
+		return $this->discountIncludingTax;
+	}
+
+	/**
+	 * Sets discountIncludingTax.
+	 *
+	 * @param float $discountIncludingTax
+	 * @return LineItem
+	 */
+	protected function setDiscountIncludingTax($discountIncludingTax) {
+		$this->discountIncludingTax = $discountIncludingTax;
 
 		return $this;
 	}
@@ -474,6 +552,52 @@ class LineItem  {
 	 */
 	public function setType($type) {
 		$this->type = $type;
+
+		return $this;
+	}
+
+	/**
+	 * Returns undiscountedAmountExcludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUndiscountedAmountExcludingTax() {
+		return $this->undiscountedAmountExcludingTax;
+	}
+
+	/**
+	 * Sets undiscountedAmountExcludingTax.
+	 *
+	 * @param float $undiscountedAmountExcludingTax
+	 * @return LineItem
+	 */
+	protected function setUndiscountedAmountExcludingTax($undiscountedAmountExcludingTax) {
+		$this->undiscountedAmountExcludingTax = $undiscountedAmountExcludingTax;
+
+		return $this;
+	}
+
+	/**
+	 * Returns undiscountedAmountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUndiscountedAmountIncludingTax() {
+		return $this->undiscountedAmountIncludingTax;
+	}
+
+	/**
+	 * Sets undiscountedAmountIncludingTax.
+	 *
+	 * @param float $undiscountedAmountIncludingTax
+	 * @return LineItem
+	 */
+	protected function setUndiscountedAmountIncludingTax($undiscountedAmountIncludingTax) {
+		$this->undiscountedAmountIncludingTax = $undiscountedAmountIncludingTax;
 
 		return $this;
 	}
