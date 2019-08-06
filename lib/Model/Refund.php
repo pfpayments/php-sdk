@@ -64,6 +64,7 @@ class Refund  {
 		'merchantReference' => 'string',
 		'nextUpdateOn' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
+		'processingOn' => '\DateTime',
 		'processorReference' => 'string',
 		'reducedLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
 		'reductions' => '\PostFinanceCheckout\Sdk\Model\LineItemReduction[]',
@@ -206,6 +207,13 @@ class Refund  {
 	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $processingOn;
 
 	/**
 	 * 
@@ -727,6 +735,29 @@ class Refund  {
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
 		$this->plannedPurgeDate = $plannedPurgeDate;
+
+		return $this;
+	}
+
+	/**
+	 * Returns processingOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getProcessingOn() {
+		return $this->processingOn;
+	}
+
+	/**
+	 * Sets processingOn.
+	 *
+	 * @param \DateTime $processingOn
+	 * @return Refund
+	 */
+	protected function setProcessingOn($processingOn) {
+		$this->processingOn = $processingOn;
 
 		return $this;
 	}

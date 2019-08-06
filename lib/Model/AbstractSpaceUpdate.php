@@ -48,6 +48,7 @@ class AbstractSpaceUpdate  {
 	private static $swaggerTypes = array(
 		'name' => 'string',
 		'postalAddress' => '\PostFinanceCheckout\Sdk\Model\SpaceAddressCreate',
+		'primaryCurrency' => 'string',
 		'requestLimit' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
 		'technicalContactAddresses' => 'string[]',
@@ -77,6 +78,13 @@ class AbstractSpaceUpdate  {
 	 * @var \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate
 	 */
 	private $postalAddress;
+
+	/**
+	 * This is the currency that is used to display aggregated amounts in the space.
+	 *
+	 * @var string
+	 */
+	private $primaryCurrency;
 
 	/**
 	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
@@ -118,6 +126,9 @@ class AbstractSpaceUpdate  {
 		}
 		if (isset($data['postalAddress'])) {
 			$this->setPostalAddress($data['postalAddress']);
+		}
+		if (isset($data['primaryCurrency'])) {
+			$this->setPrimaryCurrency($data['primaryCurrency']);
 		}
 		if (isset($data['requestLimit'])) {
 			$this->setRequestLimit($data['requestLimit']);
@@ -176,6 +187,29 @@ class AbstractSpaceUpdate  {
 	 */
 	public function setPostalAddress($postalAddress) {
 		$this->postalAddress = $postalAddress;
+
+		return $this;
+	}
+
+	/**
+	 * Returns primaryCurrency.
+	 *
+	 * This is the currency that is used to display aggregated amounts in the space.
+	 *
+	 * @return string
+	 */
+	public function getPrimaryCurrency() {
+		return $this->primaryCurrency;
+	}
+
+	/**
+	 * Sets primaryCurrency.
+	 *
+	 * @param string $primaryCurrency
+	 * @return AbstractSpaceUpdate
+	 */
+	public function setPrimaryCurrency($primaryCurrency) {
+		$this->primaryCurrency = $primaryCurrency;
 
 		return $this;
 	}

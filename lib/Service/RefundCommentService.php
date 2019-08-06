@@ -27,14 +27,14 @@ use PostFinanceCheckout\Sdk\ApiResponse;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
 
 /**
- * TransactionCompletionService service
+ * RefundCommentService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionCompletionService {
+class RefundCommentService {
 
 	/**
 	 * The API client instance.
@@ -67,41 +67,41 @@ class TransactionCompletionService {
 
 
 	/**
-	 * Operation completeOffline
+	 * Operation all
 	 *
-	 * completeOffline
+	 * Find by refund
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction which should be completed. (required)
+	 * @param int $refundId  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
+	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment[]
 	 */
-	public function completeOffline($spaceId, $id) {
-		return $this->completeOfflineWithHttpInfo($spaceId, $id)->getData();
+	public function all($spaceId, $refundId) {
+		return $this->allWithHttpInfo($spaceId, $refundId)->getData();
 	}
 
 	/**
-	 * Operation completeOfflineWithHttpInfo
+	 * Operation allWithHttpInfo
 	 *
-	 * completeOffline
+	 * Find by refund
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction which should be completed. (required)
+	 * @param int $refundId  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function completeOfflineWithHttpInfo($spaceId, $id) {
+	public function allWithHttpInfo($spaceId, $refundId) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling completeOffline');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling all');
 		}
-		// verify the required parameter 'id' is set
-		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling completeOffline');
+		// verify the required parameter 'refundId' is set
+		if ($refundId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling all');
 		}
 		// header params
 		$headerParams = array();
@@ -109,19 +109,19 @@ class TransactionCompletionService {
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
 		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
-		if ($id !== null) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		if ($refundId !== null) {
+			$queryParams['refundId'] = $this->apiClient->getSerializer()->toQueryValue($refundId);
 		}
 
 		// path params
-		$resourcePath = "/transaction-completion/completeOffline";
+		$resourcePath = "/refund-comment/all";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -143,14 +143,14 @@ class TransactionCompletionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-				'/transaction-completion/completeOffline'
+				'\PostFinanceCheckout\Sdk\Model\RefundComment[]',
+				'/refund-comment/all'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment[]', $e->getResponseHeaders());
 					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -168,41 +168,41 @@ class TransactionCompletionService {
 	}
 
 	/**
-	 * Operation completeOnline
+	 * Operation create
 	 *
-	 * completeOnline
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction which should be completed. (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentCreate $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
+	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
 	 */
-	public function completeOnline($spaceId, $id) {
-		return $this->completeOnlineWithHttpInfo($spaceId, $id)->getData();
+	public function create($spaceId, $entity) {
+		return $this->createWithHttpInfo($spaceId, $entity)->getData();
 	}
 
 	/**
-	 * Operation completeOnlineWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * completeOnline
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction which should be completed. (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentCreate $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function completeOnlineWithHttpInfo($spaceId, $id) {
+	public function createWithHttpInfo($spaceId, $entity) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling completeOnline');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
 		}
-		// verify the required parameter 'id' is set
-		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling completeOnline');
+		// verify the required parameter 'entity' is set
+		if ($entity === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
 		$headerParams = array();
@@ -210,7 +210,110 @@ class TransactionCompletionService {
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/refund-comment/create";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		// body params
+		$tempBody = null;
+		if (isset($entity)) {
+			$tempBody = $entity;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\PostFinanceCheckout\Sdk\Model\RefundComment',
+				'/refund-comment/create'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation delete
+	 *
+	 * Delete
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return void
+	 */
+	public function delete($spaceId, $id) {
+		return $this->deleteWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation deleteWithHttpInfo
+	 *
+	 * Delete
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function deleteWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling delete');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
+		if ($headerAccept !== null) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
 		$queryParams = array();
@@ -222,7 +325,7 @@ class TransactionCompletionService {
 		}
 
 		// path params
-		$resourcePath = "/transaction-completion/completeOnline";
+		$resourcePath = "/refund-comment/delete";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -244,14 +347,14 @@ class TransactionCompletionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-				'/transaction-completion/completeOnline'
+				null,
+				'/refund-comment/delete'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $e->getResponseHeaders());
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -269,41 +372,41 @@ class TransactionCompletionService {
 	}
 
 	/**
-	 * Operation completePartiallyOffline
+	 * Operation pin
 	 *
-	 * completePartiallyOffline
+	 * Pin
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
+	 * @return void
 	 */
-	public function completePartiallyOffline($spaceId, $completion) {
-		return $this->completePartiallyOfflineWithHttpInfo($spaceId, $completion)->getData();
+	public function pin($spaceId, $id) {
+		return $this->pinWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation completePartiallyOfflineWithHttpInfo
+	 * Operation pinWithHttpInfo
 	 *
-	 * completePartiallyOffline
+	 * Pin
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function completePartiallyOfflineWithHttpInfo($spaceId, $completion) {
+	public function pinWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling completePartiallyOffline');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling pin');
 		}
-		// verify the required parameter 'completion' is set
-		if ($completion === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $completion when calling completePartiallyOffline');
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling pin');
 		}
 		// header params
 		$headerParams = array();
@@ -311,27 +414,25 @@ class TransactionCompletionService {
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
 
 		// path params
-		$resourcePath = "/transaction-completion/completePartiallyOffline";
+		$resourcePath = "/refund-comment/pin";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = array();
-		// body params
-		$tempBody = null;
-		if (isset($completion)) {
-			$tempBody = $completion;
-		}
-
+		
 		// for model (json/xml)
 		$httpBody = '';
 		if (isset($tempBody)) {
@@ -343,220 +444,18 @@ class TransactionCompletionService {
 		try {
 			$response = $this->apiClient->callApi(
 				$resourcePath,
-				'POST',
+				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-				'/transaction-completion/completePartiallyOffline'
+				null,
+				'/refund-comment/pin'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
+				case 409:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation completePartiallyOnline
-	 *
-	 * completePartiallyOnline
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
-	 */
-	public function completePartiallyOnline($spaceId, $completion) {
-		return $this->completePartiallyOnlineWithHttpInfo($spaceId, $completion)->getData();
-	}
-
-	/**
-	 * Operation completePartiallyOnlineWithHttpInfo
-	 *
-	 * completePartiallyOnline
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function completePartiallyOnlineWithHttpInfo($spaceId, $completion) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling completePartiallyOnline');
-		}
-		// verify the required parameter 'completion' is set
-		if ($completion === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $completion when calling completePartiallyOnline');
-		}
-		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
-
-		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-
-		// path params
-		$resourcePath = "/transaction-completion/completePartiallyOnline";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = array();
-		// body params
-		$tempBody = null;
-		if (isset($completion)) {
-			$tempBody = $completion;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-				'/transaction-completion/completePartiallyOnline'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation count
-	 *
-	 * Count
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return int
-	 */
-	public function count($spaceId, $filter = null) {
-		return $this->countWithHttpInfo($spaceId, $filter)->getData();
-	}
-
-	/**
-	 * Operation countWithHttpInfo
-	 *
-	 * Count
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function countWithHttpInfo($spaceId, $filter = null) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
-		}
-		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
-
-		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-
-		// path params
-		$resourcePath = "/transaction-completion/count";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = array();
-		// body params
-		$tempBody = null;
-		if (isset($filter)) {
-			$tempBody = $filter;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'int',
-				'/transaction-completion/count'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
 					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -579,11 +478,11 @@ class TransactionCompletionService {
 	 * Read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction completions which should be returned. (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
+	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
 	 */
 	public function read($spaceId, $id) {
 		return $this->readWithHttpInfo($spaceId, $id)->getData();
@@ -595,7 +494,7 @@ class TransactionCompletionService {
 	 * Read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the transaction completions which should be returned. (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -628,7 +527,7 @@ class TransactionCompletionService {
 		}
 
 		// path params
-		$resourcePath = "/transaction-completion/read";
+		$resourcePath = "/refund-comment/read";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -650,14 +549,14 @@ class TransactionCompletionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-				'/transaction-completion/read'
+				'\PostFinanceCheckout\Sdk\Model\RefundComment',
+				'/refund-comment/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
 					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -675,41 +574,142 @@ class TransactionCompletionService {
 	}
 
 	/**
-	 * Operation search
+	 * Operation unpin
 	 *
-	 * Search
+	 * Unpin
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction completions which are returned by the search. (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion[]
+	 * @return void
 	 */
-	public function search($spaceId, $query) {
-		return $this->searchWithHttpInfo($spaceId, $query)->getData();
+	public function unpin($spaceId, $id) {
+		return $this->unpinWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation searchWithHttpInfo
+	 * Operation unpinWithHttpInfo
 	 *
-	 * Search
+	 * Unpin
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction completions which are returned by the search. (required)
+	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function searchWithHttpInfo($spaceId, $query) {
+	public function unpinWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling unpin');
 		}
-		// verify the required parameter 'query' is set
-		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling unpin');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
+		if ($headerAccept !== null) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/refund-comment/unpin";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/refund-comment/unpin'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation update
+	 *
+	 * Update
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentActive $entity  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
+	 */
+	public function update($spaceId, $entity) {
+		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
+	}
+
+	/**
+	 * Operation updateWithHttpInfo
+	 *
+	 * Update
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentActive $entity  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function updateWithHttpInfo($spaceId, $entity) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling update');
+		}
+		// verify the required parameter 'entity' is set
+		if ($entity === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
 		$headerParams = array();
@@ -726,7 +726,7 @@ class TransactionCompletionService {
 		}
 
 		// path params
-		$resourcePath = "/transaction-completion/search";
+		$resourcePath = "/refund-comment/update";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -734,8 +734,8 @@ class TransactionCompletionService {
 		$formParams = array();
 		// body params
 		$tempBody = null;
-		if (isset($query)) {
-			$tempBody = $query;
+		if (isset($entity)) {
+			$tempBody = $entity;
 		}
 
 		// for model (json/xml)
@@ -753,14 +753,18 @@ class TransactionCompletionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion[]',
-				'/transaction-completion/search'
+				'\PostFinanceCheckout\Sdk\Model\RefundComment',
+				'/refund-comment/update'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionCompletion[]', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

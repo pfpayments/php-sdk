@@ -351,7 +351,7 @@ final class HttpRequest {
 	 */
 	public function getBody() {
 		if ($this->body && isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) && $this->headers[self::HEADER_KEY_CONTENT_TYPE] == 'application/x-www-form-urlencoded') {
-			return http_build_query($this->body);
+			return http_build_query($this->body, '', '&');
 		} elseif ((is_object($this->body) || is_array($this->body)) &&
 			(!isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) || $this->headers[self::HEADER_KEY_CONTENT_TYPE] != 'multipart/form-data')) {
 			return json_encode($this->serializer->sanitizeForSerialization($this->body));

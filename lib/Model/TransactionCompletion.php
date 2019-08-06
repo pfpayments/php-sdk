@@ -47,21 +47,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'amount' => 'float',
+		'baseLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
 		'createdBy' => 'int',
 		'createdOn' => '\DateTime',
+		'externalId' => 'string',
 		'failedOn' => '\DateTime',
 		'failureReason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
 		'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
 		'language' => 'string',
+		'lastCompletion' => 'bool',
 		'lineItemVersion' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
+		'lineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
 		'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
 		'nextUpdateOn' => '\DateTime',
 		'paymentInformation' => 'string',
 		'plannedPurgeDate' => '\DateTime',
+		'processingOn' => '\DateTime',
 		'processorReference' => 'string',
+		'remainingLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
 		'spaceViewId' => 'int',
 		'state' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionState',
 		'succeededOn' => '\DateTime',
+		'taxAmount' => 'float',
 		'timeZone' => 'string',
 		'timeoutOn' => '\DateTime',
 		'version' => 'int'	);
@@ -78,6 +86,20 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	
 
 	/**
+	 * The amount which is captured. The amount represents sum of line items including taxes.
+	 *
+	 * @var float
+	 */
+	private $amount;
+
+	/**
+	 * The base line items on which the completion is applied on.
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	private $baseLineItems;
+
+	/**
 	 * 
 	 *
 	 * @var int
@@ -90,6 +112,13 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $createdOn;
+
+	/**
+	 * The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
 
 	/**
 	 * 
@@ -120,11 +149,25 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	private $language;
 
 	/**
+	 * Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
+	 *
+	 * @var bool
+	 */
+	private $lastCompletion;
+
+	/**
 	 * 
 	 *
 	 * @var \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion
 	 */
 	private $lineItemVersion;
+
+	/**
+	 * The line items which are captured.
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	private $lineItems;
 
 	/**
 	 * 
@@ -157,9 +200,23 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
+	 * @var \DateTime
+	 */
+	private $processingOn;
+
+	/**
+	 * 
+	 *
 	 * @var string
 	 */
 	private $processorReference;
+
+	/**
+	 * 
+	 *
+	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	private $remainingLineItems;
 
 	/**
 	 * 
@@ -181,6 +238,13 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $succeededOn;
+
+	/**
+	 * The total sum of all taxes of line items.
+	 *
+	 * @var float
+	 */
+	private $taxAmount;
 
 	/**
 	 * 
@@ -212,6 +276,9 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['baseLineItems'])) {
+			$this->setBaseLineItems($data['baseLineItems']);
+		}
 		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
@@ -221,14 +288,66 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		if (isset($data['lineItemVersion'])) {
 			$this->setLineItemVersion($data['lineItemVersion']);
 		}
+		if (isset($data['lineItems'])) {
+			$this->setLineItems($data['lineItems']);
+		}
 		if (isset($data['mode'])) {
 			$this->setMode($data['mode']);
+		}
+		if (isset($data['remainingLineItems'])) {
+			$this->setRemainingLineItems($data['remainingLineItems']);
 		}
 		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}
 
+
+	/**
+	 * Returns amount.
+	 *
+	 * The amount which is captured. The amount represents sum of line items including taxes.
+	 *
+	 * @return float
+	 */
+	public function getAmount() {
+		return $this->amount;
+	}
+
+	/**
+	 * Sets amount.
+	 *
+	 * @param float $amount
+	 * @return TransactionCompletion
+	 */
+	protected function setAmount($amount) {
+		$this->amount = $amount;
+
+		return $this;
+	}
+
+	/**
+	 * Returns baseLineItems.
+	 *
+	 * The base line items on which the completion is applied on.
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	public function getBaseLineItems() {
+		return $this->baseLineItems;
+	}
+
+	/**
+	 * Sets baseLineItems.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $baseLineItems
+	 * @return TransactionCompletion
+	 */
+	public function setBaseLineItems($baseLineItems) {
+		$this->baseLineItems = $baseLineItems;
+
+		return $this;
+	}
 
 	/**
 	 * Returns createdBy.
@@ -272,6 +391,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns externalId.
+	 *
+	 * The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return $this->externalId;
+	}
+
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return TransactionCompletion
+	 */
+	protected function setExternalId($externalId) {
+		$this->externalId = $externalId;
 
 		return $this;
 	}
@@ -369,6 +511,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	}
 
 	/**
+	 * Returns lastCompletion.
+	 *
+	 * Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
+	 *
+	 * @return bool
+	 */
+	public function getLastCompletion() {
+		return $this->lastCompletion;
+	}
+
+	/**
+	 * Sets lastCompletion.
+	 *
+	 * @param bool $lastCompletion
+	 * @return TransactionCompletion
+	 */
+	protected function setLastCompletion($lastCompletion) {
+		$this->lastCompletion = $lastCompletion;
+
+		return $this;
+	}
+
+	/**
 	 * Returns lineItemVersion.
 	 *
 	 * 
@@ -387,6 +552,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	public function setLineItemVersion($lineItemVersion) {
 		$this->lineItemVersion = $lineItemVersion;
+
+		return $this;
+	}
+
+	/**
+	 * Returns lineItems.
+	 *
+	 * The line items which are captured.
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	public function getLineItems() {
+		return $this->lineItems;
+	}
+
+	/**
+	 * Sets lineItems.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $lineItems
+	 * @return TransactionCompletion
+	 */
+	public function setLineItems($lineItems) {
+		$this->lineItems = $lineItems;
 
 		return $this;
 	}
@@ -484,6 +672,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	}
 
 	/**
+	 * Returns processingOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getProcessingOn() {
+		return $this->processingOn;
+	}
+
+	/**
+	 * Sets processingOn.
+	 *
+	 * @param \DateTime $processingOn
+	 * @return TransactionCompletion
+	 */
+	protected function setProcessingOn($processingOn) {
+		$this->processingOn = $processingOn;
+
+		return $this;
+	}
+
+	/**
 	 * Returns processorReference.
 	 *
 	 * 
@@ -502,6 +713,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	protected function setProcessorReference($processorReference) {
 		$this->processorReference = $processorReference;
+
+		return $this;
+	}
+
+	/**
+	 * Returns remainingLineItems.
+	 *
+	 * 
+	 *
+	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+	 */
+	public function getRemainingLineItems() {
+		return $this->remainingLineItems;
+	}
+
+	/**
+	 * Sets remainingLineItems.
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $remainingLineItems
+	 * @return TransactionCompletion
+	 */
+	public function setRemainingLineItems($remainingLineItems) {
+		$this->remainingLineItems = $remainingLineItems;
 
 		return $this;
 	}
@@ -571,6 +805,29 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	protected function setSucceededOn($succeededOn) {
 		$this->succeededOn = $succeededOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns taxAmount.
+	 *
+	 * The total sum of all taxes of line items.
+	 *
+	 * @return float
+	 */
+	public function getTaxAmount() {
+		return $this->taxAmount;
+	}
+
+	/**
+	 * Sets taxAmount.
+	 *
+	 * @param float $taxAmount
+	 * @return TransactionCompletion
+	 */
+	protected function setTaxAmount($taxAmount) {
+		$this->taxAmount = $taxAmount;
 
 		return $this;
 	}

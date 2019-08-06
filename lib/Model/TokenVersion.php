@@ -59,6 +59,8 @@ class TokenVersion  {
 		'name' => 'string',
 		'obsoletedOn' => '\DateTime',
 		'paymentConnectorConfiguration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
+		'paymentMethod' => 'int',
+		'paymentMethodBrand' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'processorToken' => 'string',
 		'shippingAddress' => '\PostFinanceCheckout\Sdk\Model\Address',
@@ -161,6 +163,20 @@ class TokenVersion  {
 	 * @var \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration
 	 */
 	private $paymentConnectorConfiguration;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $paymentMethod;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $paymentMethodBrand;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -523,6 +539,52 @@ class TokenVersion  {
 	 */
 	public function setPaymentConnectorConfiguration($paymentConnectorConfiguration) {
 		$this->paymentConnectorConfiguration = $paymentConnectorConfiguration;
+
+		return $this;
+	}
+
+	/**
+	 * Returns paymentMethod.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getPaymentMethod() {
+		return $this->paymentMethod;
+	}
+
+	/**
+	 * Sets paymentMethod.
+	 *
+	 * @param int $paymentMethod
+	 * @return TokenVersion
+	 */
+	protected function setPaymentMethod($paymentMethod) {
+		$this->paymentMethod = $paymentMethod;
+
+		return $this;
+	}
+
+	/**
+	 * Returns paymentMethodBrand.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getPaymentMethodBrand() {
+		return $this->paymentMethodBrand;
+	}
+
+	/**
+	 * Sets paymentMethodBrand.
+	 *
+	 * @param int $paymentMethodBrand
+	 * @return TokenVersion
+	 */
+	protected function setPaymentMethodBrand($paymentMethodBrand) {
+		$this->paymentMethodBrand = $paymentMethodBrand;
 
 		return $this;
 	}

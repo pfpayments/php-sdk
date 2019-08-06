@@ -22,6 +22,8 @@
 /**
  * Autoload function.
  *
+ * @author   customweb GmbH
+ 
  * After registering this autoload function with SPL, the following line
  * would cause the function to attempt to load the \PostFinanceCheckout\Sdk\Baz\Qux class
  * from /path/to/project/lib/Baz/Qux.php:

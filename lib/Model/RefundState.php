@@ -35,6 +35,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 class RefundState implements IEnum {
 
 	const CREATE = 'CREATE';
+	const SCHEDULED = 'SCHEDULED';
 	const PENDING = 'PENDING';
 	const MANUAL_CHECK = 'MANUAL_CHECK';
 	const FAILED = 'FAILED';

@@ -194,7 +194,7 @@ class Transaction  {
 	private $chargeRetryEnabled;
 
 	/**
-	 * The completed amount is the total amount which has been captured.
+	 * The completed amount is the total amount which has been captured so far.
 	 *
 	 * @var float
 	 */
@@ -838,7 +838,7 @@ class Transaction  {
 	/**
 	 * Returns completedAmount.
 	 *
-	 * The completed amount is the total amount which has been captured.
+	 * The completed amount is the total amount which has been captured so far.
 	 *
 	 * @return float
 	 */

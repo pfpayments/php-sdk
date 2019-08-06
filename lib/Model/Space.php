@@ -55,6 +55,7 @@ class Space  {
 		'name' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'postalAddress' => '\PostFinanceCheckout\Sdk\Model\SpaceAddress',
+		'primaryCurrency' => 'string',
 		'requestLimit' => 'int',
 		'restrictedActive' => 'bool',
 		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
@@ -128,6 +129,13 @@ class Space  {
 	 * @var \PostFinanceCheckout\Sdk\Model\SpaceAddress
 	 */
 	private $postalAddress;
+
+	/**
+	 * This is the currency that is used to display aggregated amounts in the space.
+	 *
+	 * @var string
+	 */
+	private $primaryCurrency;
 
 	/**
 	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
@@ -382,6 +390,29 @@ class Space  {
 	 */
 	public function setPostalAddress($postalAddress) {
 		$this->postalAddress = $postalAddress;
+
+		return $this;
+	}
+
+	/**
+	 * Returns primaryCurrency.
+	 *
+	 * This is the currency that is used to display aggregated amounts in the space.
+	 *
+	 * @return string
+	 */
+	public function getPrimaryCurrency() {
+		return $this->primaryCurrency;
+	}
+
+	/**
+	 * Sets primaryCurrency.
+	 *
+	 * @param string $primaryCurrency
+	 * @return Space
+	 */
+	protected function setPrimaryCurrency($primaryCurrency) {
+		$this->primaryCurrency = $primaryCurrency;
 
 		return $this;
 	}

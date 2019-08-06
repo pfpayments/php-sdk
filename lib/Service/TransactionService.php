@@ -105,7 +105,7 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json', 'text/plain;charset=utf-8'));
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
@@ -204,7 +204,7 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json', 'text/plain;charset=utf-8'));
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
@@ -306,7 +306,7 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json', 'text/plain;charset=utf-8'));
 		if ($headerAccept !== null) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}

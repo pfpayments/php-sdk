@@ -486,7 +486,7 @@ final class ApiClient {
 	private function buildRequestUrl($path, $queryParams) {
 		$url = $this->getBasePath() . $path;
 		if (!empty($queryParams)) {
-			$url = ($url . '?' . http_build_query($queryParams));
+			$url = ($url . '?' . http_build_query($queryParams, '', '&'));
 		}
 		return $url;
 	}

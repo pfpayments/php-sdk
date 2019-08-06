@@ -63,6 +63,8 @@ class LineItem  {
 		'type' => '\PostFinanceCheckout\Sdk\Model\LineItemType',
 		'undiscountedAmountExcludingTax' => 'float',
 		'undiscountedAmountIncludingTax' => 'float',
+		'undiscountedUnitPriceExcludingTax' => 'float',
+		'undiscountedUnitPriceIncludingTax' => 'float',
 		'uniqueId' => 'string',
 		'unitPriceExcludingTax' => 'float',
 		'unitPriceIncludingTax' => 'float'	);
@@ -189,6 +191,20 @@ class LineItem  {
 	 * @var float
 	 */
 	private $undiscountedAmountIncludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $undiscountedUnitPriceExcludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $undiscountedUnitPriceIncludingTax;
 
 	/**
 	 * The unique id identifies the line item within the set of line items associated with the transaction.
@@ -598,6 +614,52 @@ class LineItem  {
 	 */
 	protected function setUndiscountedAmountIncludingTax($undiscountedAmountIncludingTax) {
 		$this->undiscountedAmountIncludingTax = $undiscountedAmountIncludingTax;
+
+		return $this;
+	}
+
+	/**
+	 * Returns undiscountedUnitPriceExcludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUndiscountedUnitPriceExcludingTax() {
+		return $this->undiscountedUnitPriceExcludingTax;
+	}
+
+	/**
+	 * Sets undiscountedUnitPriceExcludingTax.
+	 *
+	 * @param float $undiscountedUnitPriceExcludingTax
+	 * @return LineItem
+	 */
+	protected function setUndiscountedUnitPriceExcludingTax($undiscountedUnitPriceExcludingTax) {
+		$this->undiscountedUnitPriceExcludingTax = $undiscountedUnitPriceExcludingTax;
+
+		return $this;
+	}
+
+	/**
+	 * Returns undiscountedUnitPriceIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUndiscountedUnitPriceIncludingTax() {
+		return $this->undiscountedUnitPriceIncludingTax;
+	}
+
+	/**
+	 * Sets undiscountedUnitPriceIncludingTax.
+	 *
+	 * @param float $undiscountedUnitPriceIncludingTax
+	 * @return LineItem
+	 */
+	protected function setUndiscountedUnitPriceIncludingTax($undiscountedUnitPriceIncludingTax) {
+		$this->undiscountedUnitPriceIncludingTax = $undiscountedUnitPriceIncludingTax;
 
 		return $this;
 	}

@@ -35,6 +35,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 class TransactionCompletionState implements IEnum {
 
 	const CREATE = 'CREATE';
+	const SCHEDULED = 'SCHEDULED';
 	const PENDING = 'PENDING';
 	const FAILED = 'FAILED';
 	const SUCCESSFUL = 'SUCCESSFUL';
