@@ -26,7 +26,7 @@ composer installed.
 Once composer is installed, execute the following command in your project root to install this library:
 
 ```sh
-composer require postfinancecheckout/php-sdk
+composer require postfinancecheckout/sdk
 ```
 
 ### Manual Installation
