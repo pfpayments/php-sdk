@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,14 +48,14 @@ final class ApiClient {
 	 *
 	 * @var array
 	 */
-	private $defaultHeaders = array();
+	private $defaultHeaders = [];
 
 	/**
 	 * The user agent that is sent with any request.
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/1.0.0/php';
+	private $userAgent = 'PHP-Client/2.0.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -102,7 +102,7 @@ final class ApiClient {
 	/**
 	 * The application user's id.
 	 *
-	 * @var string
+	 * @var integer
 	 */
 	private $userId;
 
@@ -131,13 +131,13 @@ final class ApiClient {
 			throw new \InvalidArgumentException('The application key cannot be empty or null.');
 		}
 
+		$this->userId = $userId;
+        $this->applicationKey = $applicationKey;
+
 		$this->certificateAuthority = dirname(__FILE__) . '/ca-bundle.crt';
 		$this->serializer = new ObjectSerializer();
-		$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
-		$this->serializer->setDebugFile($this->getDebugFile());
-
-		$this->userId = $userId;
-		$this->applicationKey = $applicationKey;
+		//$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
+		//$this->serializer->setDebugFile($this->getDebugFile());
 	}
 
 	/**
@@ -332,7 +332,7 @@ final class ApiClient {
 	 */
 	public function disableDebugging() {
 		$this->enableDebugging = false;
-		$this->serializer->disableDebugging();
+		//$this->serializer->disableDebugging();
 		return $this;
 	}
 
@@ -353,7 +353,7 @@ final class ApiClient {
 	 */
 	public function setDebugFile($debugFile) {
 		$this->debugFile = $debugFile;
-		$this->serializer->setDebugFile($debugFile);
+		//$this->serializer->setDebugFile($debugFile);
 		return $this;
 	}
 
@@ -394,9 +394,9 @@ final class ApiClient {
 	 * @return string
 	 */
 	public function selectHeaderAccept($accept) {
-		if (count($accept) === 0 or (count($accept) === 1 and $accept[0] === '')) {
+		if (empty($accept[0])) {
 			return null;
-		} elseif (preg_grep("/application\/json/i", $accept)) {
+		} elseif (preg_grep('/application\/json/i', $accept)) {
 			return 'application/json';
 		} else {
 			return implode(',', $accept);
@@ -410,9 +410,9 @@ final class ApiClient {
 	 * @return string
 	 */
 	public function selectHeaderContentType($contentType) {
-		if (count($contentType) === 0 or (count($contentType) === 1 and $contentType[0] === '')) {
+		if (empty($contentType[0])) {
 			return 'application/json';
-		} elseif (preg_grep("/application\/json/i", $contentType)) {
+		} elseif (preg_grep('/application\/json/i', $contentType)) {
 			return 'application/json';
 		} else {
 			return implode(',', $contentType);
@@ -447,7 +447,7 @@ final class ApiClient {
 
 		if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 299) {
 			// return raw body if response is a file
-			if ($responseType === '\SplFileObject' || $responseType === 'string') {
+			if (in_array($responseType, ['\SplFileObject', 'string'])) {
 				return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
 			}
 
@@ -459,19 +459,17 @@ final class ApiClient {
 			if ($response->getStatusCode() == 409) {
 				throw new VersioningException();
 			}
-		
+
 			$data = json_decode($response->getBody());
 			if (json_last_error() > 0) { // if response is a string
 				$data = $response->getBody();
 			}
-
-			throw new ApiException(
-				$request->getLogToken(),
-				'Error ' . $response->getStatusCode() . ' connecting to the API (' . $request->getUrl() . ')',
-				$response->getStatusCode(),
-				$response->getHeaders(),
-				$data
-			);
+            throw new ApiException(
+                'Error ' . $response->getStatusCode() . ' connecting to the API (' . $request->getUrl() . ') : ' . $response->getBody(),
+                $response->getStatusCode(),
+                $response->getHeaders(),
+                $data
+            );
 		}
 		return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $data);
 	}
@@ -499,11 +497,11 @@ final class ApiClient {
 	 */
 	private function getAuthenticationHeaders(HttpRequest $request) {
 		$timestamp = time();
-		$version = '1';
+		$version = 1;
 		$path = $request->getPath();
-		$securedData = $version . '|' . $this->userId . '|' . $timestamp . '|' . $request->getMethod() . '|' . $path;
+		$securedData = implode('|', [$version, $this->userId, $timestamp, $request->getMethod(), $path]);
 
-		$headers = array();
+		$headers = [];
 		$headers['x-mac-version'] = $version;
 		$headers['x-mac-userid'] = $this->userId;
 		$headers['x-mac-timestamp'] = $timestamp;
@@ -519,21 +517,21 @@ final class ApiClient {
 	 */
 	private function calculateHmac($securedData) {
 		$decodedSecret = base64_decode($this->applicationKey);
-		return base64_encode(hash_hmac("sha512", $securedData, $decodedSecret, true));
+		return base64_encode(hash_hmac('sha512', $securedData, $decodedSecret, true));
 	}
-	
+
 	/**
 	 * Generates a unique token to assign to the request.
 	 *
 	 * @return string
 	 */
 	private function generateUniqueToken() {
-		$s = strtoupper(md5(uniqid(rand(),true))); 
-    	return substr($s,0,8) . '-' . 
-	        substr($s,8,4) . '-' . 
-	        substr($s,12,4). '-' . 
-	        substr($s,16,4). '-' . 
-	        substr($s,20); 
+		$s = strtoupper(md5(uniqid(rand(),true)));
+    	return substr($s,0,8) . '-' .
+	        substr($s,8,4) . '-' .
+	        substr($s,12,4). '-' .
+	        substr($s,16,4). '-' .
+	        substr($s,20);
 	}
 
 }

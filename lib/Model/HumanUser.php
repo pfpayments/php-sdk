@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * HumanUser model
@@ -32,459 +33,619 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class HumanUser  {
+class HumanUser implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'HumanUser';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'HumanUser';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'emailAddress' => 'string',
-		'emailAddressVerified' => 'bool',
-		'firstname' => 'string',
-		'language' => 'string',
-		'lastname' => 'string',
-		'mobilePhoneNumber' => 'string',
-		'mobilePhoneVerified' => 'bool',
-		'primaryAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
-		'scope' => '\PostFinanceCheckout\Sdk\Model\Scope',
-		'timeZone' => 'string',
-		'twoFactorEnabled' => 'bool',
-		'twoFactorType' => '\PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'email_address' => 'string',
+        'email_address_verified' => 'bool',
+        'firstname' => 'string',
+        'language' => 'string',
+        'lastname' => 'string',
+        'mobile_phone_number' => 'string',
+        'mobile_phone_verified' => 'bool',
+        'primary_account' => '\PostFinanceCheckout\Sdk\Model\Account',
+        'scope' => '\PostFinanceCheckout\Sdk\Model\Scope',
+        'time_zone' => 'string',
+        'two_factor_enabled' => 'bool',
+        'two_factor_type' => '\PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'email_address' => null,
+        'email_address_verified' => null,
+        'firstname' => null,
+        'language' => null,
+        'lastname' => null,
+        'mobile_phone_number' => null,
+        'mobile_phone_verified' => null,
+        'primary_account' => null,
+        'scope' => null,
+        'time_zone' => null,
+        'two_factor_enabled' => null,
+        'two_factor_type' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'email_address' => 'emailAddress',
+        'email_address_verified' => 'emailAddressVerified',
+        'firstname' => 'firstname',
+        'language' => 'language',
+        'lastname' => 'lastname',
+        'mobile_phone_number' => 'mobilePhoneNumber',
+        'mobile_phone_verified' => 'mobilePhoneVerified',
+        'primary_account' => 'primaryAccount',
+        'scope' => 'scope',
+        'time_zone' => 'timeZone',
+        'two_factor_enabled' => 'twoFactorEnabled',
+        'two_factor_type' => 'twoFactorType'
+    ];
 
-	/**
-	 * The email address of the user.
-	 *
-	 * @var string
-	 */
-	private $emailAddress;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'email_address' => 'setEmailAddress',
+        'email_address_verified' => 'setEmailAddressVerified',
+        'firstname' => 'setFirstname',
+        'language' => 'setLanguage',
+        'lastname' => 'setLastname',
+        'mobile_phone_number' => 'setMobilePhoneNumber',
+        'mobile_phone_verified' => 'setMobilePhoneVerified',
+        'primary_account' => 'setPrimaryAccount',
+        'scope' => 'setScope',
+        'time_zone' => 'setTimeZone',
+        'two_factor_enabled' => 'setTwoFactorEnabled',
+        'two_factor_type' => 'setTwoFactorType'
+    ];
 
-	/**
-	 * Defines whether a user is verified or not.
-	 *
-	 * @var bool
-	 */
-	private $emailAddressVerified;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'email_address' => 'getEmailAddress',
+        'email_address_verified' => 'getEmailAddressVerified',
+        'firstname' => 'getFirstname',
+        'language' => 'getLanguage',
+        'lastname' => 'getLastname',
+        'mobile_phone_number' => 'getMobilePhoneNumber',
+        'mobile_phone_verified' => 'getMobilePhoneVerified',
+        'primary_account' => 'getPrimaryAccount',
+        'scope' => 'getScope',
+        'time_zone' => 'getTimeZone',
+        'two_factor_enabled' => 'getTwoFactorEnabled',
+        'two_factor_type' => 'getTwoFactorType'
+    ];
 
-	/**
-	 * The first name of the user.
-	 *
-	 * @var string
-	 */
-	private $firstname;
+    
 
-	/**
-	 * The preferred language of the user.
-	 *
-	 * @var string
-	 */
-	private $language;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The last name of the user.
-	 *
-	 * @var string
-	 */
-	private $lastname;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
+        
+        $this->container['email_address_verified'] = isset($data['email_address_verified']) ? $data['email_address_verified'] : null;
+        
+        $this->container['firstname'] = isset($data['firstname']) ? $data['firstname'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['lastname'] = isset($data['lastname']) ? $data['lastname'] : null;
+        
+        $this->container['mobile_phone_number'] = isset($data['mobile_phone_number']) ? $data['mobile_phone_number'] : null;
+        
+        $this->container['mobile_phone_verified'] = isset($data['mobile_phone_verified']) ? $data['mobile_phone_verified'] : null;
+        
+        $this->container['primary_account'] = isset($data['primary_account']) ? $data['primary_account'] : null;
+        
+        $this->container['scope'] = isset($data['scope']) ? $data['scope'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+        $this->container['two_factor_enabled'] = isset($data['two_factor_enabled']) ? $data['two_factor_enabled'] : null;
+        
+        $this->container['two_factor_type'] = isset($data['two_factor_type']) ? $data['two_factor_type'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $mobilePhoneNumber;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * Defines whether a users mobile phone number is verified or not.
-	 *
-	 * @var bool
-	 */
-	private $mobilePhoneVerified;
+        return $invalidProperties;
+    }
 
-	/**
-	 * The primary account links the user to a specific account.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	private $primaryAccount;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * The scope to which the user belongs to.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Scope
-	 */
-	private $scope;
-
-	/**
-	 * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
-	 *
-	 * @var string
-	 */
-	private $timeZone;
-
-	/**
-	 * Defines whether two-factor authentication is enabled for this user.
-	 *
-	 * @var bool
-	 */
-	private $twoFactorEnabled;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType
-	 */
-	private $twoFactorType;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['primaryAccount'])) {
-			$this->setPrimaryAccount($data['primaryAccount']);
-		}
-		if (isset($data['scope'])) {
-			$this->setScope($data['scope']);
-		}
-		if (isset($data['twoFactorType'])) {
-			$this->setTwoFactorType($data['twoFactorType']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns emailAddress.
-	 *
-	 * The email address of the user.
-	 *
-	 * @return string
-	 */
-	public function getEmailAddress() {
-		return $this->emailAddress;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets emailAddress.
-	 *
-	 * @param string $emailAddress
-	 * @return HumanUser
-	 */
-	protected function setEmailAddress($emailAddress) {
-		$this->emailAddress = $emailAddress;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns emailAddressVerified.
-	 *
-	 * Defines whether a user is verified or not.
-	 *
-	 * @return bool
-	 */
-	public function getEmailAddressVerified() {
-		return $this->emailAddressVerified;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets emailAddressVerified.
-	 *
-	 * @param bool $emailAddressVerified
-	 * @return HumanUser
-	 */
-	protected function setEmailAddressVerified($emailAddressVerified) {
-		$this->emailAddressVerified = $emailAddressVerified;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns firstname.
-	 *
-	 * The first name of the user.
-	 *
-	 * @return string
-	 */
-	public function getFirstname() {
-		return $this->firstname;
-	}
+    
 
-	/**
-	 * Sets firstname.
-	 *
-	 * @param string $firstname
-	 * @return HumanUser
-	 */
-	protected function setFirstname($firstname) {
-		$this->firstname = $firstname;
+    /**
+     * Gets email_address
+     *
+     * @return string
+     */
+    public function getEmailAddress()
+    {
+        return $this->container['email_address'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets email_address
+     *
+     * @param string $email_address The email address of the user.
+     *
+     * @return $this
+     */
+    public function setEmailAddress($email_address)
+    {
+        $this->container['email_address'] = $email_address;
 
-	/**
-	 * Returns language.
-	 *
-	 * The preferred language of the user.
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return HumanUser
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
+    /**
+     * Gets email_address_verified
+     *
+     * @return bool
+     */
+    public function getEmailAddressVerified()
+    {
+        return $this->container['email_address_verified'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets email_address_verified
+     *
+     * @param bool $email_address_verified Defines whether a user is verified or not.
+     *
+     * @return $this
+     */
+    public function setEmailAddressVerified($email_address_verified)
+    {
+        $this->container['email_address_verified'] = $email_address_verified;
 
-	/**
-	 * Returns lastname.
-	 *
-	 * The last name of the user.
-	 *
-	 * @return string
-	 */
-	public function getLastname() {
-		return $this->lastname;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets lastname.
-	 *
-	 * @param string $lastname
-	 * @return HumanUser
-	 */
-	protected function setLastname($lastname) {
-		$this->lastname = $lastname;
+    /**
+     * Gets firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->container['firstname'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets firstname
+     *
+     * @param string $firstname The first name of the user.
+     *
+     * @return $this
+     */
+    public function setFirstname($firstname)
+    {
+        $this->container['firstname'] = $firstname;
 
-	/**
-	 * Returns mobilePhoneNumber.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getMobilePhoneNumber() {
-		return $this->mobilePhoneNumber;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets mobilePhoneNumber.
-	 *
-	 * @param string $mobilePhoneNumber
-	 * @return HumanUser
-	 */
-	protected function setMobilePhoneNumber($mobilePhoneNumber) {
-		$this->mobilePhoneNumber = $mobilePhoneNumber;
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets language
+     *
+     * @param string $language The preferred language of the user.
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
 
-	/**
-	 * Returns mobilePhoneVerified.
-	 *
-	 * Defines whether a users mobile phone number is verified or not.
-	 *
-	 * @return bool
-	 */
-	public function getMobilePhoneVerified() {
-		return $this->mobilePhoneVerified;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets mobilePhoneVerified.
-	 *
-	 * @param bool $mobilePhoneVerified
-	 * @return HumanUser
-	 */
-	protected function setMobilePhoneVerified($mobilePhoneVerified) {
-		$this->mobilePhoneVerified = $mobilePhoneVerified;
+    /**
+     * Gets lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->container['lastname'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets lastname
+     *
+     * @param string $lastname The last name of the user.
+     *
+     * @return $this
+     */
+    public function setLastname($lastname)
+    {
+        $this->container['lastname'] = $lastname;
 
-	/**
-	 * Returns primaryAccount.
-	 *
-	 * The primary account links the user to a specific account.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	public function getPrimaryAccount() {
-		return $this->primaryAccount;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets primaryAccount.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Account $primaryAccount
-	 * @return HumanUser
-	 */
-	public function setPrimaryAccount($primaryAccount) {
-		$this->primaryAccount = $primaryAccount;
+    /**
+     * Gets mobile_phone_number
+     *
+     * @return string
+     */
+    public function getMobilePhoneNumber()
+    {
+        return $this->container['mobile_phone_number'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets mobile_phone_number
+     *
+     * @param string $mobile_phone_number 
+     *
+     * @return $this
+     */
+    public function setMobilePhoneNumber($mobile_phone_number)
+    {
+        $this->container['mobile_phone_number'] = $mobile_phone_number;
 
-	/**
-	 * Returns scope.
-	 *
-	 * The scope to which the user belongs to.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Scope
-	 */
-	public function getScope() {
-		return $this->scope;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets scope.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Scope $scope
-	 * @return HumanUser
-	 */
-	public function setScope($scope) {
-		$this->scope = $scope;
+    /**
+     * Gets mobile_phone_verified
+     *
+     * @return bool
+     */
+    public function getMobilePhoneVerified()
+    {
+        return $this->container['mobile_phone_verified'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets mobile_phone_verified
+     *
+     * @param bool $mobile_phone_verified Defines whether a users mobile phone number is verified or not.
+     *
+     * @return $this
+     */
+    public function setMobilePhoneVerified($mobile_phone_verified)
+    {
+        $this->container['mobile_phone_verified'] = $mobile_phone_verified;
 
-	/**
-	 * Returns timeZone.
-	 *
-	 * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return HumanUser
-	 */
-	protected function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
+    /**
+     * Gets primary_account
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Account
+     */
+    public function getPrimaryAccount()
+    {
+        return $this->container['primary_account'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets primary_account
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Account $primary_account The primary account links the user to a specific account.
+     *
+     * @return $this
+     */
+    public function setPrimaryAccount($primary_account)
+    {
+        $this->container['primary_account'] = $primary_account;
 
-	/**
-	 * Returns twoFactorEnabled.
-	 *
-	 * Defines whether two-factor authentication is enabled for this user.
-	 *
-	 * @return bool
-	 */
-	public function getTwoFactorEnabled() {
-		return $this->twoFactorEnabled;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets twoFactorEnabled.
-	 *
-	 * @param bool $twoFactorEnabled
-	 * @return HumanUser
-	 */
-	protected function setTwoFactorEnabled($twoFactorEnabled) {
-		$this->twoFactorEnabled = $twoFactorEnabled;
+    /**
+     * Gets scope
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Scope
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets scope
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Scope $scope The scope to which the user belongs to.
+     *
+     * @return $this
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
-	/**
-	 * Returns twoFactorType.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType
-	 */
-	public function getTwoFactorType() {
-		return $this->twoFactorType;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets twoFactorType.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType $twoFactorType
-	 * @return HumanUser
-	 */
-	public function setTwoFactorType($twoFactorType) {
-		$this->twoFactorType = $twoFactorType;
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets two_factor_enabled
+     *
+     * @return bool
+     */
+    public function getTwoFactorEnabled()
+    {
+        return $this->container['two_factor_enabled'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets two_factor_enabled
+     *
+     * @param bool $two_factor_enabled Defines whether two-factor authentication is enabled for this user.
+     *
+     * @return $this
+     */
+    public function setTwoFactorEnabled($two_factor_enabled)
+    {
+        $this->container['two_factor_enabled'] = $two_factor_enabled;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets two_factor_type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType
+     */
+    public function getTwoFactorType()
+    {
+        return $this->container['two_factor_type'];
+    }
 
+    /**
+     * Sets two_factor_type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType $two_factor_type 
+     *
+     * @return $this
+     */
+    public function setTwoFactorType($two_factor_type)
+    {
+        $this->container['two_factor_type'] = $two_factor_type;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

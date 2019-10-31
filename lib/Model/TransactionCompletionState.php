@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionCompletionState model
@@ -32,15 +31,31 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionCompletionState implements IEnum {
-
-	const CREATE = 'CREATE';
-	const SCHEDULED = 'SCHEDULED';
-	const PENDING = 'PENDING';
-	const FAILED = 'FAILED';
-	const SUCCESSFUL = 'SUCCESSFUL';
-	
-
-	
-
+class TransactionCompletionState
+{
+    /**
+     * Possible values of this enum
+     */
+    const CREATE = 'CREATE';
+    const SCHEDULED = 'SCHEDULED';
+    const PENDING = 'PENDING';
+    const FAILED = 'FAILED';
+    const SUCCESSFUL = 'SUCCESSFUL';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::CREATE,
+            self::SCHEDULED,
+            self::PENDING,
+            self::FAILED,
+            self::SUCCESSFUL,
+        ];
+    }
 }
+
+

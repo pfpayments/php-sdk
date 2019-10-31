@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * RenderedDocument model
@@ -32,205 +33,363 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedDocument  {
+class RenderedDocument implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'RenderedDocument';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'RenderedDocument';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'data' => 'string',
-		'documentTemplateType' => 'int',
-		'mimeType' => 'string',
-		'title' => 'string'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'data' => 'string[]',
+        'document_template_type' => 'int',
+        'mime_type' => 'string',
+        'title' => 'string'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'data' => 'byte',
+        'document_template_type' => 'int64',
+        'mime_type' => null,
+        'title' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'data' => 'data',
+        'document_template_type' => 'documentTemplateType',
+        'mime_type' => 'mimeType',
+        'title' => 'title'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $data;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'data' => 'setData',
+        'document_template_type' => 'setDocumentTemplateType',
+        'mime_type' => 'setMimeType',
+        'title' => 'setTitle'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $documentTemplateType;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'data' => 'getData',
+        'document_template_type' => 'getDocumentTemplateType',
+        'mime_type' => 'getMimeType',
+        'title' => 'getTitle'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $mimeType;
+    
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $title;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        
+        $this->container['document_template_type'] = isset($data['document_template_type']) ? $data['document_template_type'] : null;
+        
+        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
+        
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['data'])) {
-			$this->setData($data['data']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns data.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getData() {
-		return $this->data;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets data.
-	 *
-	 * @param string $data
-	 * @return RenderedDocument
-	 */
-	public function setData($data) {
-		$this->data = $data;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns documentTemplateType.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getDocumentTemplateType() {
-		return $this->documentTemplateType;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets documentTemplateType.
-	 *
-	 * @param int $documentTemplateType
-	 * @return RenderedDocument
-	 */
-	protected function setDocumentTemplateType($documentTemplateType) {
-		$this->documentTemplateType = $documentTemplateType;
+    
 
-		return $this;
-	}
+    /**
+     * Gets data
+     *
+     * @return string[]
+     */
+    public function getData()
+    {
+        return $this->container['data'];
+    }
 
-	/**
-	 * Returns mimeType.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getMimeType() {
-		return $this->mimeType;
-	}
+    /**
+     * Sets data
+     *
+     * @param string[] $data 
+     *
+     * @return $this
+     */
+    public function setData($data)
+    {
+        $this->container['data'] = $data;
 
-	/**
-	 * Sets mimeType.
-	 *
-	 * @param string $mimeType
-	 * @return RenderedDocument
-	 */
-	protected function setMimeType($mimeType) {
-		$this->mimeType = $mimeType;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets document_template_type
+     *
+     * @return int
+     */
+    public function getDocumentTemplateType()
+    {
+        return $this->container['document_template_type'];
+    }
 
-	/**
-	 * Returns title.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Sets document_template_type
+     *
+     * @param int $document_template_type 
+     *
+     * @return $this
+     */
+    public function setDocumentTemplateType($document_template_type)
+    {
+        $this->container['document_template_type'] = $document_template_type;
 
-	/**
-	 * Sets title.
-	 *
-	 * @param string $title
-	 * @return RenderedDocument
-	 */
-	protected function setTitle($title) {
-		$this->title = $title;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets mime_type
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->container['mime_type'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets mime_type
+     *
+     * @param string $mime_type 
+     *
+     * @return $this
+     */
+    public function setMimeType($mime_type)
+    {
+        $this->container['mime_type'] = $mime_type;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets title
+     *
+     * @param string $title 
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

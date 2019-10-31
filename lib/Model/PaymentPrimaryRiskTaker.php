@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * PaymentPrimaryRiskTaker model
@@ -32,13 +31,27 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentPrimaryRiskTaker implements IEnum {
-
-	const CUSTOMER = 'CUSTOMER';
-	const MERCHANT = 'MERCHANT';
-	const THIRD_PARTY = 'THIRD_PARTY';
-	
-
-	
-
+class PaymentPrimaryRiskTaker
+{
+    /**
+     * Possible values of this enum
+     */
+    const CUSTOMER = 'CUSTOMER';
+    const MERCHANT = 'MERCHANT';
+    const THIRD_PARTY = 'THIRD_PARTY';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::CUSTOMER,
+            self::MERCHANT,
+            self::THIRD_PARTY,
+        ];
+    }
 }
+
+

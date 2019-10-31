@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoice model
@@ -32,685 +31,839 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionInvoice extends TransactionAwareEntity  {
-
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'TransactionInvoice';
-
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'amount' => 'float',
-		'billingAddress' => '\PostFinanceCheckout\Sdk\Model\Address',
-		'completion' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
-		'createdOn' => '\DateTime',
-		'derecognizedOn' => '\DateTime',
-		'dueOn' => '\DateTime',
-		'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
-		'externalId' => 'string',
-		'language' => 'string',
-		'lineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-		'merchantReference' => 'string',
-		'outstandingAmount' => 'float',
-		'paidOn' => '\DateTime',
-		'plannedPurgeDate' => '\DateTime',
-		'spaceViewId' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\TransactionInvoiceState',
-		'taxAmount' => 'float',
-		'timeZone' => 'string',
-		'version' => 'int'	);
-
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
-
-	
-
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $amount;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	private $billingAddress;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TransactionCompletion
-	 */
-	private $completion;
-
-	/**
-	 * The date on which the invoice is created on.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
-
-	/**
-	 * The date on which the invoice is marked as derecognized.
-	 *
-	 * @var \DateTime
-	 */
-	private $derecognizedOn;
-
-	/**
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @var \DateTime
-	 */
-	private $dueOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Environment
-	 */
-	private $environment;
-
-	/**
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @var string
-	 */
-	private $externalId;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $language;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	private $lineItems;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $merchantReference;
-
-	/**
-	 * The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
-	 *
-	 * @var float
-	 */
-	private $outstandingAmount;
-
-	/**
-	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
-	 *
-	 * @var \DateTime
-	 */
-	private $paidOn;
-
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $spaceViewId;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TransactionInvoiceState
-	 */
-	private $state;
-
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $taxAmount;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $timeZone;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['billingAddress'])) {
-			$this->setBillingAddress($data['billingAddress']);
-		}
-		if (isset($data['completion'])) {
-			$this->setCompletion($data['completion']);
-		}
-		if (isset($data['environment'])) {
-			$this->setEnvironment($data['environment']);
-		}
-		if (isset($data['lineItems'])) {
-			$this->setLineItems($data['lineItems']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-	}
-
-
-	/**
-	 * Returns amount.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getAmount() {
-		return $this->amount;
-	}
-
-	/**
-	 * Sets amount.
-	 *
-	 * @param float $amount
-	 * @return TransactionInvoice
-	 */
-	protected function setAmount($amount) {
-		$this->amount = $amount;
-
-		return $this;
-	}
-
-	/**
-	 * Returns billingAddress.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	public function getBillingAddress() {
-		return $this->billingAddress;
-	}
-
-	/**
-	 * Sets billingAddress.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Address $billingAddress
-	 * @return TransactionInvoice
-	 */
-	public function setBillingAddress($billingAddress) {
-		$this->billingAddress = $billingAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns completion.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
-	 */
-	public function getCompletion() {
-		return $this->completion;
-	}
-
-	/**
-	 * Sets completion.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion
-	 * @return TransactionInvoice
-	 */
-	public function setCompletion($completion) {
-		$this->completion = $completion;
-
-		return $this;
-	}
-
-	/**
-	 * Returns createdOn.
-	 *
-	 * The date on which the invoice is created on.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
-
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return TransactionInvoice
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns derecognizedOn.
-	 *
-	 * The date on which the invoice is marked as derecognized.
-	 *
-	 * @return \DateTime
-	 */
-	public function getDerecognizedOn() {
-		return $this->derecognizedOn;
-	}
-
-	/**
-	 * Sets derecognizedOn.
-	 *
-	 * @param \DateTime $derecognizedOn
-	 * @return TransactionInvoice
-	 */
-	protected function setDerecognizedOn($derecognizedOn) {
-		$this->derecognizedOn = $derecognizedOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns dueOn.
-	 *
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @return \DateTime
-	 */
-	public function getDueOn() {
-		return $this->dueOn;
-	}
-
-	/**
-	 * Sets dueOn.
-	 *
-	 * @param \DateTime $dueOn
-	 * @return TransactionInvoice
-	 */
-	protected function setDueOn($dueOn) {
-		$this->dueOn = $dueOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns environment.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Environment
-	 */
-	public function getEnvironment() {
-		return $this->environment;
-	}
-
-	/**
-	 * Sets environment.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Environment $environment
-	 * @return TransactionInvoice
-	 */
-	public function setEnvironment($environment) {
-		$this->environment = $environment;
-
-		return $this;
-	}
-
-	/**
-	 * Returns externalId.
-	 *
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return $this->externalId;
-	}
-
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return TransactionInvoice
-	 */
-	protected function setExternalId($externalId) {
-		$this->externalId = $externalId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return TransactionInvoice
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns lineItems.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	public function getLineItems() {
-		return $this->lineItems;
-	}
-
-	/**
-	 * Sets lineItems.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $lineItems
-	 * @return TransactionInvoice
-	 */
-	public function setLineItems($lineItems) {
-		$this->lineItems = $lineItems;
-
-		return $this;
-	}
-
-	/**
-	 * Returns merchantReference.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getMerchantReference() {
-		return $this->merchantReference;
-	}
-
-	/**
-	 * Sets merchantReference.
-	 *
-	 * @param string $merchantReference
-	 * @return TransactionInvoice
-	 */
-	protected function setMerchantReference($merchantReference) {
-		$this->merchantReference = $merchantReference;
-
-		return $this;
-	}
-
-	/**
-	 * Returns outstandingAmount.
-	 *
-	 * The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
-	 *
-	 * @return float
-	 */
-	public function getOutstandingAmount() {
-		return $this->outstandingAmount;
-	}
-
-	/**
-	 * Sets outstandingAmount.
-	 *
-	 * @param float $outstandingAmount
-	 * @return TransactionInvoice
-	 */
-	protected function setOutstandingAmount($outstandingAmount) {
-		$this->outstandingAmount = $outstandingAmount;
-
-		return $this;
-	}
-
-	/**
-	 * Returns paidOn.
-	 *
-	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPaidOn() {
-		return $this->paidOn;
-	}
-
-	/**
-	 * Sets paidOn.
-	 *
-	 * @param \DateTime $paidOn
-	 * @return TransactionInvoice
-	 */
-	protected function setPaidOn($paidOn) {
-		$this->paidOn = $paidOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
-
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return TransactionInvoice
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
-
-		return $this;
-	}
-
-	/**
-	 * Returns spaceViewId.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getSpaceViewId() {
-		return $this->spaceViewId;
-	}
-
-	/**
-	 * Sets spaceViewId.
-	 *
-	 * @param int $spaceViewId
-	 * @return TransactionInvoice
-	 */
-	protected function setSpaceViewId($spaceViewId) {
-		$this->spaceViewId = $spaceViewId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoiceState
-	 */
-	public function getState() {
-		return $this->state;
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionInvoiceState $state
-	 * @return TransactionInvoice
-	 */
-	public function setState($state) {
-		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns taxAmount.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getTaxAmount() {
-		return $this->taxAmount;
-	}
-
-	/**
-	 * Sets taxAmount.
-	 *
-	 * @param float $taxAmount
-	 * @return TransactionInvoice
-	 */
-	protected function setTaxAmount($taxAmount) {
-		$this->taxAmount = $taxAmount;
-
-		return $this;
-	}
-
-	/**
-	 * Returns timeZone.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
-
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return TransactionInvoice
-	 */
-	protected function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return TransactionInvoice
-	 */
-	protected function setVersion($version) {
-		$this->version = $version;
-
-		return $this;
-	}
-
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
-
-	}
-
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
-
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
-
+class TransactionInvoice extends TransactionAwareEntity 
+{
+    const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'TransactionInvoice';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'amount' => 'float',
+        'billing_address' => '\PostFinanceCheckout\Sdk\Model\Address',
+        'completion' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
+        'created_on' => '\DateTime',
+        'derecognized_on' => '\DateTime',
+        'due_on' => '\DateTime',
+        'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
+        'external_id' => 'string',
+        'language' => 'string',
+        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'merchant_reference' => 'string',
+        'outstanding_amount' => 'float',
+        'paid_on' => '\DateTime',
+        'planned_purge_date' => '\DateTime',
+        'space_view_id' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\TransactionInvoiceState',
+        'tax_amount' => 'float',
+        'time_zone' => 'string',
+        'version' => 'int'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'amount' => null,
+        'billing_address' => null,
+        'completion' => null,
+        'created_on' => 'date-time',
+        'derecognized_on' => 'date-time',
+        'due_on' => 'date-time',
+        'environment' => null,
+        'external_id' => null,
+        'language' => null,
+        'line_items' => null,
+        'merchant_reference' => null,
+        'outstanding_amount' => null,
+        'paid_on' => 'date-time',
+        'planned_purge_date' => 'date-time',
+        'space_view_id' => 'int64',
+        'state' => null,
+        'tax_amount' => null,
+        'time_zone' => null,
+        'version' => 'int32'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'amount' => 'amount',
+        'billing_address' => 'billingAddress',
+        'completion' => 'completion',
+        'created_on' => 'createdOn',
+        'derecognized_on' => 'derecognizedOn',
+        'due_on' => 'dueOn',
+        'environment' => 'environment',
+        'external_id' => 'externalId',
+        'language' => 'language',
+        'line_items' => 'lineItems',
+        'merchant_reference' => 'merchantReference',
+        'outstanding_amount' => 'outstandingAmount',
+        'paid_on' => 'paidOn',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'space_view_id' => 'spaceViewId',
+        'state' => 'state',
+        'tax_amount' => 'taxAmount',
+        'time_zone' => 'timeZone',
+        'version' => 'version'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'amount' => 'setAmount',
+        'billing_address' => 'setBillingAddress',
+        'completion' => 'setCompletion',
+        'created_on' => 'setCreatedOn',
+        'derecognized_on' => 'setDerecognizedOn',
+        'due_on' => 'setDueOn',
+        'environment' => 'setEnvironment',
+        'external_id' => 'setExternalId',
+        'language' => 'setLanguage',
+        'line_items' => 'setLineItems',
+        'merchant_reference' => 'setMerchantReference',
+        'outstanding_amount' => 'setOutstandingAmount',
+        'paid_on' => 'setPaidOn',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'space_view_id' => 'setSpaceViewId',
+        'state' => 'setState',
+        'tax_amount' => 'setTaxAmount',
+        'time_zone' => 'setTimeZone',
+        'version' => 'setVersion'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'amount' => 'getAmount',
+        'billing_address' => 'getBillingAddress',
+        'completion' => 'getCompletion',
+        'created_on' => 'getCreatedOn',
+        'derecognized_on' => 'getDerecognizedOn',
+        'due_on' => 'getDueOn',
+        'environment' => 'getEnvironment',
+        'external_id' => 'getExternalId',
+        'language' => 'getLanguage',
+        'line_items' => 'getLineItems',
+        'merchant_reference' => 'getMerchantReference',
+        'outstanding_amount' => 'getOutstandingAmount',
+        'paid_on' => 'getPaidOn',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'space_view_id' => 'getSpaceViewId',
+        'state' => 'getState',
+        'tax_amount' => 'getTaxAmount',
+        'time_zone' => 'getTimeZone',
+        'version' => 'getVersion'
+    ];
+
+    
+
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
+
+        
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        
+        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
+        
+        $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['derecognized_on'] = isset($data['derecognized_on']) ? $data['derecognized_on'] : null;
+        
+        $this->container['due_on'] = isset($data['due_on']) ? $data['due_on'] : null;
+        
+        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
+        
+        $this->container['outstanding_amount'] = isset($data['outstanding_amount']) ? $data['outstanding_amount'] : null;
+        
+        $this->container['paid_on'] = isset($data['paid_on']) ? $data['paid_on'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['tax_amount'] = isset($data['tax_amount']) ? $data['tax_amount'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
+
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
+
+    
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    
+
+    /**
+     * Gets amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
+
+    /**
+     * Sets amount
+     *
+     * @param float $amount 
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address 
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billing_address)
+    {
+        $this->container['billing_address'] = $billing_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets completion
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletion
+     */
+    public function getCompletion()
+    {
+        return $this->container['completion'];
+    }
+
+    /**
+     * Sets completion
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion 
+     *
+     * @return $this
+     */
+    public function setCompletion($completion)
+    {
+        $this->container['completion'] = $completion;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The date on which the invoice is created on.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets derecognized_on
+     *
+     * @return \DateTime
+     */
+    public function getDerecognizedOn()
+    {
+        return $this->container['derecognized_on'];
+    }
+
+    /**
+     * Sets derecognized_on
+     *
+     * @param \DateTime $derecognized_on The date on which the invoice is marked as derecognized.
+     *
+     * @return $this
+     */
+    public function setDerecognizedOn($derecognized_on)
+    {
+        $this->container['derecognized_on'] = $derecognized_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets due_on
+     *
+     * @return \DateTime
+     */
+    public function getDueOn()
+    {
+        return $this->container['due_on'];
+    }
+
+    /**
+     * Sets due_on
+     *
+     * @param \DateTime $due_on The date on which the invoice should be paid on.
+     *
+     * @return $this
+     */
+    public function setDueOn($due_on)
+    {
+        $this->container['due_on'] = $due_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets environment
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Environment
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment 
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        $this->container['environment'] = $environment;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string $language 
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
+
+    /**
+     * Sets line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items 
+     *
+     * @return $this
+     */
+    public function setLineItems($line_items)
+    {
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets merchant_reference
+     *
+     * @return string
+     */
+    public function getMerchantReference()
+    {
+        return $this->container['merchant_reference'];
+    }
+
+    /**
+     * Sets merchant_reference
+     *
+     * @param string $merchant_reference 
+     *
+     * @return $this
+     */
+    public function setMerchantReference($merchant_reference)
+    {
+        $this->container['merchant_reference'] = $merchant_reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets outstanding_amount
+     *
+     * @return float
+     */
+    public function getOutstandingAmount()
+    {
+        return $this->container['outstanding_amount'];
+    }
+
+    /**
+     * Sets outstanding_amount
+     *
+     * @param float $outstanding_amount The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
+     *
+     * @return $this
+     */
+    public function setOutstandingAmount($outstanding_amount)
+    {
+        $this->container['outstanding_amount'] = $outstanding_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets paid_on
+     *
+     * @return \DateTime
+     */
+    public function getPaidOn()
+    {
+        return $this->container['paid_on'];
+    }
+
+    /**
+     * Sets paid_on
+     *
+     * @param \DateTime $paid_on The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
+     *
+     * @return $this
+     */
+    public function setPaidOn($paid_on)
+    {
+        $this->container['paid_on'] = $paid_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets space_view_id
+     *
+     * @return int
+     */
+    public function getSpaceViewId()
+    {
+        return $this->container['space_view_id'];
+    }
+
+    /**
+     * Sets space_view_id
+     *
+     * @param int $space_view_id 
+     *
+     * @return $this
+     */
+    public function setSpaceViewId($space_view_id)
+    {
+        $this->container['space_view_id'] = $space_view_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoiceState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionInvoiceState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets tax_amount
+     *
+     * @return float
+     */
+    public function getTaxAmount()
+    {
+        return $this->container['tax_amount'];
+    }
+
+    /**
+     * Sets tax_amount
+     *
+     * @param float $tax_amount 
+     *
+     * @return $this
+     */
+    public function setTaxAmount($tax_amount)
+    {
+        $this->container['tax_amount'] = $tax_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
+
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone 
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

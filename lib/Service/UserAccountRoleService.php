@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ use PostFinanceCheckout\Sdk\ApiClient;
 use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\ApiResponse;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
+use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * UserAccountRoleService service
@@ -49,7 +50,7 @@ class UserAccountRoleService {
 	 * @param ApiClient $apiClient the api client
 	 */
 	public function __construct(ApiClient $apiClient) {
-		if ($apiClient == null) {
+		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}
 
@@ -71,17 +72,17 @@ class UserAccountRoleService {
 	 *
 	 * Add Role
 	 *
-	 * @param int $userId The id of the user to whom the role is assigned. (required)
-	 * @param int $accountId The account to which the role is mapped. (required)
-	 * @param int $roleId The role which is mapped to the user and account. (required)
-	 * @param bool $appliesOnSubaccount Whether the role applies only on subaccount. (optional)
+	 * @param int $user_id The id of the user to whom the role is assigned. (required)
+	 * @param int $account_id The account to which the role is mapped. (required)
+	 * @param int $role_id The role which is mapped to the user and account. (required)
+	 * @param bool $applies_on_subaccount Whether the role applies only on subaccount. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\UserAccountRole
 	 */
-	public function addRole($userId, $accountId, $roleId, $appliesOnSubaccount = null) {
-		return $this->addRoleWithHttpInfo($userId, $accountId, $roleId, $appliesOnSubaccount)->getData();
+	public function addRole($user_id, $account_id, $role_id, $applies_on_subaccount = null) {
+		return $this->addRoleWithHttpInfo($user_id, $account_id, $role_id, $applies_on_subaccount)->getData();
 	}
 
 	/**
@@ -89,58 +90,58 @@ class UserAccountRoleService {
 	 *
 	 * Add Role
 	 *
-	 * @param int $userId The id of the user to whom the role is assigned. (required)
-	 * @param int $accountId The account to which the role is mapped. (required)
-	 * @param int $roleId The role which is mapped to the user and account. (required)
-	 * @param bool $appliesOnSubaccount Whether the role applies only on subaccount. (optional)
+	 * @param int $user_id The id of the user to whom the role is assigned. (required)
+	 * @param int $account_id The account to which the role is mapped. (required)
+	 * @param int $role_id The role which is mapped to the user and account. (required)
+	 * @param bool $applies_on_subaccount Whether the role applies only on subaccount. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function addRoleWithHttpInfo($userId, $accountId, $roleId, $appliesOnSubaccount = null) {
-		// verify the required parameter 'userId' is set
-		if ($userId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $userId when calling addRole');
+	public function addRoleWithHttpInfo($user_id, $account_id, $role_id, $applies_on_subaccount = null) {
+		// verify the required parameter 'user_id' is set
+		if (is_null($user_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $user_id when calling addRole');
 		}
-		// verify the required parameter 'accountId' is set
-		if ($accountId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $accountId when calling addRole');
+		// verify the required parameter 'account_id' is set
+		if (is_null($account_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $account_id when calling addRole');
 		}
-		// verify the required parameter 'roleId' is set
-		if ($roleId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $roleId when calling addRole');
+		// verify the required parameter 'role_id' is set
+		if (is_null($role_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $role_id when calling addRole');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
-		$queryParams = array();
-		if ($userId !== null) {
-			$queryParams['userId'] = $this->apiClient->getSerializer()->toQueryValue($userId);
+		$queryParams = [];
+		if (!is_null($user_id)) {
+			$queryParams['userId'] = $this->apiClient->getSerializer()->toQueryValue($user_id);
 		}
-		if ($accountId !== null) {
-			$queryParams['accountId'] = $this->apiClient->getSerializer()->toQueryValue($accountId);
+		if (!is_null($account_id)) {
+			$queryParams['accountId'] = $this->apiClient->getSerializer()->toQueryValue($account_id);
 		}
-		if ($roleId !== null) {
-			$queryParams['roleId'] = $this->apiClient->getSerializer()->toQueryValue($roleId);
+		if (!is_null($role_id)) {
+			$queryParams['roleId'] = $this->apiClient->getSerializer()->toQueryValue($role_id);
 		}
-		if ($appliesOnSubaccount !== null) {
-			$queryParams['appliesOnSubaccount'] = $this->apiClient->getSerializer()->toQueryValue($appliesOnSubaccount);
+		if (!is_null($applies_on_subaccount)) {
+			$queryParams['appliesOnSubaccount'] = $this->apiClient->getSerializer()->toQueryValue($applies_on_subaccount);
 		}
 
 		// path params
-		$resourcePath = "/user-account-role/addRole";
+		$resourcePath = '/user-account-role/addRole';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -163,20 +164,31 @@ class UserAccountRoleService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\UserAccountRole', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\UserAccountRole', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\UserAccountRole',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -186,15 +198,15 @@ class UserAccountRoleService {
 	 *
 	 * List Roles
 	 *
-	 * @param int $userId The id of the user to whom the role is assigned. (required)
-	 * @param int $accountId The account to which the role is mapped. (required)
+	 * @param int $user_id The id of the user to whom the role is assigned. (required)
+	 * @param int $account_id The account to which the role is mapped. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\UserAccountRole[]
 	 */
-	public function callList($userId, $accountId) {
-		return $this->callListWithHttpInfo($userId, $accountId)->getData();
+	public function callList($user_id, $account_id) {
+		return $this->callListWithHttpInfo($user_id, $account_id)->getData();
 	}
 
 	/**
@@ -202,46 +214,46 @@ class UserAccountRoleService {
 	 *
 	 * List Roles
 	 *
-	 * @param int $userId The id of the user to whom the role is assigned. (required)
-	 * @param int $accountId The account to which the role is mapped. (required)
+	 * @param int $user_id The id of the user to whom the role is assigned. (required)
+	 * @param int $account_id The account to which the role is mapped. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function callListWithHttpInfo($userId, $accountId) {
-		// verify the required parameter 'userId' is set
-		if ($userId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $userId when calling callList');
+	public function callListWithHttpInfo($user_id, $account_id) {
+		// verify the required parameter 'user_id' is set
+		if (is_null($user_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $user_id when calling callList');
 		}
-		// verify the required parameter 'accountId' is set
-		if ($accountId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $accountId when calling callList');
+		// verify the required parameter 'account_id' is set
+		if (is_null($account_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $account_id when calling callList');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
-		$queryParams = array();
-		if ($userId !== null) {
-			$queryParams['userId'] = $this->apiClient->getSerializer()->toQueryValue($userId);
+		$queryParams = [];
+		if (!is_null($user_id)) {
+			$queryParams['userId'] = $this->apiClient->getSerializer()->toQueryValue($user_id);
 		}
-		if ($accountId !== null) {
-			$queryParams['accountId'] = $this->apiClient->getSerializer()->toQueryValue($accountId);
+		if (!is_null($account_id)) {
+			$queryParams['accountId'] = $this->apiClient->getSerializer()->toQueryValue($account_id);
 		}
 
 		// path params
-		$resourcePath = "/user-account-role/list";
+		$resourcePath = '/user-account-role/list';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -264,20 +276,31 @@ class UserAccountRoleService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\UserAccountRole[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\UserAccountRole[]', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\UserAccountRole[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -310,30 +333,30 @@ class UserAccountRoleService {
 	 */
 	public function removeRoleWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling removeRole');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
-		$queryParams = array();
-		if ($id !== null) {
+		$queryParams = [];
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/user-account-role/removeRole";
+		$resourcePath = '/user-account-role/removeRole';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -356,16 +379,23 @@ class UserAccountRoleService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}

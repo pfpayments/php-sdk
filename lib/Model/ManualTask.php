@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ManualTask model
@@ -32,394 +33,555 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ManualTask  {
+class ManualTask implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ManualTask';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ManualTask';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'actions' => 'int[]',
-		'contextEntityId' => 'int',
-		'createdOn' => '\DateTime',
-		'expiresOn' => '\DateTime',
-		'id' => 'int',
-		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => '\DateTime',
-		'spaceId' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\ManualTaskState',
-		'type' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'actions' => 'int[]',
+        'context_entity_id' => 'int',
+        'created_on' => '\DateTime',
+        'expires_on' => '\DateTime',
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'planned_purge_date' => '\DateTime',
+        'space_id' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ManualTaskState',
+        'type' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'actions' => 'int64',
+        'context_entity_id' => 'int64',
+        'created_on' => 'date-time',
+        'expires_on' => 'date-time',
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'planned_purge_date' => 'date-time',
+        'space_id' => 'int64',
+        'state' => null,
+        'type' => 'int64'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'actions' => 'actions',
+        'context_entity_id' => 'contextEntityId',
+        'created_on' => 'createdOn',
+        'expires_on' => 'expiresOn',
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'space_id' => 'spaceId',
+        'state' => 'state',
+        'type' => 'type'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int[]
-	 */
-	private $actions;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'actions' => 'setActions',
+        'context_entity_id' => 'setContextEntityId',
+        'created_on' => 'setCreatedOn',
+        'expires_on' => 'setExpiresOn',
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'space_id' => 'setSpaceId',
+        'state' => 'setState',
+        'type' => 'setType'
+    ];
 
-	/**
-	 * The context entity ID links the manual task to the entity which caused its creation.
-	 *
-	 * @var int
-	 */
-	private $contextEntityId;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'actions' => 'getActions',
+        'context_entity_id' => 'getContextEntityId',
+        'created_on' => 'getCreatedOn',
+        'expires_on' => 'getExpiresOn',
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'space_id' => 'getSpaceId',
+        'state' => 'getState',
+        'type' => 'getType'
+    ];
 
-	/**
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
+    
 
-	/**
-	 * The expiry date indicates until when the manual task has to be executed.
-	 *
-	 * @var \DateTime
-	 */
-	private $expiresOn;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['actions'] = isset($data['actions']) ? $data['actions'] : null;
+        
+        $this->container['context_entity_id'] = isset($data['context_entity_id']) ? $data['context_entity_id'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['expires_on'] = isset($data['expires_on']) ? $data['expires_on'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['space_id'] = isset($data['space_id']) ? $data['space_id'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+    }
 
-	/**
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @var int
-	 */
-	private $linkedSpaceId;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+        return $invalidProperties;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $spaceId;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ManualTaskState
-	 */
-	private $state;
-
-	/**
-	 * The type categorizes the manual task.
-	 *
-	 * @var int
-	 */
-	private $type;
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['actions'])) {
-			$this->setActions($data['actions']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns actions.
-	 *
-	 * 
-	 *
-	 * @return int[]
-	 */
-	public function getActions() {
-		return $this->actions;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets actions.
-	 *
-	 * @param int[] $actions
-	 * @return ManualTask
-	 */
-	public function setActions($actions) {
-		$this->actions = $actions;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns contextEntityId.
-	 *
-	 * The context entity ID links the manual task to the entity which caused its creation.
-	 *
-	 * @return int
-	 */
-	public function getContextEntityId() {
-		return $this->contextEntityId;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets contextEntityId.
-	 *
-	 * @param int $contextEntityId
-	 * @return ManualTask
-	 */
-	protected function setContextEntityId($contextEntityId) {
-		$this->contextEntityId = $contextEntityId;
+    
 
-		return $this;
-	}
+    /**
+     * Gets actions
+     *
+     * @return int[]
+     */
+    public function getActions()
+    {
+        return $this->container['actions'];
+    }
 
-	/**
-	 * Returns createdOn.
-	 *
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
+    /**
+     * Sets actions
+     *
+     * @param int[] $actions 
+     *
+     * @return $this
+     */
+    public function setActions($actions)
+    {
+        $this->container['actions'] = $actions;
 
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return ManualTask
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets context_entity_id
+     *
+     * @return int
+     */
+    public function getContextEntityId()
+    {
+        return $this->container['context_entity_id'];
+    }
 
-	/**
-	 * Returns expiresOn.
-	 *
-	 * The expiry date indicates until when the manual task has to be executed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getExpiresOn() {
-		return $this->expiresOn;
-	}
+    /**
+     * Sets context_entity_id
+     *
+     * @param int $context_entity_id The context entity ID links the manual task to the entity which caused its creation.
+     *
+     * @return $this
+     */
+    public function setContextEntityId($context_entity_id)
+    {
+        $this->container['context_entity_id'] = $context_entity_id;
 
-	/**
-	 * Sets expiresOn.
-	 *
-	 * @param \DateTime $expiresOn
-	 * @return ManualTask
-	 */
-	protected function setExpiresOn($expiresOn) {
-		$this->expiresOn = $expiresOn;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ManualTask
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets expires_on
+     *
+     * @return \DateTime
+     */
+    public function getExpiresOn()
+    {
+        return $this->container['expires_on'];
+    }
 
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @return int
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
+    /**
+     * Sets expires_on
+     *
+     * @param \DateTime $expires_on The expiry date indicates until when the manual task has to be executed.
+     *
+     * @return $this
+     */
+    public function setExpiresOn($expires_on)
+    {
+        $this->container['expires_on'] = $expires_on;
 
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param int $linkedSpaceId
-	 * @return ManualTask
-	 */
-	protected function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return ManualTask
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
 
-	/**
-	 * Returns spaceId.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getSpaceId() {
-		return $this->spaceId;
-	}
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
-	/**
-	 * Sets spaceId.
-	 *
-	 * @param int $spaceId
-	 * @return ManualTask
-	 */
-	protected function setSpaceId($spaceId) {
-		$this->spaceId = $spaceId;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ManualTaskState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ManualTaskState $state
-	 * @return ManualTask
-	 */
-	public function setState($state) {
-		$this->state = $state;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets space_id
+     *
+     * @return int
+     */
+    public function getSpaceId()
+    {
+        return $this->container['space_id'];
+    }
 
-	/**
-	 * Returns type.
-	 *
-	 * The type categorizes the manual task.
-	 *
-	 * @return int
-	 */
-	public function getType() {
-		return $this->type;
-	}
+    /**
+     * Sets space_id
+     *
+     * @param int $space_id 
+     *
+     * @return $this
+     */
+    public function setSpaceId($space_id)
+    {
+        $this->container['space_id'] = $space_id;
 
-	/**
-	 * Sets type.
-	 *
-	 * @param int $type
-	 * @return ManualTask
-	 */
-	protected function setType($type) {
-		$this->type = $type;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ManualTaskState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets type
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets type
+     *
+     * @param int $type The type categorizes the manual task.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

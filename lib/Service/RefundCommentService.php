@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ use PostFinanceCheckout\Sdk\ApiClient;
 use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\ApiResponse;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
+use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * RefundCommentService service
@@ -49,7 +50,7 @@ class RefundCommentService {
 	 * @param ApiClient $apiClient the api client
 	 */
 	public function __construct(ApiClient $apiClient) {
-		if ($apiClient == null) {
+		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}
 
@@ -71,15 +72,15 @@ class RefundCommentService {
 	 *
 	 * Find by refund
 	 *
-	 * @param int $spaceId  (required)
-	 * @param int $refundId  (required)
+	 * @param int $space_id  (required)
+	 * @param int $refund_id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment[]
 	 */
-	public function all($spaceId, $refundId) {
-		return $this->allWithHttpInfo($spaceId, $refundId)->getData();
+	public function all($space_id, $refund_id) {
+		return $this->allWithHttpInfo($space_id, $refund_id)->getData();
 	}
 
 	/**
@@ -87,46 +88,46 @@ class RefundCommentService {
 	 *
 	 * Find by refund
 	 *
-	 * @param int $spaceId  (required)
-	 * @param int $refundId  (required)
+	 * @param int $space_id  (required)
+	 * @param int $refund_id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function allWithHttpInfo($spaceId, $refundId) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling all');
+	public function allWithHttpInfo($space_id, $refund_id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling all');
 		}
-		// verify the required parameter 'refundId' is set
-		if ($refundId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling all');
+		// verify the required parameter 'refund_id' is set
+		if (is_null($refund_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $refund_id when calling all');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($refundId !== null) {
-			$queryParams['refundId'] = $this->apiClient->getSerializer()->toQueryValue($refundId);
+		if (!is_null($refund_id)) {
+			$queryParams['refundId'] = $this->apiClient->getSerializer()->toQueryValue($refund_id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/all";
+		$resourcePath = '/refund-comment/all';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -149,20 +150,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment[]', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RefundComment[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -172,15 +184,15 @@ class RefundCommentService {
 	 *
 	 * Create
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentCreate $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
 	 */
-	public function create($spaceId, $entity) {
-		return $this->createWithHttpInfo($spaceId, $entity)->getData();
+	public function create($space_id, $entity) {
+		return $this->createWithHttpInfo($space_id, $entity)->getData();
 	}
 
 	/**
@@ -188,43 +200,43 @@ class RefundCommentService {
 	 *
 	 * Create
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentCreate $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function createWithHttpInfo($spaceId, $entity) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
+	public function createWithHttpInfo($space_id, $entity) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling create');
 		}
 		// verify the required parameter 'entity' is set
-		if ($entity === null) {
+		if (is_null($entity)) {
 			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/create";
+		$resourcePath = '/refund-comment/create';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -252,20 +264,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RefundComment',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -275,15 +298,15 @@ class RefundCommentService {
 	 *
 	 * Delete
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return void
 	 */
-	public function delete($spaceId, $id) {
-		return $this->deleteWithHttpInfo($spaceId, $id)->getData();
+	public function delete($space_id, $id) {
+		return $this->deleteWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -291,46 +314,46 @@ class RefundCommentService {
 	 *
 	 * Delete
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function deleteWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling delete');
+	public function deleteWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling delete');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/delete";
+		$resourcePath = '/refund-comment/delete';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -353,20 +376,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -376,15 +410,15 @@ class RefundCommentService {
 	 *
 	 * Pin
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return void
 	 */
-	public function pin($spaceId, $id) {
-		return $this->pinWithHttpInfo($spaceId, $id)->getData();
+	public function pin($space_id, $id) {
+		return $this->pinWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -392,46 +426,46 @@ class RefundCommentService {
 	 *
 	 * Pin
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function pinWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling pin');
+	public function pinWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling pin');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling pin');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/pin";
+		$resourcePath = '/refund-comment/pin';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -454,20 +488,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -477,15 +522,15 @@ class RefundCommentService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
 	 */
-	public function read($spaceId, $id) {
-		return $this->readWithHttpInfo($spaceId, $id)->getData();
+	public function read($space_id, $id) {
+		return $this->readWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -493,46 +538,46 @@ class RefundCommentService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function readWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
+	public function readWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling read');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/read";
+		$resourcePath = '/refund-comment/read';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -555,20 +600,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RefundComment',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -578,15 +634,15 @@ class RefundCommentService {
 	 *
 	 * Unpin
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return void
 	 */
-	public function unpin($spaceId, $id) {
-		return $this->unpinWithHttpInfo($spaceId, $id)->getData();
+	public function unpin($space_id, $id) {
+		return $this->unpinWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -594,46 +650,46 @@ class RefundCommentService {
 	 *
 	 * Unpin
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function unpinWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling unpin');
+	public function unpinWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling unpin');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling unpin');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/unpin";
+		$resourcePath = '/refund-comment/unpin';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -656,20 +712,31 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -679,15 +746,15 @@ class RefundCommentService {
 	 *
 	 * Update
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentActive $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RefundComment
 	 */
-	public function update($spaceId, $entity) {
-		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
+	public function update($space_id, $entity) {
+		return $this->updateWithHttpInfo($space_id, $entity)->getData();
 	}
 
 	/**
@@ -695,43 +762,43 @@ class RefundCommentService {
 	 *
 	 * Update
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\RefundCommentActive $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function updateWithHttpInfo($spaceId, $entity) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling update');
+	public function updateWithHttpInfo($space_id, $entity) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling update');
 		}
 		// verify the required parameter 'entity' is set
-		if ($entity === null) {
+		if (is_null($entity)) {
 			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/refund-comment/update";
+		$resourcePath = '/refund-comment/update';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -759,24 +826,39 @@ class RefundCommentService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RefundComment', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RefundComment',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}

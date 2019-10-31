@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * PaymentMethod model
@@ -32,322 +33,459 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentMethod  {
+class PaymentMethod implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'PaymentMethod';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'PaymentMethod';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'dataCollectionTypes' => '\PostFinanceCheckout\Sdk\Model\DataCollectionType[]',
-		'description' => 'map[string,string]',
-		'id' => 'int',
-		'imagePath' => 'string',
-		'merchantDescription' => 'map[string,string]',
-		'name' => 'map[string,string]',
-		'supportedCurrencies' => 'string[]'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'data_collection_types' => '\PostFinanceCheckout\Sdk\Model\DataCollectionType[]',
+        'description' => 'map[string,string]',
+        'id' => 'int',
+        'image_path' => 'string',
+        'merchant_description' => 'map[string,string]',
+        'name' => 'map[string,string]',
+        'supported_currencies' => 'string[]'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'data_collection_types' => null,
+        'description' => null,
+        'id' => 'int64',
+        'image_path' => null,
+        'merchant_description' => null,
+        'name' => null,
+        'supported_currencies' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'data_collection_types' => 'dataCollectionTypes',
+        'description' => 'description',
+        'id' => 'id',
+        'image_path' => 'imagePath',
+        'merchant_description' => 'merchantDescription',
+        'name' => 'name',
+        'supported_currencies' => 'supportedCurrencies'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\DataCollectionType[]
-	 */
-	private $dataCollectionTypes;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'data_collection_types' => 'setDataCollectionTypes',
+        'description' => 'setDescription',
+        'id' => 'setId',
+        'image_path' => 'setImagePath',
+        'merchant_description' => 'setMerchantDescription',
+        'name' => 'setName',
+        'supported_currencies' => 'setSupportedCurrencies'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'data_collection_types' => 'getDataCollectionTypes',
+        'description' => 'getDescription',
+        'id' => 'getId',
+        'image_path' => 'getImagePath',
+        'merchant_description' => 'getMerchantDescription',
+        'name' => 'getName',
+        'supported_currencies' => 'getSupportedCurrencies'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $imagePath;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $merchantDescription;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['data_collection_types'] = isset($data['data_collection_types']) ? $data['data_collection_types'] : null;
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['image_path'] = isset($data['image_path']) ? $data['image_path'] : null;
+        
+        $this->container['merchant_description'] = isset($data['merchant_description']) ? $data['merchant_description'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['supported_currencies'] = isset($data['supported_currencies']) ? $data['supported_currencies'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $name;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var string[]
-	 */
-	private $supportedCurrencies;
+        return $invalidProperties;
+    }
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['dataCollectionTypes'])) {
-			$this->setDataCollectionTypes($data['dataCollectionTypes']);
-		}
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['merchantDescription'])) {
-			$this->setMerchantDescription($data['merchantDescription']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['supportedCurrencies'])) {
-			$this->setSupportedCurrencies($data['supportedCurrencies']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns dataCollectionTypes.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\DataCollectionType[]
-	 */
-	public function getDataCollectionTypes() {
-		return $this->dataCollectionTypes;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets dataCollectionTypes.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType[] $dataCollectionTypes
-	 * @return PaymentMethod
-	 */
-	public function setDataCollectionTypes($dataCollectionTypes) {
-		$this->dataCollectionTypes = $dataCollectionTypes;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return PaymentMethod
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return PaymentMethod
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets data_collection_types
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\DataCollectionType[]
+     */
+    public function getDataCollectionTypes()
+    {
+        return $this->container['data_collection_types'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets data_collection_types
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType[] $data_collection_types 
+     *
+     * @return $this
+     */
+    public function setDataCollectionTypes($data_collection_types)
+    {
+        $this->container['data_collection_types'] = $data_collection_types;
 
-	/**
-	 * Returns imagePath.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getImagePath() {
-		return $this->imagePath;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets imagePath.
-	 *
-	 * @param string $imagePath
-	 * @return PaymentMethod
-	 */
-	protected function setImagePath($imagePath) {
-		$this->imagePath = $imagePath;
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Returns merchantDescription.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getMerchantDescription() {
-		return $this->merchantDescription;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets merchantDescription.
-	 *
-	 * @param map[string,string] $merchantDescription
-	 * @return PaymentMethod
-	 */
-	public function setMerchantDescription($merchantDescription) {
-		if (is_array($merchantDescription) && empty($merchantDescription)) {
-			$this->merchantDescription = new \stdClass;
-		} else {
-			$this->merchantDescription = $merchantDescription;
-		}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param map[string,string] $name
-	 * @return PaymentMethod
-	 */
-	public function setName($name) {
-		if (is_array($name) && empty($name)) {
-			$this->name = new \stdClass;
-		} else {
-			$this->name = $name;
-		}
+    /**
+     * Gets image_path
+     *
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->container['image_path'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets image_path
+     *
+     * @param string $image_path 
+     *
+     * @return $this
+     */
+    public function setImagePath($image_path)
+    {
+        $this->container['image_path'] = $image_path;
 
-	/**
-	 * Returns supportedCurrencies.
-	 *
-	 * 
-	 *
-	 * @return string[]
-	 */
-	public function getSupportedCurrencies() {
-		return $this->supportedCurrencies;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets supportedCurrencies.
-	 *
-	 * @param string[] $supportedCurrencies
-	 * @return PaymentMethod
-	 */
-	public function setSupportedCurrencies($supportedCurrencies) {
-		$this->supportedCurrencies = $supportedCurrencies;
+    /**
+     * Gets merchant_description
+     *
+     * @return map[string,string]
+     */
+    public function getMerchantDescription()
+    {
+        return $this->container['merchant_description'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets merchant_description
+     *
+     * @param map[string,string] $merchant_description 
+     *
+     * @return $this
+     */
+    public function setMerchantDescription($merchant_description)
+    {
+        $this->container['merchant_description'] = $merchant_description;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets supported_currencies
+     *
+     * @return string[]
+     */
+    public function getSupportedCurrencies()
+    {
+        return $this->container['supported_currencies'];
+    }
 
+    /**
+     * Sets supported_currencies
+     *
+     * @param string[] $supported_currencies 
+     *
+     * @return $this
+     */
+    public function setSupportedCurrencies($supported_currencies)
+    {
+        $this->container['supported_currencies'] = $supported_currencies;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

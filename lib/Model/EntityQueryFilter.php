@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * EntityQueryFilter model
@@ -32,251 +33,398 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class EntityQueryFilter  {
+class EntityQueryFilter implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'EntityQueryFilter';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'EntityQueryFilter';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'children' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilter[]',
-		'fieldName' => 'string',
-		'operator' => '\PostFinanceCheckout\Sdk\Model\CriteriaOperator',
-		'type' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilterType',
-		'value' => 'object'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'children' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilter[]',
+        'field_name' => 'string',
+        'operator' => '\PostFinanceCheckout\Sdk\Model\CriteriaOperator',
+        'type' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilterType',
+        'value' => 'object'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'children' => null,
+        'field_name' => null,
+        'operator' => null,
+        'type' => null,
+        'value' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'children' => 'children',
+        'field_name' => 'fieldName',
+        'operator' => 'operator',
+        'type' => 'type',
+        'value' => 'value'
+    ];
 
-	/**
-	 * The 'children' can contain other filter nodes which are applied to the query. This property is only applicable on filter types 'OR' and 'AND'.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\EntityQueryFilter[]
-	 */
-	private $children;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'children' => 'setChildren',
+        'field_name' => 'setFieldName',
+        'operator' => 'setOperator',
+        'type' => 'setType',
+        'value' => 'setValue'
+    ];
 
-	/**
-	 * The 'fieldName' indicates the property on the entity which should be filtered. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @var string
-	 */
-	private $fieldName;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'children' => 'getChildren',
+        'field_name' => 'getFieldName',
+        'operator' => 'getOperator',
+        'type' => 'getType',
+        'value' => 'getValue'
+    ];
 
-	/**
-	 * The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CriteriaOperator
-	 */
-	private $operator;
+    
 
-	/**
-	 * The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\EntityQueryFilterType
-	 */
-	private $type;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The 'value' is used to compare with the 'fieldName' as defined by the 'operator'. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @var object
-	 */
-	private $value;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['children'] = isset($data['children']) ? $data['children'] : null;
+        
+        $this->container['field_name'] = isset($data['field_name']) ? $data['field_name'] : null;
+        
+        $this->container['operator'] = isset($data['operator']) ? $data['operator'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['children'])) {
-			$this->setChildren($data['children']);
-		}
-		if (isset($data['fieldName'])) {
-			$this->setFieldName($data['fieldName']);
-		}
-		if (isset($data['operator'])) {
-			$this->setOperator($data['operator']);
-		}
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-		if (isset($data['value'])) {
-			$this->setValue($data['value']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns children.
-	 *
-	 * The 'children' can contain other filter nodes which are applied to the query. This property is only applicable on filter types 'OR' and 'AND'.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilter[]
-	 */
-	public function getChildren() {
-		return $this->children;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets children.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter[] $children
-	 * @return EntityQueryFilter
-	 */
-	public function setChildren($children) {
-		$this->children = $children;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns fieldName.
-	 *
-	 * The 'fieldName' indicates the property on the entity which should be filtered. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @return string
-	 */
-	public function getFieldName() {
-		return $this->fieldName;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets fieldName.
-	 *
-	 * @param string $fieldName
-	 * @return EntityQueryFilter
-	 */
-	public function setFieldName($fieldName) {
-		$this->fieldName = $fieldName;
+    
 
-		return $this;
-	}
+    /**
+     * Gets children
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilter[]
+     */
+    public function getChildren()
+    {
+        return $this->container['children'];
+    }
 
-	/**
-	 * Returns operator.
-	 *
-	 * The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CriteriaOperator
-	 */
-	public function getOperator() {
-		return $this->operator;
-	}
+    /**
+     * Sets children
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter[] $children The 'children' can contain other filter nodes which are applied to the query. This property is only applicable on filter types 'OR' and 'AND'.
+     *
+     * @return $this
+     */
+    public function setChildren($children)
+    {
+        $this->container['children'] = $children;
 
-	/**
-	 * Sets operator.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CriteriaOperator $operator
-	 * @return EntityQueryFilter
-	 */
-	public function setOperator($operator) {
-		$this->operator = $operator;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets field_name
+     *
+     * @return string
+     */
+    public function getFieldName()
+    {
+        return $this->container['field_name'];
+    }
 
-	/**
-	 * Returns type.
-	 *
-	 * The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilterType
-	 */
-	public function getType() {
-		return $this->type;
-	}
+    /**
+     * Sets field_name
+     *
+     * @param string $field_name The 'fieldName' indicates the property on the entity which should be filtered. This property is only applicable on filter type 'LEAF'.
+     *
+     * @return $this
+     */
+    public function setFieldName($field_name)
+    {
+        $this->container['field_name'] = $field_name;
 
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilterType $type
-	 * @return EntityQueryFilter
-	 */
-	public function setType($type) {
-		$this->type = $type;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets operator
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CriteriaOperator
+     */
+    public function getOperator()
+    {
+        return $this->container['operator'];
+    }
 
-	/**
-	 * Returns value.
-	 *
-	 * The 'value' is used to compare with the 'fieldName' as defined by the 'operator'. This property is only applicable on filter type 'LEAF'.
-	 *
-	 * @return object
-	 */
-	public function getValue() {
-		return $this->value;
-	}
+    /**
+     * Sets operator
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CriteriaOperator $operator The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
+     *
+     * @return $this
+     */
+    public function setOperator($operator)
+    {
+        $this->container['operator'] = $operator;
 
-	/**
-	 * Sets value.
-	 *
-	 * @param object $value
-	 * @return EntityQueryFilter
-	 */
-	public function setValue($value) {
-		$this->value = $value;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilterType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilterType $type The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets value
+     *
+     * @return object
+     */
+    public function getValue()
+    {
+        return $this->container['value'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets value
+     *
+     * @param object $value The 'value' is used to compare with the 'fieldName' as defined by the 'operator'. This property is only applicable on filter type 'LEAF'.
+     *
+     * @return $this
+     */
+    public function setValue($value)
+    {
+        $this->container['value'] = $value;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

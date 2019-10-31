@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -345,7 +345,7 @@ final class SocketHttpClient implements IHttpClient {
 				$rs = 'ssl';
 		}
 		if ($rs === null) {
-			throw new \Exception("Invalid state.");
+			throw new \Exception('Invalid state.');
 		}
 
 		$possibleTransportProtocols = stream_get_transports();
@@ -375,10 +375,10 @@ final class SocketHttpClient implements IHttpClient {
 	 * @return array
 	 */
 	private function buildStreamContextOptions(ApiClient $apiClient, HttpRequest $request) {
-		$options = array(
-			'http' => array(),
-			'ssl' => array()
-		);
+		$options = [
+			'http' => [],
+			'ssl' => [],
+		];
 		if ($request->isSecureConnection()) {
 			$options['ssl']['verify_host'] = true;
 			$options['ssl']['allow_self_signed'] = false;
@@ -390,15 +390,11 @@ final class SocketHttpClient implements IHttpClient {
 			}
 		}
 		$ipVersion = $this->readEnvironmentVariable(self::ENVIRONMENT_VARIABLE_IP_ADDRESS_VERSION);
-		if ($ipVersion !== null) {
+		if (!is_null($ipVersion)) {
 			if ($ipVersion == self::IP_ADDRESS_VERSION_V4) {
-				$options['socket'] = array(
-					'bindto' => '0.0.0.0:0'
-				);
+				$options['socket'] = [ 'bindto' => '0.0.0.0:0' ];
 			} elseif ($ipVersion == self::IP_ADDRESS_VERSION_V6) {
-				$options['socket'] = array(
-					'bindto' => '[::]:0'
-				);
+				$options['socket'] = [ 'bindto' => '[::]:0' ];
 			}
 		}
 		return $options;

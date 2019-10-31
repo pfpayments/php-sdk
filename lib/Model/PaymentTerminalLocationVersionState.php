@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,26 +20,42 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenizationnMode model
+ * PaymentTerminalLocationVersionState model
  *
  * @category    Class
- * @description The tokenization mode controls how the tokenization of payment information is applied on the transaction.
+ * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenizationnMode implements IEnum {
-
-	const FORCE_UPDATE = 'FORCE_UPDATE';
-	const FORCE_CREATION = 'FORCE_CREATION';
-	const FORCE_CREATION_WITH_ONE_CLICK_PAYMENT = 'FORCE_CREATION_WITH_ONE_CLICK_PAYMENT';
-	const ALLOW_ONE_CLICK_PAYMENT = 'ALLOW_ONE_CLICK_PAYMENT';
-	
-
-	
-
+class PaymentTerminalLocationVersionState
+{
+    /**
+     * Possible values of this enum
+     */
+    const PENDING = 'PENDING';
+    const SCHEDULING = 'SCHEDULING';
+    const ACTIVE = 'ACTIVE';
+    const DELETING = 'DELETING';
+    const DELETED = 'DELETED';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::PENDING,
+            self::SCHEDULING,
+            self::ACTIVE,
+            self::DELETING,
+            self::DELETED,
+        ];
+    }
 }
+
+

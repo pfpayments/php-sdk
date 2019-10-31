@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * RestLanguage model
@@ -32,264 +33,427 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RestLanguage  {
+class RestLanguage implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'RestLanguage';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'RestLanguage';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'countryCode' => 'string',
-		'ietfCode' => 'string',
-		'iso2Code' => 'string',
-		'iso3Code' => 'string',
-		'pluralExpression' => 'string',
-		'primaryOfGroup' => 'bool'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'country_code' => 'string',
+        'ietf_code' => 'string',
+        'iso2_code' => 'string',
+        'iso3_code' => 'string',
+        'plural_expression' => 'string',
+        'primary_of_group' => 'bool'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'country_code' => null,
+        'ietf_code' => null,
+        'iso2_code' => null,
+        'iso3_code' => null,
+        'plural_expression' => null,
+        'primary_of_group' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'country_code' => 'countryCode',
+        'ietf_code' => 'ietfCode',
+        'iso2_code' => 'iso2Code',
+        'iso3_code' => 'iso3Code',
+        'plural_expression' => 'pluralExpression',
+        'primary_of_group' => 'primaryOfGroup'
+    ];
 
-	/**
-	 * The country code represents the region of the language as a 2 letter ISO code.
-	 *
-	 * @var string
-	 */
-	private $countryCode;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'country_code' => 'setCountryCode',
+        'ietf_code' => 'setIetfCode',
+        'iso2_code' => 'setIso2Code',
+        'iso3_code' => 'setIso3Code',
+        'plural_expression' => 'setPluralExpression',
+        'primary_of_group' => 'setPrimaryOfGroup'
+    ];
 
-	/**
-	 * The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
-	 *
-	 * @var string
-	 */
-	private $ietfCode;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'country_code' => 'getCountryCode',
+        'ietf_code' => 'getIetfCode',
+        'iso2_code' => 'getIso2Code',
+        'iso3_code' => 'getIso3Code',
+        'plural_expression' => 'getPluralExpression',
+        'primary_of_group' => 'getPrimaryOfGroup'
+    ];
 
-	/**
-	 * The ISO 2 letter code represents the language with two letters.
-	 *
-	 * @var string
-	 */
-	private $iso2Code;
+    
 
-	/**
-	 * The ISO 3 letter code represents the language with three letters.
-	 *
-	 * @var string
-	 */
-	private $iso3Code;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
-	 *
-	 * @var string
-	 */
-	private $pluralExpression;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['country_code'] = isset($data['country_code']) ? $data['country_code'] : null;
+        
+        $this->container['ietf_code'] = isset($data['ietf_code']) ? $data['ietf_code'] : null;
+        
+        $this->container['iso2_code'] = isset($data['iso2_code']) ? $data['iso2_code'] : null;
+        
+        $this->container['iso3_code'] = isset($data['iso3_code']) ? $data['iso3_code'] : null;
+        
+        $this->container['plural_expression'] = isset($data['plural_expression']) ? $data['plural_expression'] : null;
+        
+        $this->container['primary_of_group'] = isset($data['primary_of_group']) ? $data['primary_of_group'] : null;
+        
+    }
 
-	/**
-	 * The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
-	 *
-	 * @var bool
-	 */
-	private $primaryOfGroup;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns countryCode.
-	 *
-	 * The country code represents the region of the language as a 2 letter ISO code.
-	 *
-	 * @return string
-	 */
-	public function getCountryCode() {
-		return $this->countryCode;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets countryCode.
-	 *
-	 * @param string $countryCode
-	 * @return RestLanguage
-	 */
-	protected function setCountryCode($countryCode) {
-		$this->countryCode = $countryCode;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns ietfCode.
-	 *
-	 * The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
-	 *
-	 * @return string
-	 */
-	public function getIetfCode() {
-		return $this->ietfCode;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets ietfCode.
-	 *
-	 * @param string $ietfCode
-	 * @return RestLanguage
-	 */
-	protected function setIetfCode($ietfCode) {
-		$this->ietfCode = $ietfCode;
+    
 
-		return $this;
-	}
+    /**
+     * Gets country_code
+     *
+     * @return string
+     */
+    public function getCountryCode()
+    {
+        return $this->container['country_code'];
+    }
 
-	/**
-	 * Returns iso2Code.
-	 *
-	 * The ISO 2 letter code represents the language with two letters.
-	 *
-	 * @return string
-	 */
-	public function getIso2Code() {
-		return $this->iso2Code;
-	}
+    /**
+     * Sets country_code
+     *
+     * @param string $country_code The country code represents the region of the language as a 2 letter ISO code.
+     *
+     * @return $this
+     */
+    public function setCountryCode($country_code)
+    {
+        $this->container['country_code'] = $country_code;
 
-	/**
-	 * Sets iso2Code.
-	 *
-	 * @param string $iso2Code
-	 * @return RestLanguage
-	 */
-	protected function setIso2Code($iso2Code) {
-		$this->iso2Code = $iso2Code;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets ietf_code
+     *
+     * @return string
+     */
+    public function getIetfCode()
+    {
+        return $this->container['ietf_code'];
+    }
 
-	/**
-	 * Returns iso3Code.
-	 *
-	 * The ISO 3 letter code represents the language with three letters.
-	 *
-	 * @return string
-	 */
-	public function getIso3Code() {
-		return $this->iso3Code;
-	}
+    /**
+     * Sets ietf_code
+     *
+     * @param string $ietf_code The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
+     *
+     * @return $this
+     */
+    public function setIetfCode($ietf_code)
+    {
+        $this->container['ietf_code'] = $ietf_code;
 
-	/**
-	 * Sets iso3Code.
-	 *
-	 * @param string $iso3Code
-	 * @return RestLanguage
-	 */
-	protected function setIso3Code($iso3Code) {
-		$this->iso3Code = $iso3Code;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets iso2_code
+     *
+     * @return string
+     */
+    public function getIso2Code()
+    {
+        return $this->container['iso2_code'];
+    }
 
-	/**
-	 * Returns pluralExpression.
-	 *
-	 * The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
-	 *
-	 * @return string
-	 */
-	public function getPluralExpression() {
-		return $this->pluralExpression;
-	}
+    /**
+     * Sets iso2_code
+     *
+     * @param string $iso2_code The ISO 2 letter code represents the language with two letters.
+     *
+     * @return $this
+     */
+    public function setIso2Code($iso2_code)
+    {
+        $this->container['iso2_code'] = $iso2_code;
 
-	/**
-	 * Sets pluralExpression.
-	 *
-	 * @param string $pluralExpression
-	 * @return RestLanguage
-	 */
-	protected function setPluralExpression($pluralExpression) {
-		$this->pluralExpression = $pluralExpression;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets iso3_code
+     *
+     * @return string
+     */
+    public function getIso3Code()
+    {
+        return $this->container['iso3_code'];
+    }
 
-	/**
-	 * Returns primaryOfGroup.
-	 *
-	 * The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
-	 *
-	 * @return bool
-	 */
-	public function getPrimaryOfGroup() {
-		return $this->primaryOfGroup;
-	}
+    /**
+     * Sets iso3_code
+     *
+     * @param string $iso3_code The ISO 3 letter code represents the language with three letters.
+     *
+     * @return $this
+     */
+    public function setIso3Code($iso3_code)
+    {
+        $this->container['iso3_code'] = $iso3_code;
 
-	/**
-	 * Sets primaryOfGroup.
-	 *
-	 * @param bool $primaryOfGroup
-	 * @return RestLanguage
-	 */
-	protected function setPrimaryOfGroup($primaryOfGroup) {
-		$this->primaryOfGroup = $primaryOfGroup;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets plural_expression
+     *
+     * @return string
+     */
+    public function getPluralExpression()
+    {
+        return $this->container['plural_expression'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets plural_expression
+     *
+     * @param string $plural_expression The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
+     *
+     * @return $this
+     */
+    public function setPluralExpression($plural_expression)
+    {
+        $this->container['plural_expression'] = $plural_expression;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets primary_of_group
+     *
+     * @return bool
+     */
+    public function getPrimaryOfGroup()
+    {
+        return $this->container['primary_of_group'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets primary_of_group
+     *
+     * @param bool $primary_of_group The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
+     *
+     * @return $this
+     */
+    public function setPrimaryOfGroup($primary_of_group)
+    {
+        $this->container['primary_of_group'] = $primary_of_group;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * WebhookListener model
@@ -32,437 +33,587 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class WebhookListener  {
+class WebhookListener implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'WebhookListener';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'WebhookListener';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'entity' => 'int',
-		'entityStates' => 'string[]',
-		'id' => 'int',
-		'identity' => '\PostFinanceCheckout\Sdk\Model\WebhookIdentity',
-		'linkedSpaceId' => 'int',
-		'name' => 'string',
-		'notifyEveryChange' => 'bool',
-		'plannedPurgeDate' => '\DateTime',
-		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'url' => '\PostFinanceCheckout\Sdk\Model\WebhookUrl',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'entity' => 'int',
+        'entity_states' => 'string[]',
+        'id' => 'int',
+        'identity' => '\PostFinanceCheckout\Sdk\Model\WebhookIdentity',
+        'linked_space_id' => 'int',
+        'name' => 'string',
+        'notify_every_change' => 'bool',
+        'planned_purge_date' => '\DateTime',
+        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'url' => '\PostFinanceCheckout\Sdk\Model\WebhookUrl',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'entity' => 'int64',
+        'entity_states' => null,
+        'id' => 'int64',
+        'identity' => null,
+        'linked_space_id' => 'int64',
+        'name' => null,
+        'notify_every_change' => null,
+        'planned_purge_date' => 'date-time',
+        'state' => null,
+        'url' => null,
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'entity' => 'entity',
+        'entity_states' => 'entityStates',
+        'id' => 'id',
+        'identity' => 'identity',
+        'linked_space_id' => 'linkedSpaceId',
+        'name' => 'name',
+        'notify_every_change' => 'notifyEveryChange',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'state' => 'state',
+        'url' => 'url',
+        'version' => 'version'
+    ];
 
-	/**
-	 * The listener listens on state changes of the entity linked with the listener.
-	 *
-	 * @var int
-	 */
-	private $entity;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'entity' => 'setEntity',
+        'entity_states' => 'setEntityStates',
+        'id' => 'setId',
+        'identity' => 'setIdentity',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'name' => 'setName',
+        'notify_every_change' => 'setNotifyEveryChange',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'state' => 'setState',
+        'url' => 'setUrl',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
-	 *
-	 * @var string[]
-	 */
-	private $entityStates;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'entity' => 'getEntity',
+        'entity_states' => 'getEntityStates',
+        'id' => 'getId',
+        'identity' => 'getIdentity',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'name' => 'getName',
+        'notify_every_change' => 'getNotifyEveryChange',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'state' => 'getState',
+        'url' => 'getUrl',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    
 
-	/**
-	 * The identity which will be used to sign messages sent by this listener.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\WebhookIdentity
-	 */
-	private $identity;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @var int
-	 */
-	private $linkedSpaceId;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['entity'] = isset($data['entity']) ? $data['entity'] : null;
+        
+        $this->container['entity_states'] = isset($data['entity_states']) ? $data['entity_states'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['identity'] = isset($data['identity']) ? $data['identity'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['notify_every_change'] = isset($data['notify_every_change']) ? $data['notify_every_change'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-	/**
-	 * The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
-	 *
-	 * @var bool
-	 */
-	private $notifyEveryChange;
+        return $invalidProperties;
+    }
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	private $state;
-
-	/**
-	 * The URL which is invoked by the listener to notify the application about the event.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\WebhookUrl
-	 */
-	private $url;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['entityStates'])) {
-			$this->setEntityStates($data['entityStates']);
-		}
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['identity'])) {
-			$this->setIdentity($data['identity']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['url'])) {
-			$this->setUrl($data['url']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns entity.
-	 *
-	 * The listener listens on state changes of the entity linked with the listener.
-	 *
-	 * @return int
-	 */
-	public function getEntity() {
-		return $this->entity;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets entity.
-	 *
-	 * @param int $entity
-	 * @return WebhookListener
-	 */
-	protected function setEntity($entity) {
-		$this->entity = $entity;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns entityStates.
-	 *
-	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
-	 *
-	 * @return string[]
-	 */
-	public function getEntityStates() {
-		return $this->entityStates;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets entityStates.
-	 *
-	 * @param string[] $entityStates
-	 * @return WebhookListener
-	 */
-	public function setEntityStates($entityStates) {
-		$this->entityStates = $entityStates;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return WebhookListener
-	 */
-	public function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets entity
+     *
+     * @return int
+     */
+    public function getEntity()
+    {
+        return $this->container['entity'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets entity
+     *
+     * @param int $entity The listener listens on state changes of the entity linked with the listener.
+     *
+     * @return $this
+     */
+    public function setEntity($entity)
+    {
+        $this->container['entity'] = $entity;
 
-	/**
-	 * Returns identity.
-	 *
-	 * The identity which will be used to sign messages sent by this listener.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\WebhookIdentity
-	 */
-	public function getIdentity() {
-		return $this->identity;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets identity.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\WebhookIdentity $identity
-	 * @return WebhookListener
-	 */
-	public function setIdentity($identity) {
-		$this->identity = $identity;
+    /**
+     * Gets entity_states
+     *
+     * @return string[]
+     */
+    public function getEntityStates()
+    {
+        return $this->container['entity_states'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets entity_states
+     *
+     * @param string[] $entity_states The target state identifies the state into which entities need to move into to trigger the webhook listener.
+     *
+     * @return $this
+     */
+    public function setEntityStates($entity_states)
+    {
+        $this->container['entity_states'] = $entity_states;
 
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @return int
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param int $linkedSpaceId
-	 * @return WebhookListener
-	 */
-	protected function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns name.
-	 *
-	 * The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return WebhookListener
-	 */
-	protected function setName($name) {
-		$this->name = $name;
+    /**
+     * Gets identity
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\WebhookIdentity
+     */
+    public function getIdentity()
+    {
+        return $this->container['identity'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets identity
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\WebhookIdentity $identity The identity which will be used to sign messages sent by this listener.
+     *
+     * @return $this
+     */
+    public function setIdentity($identity)
+    {
+        $this->container['identity'] = $identity;
 
-	/**
-	 * Returns notifyEveryChange.
-	 *
-	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
-	 *
-	 * @return bool
-	 */
-	public function getNotifyEveryChange() {
-		return $this->notifyEveryChange;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets notifyEveryChange.
-	 *
-	 * @param bool $notifyEveryChange
-	 * @return WebhookListener
-	 */
-	protected function setNotifyEveryChange($notifyEveryChange) {
-		$this->notifyEveryChange = $notifyEveryChange;
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return WebhookListener
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state
-	 * @return WebhookListener
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets notify_every_change
+     *
+     * @return bool
+     */
+    public function getNotifyEveryChange()
+    {
+        return $this->container['notify_every_change'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets notify_every_change
+     *
+     * @param bool $notify_every_change Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+     *
+     * @return $this
+     */
+    public function setNotifyEveryChange($notify_every_change)
+    {
+        $this->container['notify_every_change'] = $notify_every_change;
 
-	/**
-	 * Returns url.
-	 *
-	 * The URL which is invoked by the listener to notify the application about the event.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\WebhookUrl
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets url.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $url
-	 * @return WebhookListener
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return WebhookListener
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets url
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\WebhookUrl
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets url
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $url The URL which is invoked by the listener to notify the application about the event.
+     *
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->container['url'] = $url;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

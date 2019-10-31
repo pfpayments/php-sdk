@@ -1,16 +1,17 @@
 [![Build Status](https://travis-ci.org/pfpayments/php-sdk.svg?branch=master)](https://travis-ci.org/pfpayments/php-sdk)
 
-# PostFinance Checkout SDK for PHP
+# PostFinance Checkout PHP Library
 
-This repository contains the open source PHP SDK that allows you to access PostFinance Checkout from your PHP app.
+The PostFinance Checkout PHP library wraps around the PostFinance Checkout API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
 
-## Requirements
-
-* [PHP 5.6.0 and later](http://www.php.net/)
 
 ## Documentation
 
-https://www.postfinance-checkout.ch/doc/api/web-service
+[PostFinance Checkout Web Service API](https://www.postfinance-checkout.ch/doc/api/web-service)
+
+## Requirements
+
+- PHP 5.6.0 and above
 
 ## Installation
 
@@ -25,7 +26,7 @@ composer installed.
 Once composer is installed, execute the following command in your project root to install this library:
 
 ```sh
-composer require postfinancecheckout/sdk
+composer require pfpayments/php-sdk
 ```
 
 ### Manual Installation
@@ -39,24 +40,44 @@ require_once '/path/to/php-sdk/autoload.php';
 ```
 
 ## Usage
+The library needs to be configured with your account's space id, user id, and secret key which are available in your [PostFinance Checkout
+account dashboard](https://www.postfinance-checkout.ch/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
 
-### Basic Example
+### Configuring a Service
 
 ```php
-<?php
-
 require_once(__DIR__ . '/autoload.php');
 
 // Configuration
 $spaceId = 405;
 $userId = 512;
-$secret = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=";
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
 $client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
 
 // Create API service instance
 $transactionService = new \PostFinanceCheckout\Sdk\Service\TransactionService($client);
+$transactionPaymentPageService = new \PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService($client);
+
+```
+
+To get started with sending transactions, please review the example below:
+
+```php
+require_once(__DIR__ . '/autoload.php');
+
+// Configuration
+$spaceId = 405;
+$userId = 512;
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
+
+// Setup API client
+$client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
+
+// Create API service instance
+$transactionService = new \PostFinanceCheckout\Sdk\Service\TransactionService($client);
+$transactionPaymentPageService = new \PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService($client);
 
 // Create transaction
 $lineItem = new \PostFinanceCheckout\Sdk\Model\LineItemCreate();
@@ -69,14 +90,14 @@ $lineItem->setType(\PostFinanceCheckout\Sdk\Model\LineItemType::PRODUCT);
 
 
 $transaction = new \PostFinanceCheckout\Sdk\Model\TransactionCreate();
-$transaction->setCurrency("EUR");
+$transaction->setCurrency('EUR');
 $transaction->setLineItems(array($lineItem));
 $transaction->setAutoConfirmationEnabled(true);
 
 $createdTransaction = $transactionService->create($spaceId, $transaction);
 
 // Create Payment Page URL:
-$redirectionUrl = $transactionService->buildPaymentPageUrl($spaceId, $createdTransaction->getId());
+$redirectionUrl = $transactionPaymentPageService->paymentPageUrl($spaceId, $createdTransaction->getId());
 
 header('Location: ' . $redirectionUrl);
 
@@ -84,4 +105,4 @@ header('Location: ' . $redirectionUrl);
 
 ## License
 
-Please see the [license file](LICENSE) for more information.
+Please see the [license file](https://github.com/pfpayments/php-sdk/blob/master/LICENSE) for more information.

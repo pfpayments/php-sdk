@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * PaymentMethodBrand model
@@ -32,278 +33,427 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentMethodBrand  {
+class PaymentMethodBrand implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'PaymentMethodBrand';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'PaymentMethodBrand';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'description' => 'map[string,string]',
-		'grayImagePath' => 'string',
-		'id' => 'int',
-		'imagePath' => 'string',
-		'name' => 'map[string,string]',
-		'paymentMethod' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'description' => 'map[string,string]',
+        'gray_image_path' => 'string',
+        'id' => 'int',
+        'image_path' => 'string',
+        'name' => 'map[string,string]',
+        'payment_method' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'description' => null,
+        'gray_image_path' => null,
+        'id' => 'int64',
+        'image_path' => null,
+        'name' => null,
+        'payment_method' => 'int64'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'description' => 'description',
+        'gray_image_path' => 'grayImagePath',
+        'id' => 'id',
+        'image_path' => 'imagePath',
+        'name' => 'name',
+        'payment_method' => 'paymentMethod'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'description' => 'setDescription',
+        'gray_image_path' => 'setGrayImagePath',
+        'id' => 'setId',
+        'image_path' => 'setImagePath',
+        'name' => 'setName',
+        'payment_method' => 'setPaymentMethod'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $grayImagePath;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'description' => 'getDescription',
+        'gray_image_path' => 'getGrayImagePath',
+        'id' => 'getId',
+        'image_path' => 'getImagePath',
+        'name' => 'getName',
+        'payment_method' => 'getPaymentMethod'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $imagePath;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $name;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['gray_image_path'] = isset($data['gray_image_path']) ? $data['gray_image_path'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['image_path'] = isset($data['image_path']) ? $data['image_path'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['payment_method'] = isset($data['payment_method']) ? $data['payment_method'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $paymentMethod;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return PaymentMethodBrand
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns grayImagePath.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getGrayImagePath() {
-		return $this->grayImagePath;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets grayImagePath.
-	 *
-	 * @param string $grayImagePath
-	 * @return PaymentMethodBrand
-	 */
-	protected function setGrayImagePath($grayImagePath) {
-		$this->grayImagePath = $grayImagePath;
+    
 
-		return $this;
-	}
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return PaymentMethodBrand
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets gray_image_path
+     *
+     * @return string
+     */
+    public function getGrayImagePath()
+    {
+        return $this->container['gray_image_path'];
+    }
 
-	/**
-	 * Returns imagePath.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getImagePath() {
-		return $this->imagePath;
-	}
+    /**
+     * Sets gray_image_path
+     *
+     * @param string $gray_image_path 
+     *
+     * @return $this
+     */
+    public function setGrayImagePath($gray_image_path)
+    {
+        $this->container['gray_image_path'] = $gray_image_path;
 
-	/**
-	 * Sets imagePath.
-	 *
-	 * @param string $imagePath
-	 * @return PaymentMethodBrand
-	 */
-	protected function setImagePath($imagePath) {
-		$this->imagePath = $imagePath;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Sets name.
-	 *
-	 * @param map[string,string] $name
-	 * @return PaymentMethodBrand
-	 */
-	public function setName($name) {
-		if (is_array($name) && empty($name)) {
-			$this->name = new \stdClass;
-		} else {
-			$this->name = $name;
-		}
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets image_path
+     *
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->container['image_path'];
+    }
 
-	/**
-	 * Returns paymentMethod.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getPaymentMethod() {
-		return $this->paymentMethod;
-	}
+    /**
+     * Sets image_path
+     *
+     * @param string $image_path 
+     *
+     * @return $this
+     */
+    public function setImagePath($image_path)
+    {
+        $this->container['image_path'] = $image_path;
 
-	/**
-	 * Sets paymentMethod.
-	 *
-	 * @param int $paymentMethod
-	 * @return PaymentMethodBrand
-	 */
-	protected function setPaymentMethod($paymentMethod) {
-		$this->paymentMethod = $paymentMethod;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets payment_method
+     *
+     * @return int
+     */
+    public function getPaymentMethod()
+    {
+        return $this->container['payment_method'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets payment_method
+     *
+     * @param int $payment_method 
+     *
+     * @return $this
+     */
+    public function setPaymentMethod($payment_method)
+    {
+        $this->container['payment_method'] = $payment_method;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

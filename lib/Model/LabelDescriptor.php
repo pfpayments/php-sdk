@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * LabelDescriptor model
@@ -32,346 +33,491 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class LabelDescriptor  {
+class LabelDescriptor implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'LabelDescriptor';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'LabelDescriptor';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'category' => '\PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory',
-		'description' => 'map[string,string]',
-		'features' => 'int[]',
-		'group' => 'int',
-		'id' => 'int',
-		'name' => 'map[string,string]',
-		'type' => 'int',
-		'weight' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'category' => '\PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory',
+        'description' => 'map[string,string]',
+        'features' => 'int[]',
+        'group' => 'int',
+        'id' => 'int',
+        'name' => 'map[string,string]',
+        'type' => 'int',
+        'weight' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'category' => null,
+        'description' => null,
+        'features' => 'int64',
+        'group' => 'int64',
+        'id' => 'int64',
+        'name' => null,
+        'type' => 'int64',
+        'weight' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'category' => 'category',
+        'description' => 'description',
+        'features' => 'features',
+        'group' => 'group',
+        'id' => 'id',
+        'name' => 'name',
+        'type' => 'type',
+        'weight' => 'weight'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory
-	 */
-	private $category;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'category' => 'setCategory',
+        'description' => 'setDescription',
+        'features' => 'setFeatures',
+        'group' => 'setGroup',
+        'id' => 'setId',
+        'name' => 'setName',
+        'type' => 'setType',
+        'weight' => 'setWeight'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'category' => 'getCategory',
+        'description' => 'getDescription',
+        'features' => 'getFeatures',
+        'group' => 'getGroup',
+        'id' => 'getId',
+        'name' => 'getName',
+        'type' => 'getType',
+        'weight' => 'getWeight'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int[]
-	 */
-	private $features;
+    
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $group;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['category'] = isset($data['category']) ? $data['category'] : null;
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['features'] = isset($data['features']) ? $data['features'] : null;
+        
+        $this->container['group'] = isset($data['group']) ? $data['group'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['weight'] = isset($data['weight']) ? $data['weight'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $name;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $type;
+        return $invalidProperties;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $weight;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['category'])) {
-			$this->setCategory($data['category']);
-		}
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['features'])) {
-			$this->setFeatures($data['features']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns category.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory
-	 */
-	public function getCategory() {
-		return $this->category;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets category.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory $category
-	 * @return LabelDescriptor
-	 */
-	public function setCategory($category) {
-		$this->category = $category;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return LabelDescriptor
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns features.
-	 *
-	 * 
-	 *
-	 * @return int[]
-	 */
-	public function getFeatures() {
-		return $this->features;
-	}
+    
 
-	/**
-	 * Sets features.
-	 *
-	 * @param int[] $features
-	 * @return LabelDescriptor
-	 */
-	public function setFeatures($features) {
-		$this->features = $features;
+    /**
+     * Gets category
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets category
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory $category 
+     *
+     * @return $this
+     */
+    public function setCategory($category)
+    {
+        $this->container['category'] = $category;
 
-	/**
-	 * Returns group.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getGroup() {
-		return $this->group;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets group.
-	 *
-	 * @param int $group
-	 * @return LabelDescriptor
-	 */
-	protected function setGroup($group) {
-		$this->group = $group;
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return LabelDescriptor
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets features
+     *
+     * @return int[]
+     */
+    public function getFeatures()
+    {
+        return $this->container['features'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets features
+     *
+     * @param int[] $features 
+     *
+     * @return $this
+     */
+    public function setFeatures($features)
+    {
+        $this->container['features'] = $features;
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param map[string,string] $name
-	 * @return LabelDescriptor
-	 */
-	public function setName($name) {
-		if (is_array($name) && empty($name)) {
-			$this->name = new \stdClass;
-		} else {
-			$this->name = $name;
-		}
+    /**
+     * Gets group
+     *
+     * @return int
+     */
+    public function getGroup()
+    {
+        return $this->container['group'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets group
+     *
+     * @param int $group 
+     *
+     * @return $this
+     */
+    public function setGroup($group)
+    {
+        $this->container['group'] = $group;
 
-	/**
-	 * Returns type.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getType() {
-		return $this->type;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets type.
-	 *
-	 * @param int $type
-	 * @return LabelDescriptor
-	 */
-	protected function setType($type) {
-		$this->type = $type;
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns weight.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getWeight() {
-		return $this->weight;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets weight.
-	 *
-	 * @param int $weight
-	 * @return LabelDescriptor
-	 */
-	protected function setWeight($weight) {
-		$this->weight = $weight;
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets type
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets type
+     *
+     * @param int $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets weight
+     *
+     * @return int
+     */
+    public function getWeight()
+    {
+        return $this->container['weight'];
+    }
 
+    /**
+     * Sets weight
+     *
+     * @param int $weight 
+     *
+     * @return $this
+     */
+    public function setWeight($weight)
+    {
+        $this->container['weight'] = $weight;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

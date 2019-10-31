@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * CompletionLineItemCreate model
@@ -32,189 +33,340 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class CompletionLineItemCreate  {
+class CompletionLineItemCreate implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'CompletionLineItem.Create';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'CompletionLineItem.Create';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'amount' => 'float',
-		'quantity' => 'float',
-		'uniqueId' => 'string'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'amount' => 'float',
+        'quantity' => 'float',
+        'unique_id' => 'string'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'amount' => null,
+        'quantity' => null,
+        'unique_id' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'amount' => 'amount',
+        'quantity' => 'quantity',
+        'unique_id' => 'uniqueId'
+    ];
 
-	/**
-	 * The total amount of the line item including any tax.
-	 *
-	 * @var float
-	 */
-	private $amount;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'amount' => 'setAmount',
+        'quantity' => 'setQuantity',
+        'unique_id' => 'setUniqueId'
+    ];
 
-	/**
-	 * The quantity of the line item which should be completed.
-	 *
-	 * @var float
-	 */
-	private $quantity;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'amount' => 'getAmount',
+        'quantity' => 'getQuantity',
+        'unique_id' => 'getUniqueId'
+    ];
 
-	/**
-	 * The unique id identifies the line item on which the capture is applied on.
-	 *
-	 * @var string
-	 */
-	private $uniqueId;
+    
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        
+        $this->container['unique_id'] = isset($data['unique_id']) ? $data['unique_id'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['amount'] === null) {
+            $invalidProperties[] = "'amount' can't be null";
+        }
+        if ($this->container['quantity'] === null) {
+            $invalidProperties[] = "'quantity' can't be null";
+        }
+        if ($this->container['unique_id'] === null) {
+            $invalidProperties[] = "'unique_id' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['amount'])) {
-			$this->setAmount($data['amount']);
-		}
-		if (isset($data['quantity'])) {
-			$this->setQuantity($data['quantity']);
-		}
-		if (isset($data['uniqueId'])) {
-			$this->setUniqueId($data['uniqueId']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns amount.
-	 *
-	 * The total amount of the line item including any tax.
-	 *
-	 * @return float
-	 */
-	public function getAmount() {
-		return $this->amount;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets amount.
-	 *
-	 * @param float $amount
-	 * @return CompletionLineItemCreate
-	 */
-	public function setAmount($amount) {
-		$this->amount = $amount;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns quantity.
-	 *
-	 * The quantity of the line item which should be completed.
-	 *
-	 * @return float
-	 */
-	public function getQuantity() {
-		return $this->quantity;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets quantity.
-	 *
-	 * @param float $quantity
-	 * @return CompletionLineItemCreate
-	 */
-	public function setQuantity($quantity) {
-		$this->quantity = $quantity;
+    
 
-		return $this;
-	}
+    /**
+     * Gets amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
 
-	/**
-	 * Returns uniqueId.
-	 *
-	 * The unique id identifies the line item on which the capture is applied on.
-	 *
-	 * @return string
-	 */
-	public function getUniqueId() {
-		return $this->uniqueId;
-	}
+    /**
+     * Sets amount
+     *
+     * @param float $amount The total amount of the line item including any tax.
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->container['amount'] = $amount;
 
-	/**
-	 * Sets uniqueId.
-	 *
-	 * @param string $uniqueId
-	 * @return CompletionLineItemCreate
-	 */
-	public function setUniqueId($uniqueId) {
-		$this->uniqueId = $uniqueId;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets quantity
+     *
+     * @return float
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets quantity
+     *
+     * @param float $quantity The quantity of the line item which should be completed.
+     *
+     * @return $this
+     */
+    public function setQuantity($quantity)
+    {
+        $this->container['quantity'] = $quantity;
 
-		if ($this->getAmount() === null) {
-			throw new ValidationException("'amount' can't be null", 'amount', $this);
-		}
-		if ($this->getQuantity() === null) {
-			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-		}
-		if ($this->getUniqueId() === null) {
-			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
-		}
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets unique_id
+     *
+     * @return string
+     */
+    public function getUniqueId()
+    {
+        return $this->container['unique_id'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets unique_id
+     *
+     * @param string $unique_id The unique id identifies the line item on which the capture is applied on.
+     *
+     * @return $this
+     */
+    public function setUniqueId($unique_id)
+    {
+        $this->container['unique_id'] = $unique_id;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

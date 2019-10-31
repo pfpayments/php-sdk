@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * EntityQuery model
@@ -32,248 +33,395 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class EntityQuery  {
+class EntityQuery implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'EntityQuery';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'EntityQuery';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'filter' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilter',
-		'language' => 'string',
-		'numberOfEntities' => 'int',
-		'orderBys' => '\PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[]',
-		'startingEntity' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'filter' => '\PostFinanceCheckout\Sdk\Model\EntityQueryFilter',
+        'language' => 'string',
+        'number_of_entities' => 'int',
+        'order_bys' => '\PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[]',
+        'starting_entity' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'filter' => null,
+        'language' => null,
+        'number_of_entities' => 'int32',
+        'order_bys' => null,
+        'starting_entity' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'filter' => 'filter',
+        'language' => 'language',
+        'number_of_entities' => 'numberOfEntities',
+        'order_bys' => 'orderBys',
+        'starting_entity' => 'startingEntity'
+    ];
 
-	/**
-	 * The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\EntityQueryFilter
-	 */
-	private $filter;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'filter' => 'setFilter',
+        'language' => 'setLanguage',
+        'number_of_entities' => 'setNumberOfEntities',
+        'order_bys' => 'setOrderBys',
+        'starting_entity' => 'setStartingEntity'
+    ];
 
-	/**
-	 * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
-	 *
-	 * @var string
-	 */
-	private $language;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'filter' => 'getFilter',
+        'language' => 'getLanguage',
+        'number_of_entities' => 'getNumberOfEntities',
+        'order_bys' => 'getOrderBys',
+        'starting_entity' => 'getStartingEntity'
+    ];
 
-	/**
-	 * The number of entities defines how many entities should be returned. There is a maximum of 100 entities.
-	 *
-	 * @var int
-	 */
-	private $numberOfEntities;
+    
 
-	/**
-	 * The order bys allows to define the ordering of the entities returned by the search.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[]
-	 */
-	private $orderBys;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
-	 *
-	 * @var int
-	 */
-	private $startingEntity;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['filter'] = isset($data['filter']) ? $data['filter'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['number_of_entities'] = isset($data['number_of_entities']) ? $data['number_of_entities'] : null;
+        
+        $this->container['order_bys'] = isset($data['order_bys']) ? $data['order_bys'] : null;
+        
+        $this->container['starting_entity'] = isset($data['starting_entity']) ? $data['starting_entity'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['filter'])) {
-			$this->setFilter($data['filter']);
-		}
-		if (isset($data['language'])) {
-			$this->setLanguage($data['language']);
-		}
-		if (isset($data['numberOfEntities'])) {
-			$this->setNumberOfEntities($data['numberOfEntities']);
-		}
-		if (isset($data['orderBys'])) {
-			$this->setOrderBys($data['orderBys']);
-		}
-		if (isset($data['startingEntity'])) {
-			$this->setStartingEntity($data['startingEntity']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns filter.
-	 *
-	 * The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilter
-	 */
-	public function getFilter() {
-		return $this->filter;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets filter.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter
-	 * @return EntityQuery
-	 */
-	public function setFilter($filter) {
-		$this->filter = $filter;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns language.
-	 *
-	 * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return EntityQuery
-	 */
-	public function setLanguage($language) {
-		$this->language = $language;
+    
 
-		return $this;
-	}
+    /**
+     * Gets filter
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\EntityQueryFilter
+     */
+    public function getFilter()
+    {
+        return $this->container['filter'];
+    }
 
-	/**
-	 * Returns numberOfEntities.
-	 *
-	 * The number of entities defines how many entities should be returned. There is a maximum of 100 entities.
-	 *
-	 * @return int
-	 */
-	public function getNumberOfEntities() {
-		return $this->numberOfEntities;
-	}
+    /**
+     * Sets filter
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
+     *
+     * @return $this
+     */
+    public function setFilter($filter)
+    {
+        $this->container['filter'] = $filter;
 
-	/**
-	 * Sets numberOfEntities.
-	 *
-	 * @param int $numberOfEntities
-	 * @return EntityQuery
-	 */
-	public function setNumberOfEntities($numberOfEntities) {
-		$this->numberOfEntities = $numberOfEntities;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
 
-	/**
-	 * Returns orderBys.
-	 *
-	 * The order bys allows to define the ordering of the entities returned by the search.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[]
-	 */
-	public function getOrderBys() {
-		return $this->orderBys;
-	}
+    /**
+     * Sets language
+     *
+     * @param string $language The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
 
-	/**
-	 * Sets orderBys.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[] $orderBys
-	 * @return EntityQuery
-	 */
-	public function setOrderBys($orderBys) {
-		$this->orderBys = $orderBys;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets number_of_entities
+     *
+     * @return int
+     */
+    public function getNumberOfEntities()
+    {
+        return $this->container['number_of_entities'];
+    }
 
-	/**
-	 * Returns startingEntity.
-	 *
-	 * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
-	 *
-	 * @return int
-	 */
-	public function getStartingEntity() {
-		return $this->startingEntity;
-	}
+    /**
+     * Sets number_of_entities
+     *
+     * @param int $number_of_entities The number of entities defines how many entities should be returned. There is a maximum of 100 entities.
+     *
+     * @return $this
+     */
+    public function setNumberOfEntities($number_of_entities)
+    {
+        $this->container['number_of_entities'] = $number_of_entities;
 
-	/**
-	 * Sets startingEntity.
-	 *
-	 * @param int $startingEntity
-	 * @return EntityQuery
-	 */
-	public function setStartingEntity($startingEntity) {
-		$this->startingEntity = $startingEntity;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets order_bys
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[]
+     */
+    public function getOrderBys()
+    {
+        return $this->container['order_bys'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets order_bys
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\EntityQueryOrderBy[] $order_bys The order bys allows to define the ordering of the entities returned by the search.
+     *
+     * @return $this
+     */
+    public function setOrderBys($order_bys)
+    {
+        $this->container['order_bys'] = $order_bys;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets starting_entity
+     *
+     * @return int
+     */
+    public function getStartingEntity()
+    {
+        return $this->container['starting_entity'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets starting_entity
+     *
+     * @param int $starting_entity The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
+     *
+     * @return $this
+     */
+    public function setStartingEntity($starting_entity)
+    {
+        $this->container['starting_entity'] = $starting_entity;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

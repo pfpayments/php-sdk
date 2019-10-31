@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoiceReplacement model
@@ -32,288 +33,433 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionInvoiceReplacement  {
+class TransactionInvoiceReplacement implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'TransactionInvoiceReplacement';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'TransactionInvoiceReplacement';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'billingAddress' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
-		'dueOn' => '\DateTime',
-		'externalId' => 'string',
-		'lineItems' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
-		'merchantReference' => 'string',
-		'sentToCustomer' => 'bool'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'billing_address' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
+        'due_on' => '\DateTime',
+        'external_id' => 'string',
+        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
+        'merchant_reference' => 'string',
+        'sent_to_customer' => 'bool'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'billing_address' => null,
+        'due_on' => 'date-time',
+        'external_id' => null,
+        'line_items' => null,
+        'merchant_reference' => null,
+        'sent_to_customer' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'billing_address' => 'billingAddress',
+        'due_on' => 'dueOn',
+        'external_id' => 'externalId',
+        'line_items' => 'lineItems',
+        'merchant_reference' => 'merchantReference',
+        'sent_to_customer' => 'sentToCustomer'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\AddressCreate
-	 */
-	private $billingAddress;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'billing_address' => 'setBillingAddress',
+        'due_on' => 'setDueOn',
+        'external_id' => 'setExternalId',
+        'line_items' => 'setLineItems',
+        'merchant_reference' => 'setMerchantReference',
+        'sent_to_customer' => 'setSentToCustomer'
+    ];
 
-	/**
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @var \DateTime
-	 */
-	private $dueOn;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'billing_address' => 'getBillingAddress',
+        'due_on' => 'getDueOn',
+        'external_id' => 'getExternalId',
+        'line_items' => 'getLineItems',
+        'merchant_reference' => 'getMerchantReference',
+        'sent_to_customer' => 'getSentToCustomer'
+    ];
 
-	/**
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @var string
-	 */
-	private $externalId;
+    
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
-	 */
-	private $lineItems;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $merchantReference;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
+        
+        $this->container['due_on'] = isset($data['due_on']) ? $data['due_on'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
+        
+        $this->container['sent_to_customer'] = isset($data['sent_to_customer']) ? $data['sent_to_customer'] : null;
+        
+    }
 
-	/**
-	 * When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
-	 *
-	 * @var bool
-	 */
-	private $sentToCustomer;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['external_id'] === null) {
+            $invalidProperties[] = "'external_id' can't be null";
+        }
+        if ($this->container['line_items'] === null) {
+            $invalidProperties[] = "'line_items' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['billingAddress'])) {
-			$this->setBillingAddress($data['billingAddress']);
-		}
-		if (isset($data['dueOn'])) {
-			$this->setDueOn($data['dueOn']);
-		}
-		if (isset($data['externalId'])) {
-			$this->setExternalId($data['externalId']);
-		}
-		if (isset($data['lineItems'])) {
-			$this->setLineItems($data['lineItems']);
-		}
-		if (isset($data['merchantReference'])) {
-			$this->setMerchantReference($data['merchantReference']);
-		}
-		if (isset($data['sentToCustomer'])) {
-			$this->setSentToCustomer($data['sentToCustomer']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns billingAddress.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\AddressCreate
-	 */
-	public function getBillingAddress() {
-		return $this->billingAddress;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets billingAddress.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billingAddress
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setBillingAddress($billingAddress) {
-		$this->billingAddress = $billingAddress;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns dueOn.
-	 *
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @return \DateTime
-	 */
-	public function getDueOn() {
-		return $this->dueOn;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets dueOn.
-	 *
-	 * @param \DateTime $dueOn
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setDueOn($dueOn) {
-		$this->dueOn = $dueOn;
+    
 
-		return $this;
-	}
+    /**
+     * Gets billing_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\AddressCreate
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
 
-	/**
-	 * Returns externalId.
-	 *
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return $this->externalId;
-	}
+    /**
+     * Sets billing_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billing_address 
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billing_address)
+    {
+        $this->container['billing_address'] = $billing_address;
 
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setExternalId($externalId) {
-		$this->externalId = $externalId;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets due_on
+     *
+     * @return \DateTime
+     */
+    public function getDueOn()
+    {
+        return $this->container['due_on'];
+    }
 
-	/**
-	 * Returns lineItems.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
-	 */
-	public function getLineItems() {
-		return $this->lineItems;
-	}
+    /**
+     * Sets due_on
+     *
+     * @param \DateTime $due_on The date on which the invoice should be paid on.
+     *
+     * @return $this
+     */
+    public function setDueOn($due_on)
+    {
+        $this->container['due_on'] = $due_on;
 
-	/**
-	 * Sets lineItems.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $lineItems
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setLineItems($lineItems) {
-		$this->lineItems = $lineItems;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
 
-	/**
-	 * Returns merchantReference.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getMerchantReference() {
-		return $this->merchantReference;
-	}
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
 
-	/**
-	 * Sets merchantReference.
-	 *
-	 * @param string $merchantReference
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setMerchantReference($merchantReference) {
-		$this->merchantReference = $merchantReference;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
 
-	/**
-	 * Returns sentToCustomer.
-	 *
-	 * When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
-	 *
-	 * @return bool
-	 */
-	public function getSentToCustomer() {
-		return $this->sentToCustomer;
-	}
+    /**
+     * Sets line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items 
+     *
+     * @return $this
+     */
+    public function setLineItems($line_items)
+    {
+        $this->container['line_items'] = $line_items;
 
-	/**
-	 * Sets sentToCustomer.
-	 *
-	 * @param bool $sentToCustomer
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setSentToCustomer($sentToCustomer) {
-		$this->sentToCustomer = $sentToCustomer;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets merchant_reference
+     *
+     * @return string
+     */
+    public function getMerchantReference()
+    {
+        return $this->container['merchant_reference'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets merchant_reference
+     *
+     * @param string $merchant_reference 
+     *
+     * @return $this
+     */
+    public function setMerchantReference($merchant_reference)
+    {
+        $this->container['merchant_reference'] = $merchant_reference;
 
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		if ($this->getLineItems() === null) {
-			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
-		}
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets sent_to_customer
+     *
+     * @return bool
+     */
+    public function getSentToCustomer()
+    {
+        return $this->container['sent_to_customer'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets sent_to_customer
+     *
+     * @param bool $sent_to_customer When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
+     *
+     * @return $this
+     */
+    public function setSentToCustomer($sent_to_customer)
+    {
+        $this->container['sent_to_customer'] = $sent_to_customer;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

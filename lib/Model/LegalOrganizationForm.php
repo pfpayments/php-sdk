@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * LegalOrganizationForm model
@@ -32,239 +33,395 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class LegalOrganizationForm  {
+class LegalOrganizationForm implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'LegalOrganizationForm';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'LegalOrganizationForm';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'country' => 'string',
-		'description' => '\PostFinanceCheckout\Sdk\Model\LocalizedString[]',
-		'englishDescription' => 'string',
-		'id' => 'int',
-		'shortcut' => '\PostFinanceCheckout\Sdk\Model\LocalizedString[]'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'country' => 'string',
+        'description' => '\PostFinanceCheckout\Sdk\Model\LocalizedString[]',
+        'english_description' => 'string',
+        'id' => 'int',
+        'shortcut' => '\PostFinanceCheckout\Sdk\Model\LocalizedString[]'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'country' => null,
+        'description' => null,
+        'english_description' => null,
+        'id' => 'int64',
+        'shortcut' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'country' => 'country',
+        'description' => 'description',
+        'english_description' => 'englishDescription',
+        'id' => 'id',
+        'shortcut' => 'shortcut'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $country;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'country' => 'setCountry',
+        'description' => 'setDescription',
+        'english_description' => 'setEnglishDescription',
+        'id' => 'setId',
+        'shortcut' => 'setShortcut'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LocalizedString[]
-	 */
-	private $description;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'country' => 'getCountry',
+        'description' => 'getDescription',
+        'english_description' => 'getEnglishDescription',
+        'id' => 'getId',
+        'shortcut' => 'getShortcut'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $englishDescription;
+    
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LocalizedString[]
-	 */
-	private $shortcut;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['english_description'] = isset($data['english_description']) ? $data['english_description'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['shortcut'] = isset($data['shortcut']) ? $data['shortcut'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['shortcut'])) {
-			$this->setShortcut($data['shortcut']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns country.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getCountry() {
-		return $this->country;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets country.
-	 *
-	 * @param string $country
-	 * @return LegalOrganizationForm
-	 */
-	protected function setCountry($country) {
-		$this->country = $country;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LocalizedString[]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $description
-	 * @return LegalOrganizationForm
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
+    
 
-		return $this;
-	}
+    /**
+     * Gets country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
 
-	/**
-	 * Returns englishDescription.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getEnglishDescription() {
-		return $this->englishDescription;
-	}
+    /**
+     * Sets country
+     *
+     * @param string $country 
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->container['country'] = $country;
 
-	/**
-	 * Sets englishDescription.
-	 *
-	 * @param string $englishDescription
-	 * @return LegalOrganizationForm
-	 */
-	protected function setEnglishDescription($englishDescription) {
-		$this->englishDescription = $englishDescription;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets description
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LocalizedString[]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets description
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return LegalOrganizationForm
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets english_description
+     *
+     * @return string
+     */
+    public function getEnglishDescription()
+    {
+        return $this->container['english_description'];
+    }
 
-	/**
-	 * Returns shortcut.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LocalizedString[]
-	 */
-	public function getShortcut() {
-		return $this->shortcut;
-	}
+    /**
+     * Sets english_description
+     *
+     * @param string $english_description 
+     *
+     * @return $this
+     */
+    public function setEnglishDescription($english_description)
+    {
+        $this->container['english_description'] = $english_description;
 
-	/**
-	 * Sets shortcut.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $shortcut
-	 * @return LegalOrganizationForm
-	 */
-	public function setShortcut($shortcut) {
-		$this->shortcut = $shortcut;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets shortcut
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LocalizedString[]
+     */
+    public function getShortcut()
+    {
+        return $this->container['shortcut'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets shortcut
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $shortcut 
+     *
+     * @return $this
+     */
+    public function setShortcut($shortcut)
+    {
+        $this->container['shortcut'] = $shortcut;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

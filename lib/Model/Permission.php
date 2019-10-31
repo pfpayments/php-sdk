@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * Permission model
@@ -32,412 +33,555 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Permission  {
+class Permission implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Permission';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Permission';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'description' => 'map[string,string]',
-		'feature' => 'int',
-		'group' => 'bool',
-		'id' => 'int',
-		'leaf' => 'bool',
-		'name' => 'map[string,string]',
-		'parent' => 'int',
-		'pathToRoot' => 'int[]',
-		'title' => 'map[string,string]',
-		'twoFactorRequired' => 'bool'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'description' => 'map[string,string]',
+        'feature' => 'int',
+        'group' => 'bool',
+        'id' => 'int',
+        'leaf' => 'bool',
+        'name' => 'map[string,string]',
+        'parent' => 'int',
+        'path_to_root' => 'int[]',
+        'title' => 'map[string,string]',
+        'two_factor_required' => 'bool'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'description' => null,
+        'feature' => 'int64',
+        'group' => null,
+        'id' => 'int64',
+        'leaf' => null,
+        'name' => null,
+        'parent' => 'int64',
+        'path_to_root' => 'int64',
+        'title' => null,
+        'two_factor_required' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'description' => 'description',
+        'feature' => 'feature',
+        'group' => 'group',
+        'id' => 'id',
+        'leaf' => 'leaf',
+        'name' => 'name',
+        'parent' => 'parent',
+        'path_to_root' => 'pathToRoot',
+        'title' => 'title',
+        'two_factor_required' => 'twoFactorRequired'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'description' => 'setDescription',
+        'feature' => 'setFeature',
+        'group' => 'setGroup',
+        'id' => 'setId',
+        'leaf' => 'setLeaf',
+        'name' => 'setName',
+        'parent' => 'setParent',
+        'path_to_root' => 'setPathToRoot',
+        'title' => 'setTitle',
+        'two_factor_required' => 'setTwoFactorRequired'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $feature;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'description' => 'getDescription',
+        'feature' => 'getFeature',
+        'group' => 'getGroup',
+        'id' => 'getId',
+        'leaf' => 'getLeaf',
+        'name' => 'getName',
+        'parent' => 'getParent',
+        'path_to_root' => 'getPathToRoot',
+        'title' => 'getTitle',
+        'two_factor_required' => 'getTwoFactorRequired'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var bool
-	 */
-	private $group;
+    
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var bool
-	 */
-	private $leaf;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
+        
+        $this->container['group'] = isset($data['group']) ? $data['group'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['leaf'] = isset($data['leaf']) ? $data['leaf'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['parent'] = isset($data['parent']) ? $data['parent'] : null;
+        
+        $this->container['path_to_root'] = isset($data['path_to_root']) ? $data['path_to_root'] : null;
+        
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        
+        $this->container['two_factor_required'] = isset($data['two_factor_required']) ? $data['two_factor_required'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $name;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $parent;
+        return $invalidProperties;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var int[]
-	 */
-	private $pathToRoot;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $title;
-
-	/**
-	 * 
-	 *
-	 * @var bool
-	 */
-	private $twoFactorRequired;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['pathToRoot'])) {
-			$this->setPathToRoot($data['pathToRoot']);
-		}
-		if (isset($data['title'])) {
-			$this->setTitle($data['title']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return Permission
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns feature.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getFeature() {
-		return $this->feature;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets feature.
-	 *
-	 * @param int $feature
-	 * @return Permission
-	 */
-	protected function setFeature($feature) {
-		$this->feature = $feature;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns group.
-	 *
-	 * 
-	 *
-	 * @return bool
-	 */
-	public function getGroup() {
-		return $this->group;
-	}
+    
 
-	/**
-	 * Sets group.
-	 *
-	 * @param bool $group
-	 * @return Permission
-	 */
-	protected function setGroup($group) {
-		$this->group = $group;
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return Permission
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets feature
+     *
+     * @return int
+     */
+    public function getFeature()
+    {
+        return $this->container['feature'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets feature
+     *
+     * @param int $feature 
+     *
+     * @return $this
+     */
+    public function setFeature($feature)
+    {
+        $this->container['feature'] = $feature;
 
-	/**
-	 * Returns leaf.
-	 *
-	 * 
-	 *
-	 * @return bool
-	 */
-	public function getLeaf() {
-		return $this->leaf;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets leaf.
-	 *
-	 * @param bool $leaf
-	 * @return Permission
-	 */
-	protected function setLeaf($leaf) {
-		$this->leaf = $leaf;
+    /**
+     * Gets group
+     *
+     * @return bool
+     */
+    public function getGroup()
+    {
+        return $this->container['group'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets group
+     *
+     * @param bool $group 
+     *
+     * @return $this
+     */
+    public function setGroup($group)
+    {
+        $this->container['group'] = $group;
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param map[string,string] $name
-	 * @return Permission
-	 */
-	public function setName($name) {
-		if (is_array($name) && empty($name)) {
-			$this->name = new \stdClass;
-		} else {
-			$this->name = $name;
-		}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns parent.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getParent() {
-		return $this->parent;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets parent.
-	 *
-	 * @param int $parent
-	 * @return Permission
-	 */
-	protected function setParent($parent) {
-		$this->parent = $parent;
+    /**
+     * Gets leaf
+     *
+     * @return bool
+     */
+    public function getLeaf()
+    {
+        return $this->container['leaf'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets leaf
+     *
+     * @param bool $leaf 
+     *
+     * @return $this
+     */
+    public function setLeaf($leaf)
+    {
+        $this->container['leaf'] = $leaf;
 
-	/**
-	 * Returns pathToRoot.
-	 *
-	 * 
-	 *
-	 * @return int[]
-	 */
-	public function getPathToRoot() {
-		return $this->pathToRoot;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets pathToRoot.
-	 *
-	 * @param int[] $pathToRoot
-	 * @return Permission
-	 */
-	public function setPathToRoot($pathToRoot) {
-		$this->pathToRoot = $pathToRoot;
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns title.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets title.
-	 *
-	 * @param map[string,string] $title
-	 * @return Permission
-	 */
-	public function setTitle($title) {
-		if (is_array($title) && empty($title)) {
-			$this->title = new \stdClass;
-		} else {
-			$this->title = $title;
-		}
+    /**
+     * Gets parent
+     *
+     * @return int
+     */
+    public function getParent()
+    {
+        return $this->container['parent'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets parent
+     *
+     * @param int $parent 
+     *
+     * @return $this
+     */
+    public function setParent($parent)
+    {
+        $this->container['parent'] = $parent;
 
-	/**
-	 * Returns twoFactorRequired.
-	 *
-	 * 
-	 *
-	 * @return bool
-	 */
-	public function getTwoFactorRequired() {
-		return $this->twoFactorRequired;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets twoFactorRequired.
-	 *
-	 * @param bool $twoFactorRequired
-	 * @return Permission
-	 */
-	protected function setTwoFactorRequired($twoFactorRequired) {
-		$this->twoFactorRequired = $twoFactorRequired;
+    /**
+     * Gets path_to_root
+     *
+     * @return int[]
+     */
+    public function getPathToRoot()
+    {
+        return $this->container['path_to_root'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets path_to_root
+     *
+     * @param int[] $path_to_root 
+     *
+     * @return $this
+     */
+    public function setPathToRoot($path_to_root)
+    {
+        $this->container['path_to_root'] = $path_to_root;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets title
+     *
+     * @return map[string,string]
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets title
+     *
+     * @param map[string,string] $title 
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets two_factor_required
+     *
+     * @return bool
+     */
+    public function getTwoFactorRequired()
+    {
+        return $this->container['two_factor_required'];
+    }
 
+    /**
+     * Sets two_factor_required
+     *
+     * @param bool $two_factor_required 
+     *
+     * @return $this
+     */
+    public function setTwoFactorRequired($two_factor_required)
+    {
+        $this->container['two_factor_required'] = $two_factor_required;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

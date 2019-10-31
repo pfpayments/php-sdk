@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * Charge model
@@ -32,465 +31,615 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Charge extends TransactionAwareEntity  {
+class Charge extends TransactionAwareEntity 
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Charge';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Charge';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'createdOn' => '\DateTime',
-		'failureReason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
-		'language' => 'string',
-		'plannedPurgeDate' => '\DateTime',
-		'spaceViewId' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\ChargeState',
-		'timeZone' => 'string',
-		'timeoutOn' => '\DateTime',
-		'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
-		'type' => '\PostFinanceCheckout\Sdk\Model\ChargeType',
-		'userFailureMessage' => 'string',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'created_on' => '\DateTime',
+        'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
+        'language' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'space_view_id' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ChargeState',
+        'time_zone' => 'string',
+        'timeout_on' => '\DateTime',
+        'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
+        'type' => '\PostFinanceCheckout\Sdk\Model\ChargeType',
+        'user_failure_message' => 'string',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'created_on' => 'date-time',
+        'failure_reason' => null,
+        'language' => null,
+        'planned_purge_date' => 'date-time',
+        'space_view_id' => 'int64',
+        'state' => null,
+        'time_zone' => null,
+        'timeout_on' => 'date-time',
+        'transaction' => null,
+        'type' => null,
+        'user_failure_message' => null,
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'created_on' => 'createdOn',
+        'failure_reason' => 'failureReason',
+        'language' => 'language',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'space_view_id' => 'spaceViewId',
+        'state' => 'state',
+        'time_zone' => 'timeZone',
+        'timeout_on' => 'timeoutOn',
+        'transaction' => 'transaction',
+        'type' => 'type',
+        'user_failure_message' => 'userFailureMessage',
+        'version' => 'version'
+    ];
 
-	/**
-	 * The date on which the charge was created on.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'created_on' => 'setCreatedOn',
+        'failure_reason' => 'setFailureReason',
+        'language' => 'setLanguage',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'space_view_id' => 'setSpaceViewId',
+        'state' => 'setState',
+        'time_zone' => 'setTimeZone',
+        'timeout_on' => 'setTimeoutOn',
+        'transaction' => 'setTransaction',
+        'type' => 'setType',
+        'user_failure_message' => 'setUserFailureMessage',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\FailureReason
-	 */
-	private $failureReason;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'created_on' => 'getCreatedOn',
+        'failure_reason' => 'getFailureReason',
+        'language' => 'getLanguage',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'space_view_id' => 'getSpaceViewId',
+        'state' => 'getState',
+        'time_zone' => 'getTimeZone',
+        'timeout_on' => 'getTimeoutOn',
+        'transaction' => 'getTransaction',
+        'type' => 'getType',
+        'user_failure_message' => 'getUserFailureMessage',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $language;
-
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $spaceViewId;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ChargeState
-	 */
-	private $state;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $timeZone;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $timeoutOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Transaction
-	 */
-	private $transaction;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ChargeType
-	 */
-	private $type;
-
-	/**
-	 * The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
-	 *
-	 * @var string
-	 */
-	private $userFailureMessage;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
+    
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
 
-		if (isset($data['failureReason'])) {
-			$this->setFailureReason($data['failureReason']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['transaction'])) {
-			$this->setTransaction($data['transaction']);
-		}
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-	}
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
+        
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
 
 
-	/**
-	 * Returns createdOn.
-	 *
-	 * The date on which the charge was created on.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
 
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return Charge
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
 
-	/**
-	 * Returns failureReason.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\FailureReason
-	 */
-	public function getFailureReason() {
-		return $this->failureReason;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets failureReason.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failureReason
-	 * @return Charge
-	 */
-	public function setFailureReason($failureReason) {
-		$this->failureReason = $failureReason;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
+    
 
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return Charge
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The date on which the charge was created on.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return Charge
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Gets failure_reason
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\FailureReason
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets failure_reason
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason 
+     *
+     * @return $this
+     */
+    public function setFailureReason($failure_reason)
+    {
+        $this->container['failure_reason'] = $failure_reason;
 
-	/**
-	 * Returns spaceViewId.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getSpaceViewId() {
-		return $this->spaceViewId;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets spaceViewId.
-	 *
-	 * @param int $spaceViewId
-	 * @return Charge
-	 */
-	protected function setSpaceViewId($spaceViewId) {
-		$this->spaceViewId = $spaceViewId;
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets language
+     *
+     * @param string $language 
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ChargeState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ChargeState $state
-	 * @return Charge
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Returns timeZone.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return Charge
-	 */
-	protected function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
+    /**
+     * Gets space_view_id
+     *
+     * @return int
+     */
+    public function getSpaceViewId()
+    {
+        return $this->container['space_view_id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets space_view_id
+     *
+     * @param int $space_view_id 
+     *
+     * @return $this
+     */
+    public function setSpaceViewId($space_view_id)
+    {
+        $this->container['space_view_id'] = $space_view_id;
 
-	/**
-	 * Returns timeoutOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getTimeoutOn() {
-		return $this->timeoutOn;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets timeoutOn.
-	 *
-	 * @param \DateTime $timeoutOn
-	 * @return Charge
-	 */
-	protected function setTimeoutOn($timeoutOn) {
-		$this->timeoutOn = $timeoutOn;
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ChargeState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Returns transaction.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Transaction
-	 */
-	public function getTransaction() {
-		return $this->transaction;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets transaction.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction
-	 * @return Charge
-	 */
-	public function setTransaction($transaction) {
-		$this->transaction = $transaction;
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone 
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
 
-	/**
-	 * Returns type.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ChargeType
-	 */
-	public function getType() {
-		return $this->type;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ChargeType $type
-	 * @return Charge
-	 */
-	public function setType($type) {
-		$this->type = $type;
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime $timeout_on 
+     *
+     * @return $this
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        $this->container['timeout_on'] = $timeout_on;
 
-	/**
-	 * Returns userFailureMessage.
-	 *
-	 * The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
-	 *
-	 * @return string
-	 */
-	public function getUserFailureMessage() {
-		return $this->userFailureMessage;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets userFailureMessage.
-	 *
-	 * @param string $userFailureMessage
-	 * @return Charge
-	 */
-	protected function setUserFailureMessage($userFailureMessage) {
-		$this->userFailureMessage = $userFailureMessage;
+    /**
+     * Gets transaction
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Transaction
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets transaction
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
+     *
+     * @return $this
+     */
+    public function setTransaction($transaction)
+    {
+        $this->container['transaction'] = $transaction;
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return Charge
-	 */
-	protected function setVersion($version) {
-		$this->version = $version;
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ChargeType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets user_failure_message
+     *
+     * @return string
+     */
+    public function getUserFailureMessage()
+    {
+        return $this->container['user_failure_message'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets user_failure_message
+     *
+     * @param string $user_failure_message The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+     *
+     * @return $this
+     */
+    public function setUserFailureMessage($user_failure_message)
+    {
+        $this->container['user_failure_message'] = $user_failure_message;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

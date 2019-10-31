@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ChargeFlow model
@@ -32,338 +33,491 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ChargeFlow  {
+class ChargeFlow implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ChargeFlow';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ChargeFlow';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'conditions' => 'int[]',
-		'id' => 'int',
-		'linkedSpaceId' => 'int',
-		'name' => 'string',
-		'plannedPurgeDate' => '\DateTime',
-		'priority' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'conditions' => 'int[]',
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'name' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'priority' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'conditions' => 'int64',
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'name' => null,
+        'planned_purge_date' => 'date-time',
+        'priority' => 'int32',
+        'state' => null,
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'conditions' => 'conditions',
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'name' => 'name',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'priority' => 'priority',
+        'state' => 'state',
+        'version' => 'version'
+    ];
 
-	/**
-	 * If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
-	 *
-	 * @var int[]
-	 */
-	private $conditions;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'conditions' => 'setConditions',
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'name' => 'setName',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'priority' => 'setPriority',
+        'state' => 'setState',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'conditions' => 'getConditions',
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'name' => 'getName',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'priority' => 'getPriority',
+        'state' => 'getState',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @var int
-	 */
-	private $linkedSpaceId;
+    
 
-	/**
-	 * The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['conditions'] = isset($data['conditions']) ? $data['conditions'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['priority'] = isset($data['priority']) ? $data['priority'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-	/**
-	 * The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
-	 *
-	 * @var int
-	 */
-	private $priority;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	private $state;
+        return $invalidProperties;
+    }
 
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['conditions'])) {
-			$this->setConditions($data['conditions']);
-		}
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns conditions.
-	 *
-	 * If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
-	 *
-	 * @return int[]
-	 */
-	public function getConditions() {
-		return $this->conditions;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets conditions.
-	 *
-	 * @param int[] $conditions
-	 * @return ChargeFlow
-	 */
-	public function setConditions($conditions) {
-		$this->conditions = $conditions;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ChargeFlow
-	 */
-	public function setId($id) {
-		$this->id = $id;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @return int
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
+    
 
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param int $linkedSpaceId
-	 * @return ChargeFlow
-	 */
-	protected function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
+    /**
+     * Gets conditions
+     *
+     * @return int[]
+     */
+    public function getConditions()
+    {
+        return $this->container['conditions'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets conditions
+     *
+     * @param int[] $conditions If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
+     *
+     * @return $this
+     */
+    public function setConditions($conditions)
+    {
+        $this->container['conditions'] = $conditions;
 
-	/**
-	 * Returns name.
-	 *
-	 * The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return ChargeFlow
-	 */
-	protected function setName($name) {
-		$this->name = $name;
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return ChargeFlow
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
-	/**
-	 * Returns priority.
-	 *
-	 * The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
-	 *
-	 * @return int
-	 */
-	public function getPriority() {
-		return $this->priority;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets priority.
-	 *
-	 * @param int $priority
-	 * @return ChargeFlow
-	 */
-	protected function setPriority($priority) {
-		$this->priority = $priority;
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state
-	 * @return ChargeFlow
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return ChargeFlow
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
+    /**
+     * Gets priority
+     *
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->container['priority'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets priority
+     *
+     * @param int $priority The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
+     *
+     * @return $this
+     */
+    public function setPriority($priority)
+    {
+        $this->container['priority'] = $priority;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

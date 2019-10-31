@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * Account model
@@ -32,465 +33,619 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Account  {
+class Account implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Account';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Account';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'active' => 'bool',
-		'activeOrRestrictedActive' => 'bool',
-		'id' => 'int',
-		'name' => 'string',
-		'parentAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
-		'plannedPurgeDate' => '\DateTime',
-		'restrictedActive' => 'bool',
-		'scope' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\AccountState',
-		'subaccountLimit' => 'int',
-		'type' => '\PostFinanceCheckout\Sdk\Model\AccountType',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'active' => 'bool',
+        'active_or_restricted_active' => 'bool',
+        'id' => 'int',
+        'name' => 'string',
+        'parent_account' => '\PostFinanceCheckout\Sdk\Model\Account',
+        'planned_purge_date' => '\DateTime',
+        'restricted_active' => 'bool',
+        'scope' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\AccountState',
+        'subaccount_limit' => 'int',
+        'type' => '\PostFinanceCheckout\Sdk\Model\AccountType',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'active' => null,
+        'active_or_restricted_active' => null,
+        'id' => 'int64',
+        'name' => null,
+        'parent_account' => null,
+        'planned_purge_date' => 'date-time',
+        'restricted_active' => null,
+        'scope' => 'int64',
+        'state' => null,
+        'subaccount_limit' => 'int64',
+        'type' => null,
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'active' => 'active',
+        'active_or_restricted_active' => 'activeOrRestrictedActive',
+        'id' => 'id',
+        'name' => 'name',
+        'parent_account' => 'parentAccount',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'restricted_active' => 'restrictedActive',
+        'scope' => 'scope',
+        'state' => 'state',
+        'subaccount_limit' => 'subaccountLimit',
+        'type' => 'type',
+        'version' => 'version'
+    ];
 
-	/**
-	 * Active means that this account and all accounts in the hierarchy are active.
-	 *
-	 * @var bool
-	 */
-	private $active;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'active' => 'setActive',
+        'active_or_restricted_active' => 'setActiveOrRestrictedActive',
+        'id' => 'setId',
+        'name' => 'setName',
+        'parent_account' => 'setParentAccount',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'restricted_active' => 'setRestrictedActive',
+        'scope' => 'setScope',
+        'state' => 'setState',
+        'subaccount_limit' => 'setSubaccountLimit',
+        'type' => 'setType',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * This property is true when all accounts in the hierarchy are active or restricted active.
-	 *
-	 * @var bool
-	 */
-	private $activeOrRestrictedActive;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'active' => 'getActive',
+        'active_or_restricted_active' => 'getActiveOrRestrictedActive',
+        'id' => 'getId',
+        'name' => 'getName',
+        'parent_account' => 'getParentAccount',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'restricted_active' => 'getRestrictedActive',
+        'scope' => 'getScope',
+        'state' => 'getState',
+        'subaccount_limit' => 'getSubaccountLimit',
+        'type' => 'getType',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    
 
-	/**
-	 * The name of the account identifies the account within the administrative interface.
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The account which is responsible for administering the account.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	private $parentAccount;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['active'] = isset($data['active']) ? $data['active'] : null;
+        
+        $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['parent_account'] = isset($data['parent_account']) ? $data['parent_account'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['restricted_active'] = isset($data['restricted_active']) ? $data['restricted_active'] : null;
+        
+        $this->container['scope'] = isset($data['scope']) ? $data['scope'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['subaccount_limit'] = isset($data['subaccount_limit']) ? $data['subaccount_limit'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
-	 *
-	 * @var bool
-	 */
-	private $restrictedActive;
+        return $invalidProperties;
+    }
 
-	/**
-	 * This is the scope to which the account belongs to.
-	 *
-	 * @var int
-	 */
-	private $scope;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\AccountState
-	 */
-	private $state;
-
-	/**
-	 * This property restricts the number of subaccounts which can be created within this account.
-	 *
-	 * @var int
-	 */
-	private $subaccountLimit;
-
-	/**
-	 * The account type defines which role and capabilities it has.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\AccountType
-	 */
-	private $type;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['parentAccount'])) {
-			$this->setParentAccount($data['parentAccount']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns active.
-	 *
-	 * Active means that this account and all accounts in the hierarchy are active.
-	 *
-	 * @return bool
-	 */
-	public function getActive() {
-		return $this->active;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets active.
-	 *
-	 * @param bool $active
-	 * @return Account
-	 */
-	protected function setActive($active) {
-		$this->active = $active;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns activeOrRestrictedActive.
-	 *
-	 * This property is true when all accounts in the hierarchy are active or restricted active.
-	 *
-	 * @return bool
-	 */
-	public function getActiveOrRestrictedActive() {
-		return $this->activeOrRestrictedActive;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets activeOrRestrictedActive.
-	 *
-	 * @param bool $activeOrRestrictedActive
-	 * @return Account
-	 */
-	protected function setActiveOrRestrictedActive($activeOrRestrictedActive) {
-		$this->activeOrRestrictedActive = $activeOrRestrictedActive;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return Account
-	 */
-	public function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets active
+     *
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->container['active'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets active
+     *
+     * @param bool $active Active means that this account and all accounts in the hierarchy are active.
+     *
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->container['active'] = $active;
 
-	/**
-	 * Returns name.
-	 *
-	 * The name of the account identifies the account within the administrative interface.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return Account
-	 */
-	protected function setName($name) {
-		$this->name = $name;
+    /**
+     * Gets active_or_restricted_active
+     *
+     * @return bool
+     */
+    public function getActiveOrRestrictedActive()
+    {
+        return $this->container['active_or_restricted_active'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets active_or_restricted_active
+     *
+     * @param bool $active_or_restricted_active This property is true when all accounts in the hierarchy are active or restricted active.
+     *
+     * @return $this
+     */
+    public function setActiveOrRestrictedActive($active_or_restricted_active)
+    {
+        $this->container['active_or_restricted_active'] = $active_or_restricted_active;
 
-	/**
-	 * Returns parentAccount.
-	 *
-	 * The account which is responsible for administering the account.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	public function getParentAccount() {
-		return $this->parentAccount;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets parentAccount.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Account $parentAccount
-	 * @return Account
-	 */
-	public function setParentAccount($parentAccount) {
-		$this->parentAccount = $parentAccount;
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return Account
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name The name of the account identifies the account within the administrative interface.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns restrictedActive.
-	 *
-	 * Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
-	 *
-	 * @return bool
-	 */
-	public function getRestrictedActive() {
-		return $this->restrictedActive;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets restrictedActive.
-	 *
-	 * @param bool $restrictedActive
-	 * @return Account
-	 */
-	protected function setRestrictedActive($restrictedActive) {
-		$this->restrictedActive = $restrictedActive;
+    /**
+     * Gets parent_account
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Account
+     */
+    public function getParentAccount()
+    {
+        return $this->container['parent_account'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets parent_account
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Account $parent_account The account which is responsible for administering the account.
+     *
+     * @return $this
+     */
+    public function setParentAccount($parent_account)
+    {
+        $this->container['parent_account'] = $parent_account;
 
-	/**
-	 * Returns scope.
-	 *
-	 * This is the scope to which the account belongs to.
-	 *
-	 * @return int
-	 */
-	public function getScope() {
-		return $this->scope;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets scope.
-	 *
-	 * @param int $scope
-	 * @return Account
-	 */
-	protected function setScope($scope) {
-		$this->scope = $scope;
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\AccountState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\AccountState $state
-	 * @return Account
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets restricted_active
+     *
+     * @return bool
+     */
+    public function getRestrictedActive()
+    {
+        return $this->container['restricted_active'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets restricted_active
+     *
+     * @param bool $restricted_active Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
+     *
+     * @return $this
+     */
+    public function setRestrictedActive($restricted_active)
+    {
+        $this->container['restricted_active'] = $restricted_active;
 
-	/**
-	 * Returns subaccountLimit.
-	 *
-	 * This property restricts the number of subaccounts which can be created within this account.
-	 *
-	 * @return int
-	 */
-	public function getSubaccountLimit() {
-		return $this->subaccountLimit;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets subaccountLimit.
-	 *
-	 * @param int $subaccountLimit
-	 * @return Account
-	 */
-	protected function setSubaccountLimit($subaccountLimit) {
-		$this->subaccountLimit = $subaccountLimit;
+    /**
+     * Gets scope
+     *
+     * @return int
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets scope
+     *
+     * @param int $scope This is the scope to which the account belongs to.
+     *
+     * @return $this
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
-	/**
-	 * Returns type.
-	 *
-	 * The account type defines which role and capabilities it has.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\AccountType
-	 */
-	public function getType() {
-		return $this->type;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\AccountType $type
-	 * @return Account
-	 */
-	public function setType($type) {
-		$this->type = $type;
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\AccountState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\AccountState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return Account
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
+    /**
+     * Gets subaccount_limit
+     *
+     * @return int
+     */
+    public function getSubaccountLimit()
+    {
+        return $this->container['subaccount_limit'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets subaccount_limit
+     *
+     * @param int $subaccount_limit This property restricts the number of subaccounts which can be created within this account.
+     *
+     * @return $this
+     */
+    public function setSubaccountLimit($subaccount_limit)
+    {
+        $this->container['subaccount_limit'] = $subaccount_limit;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\AccountType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\AccountType $type The account type defines which role and capabilities it has.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

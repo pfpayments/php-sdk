@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * Token model
@@ -32,490 +33,651 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Token  {
-
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Token';
-
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'createdOn' => '\DateTime',
-		'customerEmailAddress' => 'string',
-		'customerId' => 'string',
-		'enabledForOneClickPayment' => 'bool',
-		'externalId' => 'string',
-		'id' => 'int',
-		'language' => 'string',
-		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => '\DateTime',
-		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'timeZone' => 'string',
-		'tokenReference' => 'string',
-		'version' => 'int'	);
-
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
-
-	
-
-	/**
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
-
-	/**
-	 * The customer email address is the email address of the customer.
-	 *
-	 * @var string
-	 */
-	private $customerEmailAddress;
-
-	/**
-	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
-	 *
-	 * @var string
-	 */
-	private $customerId;
-
-	/**
-	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
-	 *
-	 * @var bool
-	 */
-	private $enabledForOneClickPayment;
-
-	/**
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @var string
-	 */
-	private $externalId;
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $language;
-
-	/**
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @var int
-	 */
-	private $linkedSpaceId;
-
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	private $state;
-
-	/**
-	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
-	 *
-	 * @var string
-	 */
-	private $timeZone;
-
-	/**
-	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
-	 *
-	 * @var string
-	 */
-	private $tokenReference;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
-
-
-	/**
-	 * Returns createdOn.
-	 *
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
-
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return Token
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns customerEmailAddress.
-	 *
-	 * The customer email address is the email address of the customer.
-	 *
-	 * @return string
-	 */
-	public function getCustomerEmailAddress() {
-		return $this->customerEmailAddress;
-	}
-
-	/**
-	 * Sets customerEmailAddress.
-	 *
-	 * @param string $customerEmailAddress
-	 * @return Token
-	 */
-	protected function setCustomerEmailAddress($customerEmailAddress) {
-		$this->customerEmailAddress = $customerEmailAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns customerId.
-	 *
-	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
-	 *
-	 * @return string
-	 */
-	public function getCustomerId() {
-		return $this->customerId;
-	}
-
-	/**
-	 * Sets customerId.
-	 *
-	 * @param string $customerId
-	 * @return Token
-	 */
-	protected function setCustomerId($customerId) {
-		$this->customerId = $customerId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns enabledForOneClickPayment.
-	 *
-	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
-	 *
-	 * @return bool
-	 */
-	public function getEnabledForOneClickPayment() {
-		return $this->enabledForOneClickPayment;
-	}
-
-	/**
-	 * Sets enabledForOneClickPayment.
-	 *
-	 * @param bool $enabledForOneClickPayment
-	 * @return Token
-	 */
-	protected function setEnabledForOneClickPayment($enabledForOneClickPayment) {
-		$this->enabledForOneClickPayment = $enabledForOneClickPayment;
-
-		return $this;
-	}
-
-	/**
-	 * Returns externalId.
-	 *
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return $this->externalId;
-	}
-
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return Token
-	 */
-	protected function setExternalId($externalId) {
-		$this->externalId = $externalId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return Token
-	 */
-	public function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return Token
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @return int
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param int $linkedSpaceId
-	 * @return Token
-	 */
-	protected function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
-
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return Token
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
-
-		return $this;
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return $this->state;
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state
-	 * @return Token
-	 */
-	public function setState($state) {
-		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns timeZone.
-	 *
-	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
-
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return Token
-	 */
-	protected function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
-
-		return $this;
-	}
-
-	/**
-	 * Returns tokenReference.
-	 *
-	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
-	 *
-	 * @return string
-	 */
-	public function getTokenReference() {
-		return $this->tokenReference;
-	}
-
-	/**
-	 * Sets tokenReference.
-	 *
-	 * @param string $tokenReference
-	 * @return Token
-	 */
-	protected function setTokenReference($tokenReference) {
-		$this->tokenReference = $tokenReference;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return Token
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-
-		return $this;
-	}
-
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-
-	}
-
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
-
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
-
+class Token implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Token';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'created_on' => '\DateTime',
+        'customer_email_address' => 'string',
+        'customer_id' => 'string',
+        'enabled_for_one_click_payment' => 'bool',
+        'external_id' => 'string',
+        'id' => 'int',
+        'language' => 'string',
+        'linked_space_id' => 'int',
+        'planned_purge_date' => '\DateTime',
+        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'time_zone' => 'string',
+        'token_reference' => 'string',
+        'version' => 'int'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'created_on' => 'date-time',
+        'customer_email_address' => null,
+        'customer_id' => null,
+        'enabled_for_one_click_payment' => null,
+        'external_id' => null,
+        'id' => 'int64',
+        'language' => null,
+        'linked_space_id' => 'int64',
+        'planned_purge_date' => 'date-time',
+        'state' => null,
+        'time_zone' => null,
+        'token_reference' => null,
+        'version' => 'int32'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'created_on' => 'createdOn',
+        'customer_email_address' => 'customerEmailAddress',
+        'customer_id' => 'customerId',
+        'enabled_for_one_click_payment' => 'enabledForOneClickPayment',
+        'external_id' => 'externalId',
+        'id' => 'id',
+        'language' => 'language',
+        'linked_space_id' => 'linkedSpaceId',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'state' => 'state',
+        'time_zone' => 'timeZone',
+        'token_reference' => 'tokenReference',
+        'version' => 'version'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'created_on' => 'setCreatedOn',
+        'customer_email_address' => 'setCustomerEmailAddress',
+        'customer_id' => 'setCustomerId',
+        'enabled_for_one_click_payment' => 'setEnabledForOneClickPayment',
+        'external_id' => 'setExternalId',
+        'id' => 'setId',
+        'language' => 'setLanguage',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'state' => 'setState',
+        'time_zone' => 'setTimeZone',
+        'token_reference' => 'setTokenReference',
+        'version' => 'setVersion'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'created_on' => 'getCreatedOn',
+        'customer_email_address' => 'getCustomerEmailAddress',
+        'customer_id' => 'getCustomerId',
+        'enabled_for_one_click_payment' => 'getEnabledForOneClickPayment',
+        'external_id' => 'getExternalId',
+        'id' => 'getId',
+        'language' => 'getLanguage',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'state' => 'getState',
+        'time_zone' => 'getTimeZone',
+        'token_reference' => 'getTokenReference',
+        'version' => 'getVersion'
+    ];
+
+    
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['customer_email_address'] = isset($data['customer_email_address']) ? $data['customer_email_address'] : null;
+        
+        $this->container['customer_id'] = isset($data['customer_id']) ? $data['customer_id'] : null;
+        
+        $this->container['enabled_for_one_click_payment'] = isset($data['enabled_for_one_click_payment']) ? $data['enabled_for_one_click_payment'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+        $this->container['token_reference'] = isset($data['token_reference']) ? $data['token_reference'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
+
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
+
+    
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets customer_email_address
+     *
+     * @return string
+     */
+    public function getCustomerEmailAddress()
+    {
+        return $this->container['customer_email_address'];
+    }
+
+    /**
+     * Sets customer_email_address
+     *
+     * @param string $customer_email_address The customer email address is the email address of the customer.
+     *
+     * @return $this
+     */
+    public function setCustomerEmailAddress($customer_email_address)
+    {
+        $this->container['customer_email_address'] = $customer_email_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets customer_id
+     *
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string $customer_id The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
+     *
+     * @return $this
+     */
+    public function setCustomerId($customer_id)
+    {
+        $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets enabled_for_one_click_payment
+     *
+     * @return bool
+     */
+    public function getEnabledForOneClickPayment()
+    {
+        return $this->container['enabled_for_one_click_payment'];
+    }
+
+    /**
+     * Sets enabled_for_one_click_payment
+     *
+     * @param bool $enabled_for_one_click_payment When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
+     *
+     * @return $this
+     */
+    public function setEnabledForOneClickPayment($enabled_for_one_click_payment)
+    {
+        $this->container['enabled_for_one_click_payment'] = $enabled_for_one_click_payment;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string $language 
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
+
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets token_reference
+     *
+     * @return string
+     */
+    public function getTokenReference()
+    {
+        return $this->container['token_reference'];
+    }
+
+    /**
+     * Sets token_reference
+     *
+     * @param string $token_reference Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
+     *
+     * @return $this
+     */
+    public function setTokenReference($token_reference)
+    {
+        $this->container['token_reference'] = $token_reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

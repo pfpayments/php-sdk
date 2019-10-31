@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionVoidMode model
@@ -32,12 +31,25 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionVoidMode implements IEnum {
-
-	const ONLINE = 'ONLINE';
-	const OFFLINE = 'OFFLINE';
-	
-
-	
-
+class TransactionVoidMode
+{
+    /**
+     * Possible values of this enum
+     */
+    const ONLINE = 'ONLINE';
+    const OFFLINE = 'OFFLINE';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::ONLINE,
+            self::OFFLINE,
+        ];
+    }
 }
+
+

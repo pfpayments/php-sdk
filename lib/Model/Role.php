@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * Role model
@@ -32,344 +33,491 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Role  {
+class Role implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Role';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Role';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'account' => '\PostFinanceCheckout\Sdk\Model\Account',
-		'id' => 'int',
-		'name' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
-		'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
-		'plannedPurgeDate' => '\DateTime',
-		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'twoFactorRequired' => 'bool',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'account' => '\PostFinanceCheckout\Sdk\Model\Account',
+        'id' => 'int',
+        'name' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
+        'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
+        'planned_purge_date' => '\DateTime',
+        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'two_factor_required' => 'bool',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'account' => null,
+        'id' => 'int64',
+        'name' => null,
+        'permissions' => null,
+        'planned_purge_date' => 'date-time',
+        'state' => null,
+        'two_factor_required' => null,
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'account' => 'account',
+        'id' => 'id',
+        'name' => 'name',
+        'permissions' => 'permissions',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'state' => 'state',
+        'two_factor_required' => 'twoFactorRequired',
+        'version' => 'version'
+    ];
 
-	/**
-	 * The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	private $account;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'account' => 'setAccount',
+        'id' => 'setId',
+        'name' => 'setName',
+        'permissions' => 'setPermissions',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'state' => 'setState',
+        'two_factor_required' => 'setTwoFactorRequired',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'account' => 'getAccount',
+        'id' => 'getId',
+        'name' => 'getName',
+        'permissions' => 'getPermissions',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'state' => 'getState',
+        'two_factor_required' => 'getTwoFactorRequired',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * The name of this role is used to identify the role within administrative interfaces.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
-	 */
-	private $name;
+    
 
-	/**
-	 * Set of permissions that are granted to this role.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Permission[]
-	 */
-	private $permissions;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['account'] = isset($data['account']) ? $data['account'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['permissions'] = isset($data['permissions']) ? $data['permissions'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['two_factor_required'] = isset($data['two_factor_required']) ? $data['two_factor_required'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	private $state;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * Defines whether having been granted this role will force a user to use two-factor authentication.
-	 *
-	 * @var bool
-	 */
-	private $twoFactorRequired;
+        return $invalidProperties;
+    }
 
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['account'])) {
-			$this->setAccount($data['account']);
-		}
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['permissions'])) {
-			$this->setPermissions($data['permissions']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns account.
-	 *
-	 * The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	public function getAccount() {
-		return $this->account;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets account.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Account $account
-	 * @return Role
-	 */
-	public function setAccount($account) {
-		$this->account = $account;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return Role
-	 */
-	public function setId($id) {
-		$this->id = $id;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns name.
-	 *
-	 * The name of this role is used to identify the role within administrative interfaces.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString $name
-	 * @return Role
-	 */
-	public function setName($name) {
-		$this->name = $name;
+    /**
+     * Gets account
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Account
+     */
+    public function getAccount()
+    {
+        return $this->container['account'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets account
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Account $account The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
+     *
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+        $this->container['account'] = $account;
 
-	/**
-	 * Returns permissions.
-	 *
-	 * Set of permissions that are granted to this role.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Permission[]
-	 */
-	public function getPermissions() {
-		return $this->permissions;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets permissions.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Permission[] $permissions
-	 * @return Role
-	 */
-	public function setPermissions($permissions) {
-		$this->permissions = $permissions;
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return Role
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Gets name
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString $name The name of this role is used to identify the role within administrative interfaces.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state
-	 * @return Role
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets permissions
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Permission[]
+     */
+    public function getPermissions()
+    {
+        return $this->container['permissions'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets permissions
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Permission[] $permissions Set of permissions that are granted to this role.
+     *
+     * @return $this
+     */
+    public function setPermissions($permissions)
+    {
+        $this->container['permissions'] = $permissions;
 
-	/**
-	 * Returns twoFactorRequired.
-	 *
-	 * Defines whether having been granted this role will force a user to use two-factor authentication.
-	 *
-	 * @return bool
-	 */
-	public function getTwoFactorRequired() {
-		return $this->twoFactorRequired;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets twoFactorRequired.
-	 *
-	 * @param bool $twoFactorRequired
-	 * @return Role
-	 */
-	protected function setTwoFactorRequired($twoFactorRequired) {
-		$this->twoFactorRequired = $twoFactorRequired;
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return Role
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets two_factor_required
+     *
+     * @return bool
+     */
+    public function getTwoFactorRequired()
+    {
+        return $this->container['two_factor_required'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets two_factor_required
+     *
+     * @param bool $two_factor_required Defines whether having been granted this role will force a user to use two-factor authentication.
+     *
+     * @return $this
+     */
+    public function setTwoFactorRequired($two_factor_required)
+    {
+        $this->container['two_factor_required'] = $two_factor_required;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

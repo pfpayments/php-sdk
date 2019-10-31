@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * UserAccountRole model
@@ -32,270 +33,427 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class UserAccountRole  {
+class UserAccountRole implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'UserAccountRole';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'UserAccountRole';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'account' => 'int',
-		'appliesOnSubAccount' => 'bool',
-		'id' => 'int',
-		'role' => 'int',
-		'user' => 'int',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'account' => 'int',
+        'applies_on_sub_account' => 'bool',
+        'id' => 'int',
+        'role' => 'int',
+        'user' => 'int',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'account' => 'int64',
+        'applies_on_sub_account' => null,
+        'id' => 'int64',
+        'role' => 'int64',
+        'user' => 'int64',
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'account' => 'account',
+        'applies_on_sub_account' => 'appliesOnSubAccount',
+        'id' => 'id',
+        'role' => 'role',
+        'user' => 'user',
+        'version' => 'version'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $account;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'account' => 'setAccount',
+        'applies_on_sub_account' => 'setAppliesOnSubAccount',
+        'id' => 'setId',
+        'role' => 'setRole',
+        'user' => 'setUser',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var bool
-	 */
-	private $appliesOnSubAccount;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'account' => 'getAccount',
+        'applies_on_sub_account' => 'getAppliesOnSubAccount',
+        'id' => 'getId',
+        'role' => 'getRole',
+        'user' => 'getUser',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $role;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $user;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['account'] = isset($data['account']) ? $data['account'] : null;
+        
+        $this->container['applies_on_sub_account'] = isset($data['applies_on_sub_account']) ? $data['applies_on_sub_account'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['role'] = isset($data['role']) ? $data['role'] : null;
+        
+        $this->container['user'] = isset($data['user']) ? $data['user'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns account.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getAccount() {
-		return $this->account;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets account.
-	 *
-	 * @param int $account
-	 * @return UserAccountRole
-	 */
-	protected function setAccount($account) {
-		$this->account = $account;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns appliesOnSubAccount.
-	 *
-	 * 
-	 *
-	 * @return bool
-	 */
-	public function getAppliesOnSubAccount() {
-		return $this->appliesOnSubAccount;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets appliesOnSubAccount.
-	 *
-	 * @param bool $appliesOnSubAccount
-	 * @return UserAccountRole
-	 */
-	protected function setAppliesOnSubAccount($appliesOnSubAccount) {
-		$this->appliesOnSubAccount = $appliesOnSubAccount;
+    
 
-		return $this;
-	}
+    /**
+     * Gets account
+     *
+     * @return int
+     */
+    public function getAccount()
+    {
+        return $this->container['account'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets account
+     *
+     * @param int $account 
+     *
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+        $this->container['account'] = $account;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return UserAccountRole
-	 */
-	public function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets applies_on_sub_account
+     *
+     * @return bool
+     */
+    public function getAppliesOnSubAccount()
+    {
+        return $this->container['applies_on_sub_account'];
+    }
 
-	/**
-	 * Returns role.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getRole() {
-		return $this->role;
-	}
+    /**
+     * Sets applies_on_sub_account
+     *
+     * @param bool $applies_on_sub_account 
+     *
+     * @return $this
+     */
+    public function setAppliesOnSubAccount($applies_on_sub_account)
+    {
+        $this->container['applies_on_sub_account'] = $applies_on_sub_account;
 
-	/**
-	 * Sets role.
-	 *
-	 * @param int $role
-	 * @return UserAccountRole
-	 */
-	protected function setRole($role) {
-		$this->role = $role;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Returns user.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getUser() {
-		return $this->user;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Sets user.
-	 *
-	 * @param int $user
-	 * @return UserAccountRole
-	 */
-	protected function setUser($user) {
-		$this->user = $user;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets role
+     *
+     * @return int
+     */
+    public function getRole()
+    {
+        return $this->container['role'];
+    }
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+    /**
+     * Sets role
+     *
+     * @param int $role 
+     *
+     * @return $this
+     */
+    public function setRole($role)
+    {
+        $this->container['role'] = $role;
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return UserAccountRole
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets user
+     *
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->container['user'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets user
+     *
+     * @param int $user 
+     *
+     * @return $this
+     */
+    public function setUser($user)
+    {
+        $this->container['user'] = $user;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

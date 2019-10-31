@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -137,7 +137,7 @@ final class HttpRequest {
 	 *
 	 * @var array
 	 */
-	private $headers = array();
+	private $headers = [];
 
 	/**
 	 * The query part of the request as string.
@@ -250,7 +250,7 @@ final class HttpRequest {
 	 * @return string[]
 	 */
 	public function getHeaders() {
-		$headers = array();
+		$headers = [];
 		foreach ($this->headers as $name => $values) {
 			foreach ($values as $value) {
 				$headers[] = strtolower($name) . ': ' . $value;

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ final class HttpClientFactory {
 	 *
 	 * @var IHttpClient[]
 	 */
-	private $clients = array();
+	private $clients = [];
 
 	/**
 	 * Returns the singleton instance of the factory. If no instance exists, it is created.

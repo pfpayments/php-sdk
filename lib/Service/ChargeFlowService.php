@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ use PostFinanceCheckout\Sdk\ApiClient;
 use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\ApiResponse;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
+use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ChargeFlowService service
@@ -49,7 +50,7 @@ class ChargeFlowService {
 	 * @param ApiClient $apiClient the api client
 	 */
 	public function __construct(ApiClient $apiClient) {
-		if ($apiClient == null) {
+		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}
 
@@ -71,15 +72,15 @@ class ChargeFlowService {
 	 *
 	 * applyFlow
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\Transaction
 	 */
-	public function applyFlow($spaceId, $id) {
-		return $this->applyFlowWithHttpInfo($spaceId, $id)->getData();
+	public function applyFlow($space_id, $id) {
+		return $this->applyFlowWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -87,46 +88,46 @@ class ChargeFlowService {
 	 *
 	 * applyFlow
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function applyFlowWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling applyFlow');
+	public function applyFlowWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling applyFlow');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling applyFlow');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/charge-flow/applyFlow";
+		$resourcePath = '/charge-flow/applyFlow';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -149,20 +150,31 @@ class ChargeFlowService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\Transaction', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\Transaction',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -172,15 +184,15 @@ class ChargeFlowService {
 	 *
 	 * Count
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return int
 	 */
-	public function count($spaceId, $filter = null) {
-		return $this->countWithHttpInfo($spaceId, $filter)->getData();
+	public function count($space_id, $filter = null) {
+		return $this->countWithHttpInfo($space_id, $filter)->getData();
 	}
 
 	/**
@@ -188,39 +200,39 @@ class ChargeFlowService {
 	 *
 	 * Count
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function countWithHttpInfo($spaceId, $filter = null) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
+	public function countWithHttpInfo($space_id, $filter = null) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling count');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/charge-flow/count";
+		$resourcePath = '/charge-flow/count';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -248,20 +260,31 @@ class ChargeFlowService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -271,15 +294,15 @@ class ChargeFlowService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge flow which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\ChargeFlow
 	 */
-	public function read($spaceId, $id) {
-		return $this->readWithHttpInfo($spaceId, $id)->getData();
+	public function read($space_id, $id) {
+		return $this->readWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -287,46 +310,46 @@ class ChargeFlowService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge flow which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function readWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
+	public function readWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling read');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/charge-flow/read";
+		$resourcePath = '/charge-flow/read';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -349,20 +372,31 @@ class ChargeFlowService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ChargeFlow', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ChargeFlow', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ChargeFlow',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -372,15 +406,15 @@ class ChargeFlowService {
 	 *
 	 * Search
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\ChargeFlow[]
 	 */
-	public function search($spaceId, $query) {
-		return $this->searchWithHttpInfo($spaceId, $query)->getData();
+	public function search($space_id, $query) {
+		return $this->searchWithHttpInfo($space_id, $query)->getData();
 	}
 
 	/**
@@ -388,43 +422,43 @@ class ChargeFlowService {
 	 *
 	 * Search
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function searchWithHttpInfo($spaceId, $query) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
+	public function searchWithHttpInfo($space_id, $query) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling search');
 		}
 		// verify the required parameter 'query' is set
-		if ($query === null) {
+		if (is_null($query)) {
 			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/charge-flow/search";
+		$resourcePath = '/charge-flow/search';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -452,20 +486,31 @@ class ChargeFlowService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ChargeFlow[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ChargeFlow[]', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ChargeFlow[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -475,8 +520,8 @@ class ChargeFlowService {
 	 *
 	 * updateRecipient
 	 *
-	 * @param int $spaceId  (required)
-	 * @param int $transactionId The transaction id of the transaction whose recipient should be updated. (required)
+	 * @param int $space_id  (required)
+	 * @param int $transaction_id The transaction id of the transaction whose recipient should be updated. (required)
 	 * @param int $type The id of the charge flow configuration type to recipient should be updated for. (required)
 	 * @param string $recipient The recipient address that should be used to send the payment URL. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -484,8 +529,8 @@ class ChargeFlowService {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return void
 	 */
-	public function updateRecipient($spaceId, $transactionId, $type, $recipient) {
-		return $this->updateRecipientWithHttpInfo($spaceId, $transactionId, $type, $recipient)->getData();
+	public function updateRecipient($space_id, $transaction_id, $type, $recipient) {
+		return $this->updateRecipientWithHttpInfo($space_id, $transaction_id, $type, $recipient)->getData();
 	}
 
 	/**
@@ -493,8 +538,8 @@ class ChargeFlowService {
 	 *
 	 * updateRecipient
 	 *
-	 * @param int $spaceId  (required)
-	 * @param int $transactionId The transaction id of the transaction whose recipient should be updated. (required)
+	 * @param int $space_id  (required)
+	 * @param int $transaction_id The transaction id of the transaction whose recipient should be updated. (required)
 	 * @param int $type The id of the charge flow configuration type to recipient should be updated for. (required)
 	 * @param string $recipient The recipient address that should be used to send the payment URL. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -502,53 +547,53 @@ class ChargeFlowService {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function updateRecipientWithHttpInfo($spaceId, $transactionId, $type, $recipient) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling updateRecipient');
+	public function updateRecipientWithHttpInfo($space_id, $transaction_id, $type, $recipient) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling updateRecipient');
 		}
-		// verify the required parameter 'transactionId' is set
-		if ($transactionId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $transactionId when calling updateRecipient');
+		// verify the required parameter 'transaction_id' is set
+		if (is_null($transaction_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $transaction_id when calling updateRecipient');
 		}
 		// verify the required parameter 'type' is set
-		if ($type === null) {
+		if (is_null($type)) {
 			throw new \InvalidArgumentException('Missing the required parameter $type when calling updateRecipient');
 		}
 		// verify the required parameter 'recipient' is set
-		if ($recipient === null) {
+		if (is_null($recipient)) {
 			throw new \InvalidArgumentException('Missing the required parameter $recipient when calling updateRecipient');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($transactionId !== null) {
-			$queryParams['transactionId'] = $this->apiClient->getSerializer()->toQueryValue($transactionId);
+		if (!is_null($transaction_id)) {
+			$queryParams['transactionId'] = $this->apiClient->getSerializer()->toQueryValue($transaction_id);
 		}
-		if ($type !== null) {
+		if (!is_null($type)) {
 			$queryParams['type'] = $this->apiClient->getSerializer()->toQueryValue($type);
 		}
-		if ($recipient !== null) {
+		if (!is_null($recipient)) {
 			$queryParams['recipient'] = $this->apiClient->getSerializer()->toQueryValue($recipient);
 		}
 
 		// path params
-		$resourcePath = "/charge-flow/updateRecipient";
+		$resourcePath = '/charge-flow/updateRecipient';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -571,20 +616,31 @@ class ChargeFlowService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ use PostFinanceCheckout\Sdk\ApiClient;
 use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\ApiResponse;
 use PostFinanceCheckout\Sdk\Http\HttpRequest;
+use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoiceService service
@@ -49,7 +50,7 @@ class TransactionInvoiceService {
 	 * @param ApiClient $apiClient the api client
 	 */
 	public function __construct(ApiClient $apiClient) {
-		if ($apiClient == null) {
+		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}
 
@@ -71,15 +72,15 @@ class TransactionInvoiceService {
 	 *
 	 * Count
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return int
 	 */
-	public function count($spaceId, $filter = null) {
-		return $this->countWithHttpInfo($spaceId, $filter)->getData();
+	public function count($space_id, $filter = null) {
+		return $this->countWithHttpInfo($space_id, $filter)->getData();
 	}
 
 	/**
@@ -87,39 +88,39 @@ class TransactionInvoiceService {
 	 *
 	 * Count
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function countWithHttpInfo($spaceId, $filter = null) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
+	public function countWithHttpInfo($space_id, $filter = null) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling count');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/count";
+		$resourcePath = '/transaction-invoice/count';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -147,20 +148,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -170,15 +182,15 @@ class TransactionInvoiceService {
 	 *
 	 * getInvoiceDocument
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice to get the document for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RenderedDocument
 	 */
-	public function getInvoiceDocument($spaceId, $id) {
-		return $this->getInvoiceDocumentWithHttpInfo($spaceId, $id)->getData();
+	public function getInvoiceDocument($space_id, $id) {
+		return $this->getInvoiceDocumentWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -186,46 +198,46 @@ class TransactionInvoiceService {
 	 *
 	 * getInvoiceDocument
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice to get the document for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function getInvoiceDocumentWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getInvoiceDocument');
+	public function getInvoiceDocumentWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling getInvoiceDocument');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling getInvoiceDocument');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/getInvoiceDocument";
+		$resourcePath = '/transaction-invoice/getInvoiceDocument';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -248,20 +260,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RenderedDocument',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -271,16 +294,16 @@ class TransactionInvoiceService {
 	 *
 	 * getInvoiceDocumentWithTargetMediaType
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice to get the document for. (required)
-	 * @param int $targetMediaTypeId The id of the target media type for which the invoice should be generated for. (required)
+	 * @param int $target_media_type_id The id of the target media type for which the invoice should be generated for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\RenderedDocument
 	 */
-	public function getInvoiceDocumentWithTargetMediaType($spaceId, $id, $targetMediaTypeId) {
-		return $this->getInvoiceDocumentWithTargetMediaTypeWithHttpInfo($spaceId, $id, $targetMediaTypeId)->getData();
+	public function getInvoiceDocumentWithTargetMediaType($space_id, $id, $target_media_type_id) {
+		return $this->getInvoiceDocumentWithTargetMediaTypeWithHttpInfo($space_id, $id, $target_media_type_id)->getData();
 	}
 
 	/**
@@ -288,54 +311,54 @@ class TransactionInvoiceService {
 	 *
 	 * getInvoiceDocumentWithTargetMediaType
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice to get the document for. (required)
-	 * @param int $targetMediaTypeId The id of the target media type for which the invoice should be generated for. (required)
+	 * @param int $target_media_type_id The id of the target media type for which the invoice should be generated for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function getInvoiceDocumentWithTargetMediaTypeWithHttpInfo($spaceId, $id, $targetMediaTypeId) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getInvoiceDocumentWithTargetMediaType');
+	public function getInvoiceDocumentWithTargetMediaTypeWithHttpInfo($space_id, $id, $target_media_type_id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling getInvoiceDocumentWithTargetMediaType');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling getInvoiceDocumentWithTargetMediaType');
 		}
-		// verify the required parameter 'targetMediaTypeId' is set
-		if ($targetMediaTypeId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $targetMediaTypeId when calling getInvoiceDocumentWithTargetMediaType');
+		// verify the required parameter 'target_media_type_id' is set
+		if (is_null($target_media_type_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $target_media_type_id when calling getInvoiceDocumentWithTargetMediaType');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
-		if ($targetMediaTypeId !== null) {
-			$queryParams['targetMediaTypeId'] = $this->apiClient->getSerializer()->toQueryValue($targetMediaTypeId);
+		if (!is_null($target_media_type_id)) {
+			$queryParams['targetMediaTypeId'] = $this->apiClient->getSerializer()->toQueryValue($target_media_type_id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/getInvoiceDocumentWithTargetMediaType";
+		$resourcePath = '/transaction-invoice/getInvoiceDocumentWithTargetMediaType';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -358,20 +381,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RenderedDocument',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -381,15 +415,15 @@ class TransactionInvoiceService {
 	 *
 	 * isReplacementPossible
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The invoice which should be checked if a replacement is possible. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return bool
 	 */
-	public function isReplacementPossible($spaceId, $id) {
-		return $this->isReplacementPossibleWithHttpInfo($spaceId, $id)->getData();
+	public function isReplacementPossible($space_id, $id) {
+		return $this->isReplacementPossibleWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -397,46 +431,46 @@ class TransactionInvoiceService {
 	 *
 	 * isReplacementPossible
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The invoice which should be checked if a replacement is possible. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function isReplacementPossibleWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling isReplacementPossible');
+	public function isReplacementPossibleWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling isReplacementPossible');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling isReplacementPossible');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/isReplacementPossible";
+		$resourcePath = '/transaction-invoice/isReplacementPossible';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -459,20 +493,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'bool', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'bool', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'bool',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -482,15 +527,15 @@ class TransactionInvoiceService {
 	 *
 	 * Mark as Derecognized
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice which should be marked as derecognized. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice
 	 */
-	public function markAsDerecognized($spaceId, $id) {
-		return $this->markAsDerecognizedWithHttpInfo($spaceId, $id)->getData();
+	public function markAsDerecognized($space_id, $id) {
+		return $this->markAsDerecognizedWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -498,46 +543,46 @@ class TransactionInvoiceService {
 	 *
 	 * Mark as Derecognized
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice which should be marked as derecognized. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function markAsDerecognizedWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling markAsDerecognized');
+	public function markAsDerecognizedWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling markAsDerecognized');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling markAsDerecognized');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/markAsDerecognized";
+		$resourcePath = '/transaction-invoice/markAsDerecognized';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -560,20 +605,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionInvoice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -583,15 +639,15 @@ class TransactionInvoiceService {
 	 *
 	 * Mark as Paid
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice which should be marked as paid. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice
 	 */
-	public function markAsPaid($spaceId, $id) {
-		return $this->markAsPaidWithHttpInfo($spaceId, $id)->getData();
+	public function markAsPaid($space_id, $id) {
+		return $this->markAsPaidWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -599,46 +655,46 @@ class TransactionInvoiceService {
 	 *
 	 * Mark as Paid
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoice which should be marked as paid. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function markAsPaidWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling markAsPaid');
+	public function markAsPaidWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling markAsPaid');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling markAsPaid');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/markAsPaid";
+		$resourcePath = '/transaction-invoice/markAsPaid';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -661,20 +717,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionInvoice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -684,15 +751,15 @@ class TransactionInvoiceService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoices which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice
 	 */
-	public function read($spaceId, $id) {
-		return $this->readWithHttpInfo($spaceId, $id)->getData();
+	public function read($space_id, $id) {
+		return $this->readWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
@@ -700,46 +767,46 @@ class TransactionInvoiceService {
 	 *
 	 * Read
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoices which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function readWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
+	public function readWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling read');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/read";
+		$resourcePath = '/transaction-invoice/read';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -762,20 +829,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionInvoice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -785,7 +863,7 @@ class TransactionInvoiceService {
 	 *
 	 * replace
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoices which should be replaced. (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionInvoiceReplacement $replacement  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -793,8 +871,8 @@ class TransactionInvoiceService {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice
 	 */
-	public function replace($spaceId, $id, $replacement) {
-		return $this->replaceWithHttpInfo($spaceId, $id, $replacement)->getData();
+	public function replace($space_id, $id, $replacement) {
+		return $this->replaceWithHttpInfo($space_id, $id, $replacement)->getData();
 	}
 
 	/**
@@ -802,7 +880,7 @@ class TransactionInvoiceService {
 	 *
 	 * replace
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction invoices which should be replaced. (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionInvoiceReplacement $replacement  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -810,43 +888,43 @@ class TransactionInvoiceService {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function replaceWithHttpInfo($spaceId, $id, $replacement) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling replace');
+	public function replaceWithHttpInfo($space_id, $id, $replacement) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling replace');
 		}
 		// verify the required parameter 'id' is set
-		if ($id === null) {
+		if (is_null($id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $id when calling replace');
 		}
 		// verify the required parameter 'replacement' is set
-		if ($replacement === null) {
+		if (is_null($replacement)) {
 			throw new \InvalidArgumentException('Missing the required parameter $replacement when calling replace');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if ($id !== null) {
+		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/replace";
+		$resourcePath = '/transaction-invoice/replace';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($replacement)) {
@@ -874,20 +952,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionInvoice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}
@@ -897,15 +986,15 @@ class TransactionInvoiceService {
 	 *
 	 * Search
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction invoices which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return \PostFinanceCheckout\Sdk\Model\TransactionInvoice[]
 	 */
-	public function search($spaceId, $query) {
-		return $this->searchWithHttpInfo($spaceId, $query)->getData();
+	public function search($space_id, $query) {
+		return $this->searchWithHttpInfo($space_id, $query)->getData();
 	}
 
 	/**
@@ -913,43 +1002,43 @@ class TransactionInvoiceService {
 	 *
 	 * Search
 	 *
-	 * @param int $spaceId  (required)
+	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction invoices which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function searchWithHttpInfo($spaceId, $query) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
+	public function searchWithHttpInfo($space_id, $query) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling search');
 		}
 		// verify the required parameter 'query' is set
-		if ($query === null) {
+		if (is_null($query)) {
 			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
-		if ($headerAccept !== null) {
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
-		$queryParams = array();
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
 
 		// path params
-		$resourcePath = "/transaction-invoice/search";
+		$resourcePath = '/transaction-invoice/search';
 		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
-		$formParams = array();
+		$formParams = [];
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -977,20 +1066,31 @@ class TransactionInvoiceService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\TransactionInvoice[]', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\PostFinanceCheckout\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionInvoice[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
-
 			throw $e;
 		}
 	}

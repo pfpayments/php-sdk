@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * AbstractSpaceUpdate model
@@ -31,316 +32,459 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class AbstractSpaceUpdate  {
+class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'Abstract.Space.Update';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Abstract.Space.Update';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'name' => 'string',
-		'postalAddress' => '\PostFinanceCheckout\Sdk\Model\SpaceAddressCreate',
-		'primaryCurrency' => 'string',
-		'requestLimit' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-		'technicalContactAddresses' => 'string[]',
-		'timeZone' => 'string'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'name' => 'string',
+        'postal_address' => '\PostFinanceCheckout\Sdk\Model\SpaceAddressCreate',
+        'primary_currency' => 'string',
+        'request_limit' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'technical_contact_addresses' => 'string[]',
+        'time_zone' => 'string'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'name' => null,
+        'postal_address' => null,
+        'primary_currency' => null,
+        'request_limit' => 'int64',
+        'state' => null,
+        'technical_contact_addresses' => null,
+        'time_zone' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'name' => 'name',
+        'postal_address' => 'postalAddress',
+        'primary_currency' => 'primaryCurrency',
+        'request_limit' => 'requestLimit',
+        'state' => 'state',
+        'technical_contact_addresses' => 'technicalContactAddresses',
+        'time_zone' => 'timeZone'
+    ];
 
-	/**
-	 * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'name' => 'setName',
+        'postal_address' => 'setPostalAddress',
+        'primary_currency' => 'setPrimaryCurrency',
+        'request_limit' => 'setRequestLimit',
+        'state' => 'setState',
+        'technical_contact_addresses' => 'setTechnicalContactAddresses',
+        'time_zone' => 'setTimeZone'
+    ];
 
-	/**
-	 * The address to use in communication with clients for example in email, documents etc.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate
-	 */
-	private $postalAddress;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'name' => 'getName',
+        'postal_address' => 'getPostalAddress',
+        'primary_currency' => 'getPrimaryCurrency',
+        'request_limit' => 'getRequestLimit',
+        'state' => 'getState',
+        'technical_contact_addresses' => 'getTechnicalContactAddresses',
+        'time_zone' => 'getTimeZone'
+    ];
 
-	/**
-	 * This is the currency that is used to display aggregated amounts in the space.
-	 *
-	 * @var string
-	 */
-	private $primaryCurrency;
+    
 
-	/**
-	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
-	 *
-	 * @var int
-	 */
-	private $requestLimit;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	private $state;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['postal_address'] = isset($data['postal_address']) ? $data['postal_address'] : null;
+        
+        $this->container['primary_currency'] = isset($data['primary_currency']) ? $data['primary_currency'] : null;
+        
+        $this->container['request_limit'] = isset($data['request_limit']) ? $data['request_limit'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['technical_contact_addresses'] = isset($data['technical_contact_addresses']) ? $data['technical_contact_addresses'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+    }
 
-	/**
-	 * The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
-	 *
-	 * @var string[]
-	 */
-	private $technicalContactAddresses;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
-	 *
-	 * @var string
-	 */
-	private $timeZone;
+        return $invalidProperties;
+    }
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['postalAddress'])) {
-			$this->setPostalAddress($data['postalAddress']);
-		}
-		if (isset($data['primaryCurrency'])) {
-			$this->setPrimaryCurrency($data['primaryCurrency']);
-		}
-		if (isset($data['requestLimit'])) {
-			$this->setRequestLimit($data['requestLimit']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['technicalContactAddresses'])) {
-			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
-		}
-		if (isset($data['timeZone'])) {
-			$this->setTimeZone($data['timeZone']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns name.
-	 *
-	 * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setName($name) {
-		$this->name = $name;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns postalAddress.
-	 *
-	 * The address to use in communication with clients for example in email, documents etc.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate
-	 */
-	public function getPostalAddress() {
-		return $this->postalAddress;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets postalAddress.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate $postalAddress
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setPostalAddress($postalAddress) {
-		$this->postalAddress = $postalAddress;
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns primaryCurrency.
-	 *
-	 * This is the currency that is used to display aggregated amounts in the space.
-	 *
-	 * @return string
-	 */
-	public function getPrimaryCurrency() {
-		return $this->primaryCurrency;
-	}
+    
 
-	/**
-	 * Sets primaryCurrency.
-	 *
-	 * @param string $primaryCurrency
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setPrimaryCurrency($primaryCurrency) {
-		$this->primaryCurrency = $primaryCurrency;
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns requestLimit.
-	 *
-	 * The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
-	 *
-	 * @return int
-	 */
-	public function getRequestLimit() {
-		return $this->requestLimit;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets requestLimit.
-	 *
-	 * @param int $requestLimit
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setRequestLimit($requestLimit) {
-		$this->requestLimit = $requestLimit;
+    /**
+     * Gets postal_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate
+     */
+    public function getPostalAddress()
+    {
+        return $this->container['postal_address'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets postal_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\SpaceAddressCreate $postal_address The address to use in communication with clients for example in email, documents etc.
+     *
+     * @return $this
+     */
+    public function setPostalAddress($postal_address)
+    {
+        $this->container['postal_address'] = $postal_address;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return $this->state;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setState($state) {
-		$this->state = $state;
+    /**
+     * Gets primary_currency
+     *
+     * @return string
+     */
+    public function getPrimaryCurrency()
+    {
+        return $this->container['primary_currency'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets primary_currency
+     *
+     * @param string $primary_currency This is the currency that is used to display aggregated amounts in the space.
+     *
+     * @return $this
+     */
+    public function setPrimaryCurrency($primary_currency)
+    {
+        $this->container['primary_currency'] = $primary_currency;
 
-	/**
-	 * Returns technicalContactAddresses.
-	 *
-	 * The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
-	 *
-	 * @return string[]
-	 */
-	public function getTechnicalContactAddresses() {
-		return $this->technicalContactAddresses;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets technicalContactAddresses.
-	 *
-	 * @param string[] $technicalContactAddresses
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setTechnicalContactAddresses($technicalContactAddresses) {
-		$this->technicalContactAddresses = $technicalContactAddresses;
+    /**
+     * Gets request_limit
+     *
+     * @return int
+     */
+    public function getRequestLimit()
+    {
+        return $this->container['request_limit'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets request_limit
+     *
+     * @param int $request_limit The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
+     *
+     * @return $this
+     */
+    public function setRequestLimit($request_limit)
+    {
+        $this->container['request_limit'] = $request_limit;
 
-	/**
-	 * Returns timeZone.
-	 *
-	 * The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return AbstractSpaceUpdate
-	 */
-	public function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets technical_contact_addresses
+     *
+     * @return string[]
+     */
+    public function getTechnicalContactAddresses()
+    {
+        return $this->container['technical_contact_addresses'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets technical_contact_addresses
+     *
+     * @param string[] $technical_contact_addresses The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+     *
+     * @return $this
+     */
+    public function setTechnicalContactAddresses($technical_contact_addresses)
+    {
+        $this->container['technical_contact_addresses'] = $technical_contact_addresses;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
 
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

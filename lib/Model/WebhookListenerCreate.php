@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * WebhookListenerCreate model
@@ -32,260 +31,333 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class WebhookListenerCreate extends AbstractWebhookListenerUpdate  {
+class WebhookListenerCreate extends AbstractWebhookListenerUpdate 
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'WebhookListener.Create';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'WebhookListener.Create';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'entity' => 'int',
-		'entityStates' => 'string[]',
-		'identity' => 'int',
-		'notifyEveryChange' => 'bool',
-		'url' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'entity' => 'int',
+        'identity' => 'int',
+        'url' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'entity' => 'int64',
+        'identity' => 'int64',
+        'url' => 'int64'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'entity' => 'entity',
+        'identity' => 'identity',
+        'url' => 'url'
+    ];
 
-	/**
-	 * The listener listens on state changes of the entity linked with the listener.
-	 *
-	 * @var int
-	 */
-	private $entity;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'entity' => 'setEntity',
+        'identity' => 'setIdentity',
+        'url' => 'setUrl'
+    ];
 
-	/**
-	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
-	 *
-	 * @var string[]
-	 */
-	private $entityStates;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'entity' => 'getEntity',
+        'identity' => 'getIdentity',
+        'url' => 'getUrl'
+    ];
 
-	/**
-	 * The identity which will be used to sign messages sent by this listener.
-	 *
-	 * @var int
-	 */
-	private $identity;
-
-	/**
-	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
-	 *
-	 * @var bool
-	 */
-	private $notifyEveryChange;
-
-	/**
-	 * The URL which is invoked by the listener to notify the application about the event.
-	 *
-	 * @var int
-	 */
-	private $url;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['entity'])) {
-			$this->setEntity($data['entity']);
-		}
-		if (isset($data['entityStates'])) {
-			$this->setEntityStates($data['entityStates']);
-		}
-		if (isset($data['identity'])) {
-			$this->setIdentity($data['identity']);
-		}
-		if (isset($data['notifyEveryChange'])) {
-			$this->setNotifyEveryChange($data['notifyEveryChange']);
-		}
-		if (isset($data['url'])) {
-			$this->setUrl($data['url']);
-		}
-	}
+    
 
 
-	/**
-	 * Returns entity.
-	 *
-	 * The listener listens on state changes of the entity linked with the listener.
-	 *
-	 * @return int
-	 */
-	public function getEntity() {
-		return $this->entity;
-	}
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
 
-	/**
-	 * Sets entity.
-	 *
-	 * @param int $entity
-	 * @return WebhookListenerCreate
-	 */
-	public function setEntity($entity) {
-		$this->entity = $entity;
+        
+        $this->container['entity'] = isset($data['entity']) ? $data['entity'] : null;
+        
+        $this->container['identity'] = isset($data['identity']) ? $data['identity'] : null;
+        
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
+        
+    }
 
-		return $this;
-	}
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
 
-	/**
-	 * Returns entityStates.
-	 *
-	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
-	 *
-	 * @return string[]
-	 */
-	public function getEntityStates() {
-		return $this->entityStates;
-	}
+        if ($this->container['entity'] === null) {
+            $invalidProperties[] = "'entity' can't be null";
+        }
+        if ($this->container['url'] === null) {
+            $invalidProperties[] = "'url' can't be null";
+        }
+        return $invalidProperties;
+    }
 
-	/**
-	 * Sets entityStates.
-	 *
-	 * @param string[] $entityStates
-	 * @return WebhookListenerCreate
-	 */
-	public function setEntityStates($entityStates) {
-		$this->entityStates = $entityStates;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
 
-		return $this;
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
 
-	/**
-	 * Returns identity.
-	 *
-	 * The identity which will be used to sign messages sent by this listener.
-	 *
-	 * @return int
-	 */
-	public function getIdentity() {
-		return $this->identity;
-	}
 
-	/**
-	 * Sets identity.
-	 *
-	 * @param int $identity
-	 * @return WebhookListenerCreate
-	 */
-	public function setIdentity($identity) {
-		$this->identity = $identity;
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
 
-	/**
-	 * Returns notifyEveryChange.
-	 *
-	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
-	 *
-	 * @return bool
-	 */
-	public function getNotifyEveryChange() {
-		return $this->notifyEveryChange;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
 
-	/**
-	 * Sets notifyEveryChange.
-	 *
-	 * @param bool $notifyEveryChange
-	 * @return WebhookListenerCreate
-	 */
-	public function setNotifyEveryChange($notifyEveryChange) {
-		$this->notifyEveryChange = $notifyEveryChange;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns url.
-	 *
-	 * The URL which is invoked by the listener to notify the application about the event.
-	 *
-	 * @return int
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets url.
-	 *
-	 * @param int $url
-	 * @return WebhookListenerCreate
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
+    
 
-		return $this;
-	}
+    /**
+     * Gets entity
+     *
+     * @return int
+     */
+    public function getEntity()
+    {
+        return $this->container['entity'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
+    /**
+     * Sets entity
+     *
+     * @param int $entity The listener listens on state changes of the entity linked with the listener.
+     *
+     * @return $this
+     */
+    public function setEntity($entity)
+    {
+        $this->container['entity'] = $entity;
 
-		if ($this->getEntity() === null) {
-			throw new ValidationException("'entity' can't be null", 'entity', $this);
-		}
-		if ($this->getEntityStates() === null) {
-			throw new ValidationException("'entityStates' can't be null", 'entityStates', $this);
-		}
-		if ($this->getUrl() === null) {
-			throw new ValidationException("'url' can't be null", 'url', $this);
-		}
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets identity
+     *
+     * @return int
+     */
+    public function getIdentity()
+    {
+        return $this->container['identity'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets identity
+     *
+     * @param int $identity The identity which will be used to sign messages sent by this listener.
+     *
+     * @return $this
+     */
+    public function setIdentity($identity)
+    {
+        $this->container['identity'] = $identity;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
 
+    /**
+     * Gets url
+     *
+     * @return int
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param int $url The URL which is invoked by the listener to notify the application about the event.
+     *
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

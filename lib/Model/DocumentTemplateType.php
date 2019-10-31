@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * DocumentTemplateType model
@@ -32,250 +33,395 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DocumentTemplateType  {
+class DocumentTemplateType implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'DocumentTemplateType';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'DocumentTemplateType';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'description' => 'map[string,string]',
-		'feature' => 'int',
-		'group' => '\PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup',
-		'id' => 'int',
-		'title' => 'map[string,string]'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'description' => 'map[string,string]',
+        'feature' => 'int',
+        'group' => '\PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup',
+        'id' => 'int',
+        'title' => 'map[string,string]'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'description' => null,
+        'feature' => 'int64',
+        'group' => null,
+        'id' => 'int64',
+        'title' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'description' => 'description',
+        'feature' => 'feature',
+        'group' => 'group',
+        'id' => 'id',
+        'title' => 'title'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'description' => 'setDescription',
+        'feature' => 'setFeature',
+        'group' => 'setGroup',
+        'id' => 'setId',
+        'title' => 'setTitle'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $feature;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'description' => 'getDescription',
+        'feature' => 'getFeature',
+        'group' => 'getGroup',
+        'id' => 'getId',
+        'title' => 'getTitle'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
-	 */
-	private $group;
+    
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $title;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
+        
+        $this->container['group'] = isset($data['group']) ? $data['group'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['group'])) {
-			$this->setGroup($data['group']);
-		}
-		if (isset($data['title'])) {
-			$this->setTitle($data['title']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return DocumentTemplateType
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns feature.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getFeature() {
-		return $this->feature;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets feature.
-	 *
-	 * @param int $feature
-	 * @return DocumentTemplateType
-	 */
-	protected function setFeature($feature) {
-		$this->feature = $feature;
+    
 
-		return $this;
-	}
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-	/**
-	 * Returns group.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
-	 */
-	public function getGroup() {
-		return $this->group;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Sets group.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group
-	 * @return DocumentTemplateType
-	 */
-	public function setGroup($group) {
-		$this->group = $group;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets feature
+     *
+     * @return int
+     */
+    public function getFeature()
+    {
+        return $this->container['feature'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets feature
+     *
+     * @param int $feature 
+     *
+     * @return $this
+     */
+    public function setFeature($feature)
+    {
+        $this->container['feature'] = $feature;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return DocumentTemplateType
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets group
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup
+     */
+    public function getGroup()
+    {
+        return $this->container['group'];
+    }
 
-	/**
-	 * Returns title.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Sets group
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group 
+     *
+     * @return $this
+     */
+    public function setGroup($group)
+    {
+        $this->container['group'] = $group;
 
-	/**
-	 * Sets title.
-	 *
-	 * @param map[string,string] $title
-	 * @return DocumentTemplateType
-	 */
-	public function setTitle($title) {
-		if (is_array($title) && empty($title)) {
-			$this->title = new \stdClass;
-		} else {
-			$this->title = $title;
-		}
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets title
+     *
+     * @return map[string,string]
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets title
+     *
+     * @param map[string,string] $title 
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

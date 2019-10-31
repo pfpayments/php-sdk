@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ClientError model
@@ -32,236 +33,395 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ClientError  {
+class ClientError implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ClientError';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ClientError';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'date' => 'string',
-		'defaultMessage' => 'string',
-		'id' => 'string',
-		'message' => 'string',
-		'type' => '\PostFinanceCheckout\Sdk\Model\ClientErrorType'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'date' => 'string',
+        'default_message' => 'string',
+        'id' => 'string',
+        'message' => 'string',
+        'type' => '\PostFinanceCheckout\Sdk\Model\ClientErrorType'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'date' => null,
+        'default_message' => null,
+        'id' => null,
+        'message' => null,
+        'type' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'date' => 'date',
+        'default_message' => 'defaultMessage',
+        'id' => 'id',
+        'message' => 'message',
+        'type' => 'type'
+    ];
 
-	/**
-	 * Date when an error has occurred.
-	 *
-	 * @var string
-	 */
-	private $date;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'date' => 'setDate',
+        'default_message' => 'setDefaultMessage',
+        'id' => 'setId',
+        'message' => 'setMessage',
+        'type' => 'setType'
+    ];
 
-	/**
-	 * The error message which is translated into the default language (i.e. English).
-	 *
-	 * @var string
-	 */
-	private $defaultMessage;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'date' => 'getDate',
+        'default_message' => 'getDefaultMessage',
+        'id' => 'getId',
+        'message' => 'getMessage',
+        'type' => 'getType'
+    ];
 
-	/**
-	 * Unique identifier of an error.
-	 *
-	 * @var string
-	 */
-	private $id;
+    
 
-	/**
-	 * The error message which is translated in into the language of the client.
-	 *
-	 * @var string
-	 */
-	private $message;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The type of the client error.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ClientErrorType
-	 */
-	private $type;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['date'] = isset($data['date']) ? $data['date'] : null;
+        
+        $this->container['default_message'] = isset($data['default_message']) ? $data['default_message'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns date.
-	 *
-	 * Date when an error has occurred.
-	 *
-	 * @return string
-	 */
-	public function getDate() {
-		return $this->date;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets date.
-	 *
-	 * @param string $date
-	 * @return ClientError
-	 */
-	protected function setDate($date) {
-		$this->date = $date;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns defaultMessage.
-	 *
-	 * The error message which is translated into the default language (i.e. English).
-	 *
-	 * @return string
-	 */
-	public function getDefaultMessage() {
-		return $this->defaultMessage;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets defaultMessage.
-	 *
-	 * @param string $defaultMessage
-	 * @return ClientError
-	 */
-	protected function setDefaultMessage($defaultMessage) {
-		$this->defaultMessage = $defaultMessage;
+    
 
-		return $this;
-	}
+    /**
+     * Gets date
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->container['date'];
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * Unique identifier of an error.
-	 *
-	 * @return string
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Sets date
+     *
+     * @param string $date Date when an error has occurred.
+     *
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
-	/**
-	 * Sets id.
-	 *
-	 * @param string $id
-	 * @return ClientError
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets default_message
+     *
+     * @return string
+     */
+    public function getDefaultMessage()
+    {
+        return $this->container['default_message'];
+    }
 
-	/**
-	 * Returns message.
-	 *
-	 * The error message which is translated in into the language of the client.
-	 *
-	 * @return string
-	 */
-	public function getMessage() {
-		return $this->message;
-	}
+    /**
+     * Sets default_message
+     *
+     * @param string $default_message The error message which is translated into the default language (i.e. English).
+     *
+     * @return $this
+     */
+    public function setDefaultMessage($default_message)
+    {
+        $this->container['default_message'] = $default_message;
 
-	/**
-	 * Sets message.
-	 *
-	 * @param string $message
-	 * @return ClientError
-	 */
-	protected function setMessage($message) {
-		$this->message = $message;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Returns type.
-	 *
-	 * The type of the client error.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ClientErrorType
-	 */
-	public function getType() {
-		return $this->type;
-	}
+    /**
+     * Sets id
+     *
+     * @param string $id Unique identifier of an error.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ClientErrorType $type
-	 * @return ClientError
-	 */
-	public function setType($type) {
-		$this->type = $type;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets message
+     *
+     * @param string $message The error message which is translated in into the language of the client.
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ClientErrorType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ClientErrorType $type The type of the client error.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionCompletion model
@@ -32,911 +31,1063 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionCompletion extends TransactionAwareEntity  {
-
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'TransactionCompletion';
-
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'amount' => 'float',
-		'baseLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-		'createdBy' => 'int',
-		'createdOn' => '\DateTime',
-		'externalId' => 'string',
-		'failedOn' => '\DateTime',
-		'failureReason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
-		'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
-		'language' => 'string',
-		'lastCompletion' => 'bool',
-		'lineItemVersion' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
-		'lineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-		'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
-		'nextUpdateOn' => '\DateTime',
-		'paymentInformation' => 'string',
-		'plannedPurgeDate' => '\DateTime',
-		'processingOn' => '\DateTime',
-		'processorReference' => 'string',
-		'remainingLineItems' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-		'spaceViewId' => 'int',
-		'state' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionState',
-		'succeededOn' => '\DateTime',
-		'taxAmount' => 'float',
-		'timeZone' => 'string',
-		'timeoutOn' => '\DateTime',
-		'version' => 'int'	);
-
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
-
-	
-
-	/**
-	 * The amount which is captured. The amount represents sum of line items including taxes.
-	 *
-	 * @var float
-	 */
-	private $amount;
-
-	/**
-	 * The base line items on which the completion is applied on.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	private $baseLineItems;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $createdBy;
-
-	/**
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
-
-	/**
-	 * The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @var string
-	 */
-	private $externalId;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $failedOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\FailureReason
-	 */
-	private $failureReason;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Label[]
-	 */
-	private $labels;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $language;
-
-	/**
-	 * Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
-	 *
-	 * @var bool
-	 */
-	private $lastCompletion;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion
-	 */
-	private $lineItemVersion;
-
-	/**
-	 * The line items which are captured.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	private $lineItems;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode
-	 */
-	private $mode;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $nextUpdateOn;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $paymentInformation;
-
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $processingOn;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $processorReference;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	private $remainingLineItems;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $spaceViewId;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TransactionCompletionState
-	 */
-	private $state;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $succeededOn;
-
-	/**
-	 * The total sum of all taxes of line items.
-	 *
-	 * @var float
-	 */
-	private $taxAmount;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $timeZone;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $timeoutOn;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['baseLineItems'])) {
-			$this->setBaseLineItems($data['baseLineItems']);
-		}
-		if (isset($data['failureReason'])) {
-			$this->setFailureReason($data['failureReason']);
-		}
-		if (isset($data['labels'])) {
-			$this->setLabels($data['labels']);
-		}
-		if (isset($data['lineItemVersion'])) {
-			$this->setLineItemVersion($data['lineItemVersion']);
-		}
-		if (isset($data['lineItems'])) {
-			$this->setLineItems($data['lineItems']);
-		}
-		if (isset($data['mode'])) {
-			$this->setMode($data['mode']);
-		}
-		if (isset($data['remainingLineItems'])) {
-			$this->setRemainingLineItems($data['remainingLineItems']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-	}
-
-
-	/**
-	 * Returns amount.
-	 *
-	 * The amount which is captured. The amount represents sum of line items including taxes.
-	 *
-	 * @return float
-	 */
-	public function getAmount() {
-		return $this->amount;
-	}
-
-	/**
-	 * Sets amount.
-	 *
-	 * @param float $amount
-	 * @return TransactionCompletion
-	 */
-	protected function setAmount($amount) {
-		$this->amount = $amount;
-
-		return $this;
-	}
-
-	/**
-	 * Returns baseLineItems.
-	 *
-	 * The base line items on which the completion is applied on.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	public function getBaseLineItems() {
-		return $this->baseLineItems;
-	}
-
-	/**
-	 * Sets baseLineItems.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $baseLineItems
-	 * @return TransactionCompletion
-	 */
-	public function setBaseLineItems($baseLineItems) {
-		$this->baseLineItems = $baseLineItems;
-
-		return $this;
-	}
-
-	/**
-	 * Returns createdBy.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getCreatedBy() {
-		return $this->createdBy;
-	}
-
-	/**
-	 * Sets createdBy.
-	 *
-	 * @param int $createdBy
-	 * @return TransactionCompletion
-	 */
-	protected function setCreatedBy($createdBy) {
-		$this->createdBy = $createdBy;
-
-		return $this;
-	}
-
-	/**
-	 * Returns createdOn.
-	 *
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
-
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return TransactionCompletion
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns externalId.
-	 *
-	 * The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return $this->externalId;
-	}
-
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return TransactionCompletion
-	 */
-	protected function setExternalId($externalId) {
-		$this->externalId = $externalId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns failedOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getFailedOn() {
-		return $this->failedOn;
-	}
-
-	/**
-	 * Sets failedOn.
-	 *
-	 * @param \DateTime $failedOn
-	 * @return TransactionCompletion
-	 */
-	protected function setFailedOn($failedOn) {
-		$this->failedOn = $failedOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns failureReason.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\FailureReason
-	 */
-	public function getFailureReason() {
-		return $this->failureReason;
-	}
-
-	/**
-	 * Sets failureReason.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failureReason
-	 * @return TransactionCompletion
-	 */
-	public function setFailureReason($failureReason) {
-		$this->failureReason = $failureReason;
-
-		return $this;
-	}
-
-	/**
-	 * Returns labels.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Label[]
-	 */
-	public function getLabels() {
-		return $this->labels;
-	}
-
-	/**
-	 * Sets labels.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels
-	 * @return TransactionCompletion
-	 */
-	public function setLabels($labels) {
-		$this->labels = $labels;
-
-		return $this;
-	}
-
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return TransactionCompletion
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns lastCompletion.
-	 *
-	 * Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
-	 *
-	 * @return bool
-	 */
-	public function getLastCompletion() {
-		return $this->lastCompletion;
-	}
-
-	/**
-	 * Sets lastCompletion.
-	 *
-	 * @param bool $lastCompletion
-	 * @return TransactionCompletion
-	 */
-	protected function setLastCompletion($lastCompletion) {
-		$this->lastCompletion = $lastCompletion;
-
-		return $this;
-	}
-
-	/**
-	 * Returns lineItemVersion.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion
-	 */
-	public function getLineItemVersion() {
-		return $this->lineItemVersion;
-	}
-
-	/**
-	 * Sets lineItemVersion.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion $lineItemVersion
-	 * @return TransactionCompletion
-	 */
-	public function setLineItemVersion($lineItemVersion) {
-		$this->lineItemVersion = $lineItemVersion;
-
-		return $this;
-	}
-
-	/**
-	 * Returns lineItems.
-	 *
-	 * The line items which are captured.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	public function getLineItems() {
-		return $this->lineItems;
-	}
-
-	/**
-	 * Sets lineItems.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $lineItems
-	 * @return TransactionCompletion
-	 */
-	public function setLineItems($lineItems) {
-		$this->lineItems = $lineItems;
-
-		return $this;
-	}
-
-	/**
-	 * Returns mode.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode
-	 */
-	public function getMode() {
-		return $this->mode;
-	}
-
-	/**
-	 * Sets mode.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode $mode
-	 * @return TransactionCompletion
-	 */
-	public function setMode($mode) {
-		$this->mode = $mode;
-
-		return $this;
-	}
-
-	/**
-	 * Returns nextUpdateOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getNextUpdateOn() {
-		return $this->nextUpdateOn;
-	}
-
-	/**
-	 * Sets nextUpdateOn.
-	 *
-	 * @param \DateTime $nextUpdateOn
-	 * @return TransactionCompletion
-	 */
-	protected function setNextUpdateOn($nextUpdateOn) {
-		$this->nextUpdateOn = $nextUpdateOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns paymentInformation.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getPaymentInformation() {
-		return $this->paymentInformation;
-	}
-
-	/**
-	 * Sets paymentInformation.
-	 *
-	 * @param string $paymentInformation
-	 * @return TransactionCompletion
-	 */
-	protected function setPaymentInformation($paymentInformation) {
-		$this->paymentInformation = $paymentInformation;
-
-		return $this;
-	}
-
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
-
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return TransactionCompletion
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
-
-		return $this;
-	}
-
-	/**
-	 * Returns processingOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getProcessingOn() {
-		return $this->processingOn;
-	}
-
-	/**
-	 * Sets processingOn.
-	 *
-	 * @param \DateTime $processingOn
-	 * @return TransactionCompletion
-	 */
-	protected function setProcessingOn($processingOn) {
-		$this->processingOn = $processingOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns processorReference.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getProcessorReference() {
-		return $this->processorReference;
-	}
-
-	/**
-	 * Sets processorReference.
-	 *
-	 * @param string $processorReference
-	 * @return TransactionCompletion
-	 */
-	protected function setProcessorReference($processorReference) {
-		$this->processorReference = $processorReference;
-
-		return $this;
-	}
-
-	/**
-	 * Returns remainingLineItems.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
-	 */
-	public function getRemainingLineItems() {
-		return $this->remainingLineItems;
-	}
-
-	/**
-	 * Sets remainingLineItems.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $remainingLineItems
-	 * @return TransactionCompletion
-	 */
-	public function setRemainingLineItems($remainingLineItems) {
-		$this->remainingLineItems = $remainingLineItems;
-
-		return $this;
-	}
-
-	/**
-	 * Returns spaceViewId.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getSpaceViewId() {
-		return $this->spaceViewId;
-	}
-
-	/**
-	 * Sets spaceViewId.
-	 *
-	 * @param int $spaceViewId
-	 * @return TransactionCompletion
-	 */
-	protected function setSpaceViewId($spaceViewId) {
-		$this->spaceViewId = $spaceViewId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionState
-	 */
-	public function getState() {
-		return $this->state;
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionState $state
-	 * @return TransactionCompletion
-	 */
-	public function setState($state) {
-		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns succeededOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getSucceededOn() {
-		return $this->succeededOn;
-	}
-
-	/**
-	 * Sets succeededOn.
-	 *
-	 * @param \DateTime $succeededOn
-	 * @return TransactionCompletion
-	 */
-	protected function setSucceededOn($succeededOn) {
-		$this->succeededOn = $succeededOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns taxAmount.
-	 *
-	 * The total sum of all taxes of line items.
-	 *
-	 * @return float
-	 */
-	public function getTaxAmount() {
-		return $this->taxAmount;
-	}
-
-	/**
-	 * Sets taxAmount.
-	 *
-	 * @param float $taxAmount
-	 * @return TransactionCompletion
-	 */
-	protected function setTaxAmount($taxAmount) {
-		$this->taxAmount = $taxAmount;
-
-		return $this;
-	}
-
-	/**
-	 * Returns timeZone.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getTimeZone() {
-		return $this->timeZone;
-	}
-
-	/**
-	 * Sets timeZone.
-	 *
-	 * @param string $timeZone
-	 * @return TransactionCompletion
-	 */
-	protected function setTimeZone($timeZone) {
-		$this->timeZone = $timeZone;
-
-		return $this;
-	}
-
-	/**
-	 * Returns timeoutOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getTimeoutOn() {
-		return $this->timeoutOn;
-	}
-
-	/**
-	 * Sets timeoutOn.
-	 *
-	 * @param \DateTime $timeoutOn
-	 * @return TransactionCompletion
-	 */
-	protected function setTimeoutOn($timeoutOn) {
-		$this->timeoutOn = $timeoutOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return TransactionCompletion
-	 */
-	protected function setVersion($version) {
-		$this->version = $version;
-
-		return $this;
-	}
-
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
-
-	}
-
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
-
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
-
+class TransactionCompletion extends TransactionAwareEntity 
+{
+    const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'TransactionCompletion';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'amount' => 'float',
+        'base_line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'created_by' => 'int',
+        'created_on' => '\DateTime',
+        'external_id' => 'string',
+        'failed_on' => '\DateTime',
+        'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
+        'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
+        'language' => 'string',
+        'last_completion' => 'bool',
+        'line_item_version' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
+        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
+        'next_update_on' => '\DateTime',
+        'payment_information' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'processing_on' => '\DateTime',
+        'processor_reference' => 'string',
+        'remaining_line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'space_view_id' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionState',
+        'succeeded_on' => '\DateTime',
+        'tax_amount' => 'float',
+        'time_zone' => 'string',
+        'timeout_on' => '\DateTime',
+        'version' => 'int'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'amount' => null,
+        'base_line_items' => null,
+        'created_by' => 'int64',
+        'created_on' => 'date-time',
+        'external_id' => null,
+        'failed_on' => 'date-time',
+        'failure_reason' => null,
+        'labels' => null,
+        'language' => null,
+        'last_completion' => null,
+        'line_item_version' => null,
+        'line_items' => null,
+        'mode' => null,
+        'next_update_on' => 'date-time',
+        'payment_information' => null,
+        'planned_purge_date' => 'date-time',
+        'processing_on' => 'date-time',
+        'processor_reference' => null,
+        'remaining_line_items' => null,
+        'space_view_id' => 'int64',
+        'state' => null,
+        'succeeded_on' => 'date-time',
+        'tax_amount' => null,
+        'time_zone' => null,
+        'timeout_on' => 'date-time',
+        'version' => 'int32'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'amount' => 'amount',
+        'base_line_items' => 'baseLineItems',
+        'created_by' => 'createdBy',
+        'created_on' => 'createdOn',
+        'external_id' => 'externalId',
+        'failed_on' => 'failedOn',
+        'failure_reason' => 'failureReason',
+        'labels' => 'labels',
+        'language' => 'language',
+        'last_completion' => 'lastCompletion',
+        'line_item_version' => 'lineItemVersion',
+        'line_items' => 'lineItems',
+        'mode' => 'mode',
+        'next_update_on' => 'nextUpdateOn',
+        'payment_information' => 'paymentInformation',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'processing_on' => 'processingOn',
+        'processor_reference' => 'processorReference',
+        'remaining_line_items' => 'remainingLineItems',
+        'space_view_id' => 'spaceViewId',
+        'state' => 'state',
+        'succeeded_on' => 'succeededOn',
+        'tax_amount' => 'taxAmount',
+        'time_zone' => 'timeZone',
+        'timeout_on' => 'timeoutOn',
+        'version' => 'version'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'amount' => 'setAmount',
+        'base_line_items' => 'setBaseLineItems',
+        'created_by' => 'setCreatedBy',
+        'created_on' => 'setCreatedOn',
+        'external_id' => 'setExternalId',
+        'failed_on' => 'setFailedOn',
+        'failure_reason' => 'setFailureReason',
+        'labels' => 'setLabels',
+        'language' => 'setLanguage',
+        'last_completion' => 'setLastCompletion',
+        'line_item_version' => 'setLineItemVersion',
+        'line_items' => 'setLineItems',
+        'mode' => 'setMode',
+        'next_update_on' => 'setNextUpdateOn',
+        'payment_information' => 'setPaymentInformation',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'processing_on' => 'setProcessingOn',
+        'processor_reference' => 'setProcessorReference',
+        'remaining_line_items' => 'setRemainingLineItems',
+        'space_view_id' => 'setSpaceViewId',
+        'state' => 'setState',
+        'succeeded_on' => 'setSucceededOn',
+        'tax_amount' => 'setTaxAmount',
+        'time_zone' => 'setTimeZone',
+        'timeout_on' => 'setTimeoutOn',
+        'version' => 'setVersion'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'amount' => 'getAmount',
+        'base_line_items' => 'getBaseLineItems',
+        'created_by' => 'getCreatedBy',
+        'created_on' => 'getCreatedOn',
+        'external_id' => 'getExternalId',
+        'failed_on' => 'getFailedOn',
+        'failure_reason' => 'getFailureReason',
+        'labels' => 'getLabels',
+        'language' => 'getLanguage',
+        'last_completion' => 'getLastCompletion',
+        'line_item_version' => 'getLineItemVersion',
+        'line_items' => 'getLineItems',
+        'mode' => 'getMode',
+        'next_update_on' => 'getNextUpdateOn',
+        'payment_information' => 'getPaymentInformation',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'processing_on' => 'getProcessingOn',
+        'processor_reference' => 'getProcessorReference',
+        'remaining_line_items' => 'getRemainingLineItems',
+        'space_view_id' => 'getSpaceViewId',
+        'state' => 'getState',
+        'succeeded_on' => 'getSucceededOn',
+        'tax_amount' => 'getTaxAmount',
+        'time_zone' => 'getTimeZone',
+        'timeout_on' => 'getTimeoutOn',
+        'version' => 'getVersion'
+    ];
+
+    
+
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
+
+        
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        
+        $this->container['base_line_items'] = isset($data['base_line_items']) ? $data['base_line_items'] : null;
+        
+        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
+        
+        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
+        
+        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['last_completion'] = isset($data['last_completion']) ? $data['last_completion'] : null;
+        
+        $this->container['line_item_version'] = isset($data['line_item_version']) ? $data['line_item_version'] : null;
+        
+        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
+        
+        $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
+        
+        $this->container['payment_information'] = isset($data['payment_information']) ? $data['payment_information'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['processing_on'] = isset($data['processing_on']) ? $data['processing_on'] : null;
+        
+        $this->container['processor_reference'] = isset($data['processor_reference']) ? $data['processor_reference'] : null;
+        
+        $this->container['remaining_line_items'] = isset($data['remaining_line_items']) ? $data['remaining_line_items'] : null;
+        
+        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['succeeded_on'] = isset($data['succeeded_on']) ? $data['succeeded_on'] : null;
+        
+        $this->container['tax_amount'] = isset($data['tax_amount']) ? $data['tax_amount'] : null;
+        
+        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        
+        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
+
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
+
+    
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    
+
+    /**
+     * Gets amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
+
+    /**
+     * Sets amount
+     *
+     * @param float $amount The amount which is captured. The amount represents sum of line items including taxes.
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets base_line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+     */
+    public function getBaseLineItems()
+    {
+        return $this->container['base_line_items'];
+    }
+
+    /**
+     * Sets base_line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $base_line_items The base line items on which the completion is applied on.
+     *
+     * @return $this
+     */
+    public function setBaseLineItems($base_line_items)
+    {
+        $this->container['base_line_items'] = $base_line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_by
+     *
+     * @return int
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int $created_by 
+     *
+     * @return $this
+     */
+    public function setCreatedBy($created_by)
+    {
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime $failed_on 
+     *
+     * @return $this
+     */
+    public function setFailedOn($failed_on)
+    {
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets failure_reason
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\FailureReason
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason 
+     *
+     * @return $this
+     */
+    public function setFailureReason($failure_reason)
+    {
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets labels
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Label[]
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels 
+     *
+     * @return $this
+     */
+    public function setLabels($labels)
+    {
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string $language 
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets last_completion
+     *
+     * @return bool
+     */
+    public function getLastCompletion()
+    {
+        return $this->container['last_completion'];
+    }
+
+    /**
+     * Sets last_completion
+     *
+     * @param bool $last_completion Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
+     *
+     * @return $this
+     */
+    public function setLastCompletion($last_completion)
+    {
+        $this->container['last_completion'] = $last_completion;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets line_item_version
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion
+     */
+    public function getLineItemVersion()
+    {
+        return $this->container['line_item_version'];
+    }
+
+    /**
+     * Sets line_item_version
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion $line_item_version 
+     *
+     * @return $this
+     */
+    public function setLineItemVersion($line_item_version)
+    {
+        $this->container['line_item_version'] = $line_item_version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
+
+    /**
+     * Sets line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items which are captured.
+     *
+     * @return $this
+     */
+    public function setLineItems($line_items)
+    {
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets mode
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode
+     */
+    public function getMode()
+    {
+        return $this->container['mode'];
+    }
+
+    /**
+     * Sets mode
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode $mode 
+     *
+     * @return $this
+     */
+    public function setMode($mode)
+    {
+        $this->container['mode'] = $mode;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets next_update_on
+     *
+     * @return \DateTime
+     */
+    public function getNextUpdateOn()
+    {
+        return $this->container['next_update_on'];
+    }
+
+    /**
+     * Sets next_update_on
+     *
+     * @param \DateTime $next_update_on 
+     *
+     * @return $this
+     */
+    public function setNextUpdateOn($next_update_on)
+    {
+        $this->container['next_update_on'] = $next_update_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_information
+     *
+     * @return string
+     */
+    public function getPaymentInformation()
+    {
+        return $this->container['payment_information'];
+    }
+
+    /**
+     * Sets payment_information
+     *
+     * @param string $payment_information 
+     *
+     * @return $this
+     */
+    public function setPaymentInformation($payment_information)
+    {
+        $this->container['payment_information'] = $payment_information;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processing_on
+     *
+     * @return \DateTime
+     */
+    public function getProcessingOn()
+    {
+        return $this->container['processing_on'];
+    }
+
+    /**
+     * Sets processing_on
+     *
+     * @param \DateTime $processing_on 
+     *
+     * @return $this
+     */
+    public function setProcessingOn($processing_on)
+    {
+        $this->container['processing_on'] = $processing_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processor_reference
+     *
+     * @return string
+     */
+    public function getProcessorReference()
+    {
+        return $this->container['processor_reference'];
+    }
+
+    /**
+     * Sets processor_reference
+     *
+     * @param string $processor_reference 
+     *
+     * @return $this
+     */
+    public function setProcessorReference($processor_reference)
+    {
+        $this->container['processor_reference'] = $processor_reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets remaining_line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]
+     */
+    public function getRemainingLineItems()
+    {
+        return $this->container['remaining_line_items'];
+    }
+
+    /**
+     * Sets remaining_line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $remaining_line_items 
+     *
+     * @return $this
+     */
+    public function setRemainingLineItems($remaining_line_items)
+    {
+        $this->container['remaining_line_items'] = $remaining_line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets space_view_id
+     *
+     * @return int
+     */
+    public function getSpaceViewId()
+    {
+        return $this->container['space_view_id'];
+    }
+
+    /**
+     * Sets space_view_id
+     *
+     * @param int $space_view_id 
+     *
+     * @return $this
+     */
+    public function setSpaceViewId($space_view_id)
+    {
+        $this->container['space_view_id'] = $space_view_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets succeeded_on
+     *
+     * @return \DateTime
+     */
+    public function getSucceededOn()
+    {
+        return $this->container['succeeded_on'];
+    }
+
+    /**
+     * Sets succeeded_on
+     *
+     * @param \DateTime $succeeded_on 
+     *
+     * @return $this
+     */
+    public function setSucceededOn($succeeded_on)
+    {
+        $this->container['succeeded_on'] = $succeeded_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets tax_amount
+     *
+     * @return float
+     */
+    public function getTaxAmount()
+    {
+        return $this->container['tax_amount'];
+    }
+
+    /**
+     * Sets tax_amount
+     *
+     * @param float $tax_amount The total sum of all taxes of line items.
+     *
+     * @return $this
+     */
+    public function setTaxAmount($tax_amount)
+    {
+        $this->container['tax_amount'] = $tax_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets time_zone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
+
+    /**
+     * Sets time_zone
+     *
+     * @param string $time_zone 
+     *
+     * @return $this
+     */
+    public function setTimeZone($time_zone)
+    {
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
+
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime $timeout_on 
+     *
+     * @return $this
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        $this->container['timeout_on'] = $timeout_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

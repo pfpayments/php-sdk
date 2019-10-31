@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionUserInterfaceType model
@@ -32,13 +31,29 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionUserInterfaceType implements IEnum {
-
-	const IFRAME = 'IFRAME';
-	const PAYMENT_PAGE = 'PAYMENT_PAGE';
-	const MOBILE_SDK = 'MOBILE_SDK';
-	
-
-	
-
+class TransactionUserInterfaceType
+{
+    /**
+     * Possible values of this enum
+     */
+    const IFRAME = 'IFRAME';
+    const PAYMENT_PAGE = 'PAYMENT_PAGE';
+    const MOBILE_SDK = 'MOBILE_SDK';
+    const TERMINAL = 'TERMINAL';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::IFRAME,
+            self::PAYMENT_PAGE,
+            self::MOBILE_SDK,
+            self::TERMINAL,
+        ];
+    }
 }
+
+

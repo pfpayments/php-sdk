@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * LineItemCreate model
@@ -32,437 +33,570 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class LineItemCreate  {
+class LineItemCreate implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'LineItem.Create';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'LineItem.Create';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'amountIncludingTax' => 'float',
-		'attributes' => 'map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]',
-		'discountIncludingTax' => 'float',
-		'name' => 'string',
-		'quantity' => 'float',
-		'shippingRequired' => 'bool',
-		'sku' => 'string',
-		'taxes' => '\PostFinanceCheckout\Sdk\Model\TaxCreate[]',
-		'type' => '\PostFinanceCheckout\Sdk\Model\LineItemType',
-		'uniqueId' => 'string'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'amount_including_tax' => 'float',
+        'attributes' => 'map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]',
+        'discount_including_tax' => 'float',
+        'name' => 'string',
+        'quantity' => 'float',
+        'shipping_required' => 'bool',
+        'sku' => 'string',
+        'taxes' => '\PostFinanceCheckout\Sdk\Model\TaxCreate[]',
+        'type' => '\PostFinanceCheckout\Sdk\Model\LineItemType',
+        'unique_id' => 'string'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'amount_including_tax' => null,
+        'attributes' => null,
+        'discount_including_tax' => null,
+        'name' => null,
+        'quantity' => null,
+        'shipping_required' => null,
+        'sku' => null,
+        'taxes' => null,
+        'type' => null,
+        'unique_id' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'amount_including_tax' => 'amountIncludingTax',
+        'attributes' => 'attributes',
+        'discount_including_tax' => 'discountIncludingTax',
+        'name' => 'name',
+        'quantity' => 'quantity',
+        'shipping_required' => 'shippingRequired',
+        'sku' => 'sku',
+        'taxes' => 'taxes',
+        'type' => 'type',
+        'unique_id' => 'uniqueId'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $amountIncludingTax;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'amount_including_tax' => 'setAmountIncludingTax',
+        'attributes' => 'setAttributes',
+        'discount_including_tax' => 'setDiscountIncludingTax',
+        'name' => 'setName',
+        'quantity' => 'setQuantity',
+        'shipping_required' => 'setShippingRequired',
+        'sku' => 'setSku',
+        'taxes' => 'setTaxes',
+        'type' => 'setType',
+        'unique_id' => 'setUniqueId'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]
-	 */
-	private $attributes;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'amount_including_tax' => 'getAmountIncludingTax',
+        'attributes' => 'getAttributes',
+        'discount_including_tax' => 'getDiscountIncludingTax',
+        'name' => 'getName',
+        'quantity' => 'getQuantity',
+        'shipping_required' => 'getShippingRequired',
+        'sku' => 'getSku',
+        'taxes' => 'getTaxes',
+        'type' => 'getType',
+        'unique_id' => 'getUniqueId'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $discountIncludingTax;
+    
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $quantity;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
+        
+        $this->container['attributes'] = isset($data['attributes']) ? $data['attributes'] : null;
+        
+        $this->container['discount_including_tax'] = isset($data['discount_including_tax']) ? $data['discount_including_tax'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        
+        $this->container['shipping_required'] = isset($data['shipping_required']) ? $data['shipping_required'] : null;
+        
+        $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        
+        $this->container['taxes'] = isset($data['taxes']) ? $data['taxes'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['unique_id'] = isset($data['unique_id']) ? $data['unique_id'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var bool
-	 */
-	private $shippingRequired;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $sku;
+        if ($this->container['amount_including_tax'] === null) {
+            $invalidProperties[] = "'amount_including_tax' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['quantity'] === null) {
+            $invalidProperties[] = "'quantity' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if ($this->container['unique_id'] === null) {
+            $invalidProperties[] = "'unique_id' can't be null";
+        }
+        return $invalidProperties;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TaxCreate[]
-	 */
-	private $taxes;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\LineItemType
-	 */
-	private $type;
-
-	/**
-	 * The unique id identifies the line item within the set of line items associated with the transaction.
-	 *
-	 * @var string
-	 */
-	private $uniqueId;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['amountIncludingTax'])) {
-			$this->setAmountIncludingTax($data['amountIncludingTax']);
-		}
-		if (isset($data['attributes'])) {
-			$this->setAttributes($data['attributes']);
-		}
-		if (isset($data['discountIncludingTax'])) {
-			$this->setDiscountIncludingTax($data['discountIncludingTax']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['quantity'])) {
-			$this->setQuantity($data['quantity']);
-		}
-		if (isset($data['shippingRequired'])) {
-			$this->setShippingRequired($data['shippingRequired']);
-		}
-		if (isset($data['sku'])) {
-			$this->setSku($data['sku']);
-		}
-		if (isset($data['taxes'])) {
-			$this->setTaxes($data['taxes']);
-		}
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-		if (isset($data['uniqueId'])) {
-			$this->setUniqueId($data['uniqueId']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns amountIncludingTax.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getAmountIncludingTax() {
-		return $this->amountIncludingTax;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets amountIncludingTax.
-	 *
-	 * @param float $amountIncludingTax
-	 * @return LineItemCreate
-	 */
-	public function setAmountIncludingTax($amountIncludingTax) {
-		$this->amountIncludingTax = $amountIncludingTax;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns attributes.
-	 *
-	 * 
-	 *
-	 * @return map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]
-	 */
-	public function getAttributes() {
-		return $this->attributes;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets attributes.
-	 *
-	 * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate] $attributes
-	 * @return LineItemCreate
-	 */
-	public function setAttributes($attributes) {
-		if (is_array($attributes) && empty($attributes)) {
-			$this->attributes = new \stdClass;
-		} else {
-			$this->attributes = $attributes;
-		}
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns discountIncludingTax.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getDiscountIncludingTax() {
-		return $this->discountIncludingTax;
-	}
+    
 
-	/**
-	 * Sets discountIncludingTax.
-	 *
-	 * @param float $discountIncludingTax
-	 * @return LineItemCreate
-	 */
-	public function setDiscountIncludingTax($discountIncludingTax) {
-		$this->discountIncludingTax = $discountIncludingTax;
+    /**
+     * Gets amount_including_tax
+     *
+     * @return float
+     */
+    public function getAmountIncludingTax()
+    {
+        return $this->container['amount_including_tax'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets amount_including_tax
+     *
+     * @param float $amount_including_tax 
+     *
+     * @return $this
+     */
+    public function setAmountIncludingTax($amount_including_tax)
+    {
+        $this->container['amount_including_tax'] = $amount_including_tax;
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return LineItemCreate
-	 */
-	public function setName($name) {
-		$this->name = $name;
+    /**
+     * Gets attributes
+     *
+     * @return map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate]
+     */
+    public function getAttributes()
+    {
+        return $this->container['attributes'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets attributes
+     *
+     * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate] $attributes 
+     *
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        $this->container['attributes'] = $attributes;
 
-	/**
-	 * Returns quantity.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getQuantity() {
-		return $this->quantity;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets quantity.
-	 *
-	 * @param float $quantity
-	 * @return LineItemCreate
-	 */
-	public function setQuantity($quantity) {
-		$this->quantity = $quantity;
+    /**
+     * Gets discount_including_tax
+     *
+     * @return float
+     */
+    public function getDiscountIncludingTax()
+    {
+        return $this->container['discount_including_tax'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets discount_including_tax
+     *
+     * @param float $discount_including_tax 
+     *
+     * @return $this
+     */
+    public function setDiscountIncludingTax($discount_including_tax)
+    {
+        $this->container['discount_including_tax'] = $discount_including_tax;
 
-	/**
-	 * Returns shippingRequired.
-	 *
-	 * 
-	 *
-	 * @return bool
-	 */
-	public function getShippingRequired() {
-		return $this->shippingRequired;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets shippingRequired.
-	 *
-	 * @param bool $shippingRequired
-	 * @return LineItemCreate
-	 */
-	public function setShippingRequired($shippingRequired) {
-		$this->shippingRequired = $shippingRequired;
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns sku.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getSku() {
-		return $this->sku;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets sku.
-	 *
-	 * @param string $sku
-	 * @return LineItemCreate
-	 */
-	public function setSku($sku) {
-		$this->sku = $sku;
+    /**
+     * Gets quantity
+     *
+     * @return float
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets quantity
+     *
+     * @param float $quantity 
+     *
+     * @return $this
+     */
+    public function setQuantity($quantity)
+    {
+        $this->container['quantity'] = $quantity;
 
-	/**
-	 * Returns taxes.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TaxCreate[]
-	 */
-	public function getTaxes() {
-		return $this->taxes;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets taxes.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TaxCreate[] $taxes
-	 * @return LineItemCreate
-	 */
-	public function setTaxes($taxes) {
-		$this->taxes = $taxes;
+    /**
+     * Gets shipping_required
+     *
+     * @return bool
+     */
+    public function getShippingRequired()
+    {
+        return $this->container['shipping_required'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets shipping_required
+     *
+     * @param bool $shipping_required 
+     *
+     * @return $this
+     */
+    public function setShippingRequired($shipping_required)
+    {
+        $this->container['shipping_required'] = $shipping_required;
 
-	/**
-	 * Returns type.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\LineItemType
-	 */
-	public function getType() {
-		return $this->type;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type
-	 * @return LineItemCreate
-	 */
-	public function setType($type) {
-		$this->type = $type;
+    /**
+     * Gets sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->container['sku'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets sku
+     *
+     * @param string $sku 
+     *
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        $this->container['sku'] = $sku;
 
-	/**
-	 * Returns uniqueId.
-	 *
-	 * The unique id identifies the line item within the set of line items associated with the transaction.
-	 *
-	 * @return string
-	 */
-	public function getUniqueId() {
-		return $this->uniqueId;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets uniqueId.
-	 *
-	 * @param string $uniqueId
-	 * @return LineItemCreate
-	 */
-	public function setUniqueId($uniqueId) {
-		$this->uniqueId = $uniqueId;
+    /**
+     * Gets taxes
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TaxCreate[]
+     */
+    public function getTaxes()
+    {
+        return $this->container['taxes'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets taxes
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TaxCreate[] $taxes 
+     *
+     * @return $this
+     */
+    public function setTaxes($taxes)
+    {
+        $this->container['taxes'] = $taxes;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-		if ($this->getAmountIncludingTax() === null) {
-			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-		}
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getQuantity() === null) {
-			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-		}
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-		if ($this->getUniqueId() === null) {
-			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
-		}
-	}
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItemType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets unique_id
+     *
+     * @return string
+     */
+    public function getUniqueId()
+    {
+        return $this->container['unique_id'];
+    }
 
+    /**
+     * Sets unique_id
+     *
+     * @param string $unique_id The unique id identifies the line item within the set of line items associated with the transaction.
+     *
+     * @return $this
+     */
+    public function setUniqueId($unique_id)
+    {
+        $this->container['unique_id'] = $unique_id;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

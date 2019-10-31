@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ApplicationUser model
@@ -32,202 +31,327 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ApplicationUser extends User  {
+class ApplicationUser extends User 
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ApplicationUser';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ApplicationUser';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'name' => 'string',
-		'primaryAccount' => '\PostFinanceCheckout\Sdk\Model\Account',
-		'requestLimit' => 'int',
-	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'name' => 'string',
+        'primary_account' => '\PostFinanceCheckout\Sdk\Model\Account',
+        'request_limit' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'name' => null,
+        'primary_account' => null,
+        'request_limit' => 'int64'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'name' => 'name',
+        'primary_account' => 'primaryAccount',
+        'request_limit' => 'requestLimit'
+    ];
 
-	/**
-	 * The user name is used to identify the application user in administrative interfaces.
-	 *
-	 * @var string
-	 */
-	private $name;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'name' => 'setName',
+        'primary_account' => 'setPrimaryAccount',
+        'request_limit' => 'setRequestLimit'
+    ];
 
-	/**
-	 * The account that this user is associated with. The account owner will be able to manage this user.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	private $primaryAccount;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'name' => 'getName',
+        'primary_account' => 'getPrimaryAccount',
+        'request_limit' => 'getRequestLimit'
+    ];
 
-	/**
-	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
-	 *
-	 * @var int
-	 */
-	private $requestLimit;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['primaryAccount'])) {
-			$this->setPrimaryAccount($data['primaryAccount']);
-		}
-		if (isset($data['scope'])) {
-			$this->setScope($data['scope']);
-		}
-	}
+    
 
 
-	/**
-	 * Returns name.
-	 *
-	 * The user name is used to identify the application user in administrative interfaces.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
 
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return ApplicationUser
-	 */
-	protected function setName($name) {
-		$this->name = $name;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['primary_account'] = isset($data['primary_account']) ? $data['primary_account'] : null;
+        
+        $this->container['request_limit'] = isset($data['request_limit']) ? $data['request_limit'] : null;
+        
+    }
 
-		return $this;
-	}
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
 
-	/**
-	 * Returns primaryAccount.
-	 *
-	 * The account that this user is associated with. The account owner will be able to manage this user.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Account
-	 */
-	public function getPrimaryAccount() {
-		return $this->primaryAccount;
-	}
+        return $invalidProperties;
+    }
 
-	/**
-	 * Sets primaryAccount.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Account $primaryAccount
-	 * @return ApplicationUser
-	 */
-	public function setPrimaryAccount($primaryAccount) {
-		$this->primaryAccount = $primaryAccount;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
 
-		return $this;
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
 
-	/**
-	 * Returns requestLimit.
-	 *
-	 * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
-	 *
-	 * @return int
-	 */
-	public function getRequestLimit() {
-		return $this->requestLimit;
-	}
 
-	/**
-	 * Sets requestLimit.
-	 *
-	 * @param int $requestLimit
-	 * @return ApplicationUser
-	 */
-	protected function setRequestLimit($requestLimit) {
-		$this->requestLimit = $requestLimit;
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
 
-	/**
-	 * Returns scope.
-	 *
-	 * The scope to which the user belongs to.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Scope
-	 */
-	public function getScope() {
-		return parent::getScope();
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
 
-	/**
-	 * Sets scope.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Scope $scope
-	 * @return ApplicationUser
-	 */
-	public function setScope($scope) {
-		return parent::setScope($scope);
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
+    
 
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Sets name
+     *
+     * @param string $name The user name is used to identify the application user in administrative interfaces.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
+        return $this;
+    }
+    
+
+    /**
+     * Gets primary_account
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Account
+     */
+    public function getPrimaryAccount()
+    {
+        return $this->container['primary_account'];
+    }
+
+    /**
+     * Sets primary_account
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Account $primary_account The account that this user is associated with. The account owner will be able to manage this user.
+     *
+     * @return $this
+     */
+    public function setPrimaryAccount($primary_account)
+    {
+        $this->container['primary_account'] = $primary_account;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets request_limit
+     *
+     * @return int
+     */
+    public function getRequestLimit()
+    {
+        return $this->container['request_limit'];
+    }
+
+    /**
+     * Sets request_limit
+     *
+     * @param int $request_limit The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+     *
+     * @return $this
+     */
+    public function setRequestLimit($request_limit)
+    {
+        $this->container['request_limit'] = $request_limit;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

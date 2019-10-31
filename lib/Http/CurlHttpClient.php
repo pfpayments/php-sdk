@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,9 @@ final class CurlHttpClient implements IHttpClient {
 		if ($apiClient->getConnectionTimeout() !== 0) {
 			curl_setopt($curl, CURLOPT_TIMEOUT, $apiClient->getConnectionTimeout());
 		}
+
+        // set life-time for DNS cache entries
+        curl_setopt($curl, CURLOPT_DNS_CACHE_TIMEOUT, 30);
 		// return the result on success, rather than just true
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ManualTaskAction model
@@ -32,212 +33,363 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ManualTaskAction  {
+class ManualTaskAction implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ManualTaskAction';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ManualTaskAction';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'id' => 'int',
-		'label' => 'map[string,string]',
-		'style' => '\PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle',
-		'taskType' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'id' => 'int',
+        'label' => 'map[string,string]',
+        'style' => '\PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle',
+        'task_type' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'id' => 'int64',
+        'label' => null,
+        'style' => null,
+        'task_type' => 'int64'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'id' => 'id',
+        'label' => 'label',
+        'style' => 'style',
+        'task_type' => 'taskType'
+    ];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'id' => 'setId',
+        'label' => 'setLabel',
+        'style' => 'setStyle',
+        'task_type' => 'setTaskType'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $label;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'id' => 'getId',
+        'label' => 'getLabel',
+        'style' => 'getStyle',
+        'task_type' => 'getTaskType'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle
-	 */
-	private $style;
+    
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $taskType;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['label'] = isset($data['label']) ? $data['label'] : null;
+        
+        $this->container['style'] = isset($data['style']) ? $data['style'] : null;
+        
+        $this->container['task_type'] = isset($data['task_type']) ? $data['task_type'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['label'])) {
-			$this->setLabel($data['label']);
-		}
-		if (isset($data['style'])) {
-			$this->setStyle($data['style']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ManualTaskAction
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns label.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getLabel() {
-		return $this->label;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets label.
-	 *
-	 * @param map[string,string] $label
-	 * @return ManualTaskAction
-	 */
-	public function setLabel($label) {
-		if (is_array($label) && empty($label)) {
-			$this->label = new \stdClass;
-		} else {
-			$this->label = $label;
-		}
+    
 
-		return $this;
-	}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-	/**
-	 * Returns style.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle
-	 */
-	public function getStyle() {
-		return $this->style;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Sets style.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle $style
-	 * @return ManualTaskAction
-	 */
-	public function setStyle($style) {
-		$this->style = $style;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets label
+     *
+     * @return map[string,string]
+     */
+    public function getLabel()
+    {
+        return $this->container['label'];
+    }
 
-	/**
-	 * Returns taskType.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getTaskType() {
-		return $this->taskType;
-	}
+    /**
+     * Sets label
+     *
+     * @param map[string,string] $label 
+     *
+     * @return $this
+     */
+    public function setLabel($label)
+    {
+        $this->container['label'] = $label;
 
-	/**
-	 * Sets taskType.
-	 *
-	 * @param int $taskType
-	 * @return ManualTaskAction
-	 */
-	protected function setTaskType($taskType) {
-		$this->taskType = $taskType;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets style
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle
+     */
+    public function getStyle()
+    {
+        return $this->container['style'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets style
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle $style 
+     *
+     * @return $this
+     */
+    public function setStyle($style)
+    {
+        $this->container['style'] = $style;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets task_type
+     *
+     * @return int
+     */
+    public function getTaskType()
+    {
+        return $this->container['task_type'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets task_type
+     *
+     * @param int $task_type 
+     *
+     * @return $this
+     */
+    public function setTaskType($task_type)
+    {
+        $this->container['task_type'] = $task_type;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

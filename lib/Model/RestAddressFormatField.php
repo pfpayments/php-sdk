@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * RestAddressFormatField model
@@ -32,20 +31,41 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RestAddressFormatField implements IEnum {
-
-	const GIVEN_NAME = 'GIVEN_NAME';
-	const FAMILY_NAME = 'FAMILY_NAME';
-	const ORGANIZATION_NAME = 'ORGANIZATION_NAME';
-	const STREET = 'STREET';
-	const DEPENDENT_LOCALITY = 'DEPENDENT_LOCALITY';
-	const CITY = 'CITY';
-	const POSTAL_STATE = 'POSTAL_STATE';
-	const POST_CODE = 'POST_CODE';
-	const SORTING_CODE = 'SORTING_CODE';
-	const COUNTRY = 'COUNTRY';
-	
-
-	
-
+class RestAddressFormatField
+{
+    /**
+     * Possible values of this enum
+     */
+    const GIVEN_NAME = 'GIVEN_NAME';
+    const FAMILY_NAME = 'FAMILY_NAME';
+    const ORGANIZATION_NAME = 'ORGANIZATION_NAME';
+    const STREET = 'STREET';
+    const DEPENDENT_LOCALITY = 'DEPENDENT_LOCALITY';
+    const CITY = 'CITY';
+    const POSTAL_STATE = 'POSTAL_STATE';
+    const POST_CODE = 'POST_CODE';
+    const SORTING_CODE = 'SORTING_CODE';
+    const COUNTRY = 'COUNTRY';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::GIVEN_NAME,
+            self::FAMILY_NAME,
+            self::ORGANIZATION_NAME,
+            self::STREET,
+            self::DEPENDENT_LOCALITY,
+            self::CITY,
+            self::POSTAL_STATE,
+            self::POST_CODE,
+            self::SORTING_CODE,
+            self::COUNTRY,
+        ];
+    }
 }
+
+

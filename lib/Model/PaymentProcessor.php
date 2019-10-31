@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * PaymentProcessor model
@@ -32,361 +33,491 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentProcessor  {
+class PaymentProcessor implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'PaymentProcessor';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'PaymentProcessor';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'companyName' => 'map[string,string]',
-		'description' => 'map[string,string]',
-		'feature' => 'int',
-		'headquartersLocation' => 'map[string,string]',
-		'id' => 'int',
-		'logoPath' => 'string',
-		'name' => 'map[string,string]',
-		'productName' => 'map[string,string]'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'company_name' => 'map[string,string]',
+        'description' => 'map[string,string]',
+        'feature' => 'int',
+        'headquarters_location' => 'map[string,string]',
+        'id' => 'int',
+        'logo_path' => 'string',
+        'name' => 'map[string,string]',
+        'product_name' => 'map[string,string]'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'company_name' => null,
+        'description' => null,
+        'feature' => 'int64',
+        'headquarters_location' => null,
+        'id' => 'int64',
+        'logo_path' => null,
+        'name' => null,
+        'product_name' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'company_name' => 'companyName',
+        'description' => 'description',
+        'feature' => 'feature',
+        'headquarters_location' => 'headquartersLocation',
+        'id' => 'id',
+        'logo_path' => 'logoPath',
+        'name' => 'name',
+        'product_name' => 'productName'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $companyName;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'company_name' => 'setCompanyName',
+        'description' => 'setDescription',
+        'feature' => 'setFeature',
+        'headquarters_location' => 'setHeadquartersLocation',
+        'id' => 'setId',
+        'logo_path' => 'setLogoPath',
+        'name' => 'setName',
+        'product_name' => 'setProductName'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'company_name' => 'getCompanyName',
+        'description' => 'getDescription',
+        'feature' => 'getFeature',
+        'headquarters_location' => 'getHeadquartersLocation',
+        'id' => 'getId',
+        'logo_path' => 'getLogoPath',
+        'name' => 'getName',
+        'product_name' => 'getProductName'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $feature;
+    
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $headquartersLocation;
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['company_name'] = isset($data['company_name']) ? $data['company_name'] : null;
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
+        
+        $this->container['headquarters_location'] = isset($data['headquarters_location']) ? $data['headquarters_location'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['logo_path'] = isset($data['logo_path']) ? $data['logo_path'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['product_name'] = isset($data['product_name']) ? $data['product_name'] : null;
+        
+    }
 
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $logoPath;
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $name;
+        return $invalidProperties;
+    }
 
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $productName;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
 
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['companyName'])) {
-			$this->setCompanyName($data['companyName']);
-		}
-		if (isset($data['description'])) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['headquartersLocation'])) {
-			$this->setHeadquartersLocation($data['headquartersLocation']);
-		}
-		if (isset($data['name'])) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['productName'])) {
-			$this->setProductName($data['productName']);
-		}
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Returns companyName.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getCompanyName() {
-		return $this->companyName;
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
-	/**
-	 * Sets companyName.
-	 *
-	 * @param map[string,string] $companyName
-	 * @return PaymentProcessor
-	 */
-	public function setCompanyName($companyName) {
-		if (is_array($companyName) && empty($companyName)) {
-			$this->companyName = new \stdClass;
-		} else {
-			$this->companyName = $companyName;
-		}
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return PaymentProcessor
-	 */
-	public function setDescription($description) {
-		if (is_array($description) && empty($description)) {
-			$this->description = new \stdClass;
-		} else {
-			$this->description = $description;
-		}
+    
 
-		return $this;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Returns feature.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getFeature() {
-		return $this->feature;
-	}
+    
 
-	/**
-	 * Sets feature.
-	 *
-	 * @param int $feature
-	 * @return PaymentProcessor
-	 */
-	protected function setFeature($feature) {
-		$this->feature = $feature;
+    /**
+     * Gets company_name
+     *
+     * @return map[string,string]
+     */
+    public function getCompanyName()
+    {
+        return $this->container['company_name'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets company_name
+     *
+     * @param map[string,string] $company_name 
+     *
+     * @return $this
+     */
+    public function setCompanyName($company_name)
+    {
+        $this->container['company_name'] = $company_name;
 
-	/**
-	 * Returns headquartersLocation.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getHeadquartersLocation() {
-		return $this->headquartersLocation;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets headquartersLocation.
-	 *
-	 * @param map[string,string] $headquartersLocation
-	 * @return PaymentProcessor
-	 */
-	public function setHeadquartersLocation($headquartersLocation) {
-		if (is_array($headquartersLocation) && empty($headquartersLocation)) {
-			$this->headquartersLocation = new \stdClass;
-		} else {
-			$this->headquartersLocation = $headquartersLocation;
-		}
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return PaymentProcessor
-	 */
-	protected function setId($id) {
-		$this->id = $id;
+    /**
+     * Gets feature
+     *
+     * @return int
+     */
+    public function getFeature()
+    {
+        return $this->container['feature'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets feature
+     *
+     * @param int $feature 
+     *
+     * @return $this
+     */
+    public function setFeature($feature)
+    {
+        $this->container['feature'] = $feature;
 
-	/**
-	 * Returns logoPath.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLogoPath() {
-		return $this->logoPath;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets logoPath.
-	 *
-	 * @param string $logoPath
-	 * @return PaymentProcessor
-	 */
-	protected function setLogoPath($logoPath) {
-		$this->logoPath = $logoPath;
+    /**
+     * Gets headquarters_location
+     *
+     * @return map[string,string]
+     */
+    public function getHeadquartersLocation()
+    {
+        return $this->container['headquarters_location'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets headquarters_location
+     *
+     * @param map[string,string] $headquarters_location 
+     *
+     * @return $this
+     */
+    public function setHeadquartersLocation($headquarters_location)
+    {
+        $this->container['headquarters_location'] = $headquarters_location;
 
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getName() {
-		return $this->name;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets name.
-	 *
-	 * @param map[string,string] $name
-	 * @return PaymentProcessor
-	 */
-	public function setName($name) {
-		if (is_array($name) && empty($name)) {
-			$this->name = new \stdClass;
-		} else {
-			$this->name = $name;
-		}
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
-	/**
-	 * Returns productName.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getProductName() {
-		return $this->productName;
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Sets productName.
-	 *
-	 * @param map[string,string] $productName
-	 * @return PaymentProcessor
-	 */
-	public function setProductName($productName) {
-		if (is_array($productName) && empty($productName)) {
-			$this->productName = new \stdClass;
-		} else {
-			$this->productName = $productName;
-		}
+    /**
+     * Gets logo_path
+     *
+     * @return string
+     */
+    public function getLogoPath()
+    {
+        return $this->container['logo_path'];
+    }
 
-		return $this;
-	}
+    /**
+     * Sets logo_path
+     *
+     * @param string $logo_path 
+     *
+     * @return $this
+     */
+    public function setLogoPath($logo_path)
+    {
+        $this->container['logo_path'] = $logo_path;
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+        return $this;
+    }
+    
 
-	}
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+        return $this;
+    }
+    
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+    /**
+     * Gets product_name
+     *
+     * @return map[string,string]
+     */
+    public function getProductName()
+    {
+        return $this->container['product_name'];
+    }
 
+    /**
+     * Sets product_name
+     *
+     * @param map[string,string] $product_name 
+     *
+     * @return $this
+     */
+    public function setProductName($product_name)
+    {
+        $this->container['product_name'] = $product_name;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

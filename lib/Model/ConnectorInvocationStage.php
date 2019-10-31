@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ConnectorInvocationStage model
@@ -32,14 +31,29 @@ namespace PostFinanceCheckout\Sdk\Model;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ConnectorInvocationStage implements IEnum {
-
-	const PAYMENT_METHOD_LIST = 'PAYMENT_METHOD_LIST';
-	const FORM_GENERATION = 'FORM_GENERATION';
-	const VALIDATION = 'VALIDATION';
-	const AUTHORIZATION = 'AUTHORIZATION';
-	
-
-	
-
+class ConnectorInvocationStage
+{
+    /**
+     * Possible values of this enum
+     */
+    const PAYMENT_METHOD_LIST = 'PAYMENT_METHOD_LIST';
+    const FORM_GENERATION = 'FORM_GENERATION';
+    const VALIDATION = 'VALIDATION';
+    const AUTHORIZATION = 'AUTHORIZATION';
+    
+    /**
+     * Gets allowable values of the enum
+     * @return string[]
+     */
+    public static function getAllowableEnumValues()
+    {
+        return [
+            self::PAYMENT_METHOD_LIST,
+            self::FORM_GENERATION,
+            self::VALIDATION,
+            self::AUTHORIZATION,
+        ];
+    }
 }
+
+

@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@
  */
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use PostFinanceCheckout\Sdk\ValidationException;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * ConnectorInvocation model
@@ -32,270 +31,423 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ConnectorInvocation extends TransactionAwareEntity  {
+class ConnectorInvocation extends TransactionAwareEntity 
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'ConnectorInvocation';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'ConnectorInvocation';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'createdOn' => '\DateTime',
-		'plannedPurgeDate' => '\DateTime',
-		'stage' => '\PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage',
-		'timeTookInMilliseconds' => 'int',
-		'transaction' => 'int',
-		'version' => 'int'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'created_on' => '\DateTime',
+        'planned_purge_date' => '\DateTime',
+        'stage' => '\PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage',
+        'time_took_in_milliseconds' => 'int',
+        'transaction' => 'int',
+        'version' => 'int'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'created_on' => 'date-time',
+        'planned_purge_date' => 'date-time',
+        'stage' => null,
+        'time_took_in_milliseconds' => 'int64',
+        'transaction' => 'int64',
+        'version' => 'int32'
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'created_on' => 'createdOn',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'stage' => 'stage',
+        'time_took_in_milliseconds' => 'timeTookInMilliseconds',
+        'transaction' => 'transaction',
+        'version' => 'version'
+    ];
 
-	/**
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'created_on' => 'setCreatedOn',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'stage' => 'setStage',
+        'time_took_in_milliseconds' => 'setTimeTookInMilliseconds',
+        'transaction' => 'setTransaction',
+        'version' => 'setVersion'
+    ];
 
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'created_on' => 'getCreatedOn',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'stage' => 'getStage',
+        'time_took_in_milliseconds' => 'getTimeTookInMilliseconds',
+        'transaction' => 'getTransaction',
+        'version' => 'getVersion'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage
-	 */
-	private $stage;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $timeTookInMilliseconds;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $transaction;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['stage'])) {
-			$this->setStage($data['stage']);
-		}
-	}
+    
 
 
-	/**
-	 * Returns createdOn.
-	 *
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        parent::__construct($data);
 
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return ConnectorInvocation
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['stage'] = isset($data['stage']) ? $data['stage'] : null;
+        
+        $this->container['time_took_in_milliseconds'] = isset($data['time_took_in_milliseconds']) ? $data['time_took_in_milliseconds'] : null;
+        
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
 
-		return $this;
-	}
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = parent::listInvalidProperties();
 
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
+        return $invalidProperties;
+    }
 
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return ConnectorInvocation
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
 
-		return $this;
-	}
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats + parent::swaggerFormats();
+    }
 
-	/**
-	 * Returns stage.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage
-	 */
-	public function getStage() {
-		return $this->stage;
-	}
 
-	/**
-	 * Sets stage.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage $stage
-	 * @return ConnectorInvocation
-	 */
-	public function setStage($stage) {
-		$this->stage = $stage;
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return parent::attributeMap() + self::$attributeMap;
+    }
 
-		return $this;
-	}
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return parent::setters() + self::$setters;
+    }
 
-	/**
-	 * Returns timeTookInMilliseconds.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getTimeTookInMilliseconds() {
-		return $this->timeTookInMilliseconds;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return parent::getters() + self::$getters;
+    }
 
-	/**
-	 * Sets timeTookInMilliseconds.
-	 *
-	 * @param int $timeTookInMilliseconds
-	 * @return ConnectorInvocation
-	 */
-	protected function setTimeTookInMilliseconds($timeTookInMilliseconds) {
-		$this->timeTookInMilliseconds = $timeTookInMilliseconds;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns transaction.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getTransaction() {
-		return $this->transaction;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets transaction.
-	 *
-	 * @param int $transaction
-	 * @return ConnectorInvocation
-	 */
-	protected function setTransaction($transaction) {
-		$this->transaction = $transaction;
+    
 
-		return $this;
-	}
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
 
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return ConnectorInvocation
-	 */
-	protected function setVersion($version) {
-		$this->version = $version;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-		parent::validate();
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets stage
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage
+     */
+    public function getStage()
+    {
+        return $this->container['stage'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets stage
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage $stage 
+     *
+     * @return $this
+     */
+    public function setStage($stage)
+    {
+        $this->container['stage'] = $stage;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
 
+    /**
+     * Gets time_took_in_milliseconds
+     *
+     * @return int
+     */
+    public function getTimeTookInMilliseconds()
+    {
+        return $this->container['time_took_in_milliseconds'];
+    }
+
+    /**
+     * Sets time_took_in_milliseconds
+     *
+     * @param int $time_took_in_milliseconds 
+     *
+     * @return $this
+     */
+    public function setTimeTookInMilliseconds($time_took_in_milliseconds)
+    {
+        $this->container['time_took_in_milliseconds'] = $time_took_in_milliseconds;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets transaction
+     *
+     * @return int
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
+
+    /**
+     * Sets transaction
+     *
+     * @param int $transaction 
+     *
+     * @return $this
+     */
+    public function setTransaction($transaction)
+    {
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

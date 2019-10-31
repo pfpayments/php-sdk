@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@
 
 namespace PostFinanceCheckout\Sdk\Http;
 
-use Exception;
+use \Exception;
 
 /**
  * This exception is used to inform about connection problems during an HTTP request.
@@ -32,21 +32,21 @@ use Exception;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 final class ConnectionException extends Exception {
-	
+
 	/**
 	 * The URL of the connection.
 	 *
 	 * @var string
 	 */
 	private $url;
-	
+
 	/**
 	 * The log token of the request.
 	 *
 	 * @var string
 	 */
 	private $requestToken;
-	
+
 	/**
 	 * The error message without prefixed log token.
 	 *
@@ -62,7 +62,7 @@ final class ConnectionException extends Exception {
 	 * @param string $message the error message
 	 * @param int	$code the error code
 	 */
-	public function __construct($url = null, $requestToken = "", $message = "", $code = 0) {
+	public function __construct($url = null, $requestToken = '', $message = '', $code = 0) {
 		parent::__construct('[' . $requestToken . '] ' . $message, $code);
 		$this->url = $url;
 		$this->requestToken = $requestToken;
@@ -77,7 +77,7 @@ final class ConnectionException extends Exception {
 	public function getUrl() {
 		return $this->url;
 	}
-	
+
 	/**
 	 * Returns the log token of the request.
 	 *
@@ -86,7 +86,7 @@ final class ConnectionException extends Exception {
 	public function getRequestToken() {
 		return $this->requestToken;
 	}
-	
+
 	/**
 	 * Returns the  error message without prefixed log token.
 	 *

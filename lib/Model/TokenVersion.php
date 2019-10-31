@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TokenVersion model
@@ -32,759 +33,907 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenVersion  {
-
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'TokenVersion';
-
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'activatedOn' => '\DateTime',
-		'billingAddress' => '\PostFinanceCheckout\Sdk\Model\Address',
-		'createdOn' => '\DateTime',
-		'environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
-		'expiresOn' => '\DateTime',
-		'id' => 'int',
-		'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
-		'language' => 'string',
-		'linkedSpaceId' => 'int',
-		'name' => 'string',
-		'obsoletedOn' => '\DateTime',
-		'paymentConnectorConfiguration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
-		'paymentMethod' => 'int',
-		'paymentMethodBrand' => 'int',
-		'plannedPurgeDate' => '\DateTime',
-		'processorToken' => 'string',
-		'shippingAddress' => '\PostFinanceCheckout\Sdk\Model\Address',
-		'state' => '\PostFinanceCheckout\Sdk\Model\TokenVersionState',
-		'token' => '\PostFinanceCheckout\Sdk\Model\Token',
-		'type' => '\PostFinanceCheckout\Sdk\Model\TokenVersionType',
-		'version' => 'int'	);
-
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
-
-	
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $activatedOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	private $billingAddress;
-
-	/**
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @var \DateTime
-	 */
-	private $createdOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment
-	 */
-	private $environment;
-
-	/**
-	 * The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
-	 *
-	 * @var \DateTime
-	 */
-	private $expiresOn;
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Label[]
-	 */
-	private $labels;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $language;
-
-	/**
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @var int
-	 */
-	private $linkedSpaceId;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $name;
-
-	/**
-	 * 
-	 *
-	 * @var \DateTime
-	 */
-	private $obsoletedOn;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration
-	 */
-	private $paymentConnectorConfiguration;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $paymentMethod;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $paymentMethodBrand;
-
-	/**
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @var \DateTime
-	 */
-	private $plannedPurgeDate;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $processorToken;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	private $shippingAddress;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TokenVersionState
-	 */
-	private $state;
-
-	/**
-	 * 
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\Token
-	 */
-	private $token;
-
-	/**
-	 * The token version type determines what kind of token it is and by which payment connector the token can be processed by.
-	 *
-	 * @var \PostFinanceCheckout\Sdk\Model\TokenVersionType
-	 */
-	private $type;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
-
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['billingAddress'])) {
-			$this->setBillingAddress($data['billingAddress']);
-		}
-		if (isset($data['environment'])) {
-			$this->setEnvironment($data['environment']);
-		}
-		if (isset($data['id'])) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['labels'])) {
-			$this->setLabels($data['labels']);
-		}
-		if (isset($data['paymentConnectorConfiguration'])) {
-			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
-		}
-		if (isset($data['shippingAddress'])) {
-			$this->setShippingAddress($data['shippingAddress']);
-		}
-		if (isset($data['state'])) {
-			$this->setState($data['state']);
-		}
-		if (isset($data['token'])) {
-			$this->setToken($data['token']);
-		}
-		if (isset($data['type'])) {
-			$this->setType($data['type']);
-		}
-		if (isset($data['version'])) {
-			$this->setVersion($data['version']);
-		}
-	}
-
-
-	/**
-	 * Returns activatedOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getActivatedOn() {
-		return $this->activatedOn;
-	}
-
-	/**
-	 * Sets activatedOn.
-	 *
-	 * @param \DateTime $activatedOn
-	 * @return TokenVersion
-	 */
-	protected function setActivatedOn($activatedOn) {
-		$this->activatedOn = $activatedOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns billingAddress.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	public function getBillingAddress() {
-		return $this->billingAddress;
-	}
-
-	/**
-	 * Sets billingAddress.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Address $billingAddress
-	 * @return TokenVersion
-	 */
-	public function setBillingAddress($billingAddress) {
-		$this->billingAddress = $billingAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns createdOn.
-	 *
-	 * The created on date indicates the date on which the entity was stored into the database.
-	 *
-	 * @return \DateTime
-	 */
-	public function getCreatedOn() {
-		return $this->createdOn;
-	}
-
-	/**
-	 * Sets createdOn.
-	 *
-	 * @param \DateTime $createdOn
-	 * @return TokenVersion
-	 */
-	protected function setCreatedOn($createdOn) {
-		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns environment.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment
-	 */
-	public function getEnvironment() {
-		return $this->environment;
-	}
-
-	/**
-	 * Sets environment.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment $environment
-	 * @return TokenVersion
-	 */
-	public function setEnvironment($environment) {
-		$this->environment = $environment;
-
-		return $this;
-	}
-
-	/**
-	 * Returns expiresOn.
-	 *
-	 * The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
-	 *
-	 * @return \DateTime
-	 */
-	public function getExpiresOn() {
-		return $this->expiresOn;
-	}
-
-	/**
-	 * Sets expiresOn.
-	 *
-	 * @param \DateTime $expiresOn
-	 * @return TokenVersion
-	 */
-	protected function setExpiresOn($expiresOn) {
-		$this->expiresOn = $expiresOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return TokenVersion
-	 */
-	public function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns labels.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Label[]
-	 */
-	public function getLabels() {
-		return $this->labels;
-	}
-
-	/**
-	 * Sets labels.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels
-	 * @return TokenVersion
-	 */
-	public function setLabels($labels) {
-		$this->labels = $labels;
-
-		return $this;
-	}
-
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
-
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return TokenVersion
-	 */
-	protected function setLanguage($language) {
-		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * The linked space id holds the ID of the space to which the entity belongs to.
-	 *
-	 * @return int
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param int $linkedSpaceId
-	 * @return TokenVersion
-	 */
-	protected function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns name.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return TokenVersion
-	 */
-	protected function setName($name) {
-		$this->name = $name;
-
-		return $this;
-	}
-
-	/**
-	 * Returns obsoletedOn.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getObsoletedOn() {
-		return $this->obsoletedOn;
-	}
-
-	/**
-	 * Sets obsoletedOn.
-	 *
-	 * @param \DateTime $obsoletedOn
-	 * @return TokenVersion
-	 */
-	protected function setObsoletedOn($obsoletedOn) {
-		$this->obsoletedOn = $obsoletedOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns paymentConnectorConfiguration.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration
-	 */
-	public function getPaymentConnectorConfiguration() {
-		return $this->paymentConnectorConfiguration;
-	}
-
-	/**
-	 * Sets paymentConnectorConfiguration.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration $paymentConnectorConfiguration
-	 * @return TokenVersion
-	 */
-	public function setPaymentConnectorConfiguration($paymentConnectorConfiguration) {
-		$this->paymentConnectorConfiguration = $paymentConnectorConfiguration;
-
-		return $this;
-	}
-
-	/**
-	 * Returns paymentMethod.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getPaymentMethod() {
-		return $this->paymentMethod;
-	}
-
-	/**
-	 * Sets paymentMethod.
-	 *
-	 * @param int $paymentMethod
-	 * @return TokenVersion
-	 */
-	protected function setPaymentMethod($paymentMethod) {
-		$this->paymentMethod = $paymentMethod;
-
-		return $this;
-	}
-
-	/**
-	 * Returns paymentMethodBrand.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getPaymentMethodBrand() {
-		return $this->paymentMethodBrand;
-	}
-
-	/**
-	 * Sets paymentMethodBrand.
-	 *
-	 * @param int $paymentMethodBrand
-	 * @return TokenVersion
-	 */
-	protected function setPaymentMethodBrand($paymentMethodBrand) {
-		$this->paymentMethodBrand = $paymentMethodBrand;
-
-		return $this;
-	}
-
-	/**
-	 * Returns plannedPurgeDate.
-	 *
-	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedPurgeDate() {
-		return $this->plannedPurgeDate;
-	}
-
-	/**
-	 * Sets plannedPurgeDate.
-	 *
-	 * @param \DateTime $plannedPurgeDate
-	 * @return TokenVersion
-	 */
-	protected function setPlannedPurgeDate($plannedPurgeDate) {
-		$this->plannedPurgeDate = $plannedPurgeDate;
-
-		return $this;
-	}
-
-	/**
-	 * Returns processorToken.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getProcessorToken() {
-		return $this->processorToken;
-	}
-
-	/**
-	 * Sets processorToken.
-	 *
-	 * @param string $processorToken
-	 * @return TokenVersion
-	 */
-	protected function setProcessorToken($processorToken) {
-		$this->processorToken = $processorToken;
-
-		return $this;
-	}
-
-	/**
-	 * Returns shippingAddress.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Address
-	 */
-	public function getShippingAddress() {
-		return $this->shippingAddress;
-	}
-
-	/**
-	 * Sets shippingAddress.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Address $shippingAddress
-	 * @return TokenVersion
-	 */
-	public function setShippingAddress($shippingAddress) {
-		$this->shippingAddress = $shippingAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TokenVersionState
-	 */
-	public function getState() {
-		return $this->state;
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TokenVersionState $state
-	 * @return TokenVersion
-	 */
-	public function setState($state) {
-		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns token.
-	 *
-	 * 
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\Token
-	 */
-	public function getToken() {
-		return $this->token;
-	}
-
-	/**
-	 * Sets token.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\Token $token
-	 * @return TokenVersion
-	 */
-	public function setToken($token) {
-		$this->token = $token;
-
-		return $this;
-	}
-
-	/**
-	 * Returns type.
-	 *
-	 * The token version type determines what kind of token it is and by which payment connector the token can be processed by.
-	 *
-	 * @return \PostFinanceCheckout\Sdk\Model\TokenVersionType
-	 */
-	public function getType() {
-		return $this->type;
-	}
-
-	/**
-	 * Sets type.
-	 *
-	 * @param \PostFinanceCheckout\Sdk\Model\TokenVersionType $type
-	 * @return TokenVersion
-	 */
-	public function setType($type) {
-		$this->type = $type;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return TokenVersion
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
-
-		return $this;
-	}
-
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
-
-	}
-
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
-
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
-
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
-
+class TokenVersion implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'TokenVersion';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'activated_on' => '\DateTime',
+        'billing_address' => '\PostFinanceCheckout\Sdk\Model\Address',
+        'created_on' => '\DateTime',
+        'environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
+        'expires_on' => '\DateTime',
+        'id' => 'int',
+        'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
+        'language' => 'string',
+        'linked_space_id' => 'int',
+        'name' => 'string',
+        'obsoleted_on' => '\DateTime',
+        'payment_connector_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
+        'payment_method' => 'int',
+        'payment_method_brand' => 'int',
+        'planned_purge_date' => '\DateTime',
+        'processor_token' => 'string',
+        'shipping_address' => '\PostFinanceCheckout\Sdk\Model\Address',
+        'state' => '\PostFinanceCheckout\Sdk\Model\TokenVersionState',
+        'token' => '\PostFinanceCheckout\Sdk\Model\Token',
+        'type' => '\PostFinanceCheckout\Sdk\Model\TokenVersionType',
+        'version' => 'int'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'activated_on' => 'date-time',
+        'billing_address' => null,
+        'created_on' => 'date-time',
+        'environment' => null,
+        'expires_on' => 'date-time',
+        'id' => 'int64',
+        'labels' => null,
+        'language' => null,
+        'linked_space_id' => 'int64',
+        'name' => null,
+        'obsoleted_on' => 'date-time',
+        'payment_connector_configuration' => null,
+        'payment_method' => 'int64',
+        'payment_method_brand' => 'int64',
+        'planned_purge_date' => 'date-time',
+        'processor_token' => null,
+        'shipping_address' => null,
+        'state' => null,
+        'token' => null,
+        'type' => null,
+        'version' => 'int32'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'activated_on' => 'activatedOn',
+        'billing_address' => 'billingAddress',
+        'created_on' => 'createdOn',
+        'environment' => 'environment',
+        'expires_on' => 'expiresOn',
+        'id' => 'id',
+        'labels' => 'labels',
+        'language' => 'language',
+        'linked_space_id' => 'linkedSpaceId',
+        'name' => 'name',
+        'obsoleted_on' => 'obsoletedOn',
+        'payment_connector_configuration' => 'paymentConnectorConfiguration',
+        'payment_method' => 'paymentMethod',
+        'payment_method_brand' => 'paymentMethodBrand',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'processor_token' => 'processorToken',
+        'shipping_address' => 'shippingAddress',
+        'state' => 'state',
+        'token' => 'token',
+        'type' => 'type',
+        'version' => 'version'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'activated_on' => 'setActivatedOn',
+        'billing_address' => 'setBillingAddress',
+        'created_on' => 'setCreatedOn',
+        'environment' => 'setEnvironment',
+        'expires_on' => 'setExpiresOn',
+        'id' => 'setId',
+        'labels' => 'setLabels',
+        'language' => 'setLanguage',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'name' => 'setName',
+        'obsoleted_on' => 'setObsoletedOn',
+        'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
+        'payment_method' => 'setPaymentMethod',
+        'payment_method_brand' => 'setPaymentMethodBrand',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'processor_token' => 'setProcessorToken',
+        'shipping_address' => 'setShippingAddress',
+        'state' => 'setState',
+        'token' => 'setToken',
+        'type' => 'setType',
+        'version' => 'setVersion'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'activated_on' => 'getActivatedOn',
+        'billing_address' => 'getBillingAddress',
+        'created_on' => 'getCreatedOn',
+        'environment' => 'getEnvironment',
+        'expires_on' => 'getExpiresOn',
+        'id' => 'getId',
+        'labels' => 'getLabels',
+        'language' => 'getLanguage',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'name' => 'getName',
+        'obsoleted_on' => 'getObsoletedOn',
+        'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
+        'payment_method' => 'getPaymentMethod',
+        'payment_method_brand' => 'getPaymentMethodBrand',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'processor_token' => 'getProcessorToken',
+        'shipping_address' => 'getShippingAddress',
+        'state' => 'getState',
+        'token' => 'getToken',
+        'type' => 'getType',
+        'version' => 'getVersion'
+    ];
+
+    
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['activated_on'] = isset($data['activated_on']) ? $data['activated_on'] : null;
+        
+        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
+        
+        $this->container['expires_on'] = isset($data['expires_on']) ? $data['expires_on'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
+        
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['obsoleted_on'] = isset($data['obsoleted_on']) ? $data['obsoleted_on'] : null;
+        
+        $this->container['payment_connector_configuration'] = isset($data['payment_connector_configuration']) ? $data['payment_connector_configuration'] : null;
+        
+        $this->container['payment_method'] = isset($data['payment_method']) ? $data['payment_method'] : null;
+        
+        $this->container['payment_method_brand'] = isset($data['payment_method_brand']) ? $data['payment_method_brand'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['processor_token'] = isset($data['processor_token']) ? $data['processor_token'] : null;
+        
+        $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
+
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
+
+    
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    
+
+    /**
+     * Gets activated_on
+     *
+     * @return \DateTime
+     */
+    public function getActivatedOn()
+    {
+        return $this->container['activated_on'];
+    }
+
+    /**
+     * Sets activated_on
+     *
+     * @param \DateTime $activated_on 
+     *
+     * @return $this
+     */
+    public function setActivatedOn($activated_on)
+    {
+        $this->container['activated_on'] = $activated_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address 
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billing_address)
+    {
+        $this->container['billing_address'] = $billing_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets environment
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment $environment 
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        $this->container['environment'] = $environment;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets expires_on
+     *
+     * @return \DateTime
+     */
+    public function getExpiresOn()
+    {
+        return $this->container['expires_on'];
+    }
+
+    /**
+     * Sets expires_on
+     *
+     * @param \DateTime $expires_on The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+     *
+     * @return $this
+     */
+    public function setExpiresOn($expires_on)
+    {
+        $this->container['expires_on'] = $expires_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets labels
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Label[]
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels 
+     *
+     * @return $this
+     */
+    public function setLabels($labels)
+    {
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string $language 
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets obsoleted_on
+     *
+     * @return \DateTime
+     */
+    public function getObsoletedOn()
+    {
+        return $this->container['obsoleted_on'];
+    }
+
+    /**
+     * Sets obsoleted_on
+     *
+     * @param \DateTime $obsoleted_on 
+     *
+     * @return $this
+     */
+    public function setObsoletedOn($obsoleted_on)
+    {
+        $this->container['obsoleted_on'] = $obsoleted_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_connector_configuration
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration
+     */
+    public function getPaymentConnectorConfiguration()
+    {
+        return $this->container['payment_connector_configuration'];
+    }
+
+    /**
+     * Sets payment_connector_configuration
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration 
+     *
+     * @return $this
+     */
+    public function setPaymentConnectorConfiguration($payment_connector_configuration)
+    {
+        $this->container['payment_connector_configuration'] = $payment_connector_configuration;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_method
+     *
+     * @return int
+     */
+    public function getPaymentMethod()
+    {
+        return $this->container['payment_method'];
+    }
+
+    /**
+     * Sets payment_method
+     *
+     * @param int $payment_method 
+     *
+     * @return $this
+     */
+    public function setPaymentMethod($payment_method)
+    {
+        $this->container['payment_method'] = $payment_method;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_method_brand
+     *
+     * @return int
+     */
+    public function getPaymentMethodBrand()
+    {
+        return $this->container['payment_method_brand'];
+    }
+
+    /**
+     * Sets payment_method_brand
+     *
+     * @param int $payment_method_brand 
+     *
+     * @return $this
+     */
+    public function setPaymentMethodBrand($payment_method_brand)
+    {
+        $this->container['payment_method_brand'] = $payment_method_brand;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return $this
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processor_token
+     *
+     * @return string
+     */
+    public function getProcessorToken()
+    {
+        return $this->container['processor_token'];
+    }
+
+    /**
+     * Sets processor_token
+     *
+     * @param string $processor_token 
+     *
+     * @return $this
+     */
+    public function setProcessorToken($processor_token)
+    {
+        $this->container['processor_token'] = $processor_token;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shipping_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Address
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shipping_address'];
+    }
+
+    /**
+     * Sets shipping_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Address $shipping_address 
+     *
+     * @return $this
+     */
+    public function setShippingAddress($shipping_address)
+    {
+        $this->container['shipping_address'] = $shipping_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TokenVersionState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TokenVersionState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets token
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Token
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Token $token 
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TokenVersionType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TokenVersionType $type The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 

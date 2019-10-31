@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,97 +21,94 @@
 
 namespace PostFinanceCheckout\Sdk;
 
-use Exception;
+use \Exception;
 
 /**
- * This exception is used to inform about problems during an API call.
+ * ApiException Class Doc Comment
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ApiException extends Exception {
+class ApiException extends Exception
+{
 
-	/**
-	 * The HTTP body of the server response either as Json or string.
-	 *
-	 * @var string
-	 */
-	private $responseBody;
+    /**
+     * The HTTP body of the server response either as Json or string.
+     *
+     * @var mixed
+     */
+    protected $responseBody;
 
-	/**
-	 * The HTTP headers of the server response.
-	 *
-	 * @var string[]
-	 */
-	private $responseHeaders;
+    /**
+     * The HTTP header of the server response.
+     *
+     * @var string[]|null
+     */
+    protected $responseHeaders;
 
-	/**
-	 * The deserialized response object.
-	 *
-	 * @var mixed
-	 */
-	private $responseObject;
-	
-	/**
-	 * The log token.
-	 *
-	 * @var string
-	 */
-	private $logToken;
+    /**
+     * The deserialized response object
+     *
+     * @var $responseObject;
+     */
+    protected $responseObject;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string $message		 the error message
-	 * @param int	$code			the HTTP status code
-	 * @param string $responseHeaders the HTTP response header
-	 * @param mixed  $responseBody	the HTTP body of the server response either as Json or string
-	 * @param mixed  $responseObject  the deserialized response object
-	 */
-	public function __construct($logToken = null, $message = "", $code = 0, $responseHeaders = null, $responseBody = null, $responseObject = null) {
-		parent::__construct(($logToken != null ? '[' . $logToken . '] ' : '') . $message, $code);
-		$this->responseHeaders = $responseHeaders;
-		$this->responseBody = $responseBody;
-		$this->responseObject = $responseObject;
-		$this->logToken = $logToken;
-	}
+    /**
+     * Constructor
+     *
+     * @param string        $message         Error message
+     * @param int           $code            HTTP status code
+     * @param string[]|null $responseHeaders HTTP response header
+     * @param mixed         $responseBody    HTTP decoded body of the server response either as \stdClass or string
+     */
+    public function __construct($message = '', $code = 0, $responseHeaders = [], $responseBody = null)
+    {
+        parent::__construct($message, $code);
+        $this->responseHeaders = $responseHeaders;
+        $this->responseBody = $responseBody;
+    }
 
-	/**
-	 * Returns the HTTP response header.
-	 *
-	 * @return string
-	 */
-	public function getResponseHeaders() {
-		return $this->responseHeaders;
-	}
+    /**
+     * Gets the HTTP response header
+     *
+     * @return string[]|null HTTP response header
+     */
+    public function getResponseHeaders()
+    {
+        return $this->responseHeaders;
+    }
 
-	/**
-	 * Returns the HTTP body of the server response either as Json or string.
-	 *
-	 * @return string
-	 */
-	public function getResponseBody() {
-		return $this->responseBody;
-	}
+    /**
+     * Gets the HTTP body of the server response either as Json or string
+     *
+     * @return mixed HTTP body of the server response either as \stdClass or string
+     */
+    public function getResponseBody()
+    {
+        return $this->responseBody;
+    }
 
-	/**
-	 * Returns the deseralized response object.
-	 *
-	 * @return mixed
-	 */
-	public function getResponseObject() {
-		return $this->responseObject;
-	}
-	
-	/**
-	 * Return the log token.
-	 *
-	 * @return string
-	 */
-	public function getLogToken() {
-		return $this->logToken;
-	}
+    /**
+     * Sets the deseralized response object (during deserialization)
+     *
+     * @param mixed $obj Deserialized response object
+     *
+     * @return void
+     */
+    public function setResponseObject($obj)
+    {
+        $this->responseObject = $obj;
+    }
 
+    /**
+     * Gets the deseralized response object (during deserialization)
+     *
+     * @return mixed the deserialized response object
+     */
+    public function getResponseObject()
+    {
+        return $this->responseObject;
+    }
 }

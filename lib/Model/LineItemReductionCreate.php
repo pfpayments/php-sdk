@@ -1,9 +1,9 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ *  SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
- * PostFinance Checkout SDK: 1.0.0
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@
 
 namespace PostFinanceCheckout\Sdk\Model;
 
-use PostFinanceCheckout\Sdk\ValidationException;
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * LineItemReductionCreate model
@@ -32,189 +33,340 @@ use PostFinanceCheckout\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class LineItemReductionCreate  {
+class LineItemReductionCreate implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
 
-	/**
-	 * The original name of the model.
-	 *
-	 * @var string
-	 */
-	private static $swaggerModelName = 'LineItemReduction.Create';
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'LineItemReduction.Create';
 
-	/**
-	 * An array of property to type mappings. Used for (de)serialization.
-	 *
-	 * @var string[]
-	 */
-	private static $swaggerTypes = array(
-		'lineItemUniqueId' => 'string',
-		'quantityReduction' => 'float',
-		'unitPriceReduction' => 'float'	);
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'line_item_unique_id' => 'string',
+        'quantity_reduction' => 'float',
+        'unit_price_reduction' => 'float'
+    ];
 
-	/**
-	 * Returns an array of property to type mappings.
-	 *
-	 * @return string[]
-	 */
-	public static function swaggerTypes() {
-		return self::$swaggerTypes;
-	}
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'line_item_unique_id' => null,
+        'quantity_reduction' => null,
+        'unit_price_reduction' => null
+    ];
 
-	
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'line_item_unique_id' => 'lineItemUniqueId',
+        'quantity_reduction' => 'quantityReduction',
+        'unit_price_reduction' => 'unitPriceReduction'
+    ];
 
-	/**
-	 * The unique id identifies the line item on which the reduction is applied on.
-	 *
-	 * @var string
-	 */
-	private $lineItemUniqueId;
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'line_item_unique_id' => 'setLineItemUniqueId',
+        'quantity_reduction' => 'setQuantityReduction',
+        'unit_price_reduction' => 'setUnitPriceReduction'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $quantityReduction;
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'line_item_unique_id' => 'getLineItemUniqueId',
+        'quantity_reduction' => 'getQuantityReduction',
+        'unit_price_reduction' => 'getUnitPriceReduction'
+    ];
 
-	/**
-	 * 
-	 *
-	 * @var float
-	 */
-	private $unitPriceReduction;
+    
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['line_item_unique_id'] = isset($data['line_item_unique_id']) ? $data['line_item_unique_id'] : null;
+        
+        $this->container['quantity_reduction'] = isset($data['quantity_reduction']) ? $data['quantity_reduction'] : null;
+        
+        $this->container['unit_price_reduction'] = isset($data['unit_price_reduction']) ? $data['unit_price_reduction'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['line_item_unique_id'] === null) {
+            $invalidProperties[] = "'line_item_unique_id' can't be null";
+        }
+        if ($this->container['quantity_reduction'] === null) {
+            $invalidProperties[] = "'quantity_reduction' can't be null";
+        }
+        if ($this->container['unit_price_reduction'] === null) {
+            $invalidProperties[] = "'unit_price_reduction' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param mixed[] $data an associated array of property values initializing the model
-	 */
-	public function __construct(array $data = null) {
-		if (isset($data['lineItemUniqueId'])) {
-			$this->setLineItemUniqueId($data['lineItemUniqueId']);
-		}
-		if (isset($data['quantityReduction'])) {
-			$this->setQuantityReduction($data['quantityReduction']);
-		}
-		if (isset($data['unitPriceReduction'])) {
-			$this->setUnitPriceReduction($data['unitPriceReduction']);
-		}
-	}
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
 
-	/**
-	 * Returns lineItemUniqueId.
-	 *
-	 * The unique id identifies the line item on which the reduction is applied on.
-	 *
-	 * @return string
-	 */
-	public function getLineItemUniqueId() {
-		return $this->lineItemUniqueId;
-	}
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
 
-	/**
-	 * Sets lineItemUniqueId.
-	 *
-	 * @param string $lineItemUniqueId
-	 * @return LineItemReductionCreate
-	 */
-	public function setLineItemUniqueId($lineItemUniqueId) {
-		$this->lineItemUniqueId = $lineItemUniqueId;
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
 
-		return $this;
-	}
+    
 
-	/**
-	 * Returns quantityReduction.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getQuantityReduction() {
-		return $this->quantityReduction;
-	}
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
 
-	/**
-	 * Sets quantityReduction.
-	 *
-	 * @param float $quantityReduction
-	 * @return LineItemReductionCreate
-	 */
-	public function setQuantityReduction($quantityReduction) {
-		$this->quantityReduction = $quantityReduction;
+    
 
-		return $this;
-	}
+    /**
+     * Gets line_item_unique_id
+     *
+     * @return string
+     */
+    public function getLineItemUniqueId()
+    {
+        return $this->container['line_item_unique_id'];
+    }
 
-	/**
-	 * Returns unitPriceReduction.
-	 *
-	 * 
-	 *
-	 * @return float
-	 */
-	public function getUnitPriceReduction() {
-		return $this->unitPriceReduction;
-	}
+    /**
+     * Sets line_item_unique_id
+     *
+     * @param string $line_item_unique_id The unique id identifies the line item on which the reduction is applied on.
+     *
+     * @return $this
+     */
+    public function setLineItemUniqueId($line_item_unique_id)
+    {
+        $this->container['line_item_unique_id'] = $line_item_unique_id;
 
-	/**
-	 * Sets unitPriceReduction.
-	 *
-	 * @param float $unitPriceReduction
-	 * @return LineItemReductionCreate
-	 */
-	public function setUnitPriceReduction($unitPriceReduction) {
-		$this->unitPriceReduction = $unitPriceReduction;
+        return $this;
+    }
+    
 
-		return $this;
-	}
+    /**
+     * Gets quantity_reduction
+     *
+     * @return float
+     */
+    public function getQuantityReduction()
+    {
+        return $this->container['quantity_reduction'];
+    }
 
-	/**
-	 * Validates the model's properties and throws a ValidationException if the validation fails.
-	 *
-	 * @throws ValidationException
-	 */
-	public function validate() {
+    /**
+     * Sets quantity_reduction
+     *
+     * @param float $quantity_reduction 
+     *
+     * @return $this
+     */
+    public function setQuantityReduction($quantity_reduction)
+    {
+        $this->container['quantity_reduction'] = $quantity_reduction;
 
-		if ($this->getLineItemUniqueId() === null) {
-			throw new ValidationException("'lineItemUniqueId' can't be null", 'lineItemUniqueId', $this);
-		}
-		if ($this->getQuantityReduction() === null) {
-			throw new ValidationException("'quantityReduction' can't be null", 'quantityReduction', $this);
-		}
-		if ($this->getUnitPriceReduction() === null) {
-			throw new ValidationException("'unitPriceReduction' can't be null", 'unitPriceReduction', $this);
-		}
-	}
+        return $this;
+    }
+    
 
-	/**
-	 * Returns true if all the properties in the model are valid.
-	 *
-	 * @return boolean
-	 */
-	public function isValid() {
-		try {
-			$this->validate();
-			return true;
-		} catch (ValidationException $e) {
-			return false;
-		}
-	}
+    /**
+     * Gets unit_price_reduction
+     *
+     * @return float
+     */
+    public function getUnitPriceReduction()
+    {
+        return $this->container['unit_price_reduction'];
+    }
 
-	/**
-	 * Returns the string presentation of the object.
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-			return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-		}
+    /**
+     * Sets unit_price_reduction
+     *
+     * @param float $unit_price_reduction 
+     *
+     * @return $this
+     */
+    public function setUnitPriceReduction($unit_price_reduction)
+    {
+        $this->container['unit_price_reduction'] = $unit_price_reduction;
 
-		return json_encode(\PostFinanceCheckout\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-	}
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
 
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
 }
+
 
