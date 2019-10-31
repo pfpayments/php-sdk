@@ -28,14 +28,14 @@ use PostFinanceCheckout\Sdk\Http\HttpRequest;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * CountryService service
+ * TransactionIframeService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class CountryService {
+class TransactionIframeService {
 
 	/**
 	 * The API client instance.
@@ -68,43 +68,61 @@ class CountryService {
 
 
 	/**
-	 * Operation all
+	 * Operation javascriptUrl
 	 *
-	 * All
+	 * Build JavaScript URL
 	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\RestCountry[]
+	 * @return string
 	 */
-	public function all() {
-		return $this->allWithHttpInfo()->getData();
+	public function javascriptUrl($space_id, $id) {
+		return $this->javascriptUrlWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
-	 * Operation allWithHttpInfo
+	 * Operation javascriptUrlWithHttpInfo
 	 *
-	 * All
+	 * Build JavaScript URL
 	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function allWithHttpInfo() {
+	public function javascriptUrlWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling javascriptUrl');
+		}
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling javascriptUrl');
+		}
 		// header params
 		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json', 'text/plain;charset=utf-8']);
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
 		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
 
 		// path params
-		$resourcePath = '/country/all';
+		$resourcePath = '/transaction-iframe/javascript-url';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -126,16 +144,24 @@ class CountryService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\RestCountry[]',
-				'/country/all'
+				'string',
+				'/transaction-iframe/javascript-url'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RestCountry[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestCountry[]',
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

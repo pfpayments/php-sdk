@@ -3,7 +3,7 @@
  *  SDK
  *
  * This library allows to interact with the  payment service.
- *  SDK: 2.0.2
+ *  SDK: 2.0.3
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.0.2/php';
+	private $userAgent = 'PHP-Client/2.0.3/php';
 
 	/**
 	 * The path to the certificate authority file.

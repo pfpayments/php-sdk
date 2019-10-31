@@ -28,14 +28,14 @@ use PostFinanceCheckout\Sdk\Http\HttpRequest;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ConditionTypeService service
+ * TransactionMobileSdkService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ConditionTypeService {
+class TransactionMobileSdkService {
 
 	/**
 	 * The API client instance.
@@ -68,43 +68,52 @@ class ConditionTypeService {
 
 
 	/**
-	 * Operation all
+	 * Operation paymentFormUrl
 	 *
-	 * All
+	 * Build Mobile SDK URL
 	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ConditionType[]
+	 * @return string
 	 */
-	public function all() {
-		return $this->allWithHttpInfo()->getData();
+	public function paymentFormUrl($credentials) {
+		return $this->paymentFormUrlWithHttpInfo($credentials)->getData();
 	}
 
 	/**
-	 * Operation allWithHttpInfo
+	 * Operation paymentFormUrlWithHttpInfo
 	 *
-	 * All
+	 * Build Mobile SDK URL
 	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function allWithHttpInfo() {
+	public function paymentFormUrlWithHttpInfo($credentials) {
+		// verify the required parameter 'credentials' is set
+		if (is_null($credentials)) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling paymentFormUrl');
+		}
 		// header params
 		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json', 'text/plain;charset=utf-8']);
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
 		$queryParams = [];
+		if (!is_null($credentials)) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
 
 		// path params
-		$resourcePath = '/condition-type/all';
+		$resourcePath = '/transaction-mobile-sdk/payment-form-url';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -126,119 +135,24 @@ class ConditionTypeService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\ConditionType[]',
-				'/condition-type/all'
+				'string',
+				'/transaction-mobile-sdk/payment-form-url'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ConditionType[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ConditionType[]',
+                        'string',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                 break;
-                case 442:
+                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation read
-	 *
-	 * Read
-	 *
-	 * @param int $id The id of the condition type which should be returned. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ConditionType
-	 */
-	public function read($id) {
-		return $this->readWithHttpInfo($id)->getData();
-	}
-
-	/**
-	 * Operation readWithHttpInfo
-	 *
-	 * Read
-	 *
-	 * @param int $id The id of the condition type which should be returned. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function readWithHttpInfo($id) {
-		// verify the required parameter 'id' is set
-		if (is_null($id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($id)) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
-
-		// path params
-		$resourcePath = '/condition-type/read';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'GET',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\ConditionType',
-				'/condition-type/read'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ConditionType', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ConditionType',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
