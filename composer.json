@@ -1,9 +1,9 @@
 {
-    "name": "pfpayments/php-sdk",
-    "version": "2.0.0",
+    "name": "postfinancecheckout/php-sdk",
+    "version": "2.0.1",
 	"description": "PostFinance Checkout SDK for PHP",
 	"keywords": [
-		"pfpayments",
+		"postfinancecheckout",
 		"payment",
 		"php",
 		"sdk",
