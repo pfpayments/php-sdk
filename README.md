@@ -102,6 +102,31 @@ $redirectionUrl = $transactionPaymentPageService->paymentPageUrl($spaceId, $crea
 header('Location: ' . $redirectionUrl);
 
 ```
+### HTTP Client
+You can either use `php curl` or `php socket` extentions. It is recommend you install the necessary extentions and enable them on your system.
+
+You have to ways two specify which HTTP client you prefer.
+
+```php
+$userId = 512;
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
+
+// Setup API client
+$client = new \PostFinanceCheckout\Sdk\Sdk\ApiClient($userId, $secret);
+
+$httpClientType = \PostFinanceCheckout\Sdk\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \PostFinanceCheckout\Sdk\Sdk\Http\HttpClientFactory::TYPE_SOCKET
+
+$client->setHttpClientType($httpClientType);
+```
+
+You can also specify the HTTP client via the `PFC_HTTP_CLIENT` environment variable. The possible string values are `curl` or `socket`.
+
+
+```php
+<?php
+putenv('PFC_HTTP_CLIENT=curl');
+?>
+```
 
 ## License
 

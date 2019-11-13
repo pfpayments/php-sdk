@@ -14,7 +14,7 @@
  *  SDK
  *
  * This library allows to interact with the  payment service.
- *  SDK: 2.0.3
+ *  SDK: 2.0.4
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

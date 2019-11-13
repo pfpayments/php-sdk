@@ -4,7 +4,7 @@
  *  SDK
  *
  * This library allows to interact with the  payment service.
- *  SDK: 2.0.3
+ *  SDK: 2.0.4
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -81,7 +81,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'PostFinanceCheckout\Sdk/2.0.3/php';
+    protected $userAgent = 'PostFinanceCheckout\Sdk/2.0.4/php';
 
     /**
      * Debug switch (default set to false)
@@ -389,8 +389,8 @@ class Configuration
         $report  = 'PHP SDK (PostFinanceCheckout\Sdk) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 2.0.3' . PHP_EOL;
-        $report .= '    SDK Package Version: 2.0.3' . PHP_EOL;
+        $report .= '    OpenAPI Spec Version: 2.0.4' . PHP_EOL;
+        $report .= '    SDK Package Version: 2.0.4' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
