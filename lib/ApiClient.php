@@ -3,8 +3,6 @@
  *  SDK
  *
  * This library allows to interact with the  payment service.
- *  SDK: 2.0.4
- * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 
 namespace PostFinanceCheckout\Sdk;
 
@@ -55,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.0.4/php';
+	private $userAgent = 'PHP-Client/2.0.5/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -136,8 +135,8 @@ final class ApiClient {
 
 		$this->certificateAuthority = dirname(__FILE__) . '/ca-bundle.crt';
 		$this->serializer = new ObjectSerializer();
-		//$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
-		//$this->serializer->setDebugFile($this->getDebugFile());
+		$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
+		$this->serializer->setDebugFile($this->getDebugFile());
 	}
 
 	/**
@@ -332,7 +331,7 @@ final class ApiClient {
 	 */
 	public function disableDebugging() {
 		$this->enableDebugging = false;
-		//$this->serializer->disableDebugging();
+		$this->serializer->disableDebugging();
 		return $this;
 	}
 

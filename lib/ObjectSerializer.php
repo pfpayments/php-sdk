@@ -3,8 +3,6 @@
  *  SDK
  *
  * This library allows to interact with the  payment service.
- *  SDK: 2.0.4
- * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 
 namespace PostFinanceCheckout\Sdk;
 
@@ -33,6 +32,105 @@ use \Exception;
  */
 class ObjectSerializer
 {
+
+	/**
+	 * The path to the temporary folder (for downloading files).
+	 *
+	 * @var string
+	 */
+	private $tempFolderPath;
+
+	/**
+	 * Defined whether debug information should be logged.
+	 *
+	 * @var boolean
+	 */
+	private $enableDebugging = false;
+
+	/**
+	 * The path to the debug file.
+	 *
+	 * @var string
+	 */
+	private $debugFile = 'php://output';
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		$this->tempFolderPath = sys_get_temp_dir();
+	}
+
+	/**
+	 * Return the path of the temporary folder used to store downloaded files from endpoints with file response. By
+	 * default the system's default temporary folder is used.
+	 *
+	 * @return string
+	 */
+	public function getTempFolderPath() {
+		return $this->tempFolderPath;
+	}
+
+	/**
+	 * Sets the path to the temporary folder (for downloading files).
+	 *
+	 * @param string $tempFolderPath the temporary folder path
+	 * @return ObjectSerializer
+	 */
+	public function setTempFolderPath($tempFolderPath) {
+		$this->tempFolderPath = $tempFolderPath;
+		return $this;
+	}
+
+	/**
+	 * Returns true, when debugging is enabled.
+	 *
+	 * @return boolean
+	 */
+	public function isDebuggingEnabled() {
+		return $this->enableDebugging;
+	}
+
+	/**
+	 * Enables debugging.
+	 *
+	 * @return ObjectSerializer
+	 */
+	public function enableDebugging() {
+		$this->enableDebugging = true;
+		return $this;
+	}
+
+	/**
+	 * Disables debugging.
+	 *
+	 * @return ObjectSerializer
+	 */
+	public function disableDebugging() {
+		$this->enableDebugging = false;
+		return $this;
+	}
+
+	/**
+	 * Returns the path to the debug file.
+	 *
+	 * @return string
+	 */
+	public function getDebugFile() {
+		return $this->debugFile;
+	}
+
+	/**
+	 * Sets the path to the debug file.
+	 *
+	 * @param string $debugFile the debug file
+	 * @return ObjectSerializer
+	 */
+	public function setDebugFile($debugFile) {
+		$this->debugFile = $debugFile;
+		return $this;
+	}
+
     /**
      * Serialize data
      *
