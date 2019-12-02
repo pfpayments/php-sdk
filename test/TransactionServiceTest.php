@@ -32,6 +32,7 @@ use PostFinanceCheckout\Sdk\Model\LineItemType;
 use PostFinanceCheckout\Sdk\Model\RenderedDocument;
 use PostFinanceCheckout\Sdk\Model\TransactionCreate;
 use PostFinanceCheckout\Sdk\Model\TransactionState;
+use PostFinanceCheckout\Sdk\Model\TransactionPending;
 use PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService;
 use PostFinanceCheckout\Sdk\Service\TransactionService;
 
@@ -174,7 +175,24 @@ final class TransactionServiceTest extends TestCase {
         $transaction = $this->getTransaction();
         $transactionCreate = $transactionService->create($this->spaceId, $transaction);
         $transactionRead   = $transactionService->read($this->spaceId, $transactionCreate->getId());
-        $this->assertEquals($transactionRead->getState(), TransactionState::PENDING);
+        $this->assertEquals($transactionRead->getState(), $transactionCreate->getState());
+    }
+
+    public function testUpdate()
+    {
+        $transactionService = $this->getTransactionService();
+        $transaction = $this->getTransaction();
+        $transactionCreate = $transactionService->create($this->spaceId, $transaction);
+
+        $newTransaction = new TransactionPending();
+        $newTransaction->setId($transactionCreate->getId());
+        $newTransaction->setMetaData(['meta' => 'data']);
+        $newTransaction->setLanguage('en-US');
+        $newTransaction->setVersion($transactionCreate->getVersion());
+
+        $transactionUpdate = $transactionService->update($this->spaceId, $newTransaction);
+
+        $this->assertEquals($transactionRead->getState(), $transactionUpdate->getState());
     }
 
     public function testSearch()

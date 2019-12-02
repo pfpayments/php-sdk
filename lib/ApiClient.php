@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.0.6/php';
+	private $userAgent = 'PHP-Client/2.0.7/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -352,7 +352,7 @@ final class ApiClient {
 	 */
 	public function setDebugFile($debugFile) {
 		$this->debugFile = $debugFile;
-		//$this->serializer->setDebugFile($debugFile);
+		$this->serializer->setDebugFile($debugFile);
 		return $this;
 	}
 
