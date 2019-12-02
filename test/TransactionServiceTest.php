@@ -192,7 +192,7 @@ final class TransactionServiceTest extends TestCase {
 
         $transactionUpdate = $transactionService->update($this->spaceId, $newTransaction);
 
-        $this->assertEquals($transactionRead->getState(), $transactionUpdate->getState());
+        $this->assertEquals($transactionCreate->getState(), $transactionUpdate->getState());
     }
 
     public function testSearch()
