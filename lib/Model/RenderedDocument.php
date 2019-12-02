@@ -49,7 +49,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => 'string[]',
+        'data' => 'string',
         'document_template_type' => 'int',
         'mime_type' => 'string',
         'title' => 'string'
@@ -141,6 +141,10 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['data']) && !preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $this->container['data'])) {
+            $invalidProperties[] = "invalid value for 'data', must be conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.";
+        }
+
         return $invalidProperties;
     }
 
@@ -224,7 +228,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Gets data
      *
-     * @return string[]
+     * @return string
      */
     public function getData()
     {
@@ -234,12 +238,17 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets data
      *
-     * @param string[] $data 
+     * @param string $data data
      *
      * @return $this
      */
     public function setData($data)
     {
+
+        if (!is_null($data) && (!preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $data))) {
+            throw new \InvalidArgumentException("invalid value for $data when calling RenderedDocument., must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.");
+        }
+
         $this->container['data'] = $data;
 
         return $this;

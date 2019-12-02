@@ -29,6 +29,7 @@ use PostFinanceCheckout\Sdk\Model\EntityQueryFilter;
 use PostFinanceCheckout\Sdk\Model\EntityQueryFilterType;
 use PostFinanceCheckout\Sdk\Model\LineItemCreate;
 use PostFinanceCheckout\Sdk\Model\LineItemType;
+use PostFinanceCheckout\Sdk\Model\RenderedDocument;
 use PostFinanceCheckout\Sdk\Model\TransactionCreate;
 use PostFinanceCheckout\Sdk\Model\TransactionState;
 use PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService;
@@ -193,5 +194,12 @@ final class TransactionServiceTest extends TestCase {
         foreach ($transactionSearch as $transaction) {
             $this->assertEquals($transaction->getState(), TransactionState::PENDING);
         }
+    }
+
+    public function testDocumentDownload(){
+        $transactionService = $this->getTransactionService();
+        $transactionId = 4479214; // random transaction id
+        $renderedDocument = $transactionService->getInvoiceDocument($this->spaceId, $transactionId);
+        $this->assertEquals(true, !is_null($renderedDocument));
     }
 }
