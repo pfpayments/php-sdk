@@ -141,10 +141,6 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['data']) && !preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $this->container['data'])) {
-            $invalidProperties[] = "invalid value for 'data', must be conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -245,9 +241,6 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     public function setData($data)
     {
 
-        if (!is_null($data) && (!preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $data))) {
-            throw new \InvalidArgumentException("invalid value for $data when calling RenderedDocument., must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.");
-        }
 
         $this->container['data'] = $data;
 

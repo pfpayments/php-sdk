@@ -197,10 +197,6 @@ class PaymentTerminalDeviceModel implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['image']) && !preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $this->container['image'])) {
-            $invalidProperties[] = "invalid value for 'image', must be conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -351,9 +347,6 @@ class PaymentTerminalDeviceModel implements ModelInterface, ArrayAccess
     public function setImage($image)
     {
 
-        if (!is_null($image) && (!preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $image))) {
-            throw new \InvalidArgumentException("invalid value for $image when calling PaymentTerminalDeviceModel., must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.");
-        }
 
         $this->container['image'] = $image;
 
