@@ -57,7 +57,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
         'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalState',
-        'terminal_device_id' => 'int',
         'type' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalType',
         'version' => 'int'
     ];
@@ -76,7 +75,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'name' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
-        'terminal_device_id' => 'int64',
         'type' => null,
         'version' => 'int32'
     ];
@@ -96,7 +94,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
-        'terminal_device_id' => 'terminalDeviceId',
         'type' => 'type',
         'version' => 'version'
     ];
@@ -115,7 +112,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
-        'terminal_device_id' => 'setTerminalDeviceId',
         'type' => 'setType',
         'version' => 'setVersion'
     ];
@@ -134,7 +130,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
-        'terminal_device_id' => 'getTerminalDeviceId',
         'type' => 'getType',
         'version' => 'getVersion'
     ];
@@ -172,8 +167,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['terminal_device_id'] = isset($data['terminal_device_id']) ? $data['terminal_device_id'] : null;
         
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
@@ -465,31 +458,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setState($state)
     {
         $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets terminal_device_id
-     *
-     * @return int
-     */
-    public function getTerminalDeviceId()
-    {
-        return $this->container['terminal_device_id'];
-    }
-
-    /**
-     * Sets terminal_device_id
-     *
-     * @param int $terminal_device_id 
-     *
-     * @return $this
-     */
-    public function setTerminalDeviceId($terminal_device_id)
-    {
-        $this->container['terminal_device_id'] = $terminal_device_id;
 
         return $this;
     }

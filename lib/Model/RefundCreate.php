@@ -49,6 +49,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'amount' => 'float',
         'completion' => 'int',
         'external_id' => 'string',
         'merchant_reference' => 'string',
@@ -63,6 +64,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'amount' => null,
         'completion' => 'int64',
         'external_id' => null,
         'merchant_reference' => null,
@@ -78,6 +80,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'amount' => 'amount',
         'completion' => 'completion',
         'external_id' => 'externalId',
         'merchant_reference' => 'merchantReference',
@@ -92,6 +95,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'amount' => 'setAmount',
         'completion' => 'setCompletion',
         'external_id' => 'setExternalId',
         'merchant_reference' => 'setMerchantReference',
@@ -106,6 +110,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'amount' => 'getAmount',
         'completion' => 'getCompletion',
         'external_id' => 'getExternalId',
         'merchant_reference' => 'getMerchantReference',
@@ -132,6 +137,8 @@ class RefundCreate implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        
         $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
@@ -157,9 +164,6 @@ class RefundCreate implements ModelInterface, ArrayAccess
 
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
-        }
-        if ($this->container['reductions'] === null) {
-            $invalidProperties[] = "'reductions' can't be null";
         }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
@@ -242,6 +246,31 @@ class RefundCreate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
+
+    /**
+     * Sets amount
+     *
+     * @param float $amount 
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
     
 
     /**
