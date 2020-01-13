@@ -36,6 +36,7 @@ class TransactionUserInterfaceType
      * Possible values of this enum
      */
     const IFRAME = 'IFRAME';
+    const LIGHTBOX = 'LIGHTBOX';
     const PAYMENT_PAGE = 'PAYMENT_PAGE';
     const MOBILE_SDK = 'MOBILE_SDK';
     const TERMINAL = 'TERMINAL';
@@ -48,6 +49,7 @@ class TransactionUserInterfaceType
     {
         return [
             self::IFRAME,
+            self::LIGHTBOX,
             self::PAYMENT_PAGE,
             self::MOBILE_SDK,
             self::TERMINAL,
