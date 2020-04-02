@@ -133,7 +133,7 @@ class TransactionPaymentPageServiceTest extends TestCase
             $billingAddress = new AddressCreate();
             $billingAddress->setCity('Winterthur');
             $billingAddress->setCountry('CH');
-            $billingAddress->setEmailAddress('test@PostFinance Checkout.com');
+            $billingAddress->setEmailAddress('test@postfinancecheckout.com');
             $billingAddress->setFamilyName('Customer');
             $billingAddress->setGivenName('Good');
             $billingAddress->setPostCode('8400');
