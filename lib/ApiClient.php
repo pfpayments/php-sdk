@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.0.12/php';
+	private $userAgent = 'PHP-Client/2.0.13/php';
 
 	/**
 	 * The path to the certificate authority file.
