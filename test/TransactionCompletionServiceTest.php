@@ -162,7 +162,7 @@ class TransactionCompletionServiceTest extends TestCase
         $transaction = $this->transactionService->create($this->spaceId, $this->getTransactionBag());
         $this->transactionService->processWithoutUserInteraction($this->spaceId, $transaction->getId());
         $transactionCompletion = $this->transactionCompletionService->completeOffline($this->spaceId, $transaction->getId());
-        $this->assertEquals(TransactionCompletionState::SUCCESSFUL, $transactionCompletion->getState());
+        $this->assertEquals(true, in_array($transactionCompletion->getState(), [TransactionCompletionState::SUCCESSFUL, TransactionCompletionState::PENDING]));
     }
 
     /**
