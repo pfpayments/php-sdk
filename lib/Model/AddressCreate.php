@@ -62,8 +62,8 @@ class AddressCreate implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'string',
         'organization_name' => 'string',
         'phone_number' => 'string',
-        'post_code' => 'string',
         'postal_state' => 'string',
+        'postcode' => 'string',
         'sales_tax_number' => 'string',
         'salutation' => 'string',
         'social_security_number' => 'string',
@@ -90,8 +90,8 @@ class AddressCreate implements ModelInterface, ArrayAccess
         'mobile_phone_number' => null,
         'organization_name' => null,
         'phone_number' => null,
-        'post_code' => null,
         'postal_state' => null,
+        'postcode' => null,
         'sales_tax_number' => null,
         'salutation' => null,
         'social_security_number' => null,
@@ -119,8 +119,8 @@ class AddressCreate implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'mobilePhoneNumber',
         'organization_name' => 'organizationName',
         'phone_number' => 'phoneNumber',
-        'post_code' => 'postCode',
         'postal_state' => 'postalState',
+        'postcode' => 'postcode',
         'sales_tax_number' => 'salesTaxNumber',
         'salutation' => 'salutation',
         'social_security_number' => 'socialSecurityNumber',
@@ -147,8 +147,8 @@ class AddressCreate implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'setMobilePhoneNumber',
         'organization_name' => 'setOrganizationName',
         'phone_number' => 'setPhoneNumber',
-        'post_code' => 'setPostCode',
         'postal_state' => 'setPostalState',
+        'postcode' => 'setPostcode',
         'sales_tax_number' => 'setSalesTaxNumber',
         'salutation' => 'setSalutation',
         'social_security_number' => 'setSocialSecurityNumber',
@@ -175,8 +175,8 @@ class AddressCreate implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'getMobilePhoneNumber',
         'organization_name' => 'getOrganizationName',
         'phone_number' => 'getPhoneNumber',
-        'post_code' => 'getPostCode',
         'postal_state' => 'getPostalState',
+        'postcode' => 'getPostcode',
         'sales_tax_number' => 'getSalesTaxNumber',
         'salutation' => 'getSalutation',
         'social_security_number' => 'getSocialSecurityNumber',
@@ -228,9 +228,9 @@ class AddressCreate implements ModelInterface, ArrayAccess
         
         $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
         
-        $this->container['post_code'] = isset($data['post_code']) ? $data['post_code'] : null;
-        
         $this->container['postal_state'] = isset($data['postal_state']) ? $data['postal_state'] : null;
+        
+        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
         
         $this->container['sales_tax_number'] = isset($data['sales_tax_number']) ? $data['sales_tax_number'] : null;
         
@@ -659,31 +659,6 @@ class AddressCreate implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets post_code
-     *
-     * @return string
-     */
-    public function getPostCode()
-    {
-        return $this->container['post_code'];
-    }
-
-    /**
-     * Sets post_code
-     *
-     * @param string $post_code 
-     *
-     * @return $this
-     */
-    public function setPostCode($post_code)
-    {
-        $this->container['post_code'] = $post_code;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets postal_state
      *
      * @return string
@@ -703,6 +678,31 @@ class AddressCreate implements ModelInterface, ArrayAccess
     public function setPostalState($postal_state)
     {
         $this->container['postal_state'] = $postal_state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->container['postcode'];
+    }
+
+    /**
+     * Sets postcode
+     *
+     * @param string $postcode 
+     *
+     * @return $this
+     */
+    public function setPostcode($postcode)
+    {
+        $this->container['postcode'] = $postcode;
 
         return $this;
     }

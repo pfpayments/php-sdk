@@ -60,6 +60,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'redirection_url' => 'string',
+        'sales_channel' => 'int',
         'space_view_id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptState',
         'succeeded_on' => '\DateTime',
@@ -90,6 +91,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
         'redirection_url' => null,
+        'sales_channel' => 'int64',
         'space_view_id' => 'int64',
         'state' => null,
         'succeeded_on' => 'date-time',
@@ -121,6 +123,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
         'redirection_url' => 'redirectionUrl',
+        'sales_channel' => 'salesChannel',
         'space_view_id' => 'spaceViewId',
         'state' => 'state',
         'succeeded_on' => 'succeededOn',
@@ -151,6 +154,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'redirection_url' => 'setRedirectionUrl',
+        'sales_channel' => 'setSalesChannel',
         'space_view_id' => 'setSpaceViewId',
         'state' => 'setState',
         'succeeded_on' => 'setSucceededOn',
@@ -181,6 +185,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'redirection_url' => 'getRedirectionUrl',
+        'sales_channel' => 'getSalesChannel',
         'space_view_id' => 'getSpaceViewId',
         'state' => 'getState',
         'succeeded_on' => 'getSucceededOn',
@@ -231,6 +236,8 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['redirection_url'] = isset($data['redirection_url']) ? $data['redirection_url'] : null;
+        
+        $this->container['sales_channel'] = isset($data['sales_channel']) ? $data['sales_channel'] : null;
         
         $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
         
@@ -661,6 +668,31 @@ class ChargeAttempt extends TransactionAwareEntity
     public function setRedirectionUrl($redirection_url)
     {
         $this->container['redirection_url'] = $redirection_url;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets sales_channel
+     *
+     * @return int
+     */
+    public function getSalesChannel()
+    {
+        return $this->container['sales_channel'];
+    }
+
+    /**
+     * Sets sales_channel
+     *
+     * @param int $sales_channel 
+     *
+     * @return $this
+     */
+    public function setSalesChannel($sales_channel)
+    {
+        $this->container['sales_channel'] = $sales_channel;
 
         return $this;
     }

@@ -7,7 +7,7 @@ The PostFinance Checkout PHP library wraps around the PostFinance Checkout API. 
 
 ## Documentation
 
-[PostFinance Checkout Web Service API](https://www.postfinance-checkout.ch/doc/api/web-service)
+[PostFinance Checkout Web Service API](https://checkout.postfinance.ch/doc/api/web-service)
 
 ## Requirements
 
@@ -41,7 +41,7 @@ require_once '/path/to/php-sdk/autoload.php';
 
 ## Usage
 The library needs to be configured with your account's space id, user id, and secret key which are available in your [PostFinance Checkout
-account dashboard](https://www.postfinance-checkout.ch/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
+account dashboard](https://checkout.postfinance.ch/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
 
 ### Configuring a Service
 

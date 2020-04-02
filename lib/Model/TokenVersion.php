@@ -61,6 +61,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'name' => 'string',
         'obsoleted_on' => '\DateTime',
         'payment_connector_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
+        'payment_information_hashes' => '\PostFinanceCheckout\Sdk\Model\PaymentInformationHash[]',
         'payment_method' => 'int',
         'payment_method_brand' => 'int',
         'planned_purge_date' => '\DateTime',
@@ -90,6 +91,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'name' => null,
         'obsoleted_on' => 'date-time',
         'payment_connector_configuration' => null,
+        'payment_information_hashes' => null,
         'payment_method' => 'int64',
         'payment_method_brand' => 'int64',
         'planned_purge_date' => 'date-time',
@@ -120,6 +122,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'name' => 'name',
         'obsoleted_on' => 'obsoletedOn',
         'payment_connector_configuration' => 'paymentConnectorConfiguration',
+        'payment_information_hashes' => 'paymentInformationHashes',
         'payment_method' => 'paymentMethod',
         'payment_method_brand' => 'paymentMethodBrand',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -149,6 +152,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'name' => 'setName',
         'obsoleted_on' => 'setObsoletedOn',
         'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
+        'payment_information_hashes' => 'setPaymentInformationHashes',
         'payment_method' => 'setPaymentMethod',
         'payment_method_brand' => 'setPaymentMethodBrand',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -178,6 +182,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'name' => 'getName',
         'obsoleted_on' => 'getObsoletedOn',
         'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
+        'payment_information_hashes' => 'getPaymentInformationHashes',
         'payment_method' => 'getPaymentMethod',
         'payment_method_brand' => 'getPaymentMethodBrand',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -230,6 +235,8 @@ class TokenVersion implements ModelInterface, ArrayAccess
         $this->container['obsoleted_on'] = isset($data['obsoleted_on']) ? $data['obsoleted_on'] : null;
         
         $this->container['payment_connector_configuration'] = isset($data['payment_connector_configuration']) ? $data['payment_connector_configuration'] : null;
+        
+        $this->container['payment_information_hashes'] = isset($data['payment_information_hashes']) ? $data['payment_information_hashes'] : null;
         
         $this->container['payment_method'] = isset($data['payment_method']) ? $data['payment_method'] : null;
         
@@ -635,6 +642,31 @@ class TokenVersion implements ModelInterface, ArrayAccess
     public function setPaymentConnectorConfiguration($payment_connector_configuration)
     {
         $this->container['payment_connector_configuration'] = $payment_connector_configuration;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_information_hashes
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentInformationHash[]
+     */
+    public function getPaymentInformationHashes()
+    {
+        return $this->container['payment_information_hashes'];
+    }
+
+    /**
+     * Sets payment_information_hashes
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The payment information hash set contains hashes of the payment information represented by this token version.
+     *
+     * @return $this
+     */
+    public function setPaymentInformationHashes($payment_information_hashes)
+    {
+        $this->container['payment_information_hashes'] = $payment_information_hashes;
 
         return $this;
     }

@@ -55,6 +55,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'int[]',
         'authorization_amount' => 'float',
         'authorization_environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
+        'authorization_sales_channel' => 'int',
         'authorization_timeout_on' => '\DateTime',
         'authorized_on' => '\DateTime',
         'auto_confirmation_enabled' => 'bool',
@@ -73,6 +74,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'customers_presence' => '\PostFinanceCheckout\Sdk\Model\CustomersPresence',
         'delivery_decision_made_on' => '\DateTime',
         'device_session_identifier' => 'string',
+        'emails_disabled' => 'bool',
         'end_of_life' => '\DateTime',
         'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
         'environment_selection_strategy' => '\PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy',
@@ -120,6 +122,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'int64',
         'authorization_amount' => null,
         'authorization_environment' => null,
+        'authorization_sales_channel' => 'int64',
         'authorization_timeout_on' => 'date-time',
         'authorized_on' => 'date-time',
         'auto_confirmation_enabled' => null,
@@ -138,6 +141,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'customers_presence' => null,
         'delivery_decision_made_on' => 'date-time',
         'device_session_identifier' => null,
+        'emails_disabled' => null,
         'end_of_life' => 'date-time',
         'environment' => null,
         'environment_selection_strategy' => null,
@@ -186,6 +190,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
         'authorization_amount' => 'authorizationAmount',
         'authorization_environment' => 'authorizationEnvironment',
+        'authorization_sales_channel' => 'authorizationSalesChannel',
         'authorization_timeout_on' => 'authorizationTimeoutOn',
         'authorized_on' => 'authorizedOn',
         'auto_confirmation_enabled' => 'autoConfirmationEnabled',
@@ -204,6 +209,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'customers_presence' => 'customersPresence',
         'delivery_decision_made_on' => 'deliveryDecisionMadeOn',
         'device_session_identifier' => 'deviceSessionIdentifier',
+        'emails_disabled' => 'emailsDisabled',
         'end_of_life' => 'endOfLife',
         'environment' => 'environment',
         'environment_selection_strategy' => 'environmentSelectionStrategy',
@@ -251,6 +257,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
         'authorization_amount' => 'setAuthorizationAmount',
         'authorization_environment' => 'setAuthorizationEnvironment',
+        'authorization_sales_channel' => 'setAuthorizationSalesChannel',
         'authorization_timeout_on' => 'setAuthorizationTimeoutOn',
         'authorized_on' => 'setAuthorizedOn',
         'auto_confirmation_enabled' => 'setAutoConfirmationEnabled',
@@ -269,6 +276,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'customers_presence' => 'setCustomersPresence',
         'delivery_decision_made_on' => 'setDeliveryDecisionMadeOn',
         'device_session_identifier' => 'setDeviceSessionIdentifier',
+        'emails_disabled' => 'setEmailsDisabled',
         'end_of_life' => 'setEndOfLife',
         'environment' => 'setEnvironment',
         'environment_selection_strategy' => 'setEnvironmentSelectionStrategy',
@@ -316,6 +324,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
         'authorization_amount' => 'getAuthorizationAmount',
         'authorization_environment' => 'getAuthorizationEnvironment',
+        'authorization_sales_channel' => 'getAuthorizationSalesChannel',
         'authorization_timeout_on' => 'getAuthorizationTimeoutOn',
         'authorized_on' => 'getAuthorizedOn',
         'auto_confirmation_enabled' => 'getAutoConfirmationEnabled',
@@ -334,6 +343,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'customers_presence' => 'getCustomersPresence',
         'delivery_decision_made_on' => 'getDeliveryDecisionMadeOn',
         'device_session_identifier' => 'getDeviceSessionIdentifier',
+        'emails_disabled' => 'getEmailsDisabled',
         'end_of_life' => 'getEndOfLife',
         'environment' => 'getEnvironment',
         'environment_selection_strategy' => 'getEnvironmentSelectionStrategy',
@@ -399,6 +409,8 @@ class Transaction implements ModelInterface, ArrayAccess
         
         $this->container['authorization_environment'] = isset($data['authorization_environment']) ? $data['authorization_environment'] : null;
         
+        $this->container['authorization_sales_channel'] = isset($data['authorization_sales_channel']) ? $data['authorization_sales_channel'] : null;
+        
         $this->container['authorization_timeout_on'] = isset($data['authorization_timeout_on']) ? $data['authorization_timeout_on'] : null;
         
         $this->container['authorized_on'] = isset($data['authorized_on']) ? $data['authorized_on'] : null;
@@ -434,6 +446,8 @@ class Transaction implements ModelInterface, ArrayAccess
         $this->container['delivery_decision_made_on'] = isset($data['delivery_decision_made_on']) ? $data['delivery_decision_made_on'] : null;
         
         $this->container['device_session_identifier'] = isset($data['device_session_identifier']) ? $data['device_session_identifier'] : null;
+        
+        $this->container['emails_disabled'] = isset($data['emails_disabled']) ? $data['emails_disabled'] : null;
         
         $this->container['end_of_life'] = isset($data['end_of_life']) ? $data['end_of_life'] : null;
         
@@ -737,6 +751,31 @@ class Transaction implements ModelInterface, ArrayAccess
     public function setAuthorizationEnvironment($authorization_environment)
     {
         $this->container['authorization_environment'] = $authorization_environment;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets authorization_sales_channel
+     *
+     * @return int
+     */
+    public function getAuthorizationSalesChannel()
+    {
+        return $this->container['authorization_sales_channel'];
+    }
+
+    /**
+     * Sets authorization_sales_channel
+     *
+     * @param int $authorization_sales_channel The sales channel through which the transaction was placed.
+     *
+     * @return $this
+     */
+    public function setAuthorizationSalesChannel($authorization_sales_channel)
+    {
+        $this->container['authorization_sales_channel'] = $authorization_sales_channel;
 
         return $this;
     }
@@ -1187,6 +1226,31 @@ class Transaction implements ModelInterface, ArrayAccess
     public function setDeviceSessionIdentifier($device_session_identifier)
     {
         $this->container['device_session_identifier'] = $device_session_identifier;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets emails_disabled
+     *
+     * @return bool
+     */
+    public function getEmailsDisabled()
+    {
+        return $this->container['emails_disabled'];
+    }
+
+    /**
+     * Sets emails_disabled
+     *
+     * @param bool $emails_disabled Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+     *
+     * @return $this
+     */
+    public function setEmailsDisabled($emails_disabled)
+    {
+        $this->container['emails_disabled'] = $emails_disabled;
 
         return $this;
     }

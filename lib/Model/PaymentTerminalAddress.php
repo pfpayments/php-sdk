@@ -58,8 +58,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'string',
         'organization_name' => 'string',
         'phone_number' => 'string',
-        'post_code' => 'string',
         'postal_state' => 'string',
+        'postcode' => 'string',
         'salutation' => 'string',
         'sorting_code' => 'string',
         'street' => 'string'
@@ -80,8 +80,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         'mobile_phone_number' => null,
         'organization_name' => null,
         'phone_number' => null,
-        'post_code' => null,
         'postal_state' => null,
+        'postcode' => null,
         'salutation' => null,
         'sorting_code' => null,
         'street' => null
@@ -103,8 +103,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'mobilePhoneNumber',
         'organization_name' => 'organizationName',
         'phone_number' => 'phoneNumber',
-        'post_code' => 'postCode',
         'postal_state' => 'postalState',
+        'postcode' => 'postcode',
         'salutation' => 'salutation',
         'sorting_code' => 'sortingCode',
         'street' => 'street'
@@ -125,8 +125,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'setMobilePhoneNumber',
         'organization_name' => 'setOrganizationName',
         'phone_number' => 'setPhoneNumber',
-        'post_code' => 'setPostCode',
         'postal_state' => 'setPostalState',
+        'postcode' => 'setPostcode',
         'salutation' => 'setSalutation',
         'sorting_code' => 'setSortingCode',
         'street' => 'setStreet'
@@ -147,8 +147,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         'mobile_phone_number' => 'getMobilePhoneNumber',
         'organization_name' => 'getOrganizationName',
         'phone_number' => 'getPhoneNumber',
-        'post_code' => 'getPostCode',
         'postal_state' => 'getPostalState',
+        'postcode' => 'getPostcode',
         'salutation' => 'getSalutation',
         'sorting_code' => 'getSortingCode',
         'street' => 'getStreet'
@@ -190,9 +190,9 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
         
         $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
         
-        $this->container['post_code'] = isset($data['post_code']) ? $data['post_code'] : null;
-        
         $this->container['postal_state'] = isset($data['postal_state']) ? $data['postal_state'] : null;
+        
+        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
         
         $this->container['salutation'] = isset($data['salutation']) ? $data['salutation'] : null;
         
@@ -517,31 +517,6 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets post_code
-     *
-     * @return string
-     */
-    public function getPostCode()
-    {
-        return $this->container['post_code'];
-    }
-
-    /**
-     * Sets post_code
-     *
-     * @param string $post_code 
-     *
-     * @return $this
-     */
-    public function setPostCode($post_code)
-    {
-        $this->container['post_code'] = $post_code;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets postal_state
      *
      * @return string
@@ -561,6 +536,31 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
     public function setPostalState($postal_state)
     {
         $this->container['postal_state'] = $postal_state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->container['postcode'];
+    }
+
+    /**
+     * Sets postcode
+     *
+     * @param string $postcode 
+     *
+     * @return $this
+     */
+    public function setPostcode($postcode)
+    {
+        $this->container['postcode'] = $postcode;
 
         return $this;
     }

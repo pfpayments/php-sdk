@@ -56,8 +56,8 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'family_name' => 'string',
         'given_name' => 'string',
         'organization_name' => 'string',
-        'post_code' => 'string',
         'postal_state' => 'string',
+        'postcode' => 'string',
         'sales_tax_number' => 'string',
         'salutation' => 'string',
         'sorting_code' => 'string',
@@ -77,8 +77,8 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'family_name' => null,
         'given_name' => null,
         'organization_name' => null,
-        'post_code' => null,
         'postal_state' => null,
+        'postcode' => null,
         'sales_tax_number' => null,
         'salutation' => null,
         'sorting_code' => null,
@@ -99,8 +99,8 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'family_name' => 'familyName',
         'given_name' => 'givenName',
         'organization_name' => 'organizationName',
-        'post_code' => 'postCode',
         'postal_state' => 'postalState',
+        'postcode' => 'postcode',
         'sales_tax_number' => 'salesTaxNumber',
         'salutation' => 'salutation',
         'sorting_code' => 'sortingCode',
@@ -120,8 +120,8 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'family_name' => 'setFamilyName',
         'given_name' => 'setGivenName',
         'organization_name' => 'setOrganizationName',
-        'post_code' => 'setPostCode',
         'postal_state' => 'setPostalState',
+        'postcode' => 'setPostcode',
         'sales_tax_number' => 'setSalesTaxNumber',
         'salutation' => 'setSalutation',
         'sorting_code' => 'setSortingCode',
@@ -141,8 +141,8 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'family_name' => 'getFamilyName',
         'given_name' => 'getGivenName',
         'organization_name' => 'getOrganizationName',
-        'post_code' => 'getPostCode',
         'postal_state' => 'getPostalState',
+        'postcode' => 'getPostcode',
         'sales_tax_number' => 'getSalesTaxNumber',
         'salutation' => 'getSalutation',
         'sorting_code' => 'getSortingCode',
@@ -181,9 +181,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         
         $this->container['organization_name'] = isset($data['organization_name']) ? $data['organization_name'] : null;
         
-        $this->container['post_code'] = isset($data['post_code']) ? $data['post_code'] : null;
-        
         $this->container['postal_state'] = isset($data['postal_state']) ? $data['postal_state'] : null;
+        
+        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
         
         $this->container['sales_tax_number'] = isset($data['sales_tax_number']) ? $data['sales_tax_number'] : null;
         
@@ -460,31 +460,6 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets post_code
-     *
-     * @return string
-     */
-    public function getPostCode()
-    {
-        return $this->container['post_code'];
-    }
-
-    /**
-     * Sets post_code
-     *
-     * @param string $post_code 
-     *
-     * @return $this
-     */
-    public function setPostCode($post_code)
-    {
-        $this->container['post_code'] = $post_code;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets postal_state
      *
      * @return string
@@ -504,6 +479,31 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
     public function setPostalState($postal_state)
     {
         $this->container['postal_state'] = $postal_state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->container['postcode'];
+    }
+
+    /**
+     * Sets postcode
+     *
+     * @param string $postcode 
+     *
+     * @return $this
+     */
+    public function setPostcode($postcode)
+    {
+        $this->container['postcode'] = $postcode;
 
         return $this;
     }

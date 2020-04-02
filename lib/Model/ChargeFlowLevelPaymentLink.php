@@ -19,12 +19,10 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ChargeFlowLevelConfigurationType model
+ * ChargeFlowLevelPaymentLink model
  *
  * @category    Class
  * @description 
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
+class ChargeFlowLevelPaymentLink extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +39,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ChargeFlowLevelConfigurationType';
+    protected static $swaggerModelName = 'ChargeFlowLevelPaymentLink';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +47,8 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'description' => 'map[string,string]',
-        'id' => 'int',
-        'label' => 'map[string,string]',
-        'name' => 'map[string,string]'
+        'charge_flow_level' => '\PostFinanceCheckout\Sdk\Model\ChargeFlowLevel',
+        'payment_link' => 'string'
     ];
 
     /**
@@ -61,10 +57,8 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'description' => null,
-        'id' => 'int64',
-        'label' => null,
-        'name' => null
+        'charge_flow_level' => null,
+        'payment_link' => null
     ];
 
     /**
@@ -74,10 +68,8 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'id' => 'id',
-        'label' => 'label',
-        'name' => 'name'
+        'charge_flow_level' => 'chargeFlowLevel',
+        'payment_link' => 'paymentLink'
     ];
 
     /**
@@ -86,10 +78,8 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'id' => 'setId',
-        'label' => 'setLabel',
-        'name' => 'setName'
+        'charge_flow_level' => 'setChargeFlowLevel',
+        'payment_link' => 'setPaymentLink'
     ];
 
     /**
@@ -98,20 +88,12 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'id' => 'getId',
-        'label' => 'getLabel',
-        'name' => 'getName'
+        'charge_flow_level' => 'getChargeFlowLevel',
+        'payment_link' => 'getPaymentLink'
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -121,14 +103,12 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['charge_flow_level'] = isset($data['charge_flow_level']) ? $data['charge_flow_level'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['label'] = isset($data['label']) ? $data['label'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['payment_link'] = isset($data['payment_link']) ? $data['payment_link'] : null;
         
     }
 
@@ -139,7 +119,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -151,7 +131,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -161,7 +141,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -173,7 +153,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -183,7 +163,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -193,7 +173,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -222,100 +202,50 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets description
+     * Gets charge_flow_level
      *
-     * @return map[string,string]
+     * @return \PostFinanceCheckout\Sdk\Model\ChargeFlowLevel
      */
-    public function getDescription()
+    public function getChargeFlowLevel()
     {
-        return $this->container['description'];
+        return $this->container['charge_flow_level'];
     }
 
     /**
-     * Sets description
+     * Sets charge_flow_level
      *
-     * @param map[string,string] $description 
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeFlowLevel $charge_flow_level 
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setChargeFlowLevel($charge_flow_level)
     {
-        $this->container['description'] = $description;
+        $this->container['charge_flow_level'] = $charge_flow_level;
 
         return $this;
     }
     
 
     /**
-     * Gets id
+     * Gets payment_link
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getPaymentLink()
     {
-        return $this->container['id'];
+        return $this->container['payment_link'];
     }
 
     /**
-     * Sets id
+     * Sets payment_link
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param string $payment_link 
      *
      * @return $this
      */
-    public function setId($id)
+    public function setPaymentLink($payment_link)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets label
-     *
-     * @return map[string,string]
-     */
-    public function getLabel()
-    {
-        return $this->container['label'];
-    }
-
-    /**
-     * Sets label
-     *
-     * @param map[string,string] $label 
-     *
-     * @return $this
-     */
-    public function setLabel($label)
-    {
-        $this->container['label'] = $label;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return map[string,string]
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param map[string,string] $name 
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
+        $this->container['payment_link'] = $payment_link;
 
         return $this;
     }

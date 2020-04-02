@@ -18,40 +18,40 @@
  */
 
 
-namespace Wallee\Sdk\Test;
+namespace PostFinanceCheckout\Sdk\Test;
 
 use PHPUnit\Framework\TestCase;
-use Wallee\Sdk\ApiClient;
-use Wallee\Sdk\Http\HttpClientFactory;
-use Wallee\Sdk\Model\AddressCreate;
-use Wallee\Sdk\Model\LineItemCreate;
-use Wallee\Sdk\Model\LineItemType;
-use Wallee\Sdk\Model\TransactionCreate;
-use Wallee\Sdk\Service\TransactionPaymentPageService;
-use Wallee\Sdk\Service\TransactionService;
+use PostFinanceCheckout\Sdk\ApiClient;
+use PostFinanceCheckout\Sdk\Http\HttpClientFactory;
+use PostFinanceCheckout\Sdk\Model\AddressCreate;
+use PostFinanceCheckout\Sdk\Model\LineItemCreate;
+use PostFinanceCheckout\Sdk\Model\LineItemType;
+use PostFinanceCheckout\Sdk\Model\TransactionCompletionState;
+use PostFinanceCheckout\Sdk\Model\TransactionCreate;
+use PostFinanceCheckout\Sdk\Service\TransactionCompletionService;
+use PostFinanceCheckout\Sdk\Service\TransactionService;
 
 /**
  * This class tests the basic functionality of the SDK.
  *
  * @category Class
- * @package  Wallee\Sdk
+ * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionPaymentPageServiceTest extends TestCase
+class TransactionCompletionServiceTest extends TestCase
 {
-
     /**
-     * @var Wallee\Sdk\ApiClient
+     * @var PostFinanceCheckout\Sdk\ApiClient
      */
     private $apiClient;
 
     /**
-     * @var Wallee\Sdk\Model\TransactionCreate
+     * @var PostFinanceCheckout\Sdk\Model\TransactionCreate
      */
     private $transactionBag;
-    
-    private $transactionPaymentPageService;
+
+    private $transactionCompletionService;
     private $transactionService;
 
     /**
@@ -75,9 +75,8 @@ class TransactionPaymentPageServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        if (is_null($this->transactionPaymentPageService)) {
-            $this->transactionPaymentPageService = new TransactionPaymentPageService($this->getApiClient());
+        if (is_null($this->transactionCompletionService)) {
+            $this->transactionCompletionService = new TransactionCompletionService($this->getApiClient());
         }
 
         if (is_null($this->transactionService)) {
@@ -88,7 +87,7 @@ class TransactionPaymentPageServiceTest extends TestCase
     }
 
     /**
-     * @return Wallee\Sdk\ApiClient
+     * @return PostFinanceCheckout\Sdk\ApiClient
      */
     private function getApiClient()
     {
@@ -153,12 +152,82 @@ class TransactionPaymentPageServiceTest extends TestCase
     }
 
     /**
-     * Test the cURL HTTP client.
+     * Test case for completeOffline
+     *
+     * completeOffline.
+     *
      */
-    public function testPaymentPageUrl()
+    public function testCompleteOffline()
     {
-        $transaction    = $this->transactionService->create($this->spaceId, $this->getTransactionBag());
-        $paymentPageUrl = $this->transactionPaymentPageService->paymentPageUrl($this->spaceId, $transaction->getId());
-        $this->assertEquals(0, strpos($paymentPageUrl, 'http'));
+        $transaction = $this->transactionService->create($this->spaceId, $this->getTransactionBag());
+        $this->transactionService->processWithoutUserInteraction($this->spaceId, $transaction->getId());
+        $transactionCompletion = $this->transactionCompletionService->completeOffline($this->spaceId, $transaction->getId());
+        $this->assertEquals(TransactionCompletionState::SUCCESSFUL, $transactionCompletion->getState());
+    }
+
+    /**
+     * Test case for completeOnline
+     *
+     * completeOnline.
+     * @todo
+     *
+     */
+    public function testCompleteOnline()
+    {
+    }
+
+    /**
+     * Test case for completePartiallyOffline
+     *
+     * completePartiallyOffline.
+     * @todo
+     *
+     */
+    public function testCompletePartiallyOffline()
+    {
+    }
+
+    /**
+     * Test case for completePartiallyOnline
+     *
+     * completePartiallyOnline.
+     * @todo
+     *
+     */
+    public function testCompletePartiallyOnline()
+    {
+    }
+
+    /**
+     * Test case for count
+     *
+     * Count.
+     * @todo
+     *
+     */
+    public function testCount()
+    {
+    }
+
+    /**
+     * Test case for read
+     *
+     * Read.
+     * @todo
+     *
+     */
+    public function testRead()
+    {
+    }
+
+    /**
+     * Test case for search
+     *
+     * Search.
+     * @todo
+     *
+     */
+    public function testSearch()
+    {
     }
 }

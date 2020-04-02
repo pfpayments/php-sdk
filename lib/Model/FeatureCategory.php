@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * Feature model
+ * FeatureCategory model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Feature implements ModelInterface, ArrayAccess
+class FeatureCategory implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class Feature implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Feature';
+    protected static $swaggerModelName = 'FeatureCategory';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,15 +49,10 @@ class Feature implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'beta' => 'bool',
-        'category' => '\PostFinanceCheckout\Sdk\Model\FeatureCategory',
         'description' => 'map[string,string]',
         'id' => 'int',
-        'logo_path' => 'string',
         'name' => 'map[string,string]',
-        'required_features' => 'int[]',
-        'sort_order' => 'int',
-        'visible' => 'bool'
+        'order_weight' => 'int'
     ];
 
     /**
@@ -66,15 +61,10 @@ class Feature implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'beta' => null,
-        'category' => null,
         'description' => null,
         'id' => 'int64',
-        'logo_path' => null,
         'name' => null,
-        'required_features' => 'int64',
-        'sort_order' => 'int32',
-        'visible' => null
+        'order_weight' => 'int32'
     ];
 
     /**
@@ -84,15 +74,10 @@ class Feature implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'beta' => 'beta',
-        'category' => 'category',
         'description' => 'description',
         'id' => 'id',
-        'logo_path' => 'logoPath',
         'name' => 'name',
-        'required_features' => 'requiredFeatures',
-        'sort_order' => 'sortOrder',
-        'visible' => 'visible'
+        'order_weight' => 'orderWeight'
     ];
 
     /**
@@ -101,15 +86,10 @@ class Feature implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'beta' => 'setBeta',
-        'category' => 'setCategory',
         'description' => 'setDescription',
         'id' => 'setId',
-        'logo_path' => 'setLogoPath',
         'name' => 'setName',
-        'required_features' => 'setRequiredFeatures',
-        'sort_order' => 'setSortOrder',
-        'visible' => 'setVisible'
+        'order_weight' => 'setOrderWeight'
     ];
 
     /**
@@ -118,15 +98,10 @@ class Feature implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'beta' => 'getBeta',
-        'category' => 'getCategory',
         'description' => 'getDescription',
         'id' => 'getId',
-        'logo_path' => 'getLogoPath',
         'name' => 'getName',
-        'required_features' => 'getRequiredFeatures',
-        'sort_order' => 'getSortOrder',
-        'visible' => 'getVisible'
+        'order_weight' => 'getOrderWeight'
     ];
 
     
@@ -147,23 +122,13 @@ class Feature implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['beta'] = isset($data['beta']) ? $data['beta'] : null;
-        
-        $this->container['category'] = isset($data['category']) ? $data['category'] : null;
-        
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['logo_path'] = isset($data['logo_path']) ? $data['logo_path'] : null;
-        
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
-        $this->container['required_features'] = isset($data['required_features']) ? $data['required_features'] : null;
-        
-        $this->container['sort_order'] = isset($data['sort_order']) ? $data['sort_order'] : null;
-        
-        $this->container['visible'] = isset($data['visible']) ? $data['visible'] : null;
+        $this->container['order_weight'] = isset($data['order_weight']) ? $data['order_weight'] : null;
         
     }
 
@@ -257,56 +222,6 @@ class Feature implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets beta
-     *
-     * @return bool
-     */
-    public function getBeta()
-    {
-        return $this->container['beta'];
-    }
-
-    /**
-     * Sets beta
-     *
-     * @param bool $beta 
-     *
-     * @return $this
-     */
-    public function setBeta($beta)
-    {
-        $this->container['beta'] = $beta;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets category
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\FeatureCategory
-     */
-    public function getCategory()
-    {
-        return $this->container['category'];
-    }
-
-    /**
-     * Sets category
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\FeatureCategory $category 
-     *
-     * @return $this
-     */
-    public function setCategory($category)
-    {
-        $this->container['category'] = $category;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets description
      *
      * @return map[string,string]
@@ -357,31 +272,6 @@ class Feature implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets logo_path
-     *
-     * @return string
-     */
-    public function getLogoPath()
-    {
-        return $this->container['logo_path'];
-    }
-
-    /**
-     * Sets logo_path
-     *
-     * @param string $logo_path 
-     *
-     * @return $this
-     */
-    public function setLogoPath($logo_path)
-    {
-        $this->container['logo_path'] = $logo_path;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets name
      *
      * @return map[string,string]
@@ -407,75 +297,25 @@ class Feature implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets required_features
-     *
-     * @return int[]
-     */
-    public function getRequiredFeatures()
-    {
-        return $this->container['required_features'];
-    }
-
-    /**
-     * Sets required_features
-     *
-     * @param int[] $required_features 
-     *
-     * @return $this
-     */
-    public function setRequiredFeatures($required_features)
-    {
-        $this->container['required_features'] = $required_features;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets sort_order
+     * Gets order_weight
      *
      * @return int
      */
-    public function getSortOrder()
+    public function getOrderWeight()
     {
-        return $this->container['sort_order'];
+        return $this->container['order_weight'];
     }
 
     /**
-     * Sets sort_order
+     * Sets order_weight
      *
-     * @param int $sort_order 
+     * @param int $order_weight 
      *
      * @return $this
      */
-    public function setSortOrder($sort_order)
+    public function setOrderWeight($order_weight)
     {
-        $this->container['sort_order'] = $sort_order;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets visible
-     *
-     * @return bool
-     */
-    public function getVisible()
-    {
-        return $this->container['visible'];
-    }
-
-    /**
-     * Sets visible
-     *
-     * @param bool $visible 
-     *
-     * @return $this
-     */
-    public function setVisible($visible)
-    {
-        $this->container['visible'] = $visible;
+        $this->container['order_weight'] = $order_weight;
 
         return $this;
     }

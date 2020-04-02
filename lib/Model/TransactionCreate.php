@@ -51,6 +51,7 @@ class TransactionCreate extends AbstractTransactionPending
         'charge_retry_enabled' => 'bool',
         'customers_presence' => '\PostFinanceCheckout\Sdk\Model\CustomersPresence',
         'device_session_identifier' => 'string',
+        'emails_disabled' => 'bool',
         'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
         'environment_selection_strategy' => '\PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy',
         'space_view_id' => 'int'
@@ -66,6 +67,7 @@ class TransactionCreate extends AbstractTransactionPending
         'charge_retry_enabled' => null,
         'customers_presence' => null,
         'device_session_identifier' => null,
+        'emails_disabled' => null,
         'environment' => null,
         'environment_selection_strategy' => null,
         'space_view_id' => 'int64'
@@ -82,6 +84,7 @@ class TransactionCreate extends AbstractTransactionPending
         'charge_retry_enabled' => 'chargeRetryEnabled',
         'customers_presence' => 'customersPresence',
         'device_session_identifier' => 'deviceSessionIdentifier',
+        'emails_disabled' => 'emailsDisabled',
         'environment' => 'environment',
         'environment_selection_strategy' => 'environmentSelectionStrategy',
         'space_view_id' => 'spaceViewId'
@@ -97,6 +100,7 @@ class TransactionCreate extends AbstractTransactionPending
         'charge_retry_enabled' => 'setChargeRetryEnabled',
         'customers_presence' => 'setCustomersPresence',
         'device_session_identifier' => 'setDeviceSessionIdentifier',
+        'emails_disabled' => 'setEmailsDisabled',
         'environment' => 'setEnvironment',
         'environment_selection_strategy' => 'setEnvironmentSelectionStrategy',
         'space_view_id' => 'setSpaceViewId'
@@ -112,6 +116,7 @@ class TransactionCreate extends AbstractTransactionPending
         'charge_retry_enabled' => 'getChargeRetryEnabled',
         'customers_presence' => 'getCustomersPresence',
         'device_session_identifier' => 'getDeviceSessionIdentifier',
+        'emails_disabled' => 'getEmailsDisabled',
         'environment' => 'getEnvironment',
         'environment_selection_strategy' => 'getEnvironmentSelectionStrategy',
         'space_view_id' => 'getSpaceViewId'
@@ -138,6 +143,8 @@ class TransactionCreate extends AbstractTransactionPending
         $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
         
         $this->container['device_session_identifier'] = isset($data['device_session_identifier']) ? $data['device_session_identifier'] : null;
+        
+        $this->container['emails_disabled'] = isset($data['emails_disabled']) ? $data['emails_disabled'] : null;
         
         $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
@@ -334,6 +341,31 @@ class TransactionCreate extends AbstractTransactionPending
     public function setDeviceSessionIdentifier($device_session_identifier)
     {
         $this->container['device_session_identifier'] = $device_session_identifier;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets emails_disabled
+     *
+     * @return bool
+     */
+    public function getEmailsDisabled()
+    {
+        return $this->container['emails_disabled'];
+    }
+
+    /**
+     * Sets emails_disabled
+     *
+     * @param bool $emails_disabled Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+     *
+     * @return $this
+     */
+    public function setEmailsDisabled($emails_disabled)
+    {
+        $this->container['emails_disabled'] = $emails_disabled;
 
         return $this;
     }
