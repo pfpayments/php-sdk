@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@ class Scope implements ModelInterface, ArrayAccess
         'domain_name' => 'string',
         'features' => '\PostFinanceCheckout\Sdk\Model\Feature[]',
         'id' => 'int',
+        'machine_name' => 'string',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
         'port' => 'int',
@@ -71,6 +72,7 @@ class Scope implements ModelInterface, ArrayAccess
         'domain_name' => null,
         'features' => null,
         'id' => 'int64',
+        'machine_name' => null,
         'name' => null,
         'planned_purge_date' => 'date-time',
         'port' => 'int32',
@@ -91,6 +93,7 @@ class Scope implements ModelInterface, ArrayAccess
         'domain_name' => 'domainName',
         'features' => 'features',
         'id' => 'id',
+        'machine_name' => 'machineName',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
         'port' => 'port',
@@ -110,6 +113,7 @@ class Scope implements ModelInterface, ArrayAccess
         'domain_name' => 'setDomainName',
         'features' => 'setFeatures',
         'id' => 'setId',
+        'machine_name' => 'setMachineName',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'port' => 'setPort',
@@ -129,6 +133,7 @@ class Scope implements ModelInterface, ArrayAccess
         'domain_name' => 'getDomainName',
         'features' => 'getFeatures',
         'id' => 'getId',
+        'machine_name' => 'getMachineName',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'port' => 'getPort',
@@ -162,6 +167,8 @@ class Scope implements ModelInterface, ArrayAccess
         $this->container['features'] = isset($data['features']) ? $data['features'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['machine_name'] = isset($data['machine_name']) ? $data['machine_name'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
@@ -340,6 +347,31 @@ class Scope implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets machine_name
+     *
+     * @return string
+     */
+    public function getMachineName()
+    {
+        return $this->container['machine_name'];
+    }
+
+    /**
+     * Sets machine_name
+     *
+     * @param string $machine_name 
+     *
+     * @return $this
+     */
+    public function setMachineName($machine_name)
+    {
+        $this->container['machine_name'] = $machine_name;
 
         return $this;
     }

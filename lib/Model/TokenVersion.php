@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'created_on' => '\DateTime',
         'environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
         'expires_on' => '\DateTime',
+        'icon_url' => 'string',
         'id' => 'int',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
@@ -84,6 +85,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'created_on' => 'date-time',
         'environment' => null,
         'expires_on' => 'date-time',
+        'icon_url' => null,
         'id' => 'int64',
         'labels' => null,
         'language' => null,
@@ -115,6 +117,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'created_on' => 'createdOn',
         'environment' => 'environment',
         'expires_on' => 'expiresOn',
+        'icon_url' => 'iconUrl',
         'id' => 'id',
         'labels' => 'labels',
         'language' => 'language',
@@ -145,6 +148,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'created_on' => 'setCreatedOn',
         'environment' => 'setEnvironment',
         'expires_on' => 'setExpiresOn',
+        'icon_url' => 'setIconUrl',
         'id' => 'setId',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
@@ -175,6 +179,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
         'created_on' => 'getCreatedOn',
         'environment' => 'getEnvironment',
         'expires_on' => 'getExpiresOn',
+        'icon_url' => 'getIconUrl',
         'id' => 'getId',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
@@ -221,6 +226,8 @@ class TokenVersion implements ModelInterface, ArrayAccess
         $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
         $this->container['expires_on'] = isset($data['expires_on']) ? $data['expires_on'] : null;
+        
+        $this->container['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -467,6 +474,31 @@ class TokenVersion implements ModelInterface, ArrayAccess
     public function setExpiresOn($expires_on)
     {
         $this->container['expires_on'] = $expires_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets icon_url
+     *
+     * @return string
+     */
+    public function getIconUrl()
+    {
+        return $this->container['icon_url'];
+    }
+
+    /**
+     * Sets icon_url
+     *
+     * @param string $icon_url 
+     *
+     * @return $this
+     */
+    public function setIconUrl($icon_url)
+    {
+        $this->container['icon_url'] = $icon_url;
 
         return $this;
     }

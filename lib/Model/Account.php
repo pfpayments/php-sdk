@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'active' => 'bool',
         'active_or_restricted_active' => 'bool',
+        'deleted_by' => 'int',
+        'deleted_on' => '\DateTime',
         'id' => 'int',
         'name' => 'string',
         'parent_account' => '\PostFinanceCheckout\Sdk\Model\Account',
@@ -71,6 +73,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'active' => null,
         'active_or_restricted_active' => null,
+        'deleted_by' => 'int64',
+        'deleted_on' => 'date-time',
         'id' => 'int64',
         'name' => null,
         'parent_account' => null,
@@ -92,6 +96,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'active' => 'active',
         'active_or_restricted_active' => 'activeOrRestrictedActive',
+        'deleted_by' => 'deletedBy',
+        'deleted_on' => 'deletedOn',
         'id' => 'id',
         'name' => 'name',
         'parent_account' => 'parentAccount',
@@ -112,6 +118,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $setters = [
         'active' => 'setActive',
         'active_or_restricted_active' => 'setActiveOrRestrictedActive',
+        'deleted_by' => 'setDeletedBy',
+        'deleted_on' => 'setDeletedOn',
         'id' => 'setId',
         'name' => 'setName',
         'parent_account' => 'setParentAccount',
@@ -132,6 +140,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $getters = [
         'active' => 'getActive',
         'active_or_restricted_active' => 'getActiveOrRestrictedActive',
+        'deleted_by' => 'getDeletedBy',
+        'deleted_on' => 'getDeletedOn',
         'id' => 'getId',
         'name' => 'getName',
         'parent_account' => 'getParentAccount',
@@ -165,6 +175,10 @@ class Account implements ModelInterface, ArrayAccess
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
         
         $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
+        
+        $this->container['deleted_by'] = isset($data['deleted_by']) ? $data['deleted_by'] : null;
+        
+        $this->container['deleted_on'] = isset($data['deleted_on']) ? $data['deleted_on'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -322,6 +336,56 @@ class Account implements ModelInterface, ArrayAccess
     public function setActiveOrRestrictedActive($active_or_restricted_active)
     {
         $this->container['active_or_restricted_active'] = $active_or_restricted_active;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets deleted_by
+     *
+     * @return int
+     */
+    public function getDeletedBy()
+    {
+        return $this->container['deleted_by'];
+    }
+
+    /**
+     * Sets deleted_by
+     *
+     * @param int $deleted_by The ID of a user that deleted this entity.
+     *
+     * @return $this
+     */
+    public function setDeletedBy($deleted_by)
+    {
+        $this->container['deleted_by'] = $deleted_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets deleted_on
+     *
+     * @return \DateTime
+     */
+    public function getDeletedOn()
+    {
+        return $this->container['deleted_on'];
+    }
+
+    /**
+     * Sets deleted_on
+     *
+     * @param \DateTime $deleted_on The date and time when this entity was deleted.
+     *
+     * @return $this
+     */
+    public function setDeletedOn($deleted_on)
+    {
+        $this->container['deleted_on'] = $deleted_on;
 
         return $this;
     }

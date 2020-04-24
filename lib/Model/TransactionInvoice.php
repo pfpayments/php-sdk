@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,7 @@ class TransactionInvoice extends TransactionAwareEntity
         'billing_address' => '\PostFinanceCheckout\Sdk\Model\Address',
         'completion' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
         'created_on' => '\DateTime',
+        'derecognized_by' => 'int',
         'derecognized_on' => '\DateTime',
         'due_on' => '\DateTime',
         'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
@@ -78,6 +79,7 @@ class TransactionInvoice extends TransactionAwareEntity
         'billing_address' => null,
         'completion' => null,
         'created_on' => 'date-time',
+        'derecognized_by' => 'int64',
         'derecognized_on' => 'date-time',
         'due_on' => 'date-time',
         'environment' => null,
@@ -106,6 +108,7 @@ class TransactionInvoice extends TransactionAwareEntity
         'billing_address' => 'billingAddress',
         'completion' => 'completion',
         'created_on' => 'createdOn',
+        'derecognized_by' => 'derecognizedBy',
         'derecognized_on' => 'derecognizedOn',
         'due_on' => 'dueOn',
         'environment' => 'environment',
@@ -133,6 +136,7 @@ class TransactionInvoice extends TransactionAwareEntity
         'billing_address' => 'setBillingAddress',
         'completion' => 'setCompletion',
         'created_on' => 'setCreatedOn',
+        'derecognized_by' => 'setDerecognizedBy',
         'derecognized_on' => 'setDerecognizedOn',
         'due_on' => 'setDueOn',
         'environment' => 'setEnvironment',
@@ -160,6 +164,7 @@ class TransactionInvoice extends TransactionAwareEntity
         'billing_address' => 'getBillingAddress',
         'completion' => 'getCompletion',
         'created_on' => 'getCreatedOn',
+        'derecognized_by' => 'getDerecognizedBy',
         'derecognized_on' => 'getDerecognizedOn',
         'due_on' => 'getDueOn',
         'environment' => 'getEnvironment',
@@ -198,6 +203,8 @@ class TransactionInvoice extends TransactionAwareEntity
         $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['derecognized_by'] = isset($data['derecognized_by']) ? $data['derecognized_by'] : null;
         
         $this->container['derecognized_on'] = isset($data['derecognized_on']) ? $data['derecognized_on'] : null;
         
@@ -415,6 +422,31 @@ class TransactionInvoice extends TransactionAwareEntity
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets derecognized_by
+     *
+     * @return int
+     */
+    public function getDerecognizedBy()
+    {
+        return $this->container['derecognized_by'];
+    }
+
+    /**
+     * Sets derecognized_by
+     *
+     * @param int $derecognized_by The id of the user which marked the invoice as derecognized.
+     *
+     * @return $this
+     */
+    public function setDerecognizedBy($derecognized_by)
+    {
+        $this->container['derecognized_by'] = $derecognized_by;
 
         return $this;
     }

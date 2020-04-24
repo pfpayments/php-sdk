@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ class RefundServiceTest extends TestCase
     /**
      * @var PostFinanceCheckout\Sdk\Model\TransactionCreate
      */
-    private $transactionBag;
+    private $transactionPayload;
 
     private $transactionCompletionService;
     private $transactionService;
@@ -94,7 +94,7 @@ class RefundServiceTest extends TestCase
             $this->transactionService = new TransactionService($this->getApiClient());
         }
 
-        $this->transactionBag = $this->getTransactionBag();
+        $this->transactionPayload = $this->getTransactionPayload();
     }
 
     /**
@@ -127,9 +127,9 @@ class RefundServiceTest extends TestCase
     /**
      * @return TransactionCreate
      */
-    private function getTransactionBag()
+    private function getTransactionPayload()
     {
-        if (is_null($this->transactionBag)) {
+        if (is_null($this->transactionPayload)) {
             // line item
             $lineItem = new LineItemCreate();
             $lineItem->setName('Red T-Shirt');
@@ -143,7 +143,7 @@ class RefundServiceTest extends TestCase
             $billingAddress = new AddressCreate();
             $billingAddress->setCity('Winterthur');
             $billingAddress->setCountry('CH');
-            $billingAddress->setEmailAddress('test@postfinancecheckout.com');
+            $billingAddress->setEmailAddress('test@example.com');
             $billingAddress->setFamilyName('Customer');
             $billingAddress->setGivenName('Good');
             $billingAddress->setPostCode('8400');
@@ -152,14 +152,14 @@ class RefundServiceTest extends TestCase
             $billingAddress->setPhoneNumber('+41791234567');
             $billingAddress->setSalutation('Ms');
 
-            $this->transactionBag = new TransactionCreate();
-            $this->transactionBag->setCurrency('CHF');
-            $this->transactionBag->setLineItems([$lineItem]);
-            $this->transactionBag->setAutoConfirmationEnabled(true);
-            $this->transactionBag->setBillingAddress($billingAddress);
-            $this->transactionBag->setShippingAddress($billingAddress);
+            $this->transactionPayload = new TransactionCreate();
+            $this->transactionPayload->setCurrency('CHF');
+            $this->transactionPayload->setLineItems([$lineItem]);
+            $this->transactionPayload->setAutoConfirmationEnabled(true);
+            $this->transactionPayload->setBillingAddress($billingAddress);
+            $this->transactionPayload->setShippingAddress($billingAddress);
         }
-        return $this->transactionBag;
+        return $this->transactionPayload;
     }
 
     /**
@@ -226,7 +226,7 @@ class RefundServiceTest extends TestCase
      */
     public function testRefund()
     {
-        $transaction = $this->transactionService->create($this->spaceId, $this->transactionBag);
+        $transaction = $this->transactionService->create($this->spaceId, $this->transactionPayload);
         $transaction = $this->transactionService->processWithoutUserInteraction($this->spaceId, $transaction->getId());
         echo $transaction->getId() . PHP_EOL;
         for ($i = 1; $i <= 5; $i++) {
@@ -241,11 +241,11 @@ class RefundServiceTest extends TestCase
             $transactionCompletion = $this->transactionCompletionService->completeOffline($this->spaceId, $transaction->getId());
             $this->assertEquals($transactionCompletion->getState(), TransactionCompletionState::SUCCESSFUL);
             $transaction = $this->transactionService->read($this->spaceId, $transactionCompletion->getLinkedTransaction());  // fetch the latest transaction data
-            $refundBag   = $this->getRefundBag($transaction);
+            $refundPayload   = $this->getRefundPayload($transaction);
             /**
              * \PostFinanceCheckout\Sdk\Model\Refund $refund
              */
-            $refund = $this->refundService->refund($this->spaceId, $refundBag);
+            $refund = $this->refundService->refund($this->spaceId, $refundPayload);
             $this->assertEquals($refund->getState(), RefundState::SUCCESSFUL);
         }
     }
@@ -255,7 +255,7 @@ class RefundServiceTest extends TestCase
      * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction
      * @return RefundCreate
      */
-    private function getRefundBag($transaction)
+    private function getRefundPayload($transaction)
     {
         $refund = new RefundCreate();
         $refund->setAmount($transaction->getAuthorizationAmount());

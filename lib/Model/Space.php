@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * PostFinance Checkout SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the PostFinance Checkout payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,8 @@ class Space implements ModelInterface, ArrayAccess
         'active' => 'bool',
         'active_or_restricted_active' => 'bool',
         'database' => '\PostFinanceCheckout\Sdk\Model\TenantDatabase',
+        'deleted_by' => 'int',
+        'deleted_on' => '\DateTime',
         'id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
@@ -76,6 +78,8 @@ class Space implements ModelInterface, ArrayAccess
         'active' => null,
         'active_or_restricted_active' => null,
         'database' => null,
+        'deleted_by' => 'int64',
+        'deleted_on' => 'date-time',
         'id' => 'int64',
         'name' => null,
         'planned_purge_date' => 'date-time',
@@ -100,6 +104,8 @@ class Space implements ModelInterface, ArrayAccess
         'active' => 'active',
         'active_or_restricted_active' => 'activeOrRestrictedActive',
         'database' => 'database',
+        'deleted_by' => 'deletedBy',
+        'deleted_on' => 'deletedOn',
         'id' => 'id',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -123,6 +129,8 @@ class Space implements ModelInterface, ArrayAccess
         'active' => 'setActive',
         'active_or_restricted_active' => 'setActiveOrRestrictedActive',
         'database' => 'setDatabase',
+        'deleted_by' => 'setDeletedBy',
+        'deleted_on' => 'setDeletedOn',
         'id' => 'setId',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -146,6 +154,8 @@ class Space implements ModelInterface, ArrayAccess
         'active' => 'getActive',
         'active_or_restricted_active' => 'getActiveOrRestrictedActive',
         'database' => 'getDatabase',
+        'deleted_by' => 'getDeletedBy',
+        'deleted_on' => 'getDeletedOn',
         'id' => 'getId',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -184,6 +194,10 @@ class Space implements ModelInterface, ArrayAccess
         $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
         
         $this->container['database'] = isset($data['database']) ? $data['database'] : null;
+        
+        $this->container['deleted_by'] = isset($data['deleted_by']) ? $data['deleted_by'] : null;
+        
+        $this->container['deleted_on'] = isset($data['deleted_on']) ? $data['deleted_on'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -393,6 +407,56 @@ class Space implements ModelInterface, ArrayAccess
     public function setDatabase($database)
     {
         $this->container['database'] = $database;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets deleted_by
+     *
+     * @return int
+     */
+    public function getDeletedBy()
+    {
+        return $this->container['deleted_by'];
+    }
+
+    /**
+     * Sets deleted_by
+     *
+     * @param int $deleted_by The ID of a user that deleted this entity.
+     *
+     * @return $this
+     */
+    public function setDeletedBy($deleted_by)
+    {
+        $this->container['deleted_by'] = $deleted_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets deleted_on
+     *
+     * @return \DateTime
+     */
+    public function getDeletedOn()
+    {
+        return $this->container['deleted_on'];
+    }
+
+    /**
+     * Sets deleted_on
+     *
+     * @param \DateTime $deleted_on The date and time when this entity was deleted.
+     *
+     * @return $this
+     */
+    public function setDeletedOn($deleted_on)
+    {
+        $this->container['deleted_on'] = $deleted_on;
 
         return $this;
     }
