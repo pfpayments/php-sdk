@@ -81,8 +81,7 @@ final class ApiClientTest extends TestCase
     private function callApi($httpClientType = null)
     {
         $this->apiClient->setHttpClientType($httpClientType);
-        $service  = new PaymentMethodService($this->apiClient);
-        $response = $service->allWithHttpInfo();
+        $response = $this->apiClient->getPaymentMethodService()->allWithHttpInfo();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue(is_array($response->getData()));
     }

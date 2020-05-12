@@ -27,8 +27,6 @@ use PostFinanceCheckout\Sdk\Model\AddressCreate;
 use PostFinanceCheckout\Sdk\Model\LineItemCreate;
 use PostFinanceCheckout\Sdk\Model\LineItemType;
 use PostFinanceCheckout\Sdk\Model\TransactionCreate;
-use PostFinanceCheckout\Sdk\Service\TransactionLightboxService;
-use PostFinanceCheckout\Sdk\Service\TransactionService;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -51,9 +49,6 @@ class TransactionLightboxServiceTest extends TestCase
      */
     private $transactionPayload;
 
-    private $transactionLightboxService;
-    private $transactionService;
-
     /**
      * @var int
      */
@@ -75,15 +70,8 @@ class TransactionLightboxServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        if (is_null($this->transactionLightboxService)) {
-            $this->transactionLightboxService = new TransactionLightboxService($this->getApiClient());
-        }
-
-        if (is_null($this->transactionService)) {
-            $this->transactionService = new TransactionService($this->getApiClient());
-        }
-
+        
+        $this->apiClient = $this->getApiClient();
         $this->transactionPayload = $this->getTransactionPayload();
     }
 
@@ -160,8 +148,8 @@ class TransactionLightboxServiceTest extends TestCase
      */
     public function testJavascriptUrl()
     {
-        $transaction = $this->transactionService->create($this->spaceId, $this->getTransactionPayload());
-        $javascriptUrl      = $this->transactionLightboxService->javascriptUrl($this->spaceId, $transaction->getId());
+        $transaction = $this->apiClient->getTransactionService()->create($this->spaceId, $this->getTransactionPayload());
+        $javascriptUrl = $this->apiClient->getTransactionLightboxService()->javascriptUrl($this->spaceId, $transaction->getId());
         $this->assertEquals(0, strpos($javascriptUrl, 'http'));
     }
 }

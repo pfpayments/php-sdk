@@ -56,15 +56,6 @@ class UserSpaceRoleService {
 		$this->apiClient = $apiClient;
 	}
 
-	/**
-	 * Returns the API client instance.
-	 *
-	 * @return ApiClient
-	 */
-	public function getApiClient() {
-		return $this->apiClient;
-	}
-
 
 	/**
 	 * Operation addRole

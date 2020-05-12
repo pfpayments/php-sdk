@@ -50,9 +50,6 @@ class TransactionPaymentPageServiceTest extends TestCase
      * @var PostFinanceCheckout\Sdk\Model\TransactionCreate
      */
     private $transactionPayload;
-    
-    private $transactionPaymentPageService;
-    private $transactionService;
 
     /**
      * @var int
@@ -76,14 +73,7 @@ class TransactionPaymentPageServiceTest extends TestCase
     {
         parent::setUp();
 
-        if (is_null($this->transactionPaymentPageService)) {
-            $this->transactionPaymentPageService = new TransactionPaymentPageService($this->getApiClient());
-        }
-
-        if (is_null($this->transactionService)) {
-            $this->transactionService = new TransactionService($this->getApiClient());
-        }
-
+        $this->apiClient = $this->getApiClient();
         $this->transactionPayload = $this->getTransactionPayload();
     }
 
@@ -157,8 +147,8 @@ class TransactionPaymentPageServiceTest extends TestCase
      */
     public function testPaymentPageUrl()
     {
-        $transaction    = $this->transactionService->create($this->spaceId, $this->getTransactionPayload());
-        $paymentPageUrl = $this->transactionPaymentPageService->paymentPageUrl($this->spaceId, $transaction->getId());
+        $transaction    = $this->apiClient->getTransactionService()->create($this->spaceId, $this->getTransactionPayload());
+        $paymentPageUrl = $this->apiClient->getTransactionPaymentPageService()->paymentPageUrl($this->spaceId, $transaction->getId());
         $this->assertEquals(0, strpos($paymentPageUrl, 'http'));
     }
 }

@@ -28,8 +28,6 @@ use PostFinanceCheckout\Sdk\Model\LineItemCreate;
 use PostFinanceCheckout\Sdk\Model\LineItemType;
 use PostFinanceCheckout\Sdk\Model\TransactionCompletionState;
 use PostFinanceCheckout\Sdk\Model\TransactionCreate;
-use PostFinanceCheckout\Sdk\Service\TransactionCompletionService;
-use PostFinanceCheckout\Sdk\Service\TransactionService;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -50,9 +48,6 @@ class TransactionCompletionServiceTest extends TestCase
      * @var PostFinanceCheckout\Sdk\Model\TransactionCreate
      */
     private $transactionPayload;
-
-    private $transactionCompletionService;
-    private $transactionService;
 
     /**
      * @var int
@@ -75,14 +70,8 @@ class TransactionCompletionServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        if (is_null($this->transactionCompletionService)) {
-            $this->transactionCompletionService = new TransactionCompletionService($this->getApiClient());
-        }
-
-        if (is_null($this->transactionService)) {
-            $this->transactionService = new TransactionService($this->getApiClient());
-        }
-
+        
+        $this->apiClient = $this->getApiClient();
         $this->transactionPayload = $this->getTransactionPayload();
     }
 
@@ -159,9 +148,9 @@ class TransactionCompletionServiceTest extends TestCase
      */
     public function testCompleteOffline()
     {
-        $transaction = $this->transactionService->create($this->spaceId, $this->getTransactionPayload());
-        $this->transactionService->processWithoutUserInteraction($this->spaceId, $transaction->getId());
-        $transactionCompletion = $this->transactionCompletionService->completeOffline($this->spaceId, $transaction->getId());
+        $transaction = $this->apiClient->getTransactionService()->create($this->spaceId, $this->getTransactionPayload());
+        $this->apiClient->getTransactionService()->processWithoutUserInteraction($this->spaceId, $transaction->getId());
+        $transactionCompletion = $this->apiClient->getTransactionCompletionService()->completeOffline($this->spaceId, $transaction->getId());
         $this->assertEquals(true, in_array($transactionCompletion->getState(), [TransactionCompletionState::SUCCESSFUL, TransactionCompletionState::PENDING]));
     }
 

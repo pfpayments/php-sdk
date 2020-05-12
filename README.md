@@ -56,9 +56,9 @@ $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 // Setup API client
 $client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
 
-// Create API service instance
-$transactionService = new \PostFinanceCheckout\Sdk\Service\TransactionService($client);
-$transactionPaymentPageService = new \PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService($client);
+// Get API service instance
+$client->getTransactionService();
+$client->getTransactionPaymentPageService();
 
 ```
 
@@ -75,10 +75,6 @@ $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 // Setup API client
 $client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
 
-// Create API service instance
-$transactionService = new \PostFinanceCheckout\Sdk\Service\TransactionService($client);
-$transactionPaymentPageService = new \PostFinanceCheckout\Sdk\Service\TransactionPaymentPageService($client);
-
 // Create transaction
 $lineItem = new \PostFinanceCheckout\Sdk\Model\LineItemCreate();
 $lineItem->setName('Red T-Shirt');
@@ -89,15 +85,15 @@ $lineItem->setAmountIncludingTax(29.95);
 $lineItem->setType(\PostFinanceCheckout\Sdk\Model\LineItemType::PRODUCT);
 
 
-$transaction = new \PostFinanceCheckout\Sdk\Model\TransactionCreate();
-$transaction->setCurrency('EUR');
-$transaction->setLineItems(array($lineItem));
-$transaction->setAutoConfirmationEnabled(true);
+$transactionPayload = new \PostFinanceCheckout\Sdk\Model\TransactionCreate();
+$transactionPayload->setCurrency('EUR');
+$transactionPayload->setLineItems(array($lineItem));
+$transactionPayload->setAutoConfirmationEnabled(true);
 
-$createdTransaction = $transactionService->create($spaceId, $transaction);
+$transaction = $client->getTransactionService()->create($spaceId, $transactionPayload);
 
 // Create Payment Page URL:
-$redirectionUrl = $transactionPaymentPageService->paymentPageUrl($spaceId, $createdTransaction->getId());
+$redirectionUrl = $client->getTransactionPaymentPageService()->paymentPageUrl($spaceId, $transaction->getId());
 
 header('Location: ' . $redirectionUrl);
 

@@ -32,9 +32,6 @@ use PostFinanceCheckout\Sdk\Model\RefundType;
 use PostFinanceCheckout\Sdk\Model\TransactionCompletionState;
 use PostFinanceCheckout\Sdk\Model\TransactionCreate;
 use PostFinanceCheckout\Sdk\Model\TransactionState;
-use PostFinanceCheckout\Sdk\Service\RefundService;
-use PostFinanceCheckout\Sdk\Service\TransactionCompletionService;
-use PostFinanceCheckout\Sdk\Service\TransactionService;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -55,10 +52,6 @@ class RefundServiceTest extends TestCase
      * @var PostFinanceCheckout\Sdk\Model\TransactionCreate
      */
     private $transactionPayload;
-
-    private $transactionCompletionService;
-    private $transactionService;
-    private $refundService;
 
     /**
      * @var int
@@ -82,18 +75,7 @@ class RefundServiceTest extends TestCase
     {
         parent::setUp();
 
-        if (is_null($this->transactionCompletionService)) {
-            $this->transactionCompletionService = new TransactionCompletionService($this->getApiClient());
-        }
-
-        if (is_null($this->refundService)) {
-            $this->refundService = new RefundService($this->getApiClient());
-        }
-
-        if (is_null($this->transactionService)) {
-            $this->transactionService = new TransactionService($this->getApiClient());
-        }
-
+        $this->apiClient = $this->getApiClient();
         $this->transactionPayload = $this->getTransactionPayload();
     }
 
@@ -226,8 +208,8 @@ class RefundServiceTest extends TestCase
      */
     public function testRefund()
     {
-        $transaction = $this->transactionService->create($this->spaceId, $this->transactionPayload);
-        $transaction = $this->transactionService->processWithoutUserInteraction($this->spaceId, $transaction->getId());
+        $transaction = $this->apiClient->getTransactionService()->create($this->spaceId, $this->transactionPayload);
+        $transaction = $this->apiClient->getTransactionService()->processWithoutUserInteraction($this->spaceId, $transaction->getId());
         echo $transaction->getId() . PHP_EOL;
         for ($i = 1; $i <= 5; $i++) {
             echo $transaction->getState() . PHP_EOL;
@@ -235,17 +217,17 @@ class RefundServiceTest extends TestCase
                 break;
             }
             sleep($i * 30);
-            $transaction = $this->transactionService->read($this->spaceId, $transaction->getId());
+            $transaction = $this->apiClient->getTransactionService()->read($this->spaceId, $transaction->getId());
         }
         if (in_array($transaction->getState(), [TransactionState::FULFILL])) {
-            $transactionCompletion = $this->transactionCompletionService->completeOffline($this->spaceId, $transaction->getId());
+            $transactionCompletion = $this->apiClient->getTransactionCompletionService()->completeOffline($this->spaceId, $transaction->getId());
             $this->assertEquals($transactionCompletion->getState(), TransactionCompletionState::SUCCESSFUL);
-            $transaction = $this->transactionService->read($this->spaceId, $transactionCompletion->getLinkedTransaction());  // fetch the latest transaction data
-            $refundPayload   = $this->getRefundPayload($transaction);
+            $transaction = $this->apiClient->getTransactionService()->read($this->spaceId, $transactionCompletion->getLinkedTransaction());  // fetch the latest transaction data
+            $refundPayload = $this->getRefundPayload($transaction);
             /**
              * \PostFinanceCheckout\Sdk\Model\Refund $refund
              */
-            $refund = $this->refundService->refund($this->spaceId, $refundPayload);
+            $refund = $this->apiClient->getRefundService()->refund($this->spaceId, $refundPayload);
             $this->assertEquals($refund->getState(), RefundState::SUCCESSFUL);
         }
     }
