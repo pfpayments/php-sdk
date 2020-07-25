@@ -19,12 +19,10 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminal model
+ * ShopifyTransaction model
  *
  * @category    Class
  * @description 
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminal implements ModelInterface, ArrayAccess
+class ShopifyTransaction extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +39,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminal';
+    protected static $swaggerModelName = 'ShopifyTransaction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,15 +47,14 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
-        'id' => 'int',
-        'identifier' => 'string',
-        'linked_space_id' => 'int',
-        'location_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion',
-        'name' => 'string',
+        'checkout_id' => 'string',
+        'created_on' => '\DateTime',
+        'integration' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegration',
+        'order_id' => 'string',
+        'order_name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalState',
-        'type' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalType',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ShopifyTransactionState',
+        'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
         'version' => 'int'
     ];
 
@@ -67,15 +64,14 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'configuration_version' => null,
-        'id' => 'int64',
-        'identifier' => null,
-        'linked_space_id' => 'int64',
-        'location_version' => null,
-        'name' => null,
+        'checkout_id' => null,
+        'created_on' => 'date-time',
+        'integration' => null,
+        'order_id' => null,
+        'order_name' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
-        'type' => null,
+        'transaction' => null,
         'version' => 'int32'
     ];
 
@@ -86,15 +82,14 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'configuration_version' => 'configurationVersion',
-        'id' => 'id',
-        'identifier' => 'identifier',
-        'linked_space_id' => 'linkedSpaceId',
-        'location_version' => 'locationVersion',
-        'name' => 'name',
+        'checkout_id' => 'checkoutId',
+        'created_on' => 'createdOn',
+        'integration' => 'integration',
+        'order_id' => 'orderId',
+        'order_name' => 'orderName',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
-        'type' => 'type',
+        'transaction' => 'transaction',
         'version' => 'version'
     ];
 
@@ -104,15 +99,14 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'configuration_version' => 'setConfigurationVersion',
-        'id' => 'setId',
-        'identifier' => 'setIdentifier',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'location_version' => 'setLocationVersion',
-        'name' => 'setName',
+        'checkout_id' => 'setCheckoutId',
+        'created_on' => 'setCreatedOn',
+        'integration' => 'setIntegration',
+        'order_id' => 'setOrderId',
+        'order_name' => 'setOrderName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
-        'type' => 'setType',
+        'transaction' => 'setTransaction',
         'version' => 'setVersion'
     ];
 
@@ -122,26 +116,19 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'configuration_version' => 'getConfigurationVersion',
-        'id' => 'getId',
-        'identifier' => 'getIdentifier',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'location_version' => 'getLocationVersion',
-        'name' => 'getName',
+        'checkout_id' => 'getCheckoutId',
+        'created_on' => 'getCreatedOn',
+        'integration' => 'getIntegration',
+        'order_id' => 'getOrderId',
+        'order_name' => 'getOrderName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
-        'type' => 'getType',
+        'transaction' => 'getTransaction',
         'version' => 'getVersion'
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -151,24 +138,24 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         
-        $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
+        $this->container['checkout_id'] = isset($data['checkout_id']) ? $data['checkout_id'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
-        $this->container['identifier'] = isset($data['identifier']) ? $data['identifier'] : null;
+        $this->container['integration'] = isset($data['integration']) ? $data['integration'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
         
-        $this->container['location_version'] = isset($data['location_version']) ? $data['location_version'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['order_name'] = isset($data['order_name']) ? $data['order_name'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -181,11 +168,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -197,7 +180,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -207,7 +190,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -219,7 +202,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -229,7 +212,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -239,7 +222,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -268,154 +251,125 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets configuration_version
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion
-     */
-    public function getConfigurationVersion()
-    {
-        return $this->container['configuration_version'];
-    }
-
-    /**
-     * Sets configuration_version
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version 
-     *
-     * @return $this
-     */
-    public function setConfigurationVersion($configuration_version)
-    {
-        $this->container['configuration_version'] = $configuration_version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets identifier
+     * Gets checkout_id
      *
      * @return string
      */
-    public function getIdentifier()
+    public function getCheckoutId()
     {
-        return $this->container['identifier'];
+        return $this->container['checkout_id'];
     }
 
     /**
-     * Sets identifier
+     * Sets checkout_id
      *
-     * @param string $identifier The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
+     * @param string $checkout_id 
      *
      * @return $this
      */
-    public function setIdentifier($identifier)
+    public function setCheckoutId($checkout_id)
     {
-        $this->container['identifier'] = $identifier;
+        $this->container['checkout_id'] = $checkout_id;
 
         return $this;
     }
     
 
     /**
-     * Gets linked_space_id
+     * Gets created_on
      *
-     * @return int
+     * @return \DateTime
      */
-    public function getLinkedSpaceId()
+    public function getCreatedOn()
     {
-        return $this->container['linked_space_id'];
+        return $this->container['created_on'];
     }
 
     /**
-     * Sets linked_space_id
+     * Sets created_on
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
      *
      * @return $this
      */
-    public function setLinkedSpaceId($linked_space_id)
+    public function setCreatedOn($created_on)
     {
-        $this->container['linked_space_id'] = $linked_space_id;
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }
     
 
     /**
-     * Gets location_version
+     * Gets integration
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyIntegration
      */
-    public function getLocationVersion()
+    public function getIntegration()
     {
-        return $this->container['location_version'];
+        return $this->container['integration'];
     }
 
     /**
-     * Sets location_version
+     * Sets integration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion $location_version 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyIntegration $integration 
      *
      * @return $this
      */
-    public function setLocationVersion($location_version)
+    public function setIntegration($integration)
     {
-        $this->container['location_version'] = $location_version;
+        $this->container['integration'] = $integration;
 
         return $this;
     }
     
 
     /**
-     * Gets name
+     * Gets order_id
      *
      * @return string
      */
-    public function getName()
+    public function getOrderId()
     {
-        return $this->container['name'];
+        return $this->container['order_id'];
     }
 
     /**
-     * Sets name
+     * Sets order_id
      *
-     * @param string $name The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $order_id 
      *
      * @return $this
      */
-    public function setName($name)
+    public function setOrderId($order_id)
     {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminal., must be smaller than or equal to 100.');
-        }
+        $this->container['order_id'] = $order_id;
 
-        $this->container['name'] = $name;
+        return $this;
+    }
+    
+
+    /**
+     * Gets order_name
+     *
+     * @return string
+     */
+    public function getOrderName()
+    {
+        return $this->container['order_name'];
+    }
+
+    /**
+     * Sets order_name
+     *
+     * @param string $order_name 
+     *
+     * @return $this
+     */
+    public function setOrderName($order_name)
+    {
+        $this->container['order_name'] = $order_name;
 
         return $this;
     }
@@ -449,7 +403,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalState
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyTransactionState
      */
     public function getState()
     {
@@ -459,7 +413,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyTransactionState $state 
      *
      * @return $this
      */
@@ -472,25 +426,25 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets type
+     * Gets transaction
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalType
+     * @return \PostFinanceCheckout\Sdk\Model\Transaction
      */
-    public function getType()
+    public function getTransaction()
     {
-        return $this->container['type'];
+        return $this->container['transaction'];
     }
 
     /**
-     * Sets type
+     * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalType $type 
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */
-    public function setType($type)
+    public function setTransaction($transaction)
     {
-        $this->container['type'] = $type;
+        $this->container['transaction'] = $transaction;
 
         return $this;
     }

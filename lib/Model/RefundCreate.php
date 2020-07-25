@@ -165,6 +165,18 @@ class RefundCreate implements ModelInterface, ArrayAccess
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }
+        if ((mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
@@ -317,6 +329,13 @@ class RefundCreate implements ModelInterface, ArrayAccess
      */
     public function setExternalId($external_id)
     {
+        if ((mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling RefundCreate., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling RefundCreate., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -342,6 +361,10 @@ class RefundCreate implements ModelInterface, ArrayAccess
      */
     public function setMerchantReference($merchant_reference)
     {
+        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling RefundCreate., must be smaller than or equal to 100.');
+        }
+
         $this->container['merchant_reference'] = $merchant_reference;
 
         return $this;

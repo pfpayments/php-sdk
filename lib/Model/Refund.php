@@ -75,6 +75,8 @@ class Refund implements ModelInterface, ArrayAccess
         'taxes' => '\PostFinanceCheckout\Sdk\Model\Tax[]',
         'time_zone' => 'string',
         'timeout_on' => '\DateTime',
+        'total_applied_fees' => 'float',
+        'total_settled_amount' => 'float',
         'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
         'type' => '\PostFinanceCheckout\Sdk\Model\RefundType',
         'updated_invoice' => 'int',
@@ -113,6 +115,8 @@ class Refund implements ModelInterface, ArrayAccess
         'taxes' => null,
         'time_zone' => null,
         'timeout_on' => 'date-time',
+        'total_applied_fees' => null,
+        'total_settled_amount' => null,
         'transaction' => null,
         'type' => null,
         'updated_invoice' => 'int64',
@@ -152,6 +156,8 @@ class Refund implements ModelInterface, ArrayAccess
         'taxes' => 'taxes',
         'time_zone' => 'timeZone',
         'timeout_on' => 'timeoutOn',
+        'total_applied_fees' => 'totalAppliedFees',
+        'total_settled_amount' => 'totalSettledAmount',
         'transaction' => 'transaction',
         'type' => 'type',
         'updated_invoice' => 'updatedInvoice',
@@ -190,6 +196,8 @@ class Refund implements ModelInterface, ArrayAccess
         'taxes' => 'setTaxes',
         'time_zone' => 'setTimeZone',
         'timeout_on' => 'setTimeoutOn',
+        'total_applied_fees' => 'setTotalAppliedFees',
+        'total_settled_amount' => 'setTotalSettledAmount',
         'transaction' => 'setTransaction',
         'type' => 'setType',
         'updated_invoice' => 'setUpdatedInvoice',
@@ -228,6 +236,8 @@ class Refund implements ModelInterface, ArrayAccess
         'taxes' => 'getTaxes',
         'time_zone' => 'getTimeZone',
         'timeout_on' => 'getTimeoutOn',
+        'total_applied_fees' => 'getTotalAppliedFees',
+        'total_settled_amount' => 'getTotalSettledAmount',
         'transaction' => 'getTransaction',
         'type' => 'getType',
         'updated_invoice' => 'getUpdatedInvoice',
@@ -304,6 +314,10 @@ class Refund implements ModelInterface, ArrayAccess
         
         $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
         
+        $this->container['total_applied_fees'] = isset($data['total_applied_fees']) ? $data['total_applied_fees'] : null;
+        
+        $this->container['total_settled_amount'] = isset($data['total_settled_amount']) ? $data['total_settled_amount'] : null;
+        
         $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
         
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
@@ -322,6 +336,22 @@ class Refund implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['processor_reference']) && (mb_strlen($this->container['processor_reference']) > 150)) {
+            $invalidProperties[] = "invalid value for 'processor_reference', the character length must be smaller than or equal to 150.";
+        }
 
         return $invalidProperties;
     }
@@ -572,6 +602,13 @@ class Refund implements ModelInterface, ArrayAccess
      */
     public function setExternalId($external_id)
     {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling Refund., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling Refund., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -772,6 +809,10 @@ class Refund implements ModelInterface, ArrayAccess
      */
     public function setMerchantReference($merchant_reference)
     {
+        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling Refund., must be smaller than or equal to 100.');
+        }
+
         $this->container['merchant_reference'] = $merchant_reference;
 
         return $this;
@@ -872,6 +913,10 @@ class Refund implements ModelInterface, ArrayAccess
      */
     public function setProcessorReference($processor_reference)
     {
+        if (!is_null($processor_reference) && (mb_strlen($processor_reference) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $processor_reference when calling Refund., must be smaller than or equal to 150.');
+        }
+
         $this->container['processor_reference'] = $processor_reference;
 
         return $this;
@@ -1048,6 +1093,56 @@ class Refund implements ModelInterface, ArrayAccess
     public function setTimeoutOn($timeout_on)
     {
         $this->container['timeout_on'] = $timeout_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets total_applied_fees
+     *
+     * @return float
+     */
+    public function getTotalAppliedFees()
+    {
+        return $this->container['total_applied_fees'];
+    }
+
+    /**
+     * Sets total_applied_fees
+     *
+     * @param float $total_applied_fees The total applied fees is the sum of all fees that have been applied so far.
+     *
+     * @return $this
+     */
+    public function setTotalAppliedFees($total_applied_fees)
+    {
+        $this->container['total_applied_fees'] = $total_applied_fees;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets total_settled_amount
+     *
+     * @return float
+     */
+    public function getTotalSettledAmount()
+    {
+        return $this->container['total_settled_amount'];
+    }
+
+    /**
+     * Sets total_settled_amount
+     *
+     * @param float $total_settled_amount The total settled amount is the total amount which has been settled so far.
+     *
+     * @return $this
+     */
+    public function setTotalSettledAmount($total_settled_amount)
+    {
+        $this->container['total_settled_amount'] = $total_settled_amount;
 
         return $this;
     }

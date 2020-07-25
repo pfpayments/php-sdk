@@ -163,9 +163,33 @@ class TransactionCreate extends AbstractTransactionPending
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
         if ($this->container['line_items'] === null) {
             $invalidProperties[] = "'line_items' can't be null";
         }
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
+            $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) > 40)) {
+            $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) < 10)) {
+            $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be bigger than or equal to 10.";
+        }
+
         return $invalidProperties;
     }
 
@@ -340,6 +364,13 @@ class TransactionCreate extends AbstractTransactionPending
      */
     public function setDeviceSessionIdentifier($device_session_identifier)
     {
+        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling TransactionCreate., must be smaller than or equal to 40.');
+        }
+        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) < 10)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling TransactionCreate., must be bigger than or equal to 10.');
+        }
+
         $this->container['device_session_identifier'] = $device_session_identifier;
 
         return $this;

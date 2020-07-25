@@ -253,6 +253,66 @@ class Address implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['city']) && (mb_strlen($this->container['city']) > 100)) {
+            $invalidProperties[] = "invalid value for 'city', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['commercial_register_number']) && (mb_strlen($this->container['commercial_register_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'commercial_register_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['family_name']) && (mb_strlen($this->container['family_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'family_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['postcode']) && (mb_strlen($this->container['postcode']) > 40)) {
+            $invalidProperties[] = "invalid value for 'postcode', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['sales_tax_number']) && (mb_strlen($this->container['sales_tax_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sales_tax_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['social_security_number']) && (mb_strlen($this->container['social_security_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'social_security_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['street']) && (mb_strlen($this->container['street']) > 300)) {
+            $invalidProperties[] = "invalid value for 'street', the character length must be smaller than or equal to 300.";
+        }
+
         return $invalidProperties;
     }
 
@@ -352,6 +412,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setCity($city)
     {
+        if (!is_null($city) && (mb_strlen($city) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $city when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['city'] = $city;
 
         return $this;
@@ -377,6 +441,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setCommercialRegisterNumber($commercial_register_number)
     {
+        if (!is_null($commercial_register_number) && (mb_strlen($commercial_register_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $commercial_register_number when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['commercial_register_number'] = $commercial_register_number;
 
         return $this;
@@ -452,6 +520,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setDependentLocality($dependent_locality)
     {
+        if (!is_null($dependent_locality) && (mb_strlen($dependent_locality) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $dependent_locality when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['dependent_locality'] = $dependent_locality;
 
         return $this;
@@ -477,6 +549,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setEmailAddress($email_address)
     {
+        if (!is_null($email_address) && (mb_strlen($email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling Address., must be smaller than or equal to 254.');
+        }
+
         $this->container['email_address'] = $email_address;
 
         return $this;
@@ -502,6 +578,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setFamilyName($family_name)
     {
+        if (!is_null($family_name) && (mb_strlen($family_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $family_name when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['family_name'] = $family_name;
 
         return $this;
@@ -552,6 +632,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setGivenName($given_name)
     {
+        if (!is_null($given_name) && (mb_strlen($given_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $given_name when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['given_name'] = $given_name;
 
         return $this;
@@ -602,6 +686,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setMobilePhoneNumber($mobile_phone_number)
     {
+        if (!is_null($mobile_phone_number) && (mb_strlen($mobile_phone_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $mobile_phone_number when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['mobile_phone_number'] = $mobile_phone_number;
 
         return $this;
@@ -627,6 +715,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setOrganizationName($organization_name)
     {
+        if (!is_null($organization_name) && (mb_strlen($organization_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $organization_name when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['organization_name'] = $organization_name;
 
         return $this;
@@ -652,6 +744,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setPhoneNumber($phone_number)
     {
+        if (!is_null($phone_number) && (mb_strlen($phone_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $phone_number when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['phone_number'] = $phone_number;
 
         return $this;
@@ -702,6 +798,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setPostcode($postcode)
     {
+        if (!is_null($postcode) && (mb_strlen($postcode) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $postcode when calling Address., must be smaller than or equal to 40.');
+        }
+
         $this->container['postcode'] = $postcode;
 
         return $this;
@@ -727,6 +827,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setSalesTaxNumber($sales_tax_number)
     {
+        if (!is_null($sales_tax_number) && (mb_strlen($sales_tax_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sales_tax_number when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['sales_tax_number'] = $sales_tax_number;
 
         return $this;
@@ -752,6 +856,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setSalutation($salutation)
     {
+        if (!is_null($salutation) && (mb_strlen($salutation) > 20)) {
+            throw new \InvalidArgumentException('invalid length for $salutation when calling Address., must be smaller than or equal to 20.');
+        }
+
         $this->container['salutation'] = $salutation;
 
         return $this;
@@ -777,6 +885,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setSocialSecurityNumber($social_security_number)
     {
+        if (!is_null($social_security_number) && (mb_strlen($social_security_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $social_security_number when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['social_security_number'] = $social_security_number;
 
         return $this;
@@ -802,6 +914,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setSortingCode($sorting_code)
     {
+        if (!is_null($sorting_code) && (mb_strlen($sorting_code) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sorting_code when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['sorting_code'] = $sorting_code;
 
         return $this;
@@ -827,6 +943,10 @@ class Address implements ModelInterface, ArrayAccess
      */
     public function setStreet($street)
     {
+        if (!is_null($street) && (mb_strlen($street) > 300)) {
+            throw new \InvalidArgumentException('invalid length for $street when calling Address., must be smaller than or equal to 300.');
+        }
+
         $this->container['street'] = $street;
 
         return $this;

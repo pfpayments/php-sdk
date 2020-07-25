@@ -134,6 +134,10 @@ class TenantDatabase implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 200)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -258,6 +262,10 @@ class TenantDatabase implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling TenantDatabase., must be smaller than or equal to 200.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

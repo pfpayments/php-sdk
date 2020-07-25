@@ -197,6 +197,22 @@ class HumanUser implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 128)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 128.";
+        }
+
+        if (!is_null($this->container['firstname']) && (mb_strlen($this->container['firstname']) > 100)) {
+            $invalidProperties[] = "invalid value for 'firstname', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['lastname']) && (mb_strlen($this->container['lastname']) > 100)) {
+            $invalidProperties[] = "invalid value for 'lastname', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 30)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 30.";
+        }
+
         return $invalidProperties;
     }
 
@@ -296,6 +312,10 @@ class HumanUser implements ModelInterface, ArrayAccess
      */
     public function setEmailAddress($email_address)
     {
+        if (!is_null($email_address) && (mb_strlen($email_address) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling HumanUser., must be smaller than or equal to 128.');
+        }
+
         $this->container['email_address'] = $email_address;
 
         return $this;
@@ -346,6 +366,10 @@ class HumanUser implements ModelInterface, ArrayAccess
      */
     public function setFirstname($firstname)
     {
+        if (!is_null($firstname) && (mb_strlen($firstname) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $firstname when calling HumanUser., must be smaller than or equal to 100.');
+        }
+
         $this->container['firstname'] = $firstname;
 
         return $this;
@@ -396,6 +420,10 @@ class HumanUser implements ModelInterface, ArrayAccess
      */
     public function setLastname($lastname)
     {
+        if (!is_null($lastname) && (mb_strlen($lastname) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $lastname when calling HumanUser., must be smaller than or equal to 100.');
+        }
+
         $this->container['lastname'] = $lastname;
 
         return $this;
@@ -421,6 +449,10 @@ class HumanUser implements ModelInterface, ArrayAccess
      */
     public function setMobilePhoneNumber($mobile_phone_number)
     {
+        if (!is_null($mobile_phone_number) && (mb_strlen($mobile_phone_number) > 30)) {
+            throw new \InvalidArgumentException('invalid length for $mobile_phone_number when calling HumanUser., must be smaller than or equal to 30.');
+        }
+
         $this->container['mobile_phone_number'] = $mobile_phone_number;
 
         return $this;

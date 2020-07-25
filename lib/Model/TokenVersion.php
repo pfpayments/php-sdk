@@ -274,6 +274,14 @@ class TokenVersion implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 150)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['processor_token']) && (mb_strlen($this->container['processor_token']) > 150)) {
+            $invalidProperties[] = "invalid value for 'processor_token', the character length must be smaller than or equal to 150.";
+        }
+
         return $invalidProperties;
     }
 
@@ -623,6 +631,10 @@ class TokenVersion implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling TokenVersion., must be smaller than or equal to 150.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
@@ -798,6 +810,10 @@ class TokenVersion implements ModelInterface, ArrayAccess
      */
     public function setProcessorToken($processor_token)
     {
+        if (!is_null($processor_token) && (mb_strlen($processor_token) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $processor_token when calling TokenVersion., must be smaller than or equal to 150.');
+        }
+
         $this->container['processor_token'] = $processor_token;
 
         return $this;

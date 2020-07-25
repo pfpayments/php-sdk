@@ -49,6 +49,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalContactAddress',
         'default_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration',
         'delivery_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
         'id' => 'int',
@@ -65,6 +66,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'contact_address' => null,
         'default_configuration' => null,
         'delivery_address' => null,
         'id' => 'int64',
@@ -82,6 +84,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'contact_address' => 'contactAddress',
         'default_configuration' => 'defaultConfiguration',
         'delivery_address' => 'deliveryAddress',
         'id' => 'id',
@@ -98,6 +101,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'contact_address' => 'setContactAddress',
         'default_configuration' => 'setDefaultConfiguration',
         'delivery_address' => 'setDeliveryAddress',
         'id' => 'setId',
@@ -114,6 +118,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'contact_address' => 'getContactAddress',
         'default_configuration' => 'getDefaultConfiguration',
         'delivery_address' => 'getDeliveryAddress',
         'id' => 'getId',
@@ -142,6 +147,8 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
+        
         $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
         
         $this->container['delivery_address'] = isset($data['delivery_address']) ? $data['delivery_address'] : null;
@@ -168,6 +175,10 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
 
         return $invalidProperties;
     }
@@ -247,6 +258,31 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets contact_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalContactAddress
+     */
+    public function getContactAddress()
+    {
+        return $this->container['contact_address'];
+    }
+
+    /**
+     * Sets contact_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalContactAddress $contact_address 
+     *
+     * @return $this
+     */
+    public function setContactAddress($contact_address)
+    {
+        $this->container['contact_address'] = $contact_address;
+
+        return $this;
+    }
     
 
     /**
@@ -368,6 +404,10 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

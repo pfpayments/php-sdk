@@ -27,14 +27,14 @@ use PostFinanceCheckout\Sdk\Http\HttpRequest;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentProcessorConfigurationService service
+ * ShopifyTransactionService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentProcessorConfigurationService {
+class ShopifyTransactionService {
 
 	/**
 	 * The API client instance.
@@ -114,7 +114,7 @@ class PaymentProcessorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/payment-processor-configuration/count';
+		$resourcePath = '/shopify-transaction/count';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -142,7 +142,7 @@ class PaymentProcessorConfigurationService {
 				$httpBody,
 				$headerParams,
 				'int',
-				'/payment-processor-configuration/count'
+				'/shopify-transaction/count'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -182,11 +182,11 @@ class PaymentProcessorConfigurationService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the payment processor configuration which should be returned. (required)
+	 * @param int $id The id of the Shopify transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration
+	 * @return \PostFinanceCheckout\Sdk\Model\ShopifyTransaction
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -198,7 +198,7 @@ class PaymentProcessorConfigurationService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the payment processor configuration which should be returned. (required)
+	 * @param int $id The id of the Shopify transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -231,7 +231,7 @@ class PaymentProcessorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/payment-processor-configuration/read';
+		$resourcePath = '/shopify-transaction/read';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -253,16 +253,16 @@ class PaymentProcessorConfigurationService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration',
-				'/payment-processor-configuration/read'
+				'\PostFinanceCheckout\Sdk\Model\ShopifyTransaction',
+				'/shopify-transaction/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifyTransaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration',
+                        '\PostFinanceCheckout\Sdk\Model\ShopifyTransaction',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -294,11 +294,11 @@ class PaymentProcessorConfigurationService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the payment processor configuration which are returned by the search. (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the Shopify transactions which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration[]
+	 * @return \PostFinanceCheckout\Sdk\Model\ShopifyTransaction[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -310,7 +310,7 @@ class PaymentProcessorConfigurationService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the payment processor configuration which are returned by the search. (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the Shopify transactions which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -340,7 +340,7 @@ class PaymentProcessorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/payment-processor-configuration/search';
+		$resourcePath = '/shopify-transaction/search';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -367,16 +367,16 @@ class PaymentProcessorConfigurationService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration[]',
-				'/payment-processor-configuration/search'
+				'\PostFinanceCheckout\Sdk\Model\ShopifyTransaction[]',
+				'/shopify-transaction/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifyTransaction[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration[]',
+                        '\PostFinanceCheckout\Sdk\Model\ShopifyTransaction[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

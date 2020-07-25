@@ -162,6 +162,14 @@ class SpaceView implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 200)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -311,6 +319,13 @@ class SpaceView implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling SpaceView., must be smaller than or equal to 200.');
+        }
+        if (!is_null($name) && (mb_strlen($name) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling SpaceView., must be bigger than or equal to 3.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

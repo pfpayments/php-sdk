@@ -128,6 +128,10 @@ class ApplicationUser extends User
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 256)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 256.";
+        }
+
         return $invalidProperties;
     }
 
@@ -227,6 +231,10 @@ class ApplicationUser extends User
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 256)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling ApplicationUser., must be smaller than or equal to 256.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

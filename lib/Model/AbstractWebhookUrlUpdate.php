@@ -133,6 +133,10 @@ class AbstractWebhookUrlUpdate implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
+
         return $invalidProperties;
     }
 
@@ -232,6 +236,10 @@ class AbstractWebhookUrlUpdate implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling AbstractWebhookUrlUpdate., must be smaller than or equal to 50.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

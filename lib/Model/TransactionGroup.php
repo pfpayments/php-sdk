@@ -169,6 +169,10 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['customer_id']) && (mb_strlen($this->container['customer_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'customer_id', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -293,6 +297,10 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      */
     public function setCustomerId($customer_id)
     {
+        if (!is_null($customer_id) && (mb_strlen($customer_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $customer_id when calling TransactionGroup., must be smaller than or equal to 100.');
+        }
+
         $this->container['customer_id'] = $customer_id;
 
         return $this;

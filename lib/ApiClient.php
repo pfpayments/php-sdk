@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.0/php';
+	private $userAgent = 'PHP-Client/2.1.1/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -893,6 +893,18 @@ final class ApiClient {
             $this->refundService = new \PostFinanceCheckout\Sdk\Service\RefundService($this);
         }
         return $this->refundService;
+    }
+    
+    protected $shopifyTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\ShopifyTransactionService
+     */
+    public function getShopifyTransactionService() {
+        if(is_null($this->shopifyTransactionService)){
+            $this->shopifyTransactionService = new \PostFinanceCheckout\Sdk\Service\ShopifyTransactionService($this);
+        }
+        return $this->shopifyTransactionService;
     }
     
     protected $spaceService;

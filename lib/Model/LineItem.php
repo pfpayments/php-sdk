@@ -260,6 +260,22 @@ class LineItem implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 150)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 1)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 200)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['unique_id']) && (mb_strlen($this->container['unique_id']) > 200)) {
+            $invalidProperties[] = "invalid value for 'unique_id', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -509,6 +525,13 @@ class LineItem implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling LineItem., must be smaller than or equal to 150.');
+        }
+        if (!is_null($name) && (mb_strlen($name) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling LineItem., must be bigger than or equal to 1.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
@@ -584,6 +607,10 @@ class LineItem implements ModelInterface, ArrayAccess
      */
     public function setSku($sku)
     {
+        if (!is_null($sku) && (mb_strlen($sku) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling LineItem., must be smaller than or equal to 200.');
+        }
+
         $this->container['sku'] = $sku;
 
         return $this;
@@ -809,6 +836,10 @@ class LineItem implements ModelInterface, ArrayAccess
      */
     public function setUniqueId($unique_id)
     {
+        if (!is_null($unique_id) && (mb_strlen($unique_id) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $unique_id when calling LineItem., must be smaller than or equal to 200.');
+        }
+
         $this->container['unique_id'] = $unique_id;
 
         return $this;

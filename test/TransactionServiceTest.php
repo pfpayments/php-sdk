@@ -335,7 +335,7 @@ class TransactionServiceTest extends TestCase
         $transaction = $this->apiClient->getTransactionService()->create($this->spaceId, $this->getTransactionPayload());
         $this->assertEquals($transaction->getState(), TransactionState::PENDING);
         $transaction = $this->apiClient->getTransactionService()->processWithoutUserInteraction($this->spaceId, $transaction->getId());
-        $this->assertEquals(true, in_array($transaction->getState(), [TransactionState::AUTHORIZED, TransactionState::FULFILL]));
+        $this->assertEquals(true, in_array($transaction->getState(), [TransactionState::AUTHORIZED, TransactionState::FULFILL, TransactionState::PROCESSING]));
     }
 
     /**

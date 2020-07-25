@@ -190,6 +190,22 @@ class Customer implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['customer_id']) && (mb_strlen($this->container['customer_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'customer_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['family_name']) && (mb_strlen($this->container['family_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'family_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -314,6 +330,10 @@ class Customer implements ModelInterface, ArrayAccess
      */
     public function setCustomerId($customer_id)
     {
+        if (!is_null($customer_id) && (mb_strlen($customer_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $customer_id when calling Customer., must be smaller than or equal to 100.');
+        }
+
         $this->container['customer_id'] = $customer_id;
 
         return $this;
@@ -339,6 +359,10 @@ class Customer implements ModelInterface, ArrayAccess
      */
     public function setEmailAddress($email_address)
     {
+        if (!is_null($email_address) && (mb_strlen($email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling Customer., must be smaller than or equal to 254.');
+        }
+
         $this->container['email_address'] = $email_address;
 
         return $this;
@@ -364,6 +388,10 @@ class Customer implements ModelInterface, ArrayAccess
      */
     public function setFamilyName($family_name)
     {
+        if (!is_null($family_name) && (mb_strlen($family_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $family_name when calling Customer., must be smaller than or equal to 100.');
+        }
+
         $this->container['family_name'] = $family_name;
 
         return $this;
@@ -389,6 +417,10 @@ class Customer implements ModelInterface, ArrayAccess
      */
     public function setGivenName($given_name)
     {
+        if (!is_null($given_name) && (mb_strlen($given_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $given_name when calling Customer., must be smaller than or equal to 100.');
+        }
+
         $this->container['given_name'] = $given_name;
 
         return $this;

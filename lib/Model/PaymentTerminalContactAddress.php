@@ -19,12 +19,10 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TaxCreate model
+ * PaymentTerminalContactAddress model
  *
  * @category    Class
  * @description 
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCreate implements ModelInterface, ArrayAccess
+class PaymentTerminalContactAddress extends PaymentTerminalAddress 
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +39,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Tax.Create';
+    protected static $swaggerModelName = 'PaymentTerminalContactAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +47,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'rate' => 'float',
-        'title' => 'string'
+        
     ];
 
     /**
@@ -59,8 +56,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'rate' => null,
-        'title' => null
+        
     ];
 
     /**
@@ -70,8 +66,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'rate' => 'rate',
-        'title' => 'title'
+        
     ];
 
     /**
@@ -80,8 +75,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'title' => 'setTitle'
+        
     ];
 
     /**
@@ -90,18 +84,11 @@ class TaxCreate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'title' => 'getTitle'
+        
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -111,10 +98,8 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        
-        $this->container['rate'] = isset($data['rate']) ? $data['rate'] : null;
-        
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        parent::__construct($data);
+
         
     }
 
@@ -125,20 +110,26 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['rate'] === null) {
-            $invalidProperties[] = "'rate' can't be null";
-        }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
-        if ((mb_strlen($this->container['title']) > 40)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 40.";
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
         }
 
-        if ((mb_strlen($this->container['title']) < 2)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 2.";
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -151,7 +142,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -161,7 +152,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -173,7 +164,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -183,7 +174,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -193,7 +184,7 @@ class TaxCreate implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -219,63 +210,6 @@ class TaxCreate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets rate
-     *
-     * @return float
-     */
-    public function getRate()
-    {
-        return $this->container['rate'];
-    }
-
-    /**
-     * Sets rate
-     *
-     * @param float $rate 
-     *
-     * @return $this
-     */
-    public function setRate($rate)
-    {
-        $this->container['rate'] = $rate;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title 
-     *
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        if ((mb_strlen($title) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling TaxCreate., must be smaller than or equal to 40.');
-        }
-        if ((mb_strlen($title) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling TaxCreate., must be bigger than or equal to 2.');
-        }
-
-        $this->container['title'] = $title;
-
-        return $this;
-    }
     
     /**
      * Returns true if offset exists. False otherwise.

@@ -114,6 +114,10 @@ class ApplicationUserCreateWithMacKey extends ApplicationUser
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 256)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 256.";
+        }
+
         return $invalidProperties;
     }
 

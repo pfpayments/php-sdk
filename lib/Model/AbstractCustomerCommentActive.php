@@ -119,6 +119,10 @@ class AbstractCustomerCommentActive implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['content']) && (mb_strlen($this->container['content']) > 262144)) {
+            $invalidProperties[] = "invalid value for 'content', the character length must be smaller than or equal to 262144.";
+        }
+
         return $invalidProperties;
     }
 
@@ -218,6 +222,10 @@ class AbstractCustomerCommentActive implements ModelInterface, ArrayAccess
      */
     public function setContent($content)
     {
+        if (!is_null($content) && (mb_strlen($content) > 262144)) {
+            throw new \InvalidArgumentException('invalid length for $content when calling AbstractCustomerCommentActive., must be smaller than or equal to 262144.');
+        }
+
         $this->container['content'] = $content;
 
         return $this;

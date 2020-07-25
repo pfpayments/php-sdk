@@ -238,6 +238,22 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
+            $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -437,6 +453,10 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setCustomerEmailAddress($customer_email_address)
     {
+        if (!is_null($customer_email_address) && (mb_strlen($customer_email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling AbstractTransactionPending., must be smaller than or equal to 254.');
+        }
+
         $this->container['customer_email_address'] = $customer_email_address;
 
         return $this;
@@ -512,6 +532,10 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setInvoiceMerchantReference($invoice_merchant_reference)
     {
+        if (!is_null($invoice_merchant_reference) && (mb_strlen($invoice_merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling AbstractTransactionPending., must be smaller than or equal to 100.');
+        }
+
         $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
 
         return $this;
@@ -587,6 +611,10 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setMerchantReference($merchant_reference)
     {
+        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling AbstractTransactionPending., must be smaller than or equal to 100.');
+        }
+
         $this->container['merchant_reference'] = $merchant_reference;
 
         return $this;
@@ -662,6 +690,10 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setShippingMethod($shipping_method)
     {
+        if (!is_null($shipping_method) && (mb_strlen($shipping_method) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $shipping_method when calling AbstractTransactionPending., must be smaller than or equal to 200.');
+        }
+
         $this->container['shipping_method'] = $shipping_method;
 
         return $this;

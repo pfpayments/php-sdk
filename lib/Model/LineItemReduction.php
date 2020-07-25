@@ -134,6 +134,10 @@ class LineItemReduction implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['line_item_unique_id']) && (mb_strlen($this->container['line_item_unique_id']) > 200)) {
+            $invalidProperties[] = "invalid value for 'line_item_unique_id', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -233,6 +237,10 @@ class LineItemReduction implements ModelInterface, ArrayAccess
      */
     public function setLineItemUniqueId($line_item_unique_id)
     {
+        if (!is_null($line_item_unique_id) && (mb_strlen($line_item_unique_id) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $line_item_unique_id when calling LineItemReduction., must be smaller than or equal to 200.');
+        }
+
         $this->container['line_item_unique_id'] = $line_item_unique_id;
 
         return $this;

@@ -143,6 +143,10 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
         if ($this->container['unique_id'] === null) {
             $invalidProperties[] = "'unique_id' can't be null";
         }
+        if ((mb_strlen($this->container['unique_id']) > 200)) {
+            $invalidProperties[] = "invalid value for 'unique_id', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -292,6 +296,10 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
      */
     public function setUniqueId($unique_id)
     {
+        if ((mb_strlen($unique_id) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $unique_id when calling CompletionLineItemCreate., must be smaller than or equal to 200.');
+        }
+
         $this->container['unique_id'] = $unique_id;
 
         return $this;

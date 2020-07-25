@@ -108,9 +108,9 @@ $userId = 512;
 $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
-$client = new \PostFinanceCheckout\Sdk\Sdk\ApiClient($userId, $secret);
+$client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
 
-$httpClientType = \PostFinanceCheckout\Sdk\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \PostFinanceCheckout\Sdk\Sdk\Http\HttpClientFactory::TYPE_SOCKET
+$httpClientType = \PostFinanceCheckout\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \PostFinanceCheckout\Sdk\Http\HttpClientFactory::TYPE_SOCKET
 
 $client->setHttpClientType($httpClientType);
 ```

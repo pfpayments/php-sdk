@@ -268,6 +268,10 @@ class ChargeAttempt extends TransactionAwareEntity
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['user_failure_message']) && (mb_strlen($this->container['user_failure_message']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'user_failure_message', the character length must be smaller than or equal to 2000.";
+        }
+
         return $invalidProperties;
     }
 
@@ -892,6 +896,10 @@ class ChargeAttempt extends TransactionAwareEntity
      */
     public function setUserFailureMessage($user_failure_message)
     {
+        if (!is_null($user_failure_message) && (mb_strlen($user_failure_message) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $user_failure_message when calling ChargeAttempt., must be smaller than or equal to 2000.');
+        }
+
         $this->container['user_failure_message'] = $user_failure_message;
 
         return $this;

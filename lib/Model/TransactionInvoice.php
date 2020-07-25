@@ -247,6 +247,18 @@ class TransactionInvoice extends TransactionAwareEntity
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -546,6 +558,13 @@ class TransactionInvoice extends TransactionAwareEntity
      */
     public function setExternalId($external_id)
     {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionInvoice., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionInvoice., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -621,6 +640,10 @@ class TransactionInvoice extends TransactionAwareEntity
      */
     public function setMerchantReference($merchant_reference)
     {
+        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling TransactionInvoice., must be smaller than or equal to 100.');
+        }
+
         $this->container['merchant_reference'] = $merchant_reference;
 
         return $this;

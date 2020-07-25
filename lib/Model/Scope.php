@@ -197,6 +197,18 @@ class Scope implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['domain_name']) && (mb_strlen($this->container['domain_name']) > 40)) {
+            $invalidProperties[] = "invalid value for 'domain_name', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['machine_name']) && (mb_strlen($this->container['machine_name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'machine_name', the character length must be smaller than or equal to 50.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
+
         return $invalidProperties;
     }
 
@@ -296,6 +308,10 @@ class Scope implements ModelInterface, ArrayAccess
      */
     public function setDomainName($domain_name)
     {
+        if (!is_null($domain_name) && (mb_strlen($domain_name) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $domain_name when calling Scope., must be smaller than or equal to 40.');
+        }
+
         $this->container['domain_name'] = $domain_name;
 
         return $this;
@@ -371,6 +387,10 @@ class Scope implements ModelInterface, ArrayAccess
      */
     public function setMachineName($machine_name)
     {
+        if (!is_null($machine_name) && (mb_strlen($machine_name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $machine_name when calling Scope., must be smaller than or equal to 50.');
+        }
+
         $this->container['machine_name'] = $machine_name;
 
         return $this;
@@ -396,6 +416,10 @@ class Scope implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling Scope., must be smaller than or equal to 50.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

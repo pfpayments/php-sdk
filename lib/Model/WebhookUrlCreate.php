@@ -112,6 +112,10 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
+
         return $invalidProperties;
     }
 

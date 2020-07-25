@@ -137,6 +137,10 @@ class LineItemReductionCreate implements ModelInterface, ArrayAccess
         if ($this->container['line_item_unique_id'] === null) {
             $invalidProperties[] = "'line_item_unique_id' can't be null";
         }
+        if ((mb_strlen($this->container['line_item_unique_id']) > 200)) {
+            $invalidProperties[] = "invalid value for 'line_item_unique_id', the character length must be smaller than or equal to 200.";
+        }
+
         if ($this->container['quantity_reduction'] === null) {
             $invalidProperties[] = "'quantity_reduction' can't be null";
         }
@@ -242,6 +246,10 @@ class LineItemReductionCreate implements ModelInterface, ArrayAccess
      */
     public function setLineItemUniqueId($line_item_unique_id)
     {
+        if ((mb_strlen($line_item_unique_id) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $line_item_unique_id when calling LineItemReductionCreate., must be smaller than or equal to 200.');
+        }
+
         $this->container['line_item_unique_id'] = $line_item_unique_id;
 
         return $this;

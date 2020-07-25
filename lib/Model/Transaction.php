@@ -104,6 +104,8 @@ class Transaction implements ModelInterface, ArrayAccess
         'time_zone' => 'string',
         'token' => '\PostFinanceCheckout\Sdk\Model\Token',
         'tokenization_mode' => '\PostFinanceCheckout\Sdk\Model\TokenizationMode',
+        'total_applied_fees' => 'float',
+        'total_settled_amount' => 'float',
         'user_agent_header' => 'string',
         'user_failure_message' => 'string',
         'user_interface_type' => '\PostFinanceCheckout\Sdk\Model\TransactionUserInterfaceType',
@@ -171,6 +173,8 @@ class Transaction implements ModelInterface, ArrayAccess
         'time_zone' => null,
         'token' => null,
         'tokenization_mode' => null,
+        'total_applied_fees' => null,
+        'total_settled_amount' => null,
         'user_agent_header' => null,
         'user_failure_message' => null,
         'user_interface_type' => null,
@@ -239,6 +243,8 @@ class Transaction implements ModelInterface, ArrayAccess
         'time_zone' => 'timeZone',
         'token' => 'token',
         'tokenization_mode' => 'tokenizationMode',
+        'total_applied_fees' => 'totalAppliedFees',
+        'total_settled_amount' => 'totalSettledAmount',
         'user_agent_header' => 'userAgentHeader',
         'user_failure_message' => 'userFailureMessage',
         'user_interface_type' => 'userInterfaceType',
@@ -306,6 +312,8 @@ class Transaction implements ModelInterface, ArrayAccess
         'time_zone' => 'setTimeZone',
         'token' => 'setToken',
         'tokenization_mode' => 'setTokenizationMode',
+        'total_applied_fees' => 'setTotalAppliedFees',
+        'total_settled_amount' => 'setTotalSettledAmount',
         'user_agent_header' => 'setUserAgentHeader',
         'user_failure_message' => 'setUserFailureMessage',
         'user_interface_type' => 'setUserInterfaceType',
@@ -373,6 +381,8 @@ class Transaction implements ModelInterface, ArrayAccess
         'time_zone' => 'getTimeZone',
         'token' => 'getToken',
         'tokenization_mode' => 'getTokenizationMode',
+        'total_applied_fees' => 'getTotalAppliedFees',
+        'total_settled_amount' => 'getTotalSettledAmount',
         'user_agent_header' => 'getUserAgentHeader',
         'user_failure_message' => 'getUserFailureMessage',
         'user_interface_type' => 'getUserInterfaceType',
@@ -507,6 +517,10 @@ class Transaction implements ModelInterface, ArrayAccess
         
         $this->container['tokenization_mode'] = isset($data['tokenization_mode']) ? $data['tokenization_mode'] : null;
         
+        $this->container['total_applied_fees'] = isset($data['total_applied_fees']) ? $data['total_applied_fees'] : null;
+        
+        $this->container['total_settled_amount'] = isset($data['total_settled_amount']) ? $data['total_settled_amount'] : null;
+        
         $this->container['user_agent_header'] = isset($data['user_agent_header']) ? $data['user_agent_header'] : null;
         
         $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
@@ -525,6 +539,30 @@ class Transaction implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) > 40)) {
+            $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) < 10)) {
+            $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be bigger than or equal to 10.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
+            $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
+        }
 
         return $invalidProperties;
     }
@@ -1125,6 +1163,10 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setCustomerEmailAddress($customer_email_address)
     {
+        if (!is_null($customer_email_address) && (mb_strlen($customer_email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling Transaction., must be smaller than or equal to 254.');
+        }
+
         $this->container['customer_email_address'] = $customer_email_address;
 
         return $this;
@@ -1225,6 +1267,13 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setDeviceSessionIdentifier($device_session_identifier)
     {
+        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be smaller than or equal to 40.');
+        }
+        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) < 10)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be bigger than or equal to 10.');
+        }
+
         $this->container['device_session_identifier'] = $device_session_identifier;
 
         return $this;
@@ -1525,6 +1574,10 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setInvoiceMerchantReference($invoice_merchant_reference)
     {
+        if (!is_null($invoice_merchant_reference) && (mb_strlen($invoice_merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling Transaction., must be smaller than or equal to 100.');
+        }
+
         $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
 
         return $this;
@@ -1625,6 +1678,10 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setMerchantReference($merchant_reference)
     {
+        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling Transaction., must be smaller than or equal to 100.');
+        }
+
         $this->container['merchant_reference'] = $merchant_reference;
 
         return $this;
@@ -1825,6 +1882,10 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setShippingMethod($shipping_method)
     {
+        if (!is_null($shipping_method) && (mb_strlen($shipping_method) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $shipping_method when calling Transaction., must be smaller than or equal to 200.');
+        }
+
         $this->container['shipping_method'] = $shipping_method;
 
         return $this;
@@ -1976,6 +2037,56 @@ class Transaction implements ModelInterface, ArrayAccess
     public function setTokenizationMode($tokenization_mode)
     {
         $this->container['tokenization_mode'] = $tokenization_mode;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets total_applied_fees
+     *
+     * @return float
+     */
+    public function getTotalAppliedFees()
+    {
+        return $this->container['total_applied_fees'];
+    }
+
+    /**
+     * Sets total_applied_fees
+     *
+     * @param float $total_applied_fees The total applied fees is the sum of all fees that have been applied so far.
+     *
+     * @return $this
+     */
+    public function setTotalAppliedFees($total_applied_fees)
+    {
+        $this->container['total_applied_fees'] = $total_applied_fees;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets total_settled_amount
+     *
+     * @return float
+     */
+    public function getTotalSettledAmount()
+    {
+        return $this->container['total_settled_amount'];
+    }
+
+    /**
+     * Sets total_settled_amount
+     *
+     * @param float $total_settled_amount The total settled amount is the total amount which has been settled so far.
+     *
+     * @return $this
+     */
+    public function setTotalSettledAmount($total_settled_amount)
+    {
+        $this->container['total_settled_amount'] = $total_settled_amount;
 
         return $this;
     }

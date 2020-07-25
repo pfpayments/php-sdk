@@ -130,9 +130,17 @@ class LineItemAttributeCreate implements ModelInterface, ArrayAccess
         if ($this->container['label'] === null) {
             $invalidProperties[] = "'label' can't be null";
         }
+        if ((mb_strlen($this->container['label']) > 512)) {
+            $invalidProperties[] = "invalid value for 'label', the character length must be smaller than or equal to 512.";
+        }
+
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
+        if ((mb_strlen($this->container['value']) > 512)) {
+            $invalidProperties[] = "invalid value for 'value', the character length must be smaller than or equal to 512.";
+        }
+
         return $invalidProperties;
     }
 
@@ -232,6 +240,10 @@ class LineItemAttributeCreate implements ModelInterface, ArrayAccess
      */
     public function setLabel($label)
     {
+        if ((mb_strlen($label) > 512)) {
+            throw new \InvalidArgumentException('invalid length for $label when calling LineItemAttributeCreate., must be smaller than or equal to 512.');
+        }
+
         $this->container['label'] = $label;
 
         return $this;
@@ -257,6 +269,10 @@ class LineItemAttributeCreate implements ModelInterface, ArrayAccess
      */
     public function setValue($value)
     {
+        if ((mb_strlen($value) > 512)) {
+            throw new \InvalidArgumentException('invalid length for $value when calling LineItemAttributeCreate., must be smaller than or equal to 512.');
+        }
+
         $this->container['value'] = $value;
 
         return $this;

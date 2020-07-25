@@ -127,6 +127,14 @@ class Tax implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 40)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) < 2)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 2.";
+        }
+
         return $invalidProperties;
     }
 
@@ -251,6 +259,13 @@ class Tax implements ModelInterface, ArrayAccess
      */
     public function setTitle($title)
     {
+        if (!is_null($title) && (mb_strlen($title) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling Tax., must be smaller than or equal to 40.');
+        }
+        if (!is_null($title) && (mb_strlen($title) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling Tax., must be bigger than or equal to 2.');
+        }
+
         $this->container['title'] = $title;
 
         return $this;

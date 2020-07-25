@@ -162,6 +162,10 @@ class PaymentTerminalConfiguration implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -311,6 +315,10 @@ class PaymentTerminalConfiguration implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalConfiguration., must be smaller than or equal to 100.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
