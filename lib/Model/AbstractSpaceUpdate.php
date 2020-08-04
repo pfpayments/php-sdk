@@ -48,6 +48,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'last_modified_date' => '\DateTime',
         'name' => 'string',
         'postal_address' => '\PostFinanceCheckout\Sdk\Model\SpaceAddressCreate',
         'primary_currency' => 'string',
@@ -63,6 +64,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'last_modified_date' => 'date-time',
         'name' => null,
         'postal_address' => null,
         'primary_currency' => null,
@@ -79,6 +81,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'last_modified_date' => 'lastModifiedDate',
         'name' => 'name',
         'postal_address' => 'postalAddress',
         'primary_currency' => 'primaryCurrency',
@@ -94,6 +97,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'last_modified_date' => 'setLastModifiedDate',
         'name' => 'setName',
         'postal_address' => 'setPostalAddress',
         'primary_currency' => 'setPrimaryCurrency',
@@ -109,6 +113,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'last_modified_date' => 'getLastModifiedDate',
         'name' => 'getName',
         'postal_address' => 'getPostalAddress',
         'primary_currency' => 'getPrimaryCurrency',
@@ -135,6 +140,8 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
+        $this->container['last_modified_date'] = isset($data['last_modified_date']) ? $data['last_modified_date'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
@@ -247,6 +254,31 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets last_modified_date
+     *
+     * @return \DateTime
+     */
+    public function getLastModifiedDate()
+    {
+        return $this->container['last_modified_date'];
+    }
+
+    /**
+     * Sets last_modified_date
+     *
+     * @param \DateTime $last_modified_date 
+     *
+     * @return $this
+     */
+    public function setLastModifiedDate($last_modified_date)
+    {
+        $this->container['last_modified_date'] = $last_modified_date;
+
+        return $this;
+    }
     
 
     /**

@@ -48,6 +48,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'last_modified_date' => '\DateTime',
         'name' => 'string',
         'subaccount_limit' => 'int'
     ];
@@ -58,6 +59,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'last_modified_date' => 'date-time',
         'name' => null,
         'subaccount_limit' => 'int64'
     ];
@@ -69,6 +71,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'last_modified_date' => 'lastModifiedDate',
         'name' => 'name',
         'subaccount_limit' => 'subaccountLimit'
     ];
@@ -79,6 +82,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'last_modified_date' => 'setLastModifiedDate',
         'name' => 'setName',
         'subaccount_limit' => 'setSubaccountLimit'
     ];
@@ -89,6 +93,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'last_modified_date' => 'getLastModifiedDate',
         'name' => 'getName',
         'subaccount_limit' => 'getSubaccountLimit'
     ];
@@ -110,6 +115,8 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
+        $this->container['last_modified_date'] = isset($data['last_modified_date']) ? $data['last_modified_date'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
@@ -212,6 +219,31 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets last_modified_date
+     *
+     * @return \DateTime
+     */
+    public function getLastModifiedDate()
+    {
+        return $this->container['last_modified_date'];
+    }
+
+    /**
+     * Sets last_modified_date
+     *
+     * @param \DateTime $last_modified_date 
+     *
+     * @return $this
+     */
+    public function setLastModifiedDate($last_modified_date)
+    {
+        $this->container['last_modified_date'] = $last_modified_date;
+
+        return $this;
+    }
     
 
     /**

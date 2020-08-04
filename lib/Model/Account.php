@@ -54,6 +54,7 @@ class Account implements ModelInterface, ArrayAccess
         'deleted_by' => 'int',
         'deleted_on' => '\DateTime',
         'id' => 'int',
+        'last_modified_date' => '\DateTime',
         'name' => 'string',
         'parent_account' => '\PostFinanceCheckout\Sdk\Model\Account',
         'planned_purge_date' => '\DateTime',
@@ -76,6 +77,7 @@ class Account implements ModelInterface, ArrayAccess
         'deleted_by' => 'int64',
         'deleted_on' => 'date-time',
         'id' => 'int64',
+        'last_modified_date' => 'date-time',
         'name' => null,
         'parent_account' => null,
         'planned_purge_date' => 'date-time',
@@ -99,6 +101,7 @@ class Account implements ModelInterface, ArrayAccess
         'deleted_by' => 'deletedBy',
         'deleted_on' => 'deletedOn',
         'id' => 'id',
+        'last_modified_date' => 'lastModifiedDate',
         'name' => 'name',
         'parent_account' => 'parentAccount',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -121,6 +124,7 @@ class Account implements ModelInterface, ArrayAccess
         'deleted_by' => 'setDeletedBy',
         'deleted_on' => 'setDeletedOn',
         'id' => 'setId',
+        'last_modified_date' => 'setLastModifiedDate',
         'name' => 'setName',
         'parent_account' => 'setParentAccount',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -143,6 +147,7 @@ class Account implements ModelInterface, ArrayAccess
         'deleted_by' => 'getDeletedBy',
         'deleted_on' => 'getDeletedOn',
         'id' => 'getId',
+        'last_modified_date' => 'getLastModifiedDate',
         'name' => 'getName',
         'parent_account' => 'getParentAccount',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -181,6 +186,8 @@ class Account implements ModelInterface, ArrayAccess
         $this->container['deleted_on'] = isset($data['deleted_on']) ? $data['deleted_on'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['last_modified_date'] = isset($data['last_modified_date']) ? $data['last_modified_date'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
@@ -419,6 +426,31 @@ class Account implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets last_modified_date
+     *
+     * @return \DateTime
+     */
+    public function getLastModifiedDate()
+    {
+        return $this->container['last_modified_date'];
+    }
+
+    /**
+     * Sets last_modified_date
+     *
+     * @param \DateTime $last_modified_date 
+     *
+     * @return $this
+     */
+    public function setLastModifiedDate($last_modified_date)
+    {
+        $this->container['last_modified_date'] = $last_modified_date;
 
         return $this;
     }
