@@ -49,18 +49,19 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'additional_line_item_data' => '\PostFinanceCheckout\Sdk\Model\ShopifyAdditionalLineItemData[]',
         'allow_invoice_download' => 'bool',
         'allowed_payment_method_configurations' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration[]',
-        'app_version' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegrationAppVersion',
         'currency' => 'string',
         'id' => 'int',
-        'installed' => 'bool',
         'integrated_payment_form_enabled' => 'bool',
         'language' => 'string',
         'login_name' => 'string',
         'name' => 'string',
+        'payment_app_version' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegrationPaymentAppVersion',
+        'payment_installed' => 'bool',
+        'payment_proxy_path' => 'string',
         'planned_purge_date' => '\DateTime',
-        'proxy_path' => 'string',
         'replace_payment_method_image' => 'bool',
         'shop_name' => 'string',
         'show_payment_information' => 'bool',
@@ -68,6 +69,9 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'space_id' => 'int',
         'space_view_id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'subscription_app_version' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegrationSubscriptionAppVersion',
+        'subscription_installed' => 'bool',
+        'subscription_proxy_path' => 'string',
         'version' => 'int'
     ];
 
@@ -77,18 +81,19 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'additional_line_item_data' => null,
         'allow_invoice_download' => null,
         'allowed_payment_method_configurations' => null,
-        'app_version' => null,
         'currency' => null,
         'id' => 'int64',
-        'installed' => null,
         'integrated_payment_form_enabled' => null,
         'language' => null,
         'login_name' => null,
         'name' => null,
+        'payment_app_version' => null,
+        'payment_installed' => null,
+        'payment_proxy_path' => null,
         'planned_purge_date' => 'date-time',
-        'proxy_path' => null,
         'replace_payment_method_image' => null,
         'shop_name' => null,
         'show_payment_information' => null,
@@ -96,6 +101,9 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'space_id' => 'int64',
         'space_view_id' => 'int64',
         'state' => null,
+        'subscription_app_version' => null,
+        'subscription_installed' => null,
+        'subscription_proxy_path' => null,
         'version' => 'int32'
     ];
 
@@ -106,18 +114,19 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'additional_line_item_data' => 'additionalLineItemData',
         'allow_invoice_download' => 'allowInvoiceDownload',
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
-        'app_version' => 'appVersion',
         'currency' => 'currency',
         'id' => 'id',
-        'installed' => 'installed',
         'integrated_payment_form_enabled' => 'integratedPaymentFormEnabled',
         'language' => 'language',
         'login_name' => 'loginName',
         'name' => 'name',
+        'payment_app_version' => 'paymentAppVersion',
+        'payment_installed' => 'paymentInstalled',
+        'payment_proxy_path' => 'paymentProxyPath',
         'planned_purge_date' => 'plannedPurgeDate',
-        'proxy_path' => 'proxyPath',
         'replace_payment_method_image' => 'replacePaymentMethodImage',
         'shop_name' => 'shopName',
         'show_payment_information' => 'showPaymentInformation',
@@ -125,6 +134,9 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'space_id' => 'spaceId',
         'space_view_id' => 'spaceViewId',
         'state' => 'state',
+        'subscription_app_version' => 'subscriptionAppVersion',
+        'subscription_installed' => 'subscriptionInstalled',
+        'subscription_proxy_path' => 'subscriptionProxyPath',
         'version' => 'version'
     ];
 
@@ -134,18 +146,19 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'additional_line_item_data' => 'setAdditionalLineItemData',
         'allow_invoice_download' => 'setAllowInvoiceDownload',
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
-        'app_version' => 'setAppVersion',
         'currency' => 'setCurrency',
         'id' => 'setId',
-        'installed' => 'setInstalled',
         'integrated_payment_form_enabled' => 'setIntegratedPaymentFormEnabled',
         'language' => 'setLanguage',
         'login_name' => 'setLoginName',
         'name' => 'setName',
+        'payment_app_version' => 'setPaymentAppVersion',
+        'payment_installed' => 'setPaymentInstalled',
+        'payment_proxy_path' => 'setPaymentProxyPath',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'proxy_path' => 'setProxyPath',
         'replace_payment_method_image' => 'setReplacePaymentMethodImage',
         'shop_name' => 'setShopName',
         'show_payment_information' => 'setShowPaymentInformation',
@@ -153,6 +166,9 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'space_id' => 'setSpaceId',
         'space_view_id' => 'setSpaceViewId',
         'state' => 'setState',
+        'subscription_app_version' => 'setSubscriptionAppVersion',
+        'subscription_installed' => 'setSubscriptionInstalled',
+        'subscription_proxy_path' => 'setSubscriptionProxyPath',
         'version' => 'setVersion'
     ];
 
@@ -162,18 +178,19 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'additional_line_item_data' => 'getAdditionalLineItemData',
         'allow_invoice_download' => 'getAllowInvoiceDownload',
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
-        'app_version' => 'getAppVersion',
         'currency' => 'getCurrency',
         'id' => 'getId',
-        'installed' => 'getInstalled',
         'integrated_payment_form_enabled' => 'getIntegratedPaymentFormEnabled',
         'language' => 'getLanguage',
         'login_name' => 'getLoginName',
         'name' => 'getName',
+        'payment_app_version' => 'getPaymentAppVersion',
+        'payment_installed' => 'getPaymentInstalled',
+        'payment_proxy_path' => 'getPaymentProxyPath',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'proxy_path' => 'getProxyPath',
         'replace_payment_method_image' => 'getReplacePaymentMethodImage',
         'shop_name' => 'getShopName',
         'show_payment_information' => 'getShowPaymentInformation',
@@ -181,6 +198,9 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'space_id' => 'getSpaceId',
         'space_view_id' => 'getSpaceViewId',
         'state' => 'getState',
+        'subscription_app_version' => 'getSubscriptionAppVersion',
+        'subscription_installed' => 'getSubscriptionInstalled',
+        'subscription_proxy_path' => 'getSubscriptionProxyPath',
         'version' => 'getVersion'
     ];
 
@@ -202,17 +222,15 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['additional_line_item_data'] = isset($data['additional_line_item_data']) ? $data['additional_line_item_data'] : null;
+        
         $this->container['allow_invoice_download'] = isset($data['allow_invoice_download']) ? $data['allow_invoice_download'] : null;
         
         $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
         
-        $this->container['app_version'] = isset($data['app_version']) ? $data['app_version'] : null;
-        
         $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['installed'] = isset($data['installed']) ? $data['installed'] : null;
         
         $this->container['integrated_payment_form_enabled'] = isset($data['integrated_payment_form_enabled']) ? $data['integrated_payment_form_enabled'] : null;
         
@@ -222,9 +240,13 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        $this->container['payment_app_version'] = isset($data['payment_app_version']) ? $data['payment_app_version'] : null;
         
-        $this->container['proxy_path'] = isset($data['proxy_path']) ? $data['proxy_path'] : null;
+        $this->container['payment_installed'] = isset($data['payment_installed']) ? $data['payment_installed'] : null;
+        
+        $this->container['payment_proxy_path'] = isset($data['payment_proxy_path']) ? $data['payment_proxy_path'] : null;
+        
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['replace_payment_method_image'] = isset($data['replace_payment_method_image']) ? $data['replace_payment_method_image'] : null;
         
@@ -239,6 +261,12 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['subscription_app_version'] = isset($data['subscription_app_version']) ? $data['subscription_app_version'] : null;
+        
+        $this->container['subscription_installed'] = isset($data['subscription_installed']) ? $data['subscription_installed'] : null;
+        
+        $this->container['subscription_proxy_path'] = isset($data['subscription_proxy_path']) ? $data['subscription_proxy_path'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -346,6 +374,31 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets additional_line_item_data
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyAdditionalLineItemData[]
+     */
+    public function getAdditionalLineItemData()
+    {
+        return $this->container['additional_line_item_data'];
+    }
+
+    /**
+     * Sets additional_line_item_data
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyAdditionalLineItemData[] $additional_line_item_data 
+     *
+     * @return $this
+     */
+    public function setAdditionalLineItemData($additional_line_item_data)
+    {
+        $this->container['additional_line_item_data'] = $additional_line_item_data;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets allow_invoice_download
      *
      * @return bool
@@ -396,31 +449,6 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets app_version
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationAppVersion
-     */
-    public function getAppVersion()
-    {
-        return $this->container['app_version'];
-    }
-
-    /**
-     * Sets app_version
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationAppVersion $app_version 
-     *
-     * @return $this
-     */
-    public function setAppVersion($app_version)
-    {
-        $this->container['app_version'] = $app_version;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets currency
      *
      * @return string
@@ -465,31 +493,6 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets installed
-     *
-     * @return bool
-     */
-    public function getInstalled()
-    {
-        return $this->container['installed'];
-    }
-
-    /**
-     * Sets installed
-     *
-     * @param bool $installed 
-     *
-     * @return $this
-     */
-    public function setInstalled($installed)
-    {
-        $this->container['installed'] = $installed;
 
         return $this;
     }
@@ -604,6 +607,81 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets payment_app_version
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationPaymentAppVersion
+     */
+    public function getPaymentAppVersion()
+    {
+        return $this->container['payment_app_version'];
+    }
+
+    /**
+     * Sets payment_app_version
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationPaymentAppVersion $payment_app_version 
+     *
+     * @return $this
+     */
+    public function setPaymentAppVersion($payment_app_version)
+    {
+        $this->container['payment_app_version'] = $payment_app_version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_installed
+     *
+     * @return bool
+     */
+    public function getPaymentInstalled()
+    {
+        return $this->container['payment_installed'];
+    }
+
+    /**
+     * Sets payment_installed
+     *
+     * @param bool $payment_installed 
+     *
+     * @return $this
+     */
+    public function setPaymentInstalled($payment_installed)
+    {
+        $this->container['payment_installed'] = $payment_installed;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_proxy_path
+     *
+     * @return string
+     */
+    public function getPaymentProxyPath()
+    {
+        return $this->container['payment_proxy_path'];
+    }
+
+    /**
+     * Sets payment_proxy_path
+     *
+     * @param string $payment_proxy_path Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+     *
+     * @return $this
+     */
+    public function setPaymentProxyPath($payment_proxy_path)
+    {
+        $this->container['payment_proxy_path'] = $payment_proxy_path;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets planned_purge_date
      *
      * @return \DateTime
@@ -623,31 +701,6 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets proxy_path
-     *
-     * @return string
-     */
-    public function getProxyPath()
-    {
-        return $this->container['proxy_path'];
-    }
-
-    /**
-     * Sets proxy_path
-     *
-     * @param string $proxy_path Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
-     *
-     * @return $this
-     */
-    public function setProxyPath($proxy_path)
-    {
-        $this->container['proxy_path'] = $proxy_path;
 
         return $this;
     }
@@ -827,6 +880,81 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription_app_version
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationSubscriptionAppVersion
+     */
+    public function getSubscriptionAppVersion()
+    {
+        return $this->container['subscription_app_version'];
+    }
+
+    /**
+     * Sets subscription_app_version
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyIntegrationSubscriptionAppVersion $subscription_app_version 
+     *
+     * @return $this
+     */
+    public function setSubscriptionAppVersion($subscription_app_version)
+    {
+        $this->container['subscription_app_version'] = $subscription_app_version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription_installed
+     *
+     * @return bool
+     */
+    public function getSubscriptionInstalled()
+    {
+        return $this->container['subscription_installed'];
+    }
+
+    /**
+     * Sets subscription_installed
+     *
+     * @param bool $subscription_installed 
+     *
+     * @return $this
+     */
+    public function setSubscriptionInstalled($subscription_installed)
+    {
+        $this->container['subscription_installed'] = $subscription_installed;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription_proxy_path
+     *
+     * @return string
+     */
+    public function getSubscriptionProxyPath()
+    {
+        return $this->container['subscription_proxy_path'];
+    }
+
+    /**
+     * Sets subscription_proxy_path
+     *
+     * @param string $subscription_proxy_path Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+     *
+     * @return $this
+     */
+    public function setSubscriptionProxyPath($subscription_proxy_path)
+    {
+        $this->container['subscription_proxy_path'] = $subscription_proxy_path;
 
         return $this;
     }

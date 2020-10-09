@@ -48,6 +48,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'charge_flow_level' => '\PostFinanceCheckout\Sdk\Model\ChargeFlowLevel',
+        'linked_space_id' => 'int',
         'payment_link' => 'string'
     ];
 
@@ -58,6 +59,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
       */
     protected static $swaggerFormats = [
         'charge_flow_level' => null,
+        'linked_space_id' => 'int64',
         'payment_link' => null
     ];
 
@@ -69,6 +71,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
      */
     protected static $attributeMap = [
         'charge_flow_level' => 'chargeFlowLevel',
+        'linked_space_id' => 'linkedSpaceId',
         'payment_link' => 'paymentLink'
     ];
 
@@ -79,6 +82,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
      */
     protected static $setters = [
         'charge_flow_level' => 'setChargeFlowLevel',
+        'linked_space_id' => 'setLinkedSpaceId',
         'payment_link' => 'setPaymentLink'
     ];
 
@@ -89,6 +93,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
      */
     protected static $getters = [
         'charge_flow_level' => 'getChargeFlowLevel',
+        'linked_space_id' => 'getLinkedSpaceId',
         'payment_link' => 'getPaymentLink'
     ];
 
@@ -107,6 +112,8 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
 
         
         $this->container['charge_flow_level'] = isset($data['charge_flow_level']) ? $data['charge_flow_level'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['payment_link'] = isset($data['payment_link']) ? $data['payment_link'] : null;
         
@@ -221,6 +228,31 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
     public function setChargeFlowLevel($charge_flow_level)
     {
         $this->container['charge_flow_level'] = $charge_flow_level;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

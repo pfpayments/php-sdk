@@ -51,6 +51,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'active' => 'bool',
         'active_or_restricted_active' => 'bool',
+        'created_by' => 'int',
+        'created_on' => '\DateTime',
         'deleted_by' => 'int',
         'deleted_on' => '\DateTime',
         'id' => 'int',
@@ -74,6 +76,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'active' => null,
         'active_or_restricted_active' => null,
+        'created_by' => 'int64',
+        'created_on' => 'date-time',
         'deleted_by' => 'int64',
         'deleted_on' => 'date-time',
         'id' => 'int64',
@@ -98,6 +102,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'active' => 'active',
         'active_or_restricted_active' => 'activeOrRestrictedActive',
+        'created_by' => 'createdBy',
+        'created_on' => 'createdOn',
         'deleted_by' => 'deletedBy',
         'deleted_on' => 'deletedOn',
         'id' => 'id',
@@ -121,6 +127,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $setters = [
         'active' => 'setActive',
         'active_or_restricted_active' => 'setActiveOrRestrictedActive',
+        'created_by' => 'setCreatedBy',
+        'created_on' => 'setCreatedOn',
         'deleted_by' => 'setDeletedBy',
         'deleted_on' => 'setDeletedOn',
         'id' => 'setId',
@@ -144,6 +152,8 @@ class Account implements ModelInterface, ArrayAccess
     protected static $getters = [
         'active' => 'getActive',
         'active_or_restricted_active' => 'getActiveOrRestrictedActive',
+        'created_by' => 'getCreatedBy',
+        'created_on' => 'getCreatedOn',
         'deleted_by' => 'getDeletedBy',
         'deleted_on' => 'getDeletedOn',
         'id' => 'getId',
@@ -180,6 +190,10 @@ class Account implements ModelInterface, ArrayAccess
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
         
         $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
+        
+        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['deleted_by'] = isset($data['deleted_by']) ? $data['deleted_by'] : null;
         
@@ -351,6 +365,56 @@ class Account implements ModelInterface, ArrayAccess
     public function setActiveOrRestrictedActive($active_or_restricted_active)
     {
         $this->container['active_or_restricted_active'] = $active_or_restricted_active;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_by
+     *
+     * @return int
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int $created_by The ID of the user who created this entity.
+     *
+     * @return $this
+     */
+    public function setCreatedBy($created_by)
+    {
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The date and time when this entity was created.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }

@@ -48,13 +48,17 @@ class TransactionCreate extends AbstractTransactionPending
       */
     protected static $swaggerTypes = [
         'auto_confirmation_enabled' => 'bool',
+        'billing_address' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
         'charge_retry_enabled' => 'bool',
         'customers_presence' => '\PostFinanceCheckout\Sdk\Model\CustomersPresence',
         'device_session_identifier' => 'string',
         'emails_disabled' => 'bool',
         'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
         'environment_selection_strategy' => '\PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy',
-        'space_view_id' => 'int'
+        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
+        'shipping_address' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
+        'space_view_id' => 'int',
+        'token' => 'int'
     ];
 
     /**
@@ -64,13 +68,17 @@ class TransactionCreate extends AbstractTransactionPending
       */
     protected static $swaggerFormats = [
         'auto_confirmation_enabled' => null,
+        'billing_address' => null,
         'charge_retry_enabled' => null,
         'customers_presence' => null,
         'device_session_identifier' => null,
         'emails_disabled' => null,
         'environment' => null,
         'environment_selection_strategy' => null,
-        'space_view_id' => 'int64'
+        'line_items' => null,
+        'shipping_address' => null,
+        'space_view_id' => 'int64',
+        'token' => 'int64'
     ];
 
     /**
@@ -81,13 +89,17 @@ class TransactionCreate extends AbstractTransactionPending
      */
     protected static $attributeMap = [
         'auto_confirmation_enabled' => 'autoConfirmationEnabled',
+        'billing_address' => 'billingAddress',
         'charge_retry_enabled' => 'chargeRetryEnabled',
         'customers_presence' => 'customersPresence',
         'device_session_identifier' => 'deviceSessionIdentifier',
         'emails_disabled' => 'emailsDisabled',
         'environment' => 'environment',
         'environment_selection_strategy' => 'environmentSelectionStrategy',
-        'space_view_id' => 'spaceViewId'
+        'line_items' => 'lineItems',
+        'shipping_address' => 'shippingAddress',
+        'space_view_id' => 'spaceViewId',
+        'token' => 'token'
     ];
 
     /**
@@ -97,13 +109,17 @@ class TransactionCreate extends AbstractTransactionPending
      */
     protected static $setters = [
         'auto_confirmation_enabled' => 'setAutoConfirmationEnabled',
+        'billing_address' => 'setBillingAddress',
         'charge_retry_enabled' => 'setChargeRetryEnabled',
         'customers_presence' => 'setCustomersPresence',
         'device_session_identifier' => 'setDeviceSessionIdentifier',
         'emails_disabled' => 'setEmailsDisabled',
         'environment' => 'setEnvironment',
         'environment_selection_strategy' => 'setEnvironmentSelectionStrategy',
-        'space_view_id' => 'setSpaceViewId'
+        'line_items' => 'setLineItems',
+        'shipping_address' => 'setShippingAddress',
+        'space_view_id' => 'setSpaceViewId',
+        'token' => 'setToken'
     ];
 
     /**
@@ -113,13 +129,17 @@ class TransactionCreate extends AbstractTransactionPending
      */
     protected static $getters = [
         'auto_confirmation_enabled' => 'getAutoConfirmationEnabled',
+        'billing_address' => 'getBillingAddress',
         'charge_retry_enabled' => 'getChargeRetryEnabled',
         'customers_presence' => 'getCustomersPresence',
         'device_session_identifier' => 'getDeviceSessionIdentifier',
         'emails_disabled' => 'getEmailsDisabled',
         'environment' => 'getEnvironment',
         'environment_selection_strategy' => 'getEnvironmentSelectionStrategy',
-        'space_view_id' => 'getSpaceViewId'
+        'line_items' => 'getLineItems',
+        'shipping_address' => 'getShippingAddress',
+        'space_view_id' => 'getSpaceViewId',
+        'token' => 'getToken'
     ];
 
     
@@ -138,6 +158,8 @@ class TransactionCreate extends AbstractTransactionPending
         
         $this->container['auto_confirmation_enabled'] = isset($data['auto_confirmation_enabled']) ? $data['auto_confirmation_enabled'] : null;
         
+        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
+        
         $this->container['charge_retry_enabled'] = isset($data['charge_retry_enabled']) ? $data['charge_retry_enabled'] : null;
         
         $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
@@ -150,7 +172,13 @@ class TransactionCreate extends AbstractTransactionPending
         
         $this->container['environment_selection_strategy'] = isset($data['environment_selection_strategy']) ? $data['environment_selection_strategy'] : null;
         
+        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
+        
         $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
+        
+        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
         
     }
 
@@ -163,25 +191,6 @@ class TransactionCreate extends AbstractTransactionPending
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['line_items'] === null) {
-            $invalidProperties[] = "'line_items' can't be null";
-        }
-        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
-            $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
-        }
-
         if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) > 40)) {
             $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be smaller than or equal to 40.";
         }
@@ -190,6 +199,9 @@ class TransactionCreate extends AbstractTransactionPending
             $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be bigger than or equal to 10.";
         }
 
+        if ($this->container['line_items'] === null) {
+            $invalidProperties[] = "'line_items' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,6 +302,31 @@ class TransactionCreate extends AbstractTransactionPending
     public function setAutoConfirmationEnabled($auto_confirmation_enabled)
     {
         $this->container['auto_confirmation_enabled'] = $auto_confirmation_enabled;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\AddressCreate
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billing_address 
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billing_address)
+    {
+        $this->container['billing_address'] = $billing_address;
 
         return $this;
     }
@@ -453,6 +490,56 @@ class TransactionCreate extends AbstractTransactionPending
     
 
     /**
+     * Gets line_items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
+
+    /**
+     * Sets line_items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items 
+     *
+     * @return $this
+     */
+    public function setLineItems($line_items)
+    {
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shipping_address
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\AddressCreate
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shipping_address'];
+    }
+
+    /**
+     * Sets shipping_address
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $shipping_address 
+     *
+     * @return $this
+     */
+    public function setShippingAddress($shipping_address)
+    {
+        $this->container['shipping_address'] = $shipping_address;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets space_view_id
      *
      * @return int
@@ -472,6 +559,31 @@ class TransactionCreate extends AbstractTransactionPending
     public function setSpaceViewId($space_view_id)
     {
         $this->container['space_view_id'] = $space_view_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets token
+     *
+     * @return int
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param int $token 
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->container['token'] = $token;
 
         return $this;
     }

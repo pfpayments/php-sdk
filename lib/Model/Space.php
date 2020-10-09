@@ -52,6 +52,8 @@ class Space implements ModelInterface, ArrayAccess
         'account' => '\PostFinanceCheckout\Sdk\Model\Account',
         'active' => 'bool',
         'active_or_restricted_active' => 'bool',
+        'created_by' => 'int',
+        'created_on' => '\DateTime',
         'database' => '\PostFinanceCheckout\Sdk\Model\TenantDatabase',
         'deleted_by' => 'int',
         'deleted_on' => '\DateTime',
@@ -78,6 +80,8 @@ class Space implements ModelInterface, ArrayAccess
         'account' => null,
         'active' => null,
         'active_or_restricted_active' => null,
+        'created_by' => 'int64',
+        'created_on' => 'date-time',
         'database' => null,
         'deleted_by' => 'int64',
         'deleted_on' => 'date-time',
@@ -105,6 +109,8 @@ class Space implements ModelInterface, ArrayAccess
         'account' => 'account',
         'active' => 'active',
         'active_or_restricted_active' => 'activeOrRestrictedActive',
+        'created_by' => 'createdBy',
+        'created_on' => 'createdOn',
         'database' => 'database',
         'deleted_by' => 'deletedBy',
         'deleted_on' => 'deletedOn',
@@ -131,6 +137,8 @@ class Space implements ModelInterface, ArrayAccess
         'account' => 'setAccount',
         'active' => 'setActive',
         'active_or_restricted_active' => 'setActiveOrRestrictedActive',
+        'created_by' => 'setCreatedBy',
+        'created_on' => 'setCreatedOn',
         'database' => 'setDatabase',
         'deleted_by' => 'setDeletedBy',
         'deleted_on' => 'setDeletedOn',
@@ -157,6 +165,8 @@ class Space implements ModelInterface, ArrayAccess
         'account' => 'getAccount',
         'active' => 'getActive',
         'active_or_restricted_active' => 'getActiveOrRestrictedActive',
+        'created_by' => 'getCreatedBy',
+        'created_on' => 'getCreatedOn',
         'database' => 'getDatabase',
         'deleted_by' => 'getDeletedBy',
         'deleted_on' => 'getDeletedOn',
@@ -197,6 +207,10 @@ class Space implements ModelInterface, ArrayAccess
         $this->container['active'] = isset($data['active']) ? $data['active'] : null;
         
         $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
+        
+        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['database'] = isset($data['database']) ? $data['database'] : null;
         
@@ -397,6 +411,56 @@ class Space implements ModelInterface, ArrayAccess
     public function setActiveOrRestrictedActive($active_or_restricted_active)
     {
         $this->container['active_or_restricted_active'] = $active_or_restricted_active;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_by
+     *
+     * @return int
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int $created_by The ID of the user who created this entity.
+     *
+     * @return $this
+     */
+    public function setCreatedBy($created_by)
+    {
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The date and time when this entity was created.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }

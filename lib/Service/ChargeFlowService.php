@@ -137,6 +137,7 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -247,6 +248,7 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -359,6 +361,7 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -473,6 +476,7 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -603,6 +607,7 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

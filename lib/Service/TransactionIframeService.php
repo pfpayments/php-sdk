@@ -137,6 +137,7 @@ class TransactionIframeService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',

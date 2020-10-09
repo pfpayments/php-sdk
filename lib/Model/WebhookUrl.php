@@ -166,6 +166,14 @@ class WebhookUrl implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
         }
 
+        if (!is_null($this->container['url']) && (mb_strlen($this->container['url']) > 500)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['url']) && (mb_strlen($this->container['url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be bigger than or equal to 9.";
+        }
+
         return $invalidProperties;
     }
 
@@ -394,6 +402,13 @@ class WebhookUrl implements ModelInterface, ArrayAccess
      */
     public function setUrl($url)
     {
+        if (!is_null($url) && (mb_strlen($url) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $url when calling WebhookUrl., must be smaller than or equal to 500.');
+        }
+        if (!is_null($url) && (mb_strlen($url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $url when calling WebhookUrl., must be bigger than or equal to 9.');
+        }
+
         $this->container['url'] = $url;
 
         return $this;

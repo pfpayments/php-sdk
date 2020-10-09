@@ -121,10 +121,6 @@ class ApplicationUserUpdate extends AbstractApplicationUserUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 256)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 256.";
-        }
-
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }

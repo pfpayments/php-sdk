@@ -48,6 +48,7 @@ class ConnectorInvocation extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'created_on' => '\DateTime',
+        'linked_space_id' => 'int',
         'planned_purge_date' => '\DateTime',
         'stage' => '\PostFinanceCheckout\Sdk\Model\ConnectorInvocationStage',
         'time_took_in_milliseconds' => 'int',
@@ -62,6 +63,7 @@ class ConnectorInvocation extends TransactionAwareEntity
       */
     protected static $swaggerFormats = [
         'created_on' => 'date-time',
+        'linked_space_id' => 'int64',
         'planned_purge_date' => 'date-time',
         'stage' => null,
         'time_took_in_milliseconds' => 'int64',
@@ -77,6 +79,7 @@ class ConnectorInvocation extends TransactionAwareEntity
      */
     protected static $attributeMap = [
         'created_on' => 'createdOn',
+        'linked_space_id' => 'linkedSpaceId',
         'planned_purge_date' => 'plannedPurgeDate',
         'stage' => 'stage',
         'time_took_in_milliseconds' => 'timeTookInMilliseconds',
@@ -91,6 +94,7 @@ class ConnectorInvocation extends TransactionAwareEntity
      */
     protected static $setters = [
         'created_on' => 'setCreatedOn',
+        'linked_space_id' => 'setLinkedSpaceId',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'stage' => 'setStage',
         'time_took_in_milliseconds' => 'setTimeTookInMilliseconds',
@@ -105,6 +109,7 @@ class ConnectorInvocation extends TransactionAwareEntity
      */
     protected static $getters = [
         'created_on' => 'getCreatedOn',
+        'linked_space_id' => 'getLinkedSpaceId',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'stage' => 'getStage',
         'time_took_in_milliseconds' => 'getTimeTookInMilliseconds',
@@ -127,6 +132,8 @@ class ConnectorInvocation extends TransactionAwareEntity
 
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -249,6 +256,31 @@ class ConnectorInvocation extends TransactionAwareEntity
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

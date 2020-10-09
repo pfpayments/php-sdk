@@ -51,6 +51,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodBrand[]',
         'allowed_payment_method_configurations' => 'int[]',
         'billing_address' => '\PostFinanceCheckout\Sdk\Model\AddressCreate',
+        'completion_behavior' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior',
         'currency' => 'string',
         'customer_email_address' => 'string',
         'customer_id' => 'string',
@@ -77,6 +78,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => null,
         'allowed_payment_method_configurations' => 'int64',
         'billing_address' => null,
+        'completion_behavior' => null,
         'currency' => null,
         'customer_email_address' => null,
         'customer_id' => null,
@@ -104,6 +106,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => 'allowedPaymentMethodBrands',
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
         'billing_address' => 'billingAddress',
+        'completion_behavior' => 'completionBehavior',
         'currency' => 'currency',
         'customer_email_address' => 'customerEmailAddress',
         'customer_id' => 'customerId',
@@ -130,6 +133,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => 'setAllowedPaymentMethodBrands',
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
         'billing_address' => 'setBillingAddress',
+        'completion_behavior' => 'setCompletionBehavior',
         'currency' => 'setCurrency',
         'customer_email_address' => 'setCustomerEmailAddress',
         'customer_id' => 'setCustomerId',
@@ -156,6 +160,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => 'getAllowedPaymentMethodBrands',
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
         'billing_address' => 'getBillingAddress',
+        'completion_behavior' => 'getCompletionBehavior',
         'currency' => 'getCurrency',
         'customer_email_address' => 'getCustomerEmailAddress',
         'customer_id' => 'getCustomerId',
@@ -196,6 +201,8 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
         $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
         
         $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
+        
+        $this->container['completion_behavior'] = isset($data['completion_behavior']) ? $data['completion_behavior'] : null;
         
         $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         
@@ -242,6 +249,14 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
         }
 
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 1000.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
+        }
+
         if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
             $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
         }
@@ -252,6 +267,14 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
 
         if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
             $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 1000.";
+        }
+
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be bigger than or equal to 9.";
         }
 
         return $invalidProperties;
@@ -410,6 +433,31 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets completion_behavior
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior
+     */
+    public function getCompletionBehavior()
+    {
+        return $this->container['completion_behavior'];
+    }
+
+    /**
+     * Sets completion_behavior
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior The completion behavior controls when the transaction is completed.
+     *
+     * @return $this
+     */
+    public function setCompletionBehavior($completion_behavior)
+    {
+        $this->container['completion_behavior'] = $completion_behavior;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets currency
      *
      * @return string
@@ -507,6 +555,13 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setFailedUrl($failed_url)
     {
+        if (!is_null($failed_url) && (mb_strlen($failed_url) > 1000)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling AbstractTransactionPending., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($failed_url) && (mb_strlen($failed_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling AbstractTransactionPending., must be bigger than or equal to 9.');
+        }
+
         $this->container['failed_url'] = $failed_url;
 
         return $this;
@@ -719,6 +774,13 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
      */
     public function setSuccessUrl($success_url)
     {
+        if (!is_null($success_url) && (mb_strlen($success_url) > 1000)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling AbstractTransactionPending., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($success_url) && (mb_strlen($success_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling AbstractTransactionPending., must be bigger than or equal to 9.');
+        }
+
         $this->container['success_url'] = $success_url;
 
         return $this;

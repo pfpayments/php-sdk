@@ -47,7 +47,10 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerTypes = [
-        
+        'family_name' => 'string',
+        'given_name' => 'string',
+        'organization_name' => 'string',
+        'phone_number' => 'string'
     ];
 
     /**
@@ -56,7 +59,10 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerFormats = [
-        
+        'family_name' => null,
+        'given_name' => null,
+        'organization_name' => null,
+        'phone_number' => null
     ];
 
     /**
@@ -66,7 +72,10 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'family_name' => 'familyName',
+        'given_name' => 'givenName',
+        'organization_name' => 'organizationName',
+        'phone_number' => 'phoneNumber'
     ];
 
     /**
@@ -75,7 +84,10 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $setters = [
-        
+        'family_name' => 'setFamilyName',
+        'given_name' => 'setGivenName',
+        'organization_name' => 'setOrganizationName',
+        'phone_number' => 'setPhoneNumber'
     ];
 
     /**
@@ -84,7 +96,10 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $getters = [
-        
+        'family_name' => 'getFamilyName',
+        'given_name' => 'getGivenName',
+        'organization_name' => 'getOrganizationName',
+        'phone_number' => 'getPhoneNumber'
     ];
 
     
@@ -101,6 +116,14 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
         parent::__construct($data);
 
         
+        $this->container['family_name'] = isset($data['family_name']) ? $data['family_name'] : null;
+        
+        $this->container['given_name'] = isset($data['given_name']) ? $data['given_name'] : null;
+        
+        $this->container['organization_name'] = isset($data['organization_name']) ? $data['organization_name'] : null;
+        
+        $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
+        
     }
 
     /**
@@ -111,26 +134,6 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
     public function listInvalidProperties()
     {
         $invalidProperties = parent::listInvalidProperties();
-
-        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
-            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
-            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
-            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
-        }
-
-        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
-        }
 
         return $invalidProperties;
     }
@@ -210,6 +213,106 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets family_name
+     *
+     * @return string
+     */
+    public function getFamilyName()
+    {
+        return $this->container['family_name'];
+    }
+
+    /**
+     * Sets family_name
+     *
+     * @param string $family_name 
+     *
+     * @return $this
+     */
+    public function setFamilyName($family_name)
+    {
+        $this->container['family_name'] = $family_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets given_name
+     *
+     * @return string
+     */
+    public function getGivenName()
+    {
+        return $this->container['given_name'];
+    }
+
+    /**
+     * Sets given_name
+     *
+     * @param string $given_name 
+     *
+     * @return $this
+     */
+    public function setGivenName($given_name)
+    {
+        $this->container['given_name'] = $given_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets organization_name
+     *
+     * @return string
+     */
+    public function getOrganizationName()
+    {
+        return $this->container['organization_name'];
+    }
+
+    /**
+     * Sets organization_name
+     *
+     * @param string $organization_name 
+     *
+     * @return $this
+     */
+    public function setOrganizationName($organization_name)
+    {
+        $this->container['organization_name'] = $organization_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets phone_number
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->container['phone_number'];
+    }
+
+    /**
+     * Sets phone_number
+     *
+     * @param string $phone_number 
+     *
+     * @return $this
+     */
+    public function setPhoneNumber($phone_number)
+    {
+        $this->container['phone_number'] = $phone_number;
+
+        return $this;
+    }
     
     /**
      * Returns true if offset exists. False otherwise.

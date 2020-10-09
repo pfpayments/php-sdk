@@ -50,8 +50,11 @@ class SalesChannel implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'description' => 'map[string,string]',
+        'icon' => 'string',
         'id' => 'int',
-        'name' => 'map[string,string]'
+        'name' => 'map[string,string]',
+        'parent' => '\PostFinanceCheckout\Sdk\Model\SalesChannel',
+        'sort_order' => 'int'
     ];
 
     /**
@@ -61,8 +64,11 @@ class SalesChannel implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'description' => null,
+        'icon' => null,
         'id' => 'int64',
-        'name' => null
+        'name' => null,
+        'parent' => null,
+        'sort_order' => 'int32'
     ];
 
     /**
@@ -73,8 +79,11 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'description' => 'description',
+        'icon' => 'icon',
         'id' => 'id',
-        'name' => 'name'
+        'name' => 'name',
+        'parent' => 'parent',
+        'sort_order' => 'sortOrder'
     ];
 
     /**
@@ -84,8 +93,11 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'description' => 'setDescription',
+        'icon' => 'setIcon',
         'id' => 'setId',
-        'name' => 'setName'
+        'name' => 'setName',
+        'parent' => 'setParent',
+        'sort_order' => 'setSortOrder'
     ];
 
     /**
@@ -95,8 +107,11 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'description' => 'getDescription',
+        'icon' => 'getIcon',
         'id' => 'getId',
-        'name' => 'getName'
+        'name' => 'getName',
+        'parent' => 'getParent',
+        'sort_order' => 'getSortOrder'
     ];
 
     
@@ -119,9 +134,15 @@ class SalesChannel implements ModelInterface, ArrayAccess
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
+        $this->container['icon'] = isset($data['icon']) ? $data['icon'] : null;
+        
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['parent'] = isset($data['parent']) ? $data['parent'] : null;
+        
+        $this->container['sort_order'] = isset($data['sort_order']) ? $data['sort_order'] : null;
         
     }
 
@@ -240,6 +261,31 @@ class SalesChannel implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->container['icon'];
+    }
+
+    /**
+     * Sets icon
+     *
+     * @param string $icon 
+     *
+     * @return $this
+     */
+    public function setIcon($icon)
+    {
+        $this->container['icon'] = $icon;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets id
      *
      * @return int
@@ -284,6 +330,56 @@ class SalesChannel implements ModelInterface, ArrayAccess
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets parent
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\SalesChannel
+     */
+    public function getParent()
+    {
+        return $this->container['parent'];
+    }
+
+    /**
+     * Sets parent
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\SalesChannel $parent 
+     *
+     * @return $this
+     */
+    public function setParent($parent)
+    {
+        $this->container['parent'] = $parent;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets sort_order
+     *
+     * @return int
+     */
+    public function getSortOrder()
+    {
+        return $this->container['sort_order'];
+    }
+
+    /**
+     * Sets sort_order
+     *
+     * @param int $sort_order 
+     *
+     * @return $this
+     */
+    public function setSortOrder($sort_order)
+    {
+        $this->container['sort_order'] = $sort_order;
 
         return $this;
     }

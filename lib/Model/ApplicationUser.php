@@ -49,7 +49,8 @@ class ApplicationUser extends User
     protected static $swaggerTypes = [
         'name' => 'string',
         'primary_account' => '\PostFinanceCheckout\Sdk\Model\Account',
-        'request_limit' => 'int'
+        'request_limit' => 'int',
+        'scope' => '\PostFinanceCheckout\Sdk\Model\Scope'
     ];
 
     /**
@@ -60,7 +61,8 @@ class ApplicationUser extends User
     protected static $swaggerFormats = [
         'name' => null,
         'primary_account' => null,
-        'request_limit' => 'int64'
+        'request_limit' => 'int64',
+        'scope' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class ApplicationUser extends User
     protected static $attributeMap = [
         'name' => 'name',
         'primary_account' => 'primaryAccount',
-        'request_limit' => 'requestLimit'
+        'request_limit' => 'requestLimit',
+        'scope' => 'scope'
     ];
 
     /**
@@ -83,7 +86,8 @@ class ApplicationUser extends User
     protected static $setters = [
         'name' => 'setName',
         'primary_account' => 'setPrimaryAccount',
-        'request_limit' => 'setRequestLimit'
+        'request_limit' => 'setRequestLimit',
+        'scope' => 'setScope'
     ];
 
     /**
@@ -94,7 +98,8 @@ class ApplicationUser extends User
     protected static $getters = [
         'name' => 'getName',
         'primary_account' => 'getPrimaryAccount',
-        'request_limit' => 'getRequestLimit'
+        'request_limit' => 'getRequestLimit',
+        'scope' => 'getScope'
     ];
 
     
@@ -116,6 +121,8 @@ class ApplicationUser extends User
         $this->container['primary_account'] = isset($data['primary_account']) ? $data['primary_account'] : null;
         
         $this->container['request_limit'] = isset($data['request_limit']) ? $data['request_limit'] : null;
+        
+        $this->container['scope'] = isset($data['scope']) ? $data['scope'] : null;
         
     }
 
@@ -286,6 +293,31 @@ class ApplicationUser extends User
     public function setRequestLimit($request_limit)
     {
         $this->container['request_limit'] = $request_limit;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets scope
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Scope
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
+
+    /**
+     * Sets scope
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Scope $scope The scope to which the user belongs to.
+     *
+     * @return $this
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
         return $this;
     }

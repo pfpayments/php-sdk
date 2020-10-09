@@ -121,22 +121,6 @@ class CustomerActive extends AbstractCustomerActive
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['customer_id']) && (mb_strlen($this->container['customer_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'customer_id', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['family_name']) && (mb_strlen($this->container['family_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'family_name', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
-        }
-
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }

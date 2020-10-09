@@ -48,6 +48,7 @@ class ChargeAttempt extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'charge' => '\PostFinanceCheckout\Sdk\Model\Charge',
+        'completion_behavior' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior',
         'connector_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
         'created_on' => '\DateTime',
         'environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
@@ -57,6 +58,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => '\PostFinanceCheckout\Sdk\Model\ConnectorInvocation',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
+        'linked_space_id' => 'int',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'redirection_url' => 'string',
@@ -79,6 +81,7 @@ class ChargeAttempt extends TransactionAwareEntity
       */
     protected static $swaggerFormats = [
         'charge' => null,
+        'completion_behavior' => null,
         'connector_configuration' => null,
         'created_on' => 'date-time',
         'environment' => null,
@@ -88,6 +91,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => null,
         'labels' => null,
         'language' => null,
+        'linked_space_id' => 'int64',
         'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
         'redirection_url' => null,
@@ -111,6 +115,7 @@ class ChargeAttempt extends TransactionAwareEntity
      */
     protected static $attributeMap = [
         'charge' => 'charge',
+        'completion_behavior' => 'completionBehavior',
         'connector_configuration' => 'connectorConfiguration',
         'created_on' => 'createdOn',
         'environment' => 'environment',
@@ -120,6 +125,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'invocation',
         'labels' => 'labels',
         'language' => 'language',
+        'linked_space_id' => 'linkedSpaceId',
         'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
         'redirection_url' => 'redirectionUrl',
@@ -142,6 +148,7 @@ class ChargeAttempt extends TransactionAwareEntity
      */
     protected static $setters = [
         'charge' => 'setCharge',
+        'completion_behavior' => 'setCompletionBehavior',
         'connector_configuration' => 'setConnectorConfiguration',
         'created_on' => 'setCreatedOn',
         'environment' => 'setEnvironment',
@@ -151,6 +158,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'setInvocation',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
+        'linked_space_id' => 'setLinkedSpaceId',
         'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'redirection_url' => 'setRedirectionUrl',
@@ -173,6 +181,7 @@ class ChargeAttempt extends TransactionAwareEntity
      */
     protected static $getters = [
         'charge' => 'getCharge',
+        'completion_behavior' => 'getCompletionBehavior',
         'connector_configuration' => 'getConnectorConfiguration',
         'created_on' => 'getCreatedOn',
         'environment' => 'getEnvironment',
@@ -182,6 +191,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'getInvocation',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
+        'linked_space_id' => 'getLinkedSpaceId',
         'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'redirection_url' => 'getRedirectionUrl',
@@ -213,6 +223,8 @@ class ChargeAttempt extends TransactionAwareEntity
         
         $this->container['charge'] = isset($data['charge']) ? $data['charge'] : null;
         
+        $this->container['completion_behavior'] = isset($data['completion_behavior']) ? $data['completion_behavior'] : null;
+        
         $this->container['connector_configuration'] = isset($data['connector_configuration']) ? $data['connector_configuration'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
@@ -230,6 +242,8 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
         
@@ -372,6 +386,31 @@ class ChargeAttempt extends TransactionAwareEntity
     public function setCharge($charge)
     {
         $this->container['charge'] = $charge;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets completion_behavior
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior
+     */
+    public function getCompletionBehavior()
+    {
+        return $this->container['completion_behavior'];
+    }
+
+    /**
+     * Sets completion_behavior
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior 
+     *
+     * @return $this
+     */
+    public function setCompletionBehavior($completion_behavior)
+    {
+        $this->container['completion_behavior'] = $completion_behavior;
 
         return $this;
     }
@@ -597,6 +636,31 @@ class ChargeAttempt extends TransactionAwareEntity
     public function setLanguage($language)
     {
         $this->container['language'] = $language;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

@@ -114,14 +114,6 @@ class SpaceCreate extends AbstractSpaceUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 200)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
-        }
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
-        }
-
         if ($this->container['account'] === null) {
             $invalidProperties[] = "'account' can't be null";
         }

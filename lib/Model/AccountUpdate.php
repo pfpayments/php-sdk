@@ -121,14 +121,6 @@ class AccountUpdate extends AbstractAccountUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 200)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
-        }
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
-        }
-
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }

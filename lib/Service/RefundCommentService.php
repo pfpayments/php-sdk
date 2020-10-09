@@ -137,6 +137,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -251,6 +252,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -363,6 +365,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -475,6 +478,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -587,6 +591,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -699,6 +704,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -813,6 +819,7 @@ class RefundCommentService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

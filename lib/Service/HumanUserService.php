@@ -126,6 +126,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -231,6 +232,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -336,6 +338,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -441,6 +444,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -544,6 +548,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -649,6 +654,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -754,6 +760,7 @@ class HumanUserService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

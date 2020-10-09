@@ -121,10 +121,6 @@ class CustomerCommentActive extends AbstractCustomerCommentActive
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['content']) && (mb_strlen($this->container['content']) > 262144)) {
-            $invalidProperties[] = "invalid value for 'content', the character length must be smaller than or equal to 262144.";
-        }
-
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }

@@ -135,6 +135,7 @@ class ManualTaskService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -247,6 +248,7 @@ class ManualTaskService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -361,6 +363,7 @@ class ManualTaskService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->resetConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

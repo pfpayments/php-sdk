@@ -114,10 +114,6 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['content']) && (mb_strlen($this->container['content']) > 262144)) {
-            $invalidProperties[] = "invalid value for 'content', the character length must be smaller than or equal to 262144.";
-        }
-
         if ($this->container['transaction'] === null) {
             $invalidProperties[] = "'transaction' can't be null";
         }

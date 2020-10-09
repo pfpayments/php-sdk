@@ -54,11 +54,13 @@ class TransactionCompletion extends TransactionAwareEntity
         'external_id' => 'string',
         'failed_on' => '\DateTime',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
+        'invoice_merchant_reference' => 'string',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
         'last_completion' => 'bool',
         'line_item_version' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'linked_space_id' => 'int',
         'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
         'next_update_on' => '\DateTime',
         'payment_information' => 'string',
@@ -88,11 +90,13 @@ class TransactionCompletion extends TransactionAwareEntity
         'external_id' => null,
         'failed_on' => 'date-time',
         'failure_reason' => null,
+        'invoice_merchant_reference' => null,
         'labels' => null,
         'language' => null,
         'last_completion' => null,
         'line_item_version' => null,
         'line_items' => null,
+        'linked_space_id' => 'int64',
         'mode' => null,
         'next_update_on' => 'date-time',
         'payment_information' => null,
@@ -123,11 +127,13 @@ class TransactionCompletion extends TransactionAwareEntity
         'external_id' => 'externalId',
         'failed_on' => 'failedOn',
         'failure_reason' => 'failureReason',
+        'invoice_merchant_reference' => 'invoiceMerchantReference',
         'labels' => 'labels',
         'language' => 'language',
         'last_completion' => 'lastCompletion',
         'line_item_version' => 'lineItemVersion',
         'line_items' => 'lineItems',
+        'linked_space_id' => 'linkedSpaceId',
         'mode' => 'mode',
         'next_update_on' => 'nextUpdateOn',
         'payment_information' => 'paymentInformation',
@@ -157,11 +163,13 @@ class TransactionCompletion extends TransactionAwareEntity
         'external_id' => 'setExternalId',
         'failed_on' => 'setFailedOn',
         'failure_reason' => 'setFailureReason',
+        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
         'last_completion' => 'setLastCompletion',
         'line_item_version' => 'setLineItemVersion',
         'line_items' => 'setLineItems',
+        'linked_space_id' => 'setLinkedSpaceId',
         'mode' => 'setMode',
         'next_update_on' => 'setNextUpdateOn',
         'payment_information' => 'setPaymentInformation',
@@ -191,11 +199,13 @@ class TransactionCompletion extends TransactionAwareEntity
         'external_id' => 'getExternalId',
         'failed_on' => 'getFailedOn',
         'failure_reason' => 'getFailureReason',
+        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
         'last_completion' => 'getLastCompletion',
         'line_item_version' => 'getLineItemVersion',
         'line_items' => 'getLineItems',
+        'linked_space_id' => 'getLinkedSpaceId',
         'mode' => 'getMode',
         'next_update_on' => 'getNextUpdateOn',
         'payment_information' => 'getPaymentInformation',
@@ -240,6 +250,8 @@ class TransactionCompletion extends TransactionAwareEntity
         
         $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
         
+        $this->container['invoice_merchant_reference'] = isset($data['invoice_merchant_reference']) ? $data['invoice_merchant_reference'] : null;
+        
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
@@ -249,6 +261,8 @@ class TransactionCompletion extends TransactionAwareEntity
         $this->container['line_item_version'] = isset($data['line_item_version']) ? $data['line_item_version'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
         
@@ -295,6 +309,10 @@ class TransactionCompletion extends TransactionAwareEntity
 
         if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
             $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -560,6 +578,35 @@ class TransactionCompletion extends TransactionAwareEntity
     
 
     /**
+     * Gets invoice_merchant_reference
+     *
+     * @return string
+     */
+    public function getInvoiceMerchantReference()
+    {
+        return $this->container['invoice_merchant_reference'];
+    }
+
+    /**
+     * Sets invoice_merchant_reference
+     *
+     * @param string $invoice_merchant_reference 
+     *
+     * @return $this
+     */
+    public function setInvoiceMerchantReference($invoice_merchant_reference)
+    {
+        if (!is_null($invoice_merchant_reference) && (mb_strlen($invoice_merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling TransactionCompletion., must be smaller than or equal to 100.');
+        }
+
+        $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets labels
      *
      * @return \PostFinanceCheckout\Sdk\Model\Label[]
@@ -679,6 +726,31 @@ class TransactionCompletion extends TransactionAwareEntity
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

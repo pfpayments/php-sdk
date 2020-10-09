@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifyIntegrationAppVersion model
+ * ShopifyIntegrationSubscriptionAppVersion model
  *
  * @category    Class
  * @description 
@@ -30,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifyIntegrationAppVersion
+class ShopifyIntegrationSubscriptionAppVersion
 {
     /**
      * Possible values of this enum
