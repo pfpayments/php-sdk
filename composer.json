@@ -1,6 +1,6 @@
 {
     "name": "postfinancecheckout/sdk",
-    "version": "2.1.3",
+    "version": "2.1.4",
 	"description": "PostFinance Checkout SDK for PHP",
 	"keywords": [
 		"postfinancecheckout",
@@ -13,8 +13,8 @@
 	"license": "Apache-2.0",
 	"authors": [
 		{
-			"name": "customweb GmbH",
-			"homepage": "https://customweb.com"
+			"name": "wallee AG",
+			"homepage": "https://wallee.com"
 		}
 	],
 	"require": {
