@@ -118,8 +118,7 @@ final class ApiClientTest extends TestCase
     public function testEmptyResponseWithSocketClient()
     {
     	$this->apiClient->setHttpClientType(HttpClientFactory::TYPE_SOCKET);
-    	$transactionRead = $this->apiClient->getTransactionService()->read($this->spaceId, 1);
-    	$this->assertEquals(null, $transactionRead->getId());
+    	$this->apiClient->getTransactionService()->read($this->spaceId, 1);
     }
     
     /**
@@ -128,8 +127,7 @@ final class ApiClientTest extends TestCase
     public function testEmptyResponseWithCurlClient()
     {
     	$this->apiClient->setHttpClientType(HttpClientFactory::TYPE_CURL);
-    	$transactionRead = $this->apiClient->getTransactionService()->read($this->spaceId, 1);
-    	$this->assertEquals(null, $transactionRead->getId());
+    	$this->apiClient->getTransactionService()->read($this->spaceId, 1);
     }
 
 }
