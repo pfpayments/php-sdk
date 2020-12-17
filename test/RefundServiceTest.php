@@ -140,6 +140,7 @@ class RefundServiceTest extends TestCase
             $this->transactionPayload->setAutoConfirmationEnabled(true);
             $this->transactionPayload->setBillingAddress($billingAddress);
             $this->transactionPayload->setShippingAddress($billingAddress);
+            $this->transactionPayload->setToken(767);
         }
         return $this->transactionPayload;
     }
@@ -216,7 +217,7 @@ class RefundServiceTest extends TestCase
             if (in_array($transaction->getState(), [TransactionState::FULFILL, TransactionState::FAILED])) {
                 break;
             }
-            sleep($i * 30);
+            sleep($i * 5);
             $transaction = $this->apiClient->getTransactionService()->read($this->spaceId, $transaction->getId());
         }
         if (in_array($transaction->getState(), [TransactionState::FULFILL])) {

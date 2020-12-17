@@ -103,6 +103,11 @@ final class SocketHttpClient implements IHttpClient {
 				}
 				$responseMessage .= $line;
 			} else {
+				// If the content of the response is empty, there is nothing to be read.
+				if ($contentLength == 0) {
+                    $endReached = true;
+                    break;
+                }
 				// Check if we can read without chunks
 				if (!$chunked) {
 					$readBytes = 4096;

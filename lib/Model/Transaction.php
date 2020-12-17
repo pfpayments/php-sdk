@@ -87,6 +87,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'internet_protocol_address' => 'string',
         'internet_protocol_address_country' => 'string',
         'invoice_merchant_reference' => 'string',
+        'java_enabled' => 'bool',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
         'linked_space_id' => 'int',
@@ -97,6 +98,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'planned_purge_date' => '\DateTime',
         'processing_on' => '\DateTime',
         'refunded_amount' => 'float',
+        'screen_color_depth' => 'string',
+        'screen_height' => 'string',
+        'screen_width' => 'string',
         'shipping_address' => '\PostFinanceCheckout\Sdk\Model\Address',
         'shipping_method' => 'string',
         'space_view_id' => 'int',
@@ -111,7 +115,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'user_agent_header' => 'string',
         'user_failure_message' => 'string',
         'user_interface_type' => '\PostFinanceCheckout\Sdk\Model\TransactionUserInterfaceType',
-        'version' => 'int'
+        'version' => 'int',
+        'window_height' => 'string',
+        'window_width' => 'string'
     ];
 
     /**
@@ -158,6 +164,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'internet_protocol_address' => null,
         'internet_protocol_address_country' => null,
         'invoice_merchant_reference' => null,
+        'java_enabled' => null,
         'language' => null,
         'line_items' => null,
         'linked_space_id' => 'int64',
@@ -168,6 +175,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'date-time',
         'processing_on' => 'date-time',
         'refunded_amount' => null,
+        'screen_color_depth' => null,
+        'screen_height' => null,
+        'screen_width' => null,
         'shipping_address' => null,
         'shipping_method' => null,
         'space_view_id' => 'int64',
@@ -182,7 +192,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'user_agent_header' => null,
         'user_failure_message' => null,
         'user_interface_type' => null,
-        'version' => 'int32'
+        'version' => 'int32',
+        'window_height' => null,
+        'window_width' => null
     ];
 
     /**
@@ -230,6 +242,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'internet_protocol_address' => 'internetProtocolAddress',
         'internet_protocol_address_country' => 'internetProtocolAddressCountry',
         'invoice_merchant_reference' => 'invoiceMerchantReference',
+        'java_enabled' => 'javaEnabled',
         'language' => 'language',
         'line_items' => 'lineItems',
         'linked_space_id' => 'linkedSpaceId',
@@ -240,6 +253,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'plannedPurgeDate',
         'processing_on' => 'processingOn',
         'refunded_amount' => 'refundedAmount',
+        'screen_color_depth' => 'screenColorDepth',
+        'screen_height' => 'screenHeight',
+        'screen_width' => 'screenWidth',
         'shipping_address' => 'shippingAddress',
         'shipping_method' => 'shippingMethod',
         'space_view_id' => 'spaceViewId',
@@ -254,7 +270,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'user_agent_header' => 'userAgentHeader',
         'user_failure_message' => 'userFailureMessage',
         'user_interface_type' => 'userInterfaceType',
-        'version' => 'version'
+        'version' => 'version',
+        'window_height' => 'windowHeight',
+        'window_width' => 'windowWidth'
     ];
 
     /**
@@ -301,6 +319,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'internet_protocol_address' => 'setInternetProtocolAddress',
         'internet_protocol_address_country' => 'setInternetProtocolAddressCountry',
         'invoice_merchant_reference' => 'setInvoiceMerchantReference',
+        'java_enabled' => 'setJavaEnabled',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
         'linked_space_id' => 'setLinkedSpaceId',
@@ -311,6 +330,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'setPlannedPurgeDate',
         'processing_on' => 'setProcessingOn',
         'refunded_amount' => 'setRefundedAmount',
+        'screen_color_depth' => 'setScreenColorDepth',
+        'screen_height' => 'setScreenHeight',
+        'screen_width' => 'setScreenWidth',
         'shipping_address' => 'setShippingAddress',
         'shipping_method' => 'setShippingMethod',
         'space_view_id' => 'setSpaceViewId',
@@ -325,7 +347,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'user_agent_header' => 'setUserAgentHeader',
         'user_failure_message' => 'setUserFailureMessage',
         'user_interface_type' => 'setUserInterfaceType',
-        'version' => 'setVersion'
+        'version' => 'setVersion',
+        'window_height' => 'setWindowHeight',
+        'window_width' => 'setWindowWidth'
     ];
 
     /**
@@ -372,6 +396,7 @@ class Transaction implements ModelInterface, ArrayAccess
         'internet_protocol_address' => 'getInternetProtocolAddress',
         'internet_protocol_address_country' => 'getInternetProtocolAddressCountry',
         'invoice_merchant_reference' => 'getInvoiceMerchantReference',
+        'java_enabled' => 'getJavaEnabled',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
         'linked_space_id' => 'getLinkedSpaceId',
@@ -382,6 +407,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'getPlannedPurgeDate',
         'processing_on' => 'getProcessingOn',
         'refunded_amount' => 'getRefundedAmount',
+        'screen_color_depth' => 'getScreenColorDepth',
+        'screen_height' => 'getScreenHeight',
+        'screen_width' => 'getScreenWidth',
         'shipping_address' => 'getShippingAddress',
         'shipping_method' => 'getShippingMethod',
         'space_view_id' => 'getSpaceViewId',
@@ -396,7 +424,9 @@ class Transaction implements ModelInterface, ArrayAccess
         'user_agent_header' => 'getUserAgentHeader',
         'user_failure_message' => 'getUserFailureMessage',
         'user_interface_type' => 'getUserInterfaceType',
-        'version' => 'getVersion'
+        'version' => 'getVersion',
+        'window_height' => 'getWindowHeight',
+        'window_width' => 'getWindowWidth'
     ];
 
     
@@ -493,6 +523,8 @@ class Transaction implements ModelInterface, ArrayAccess
         
         $this->container['invoice_merchant_reference'] = isset($data['invoice_merchant_reference']) ? $data['invoice_merchant_reference'] : null;
         
+        $this->container['java_enabled'] = isset($data['java_enabled']) ? $data['java_enabled'] : null;
+        
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
@@ -512,6 +544,12 @@ class Transaction implements ModelInterface, ArrayAccess
         $this->container['processing_on'] = isset($data['processing_on']) ? $data['processing_on'] : null;
         
         $this->container['refunded_amount'] = isset($data['refunded_amount']) ? $data['refunded_amount'] : null;
+        
+        $this->container['screen_color_depth'] = isset($data['screen_color_depth']) ? $data['screen_color_depth'] : null;
+        
+        $this->container['screen_height'] = isset($data['screen_height']) ? $data['screen_height'] : null;
+        
+        $this->container['screen_width'] = isset($data['screen_width']) ? $data['screen_width'] : null;
         
         $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
         
@@ -542,6 +580,10 @@ class Transaction implements ModelInterface, ArrayAccess
         $this->container['user_interface_type'] = isset($data['user_interface_type']) ? $data['user_interface_type'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+        $this->container['window_height'] = isset($data['window_height']) ? $data['window_height'] : null;
+        
+        $this->container['window_width'] = isset($data['window_width']) ? $data['window_width'] : null;
         
     }
 
@@ -1647,6 +1689,31 @@ class Transaction implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets java_enabled
+     *
+     * @return bool
+     */
+    public function getJavaEnabled()
+    {
+        return $this->container['java_enabled'];
+    }
+
+    /**
+     * Sets java_enabled
+     *
+     * @param bool $java_enabled 
+     *
+     * @return $this
+     */
+    public function setJavaEnabled($java_enabled)
+    {
+        $this->container['java_enabled'] = $java_enabled;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets language
      *
      * @return string
@@ -1895,6 +1962,81 @@ class Transaction implements ModelInterface, ArrayAccess
     public function setRefundedAmount($refunded_amount)
     {
         $this->container['refunded_amount'] = $refunded_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets screen_color_depth
+     *
+     * @return string
+     */
+    public function getScreenColorDepth()
+    {
+        return $this->container['screen_color_depth'];
+    }
+
+    /**
+     * Sets screen_color_depth
+     *
+     * @param string $screen_color_depth 
+     *
+     * @return $this
+     */
+    public function setScreenColorDepth($screen_color_depth)
+    {
+        $this->container['screen_color_depth'] = $screen_color_depth;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets screen_height
+     *
+     * @return string
+     */
+    public function getScreenHeight()
+    {
+        return $this->container['screen_height'];
+    }
+
+    /**
+     * Sets screen_height
+     *
+     * @param string $screen_height 
+     *
+     * @return $this
+     */
+    public function setScreenHeight($screen_height)
+    {
+        $this->container['screen_height'] = $screen_height;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets screen_width
+     *
+     * @return string
+     */
+    public function getScreenWidth()
+    {
+        return $this->container['screen_width'];
+    }
+
+    /**
+     * Sets screen_width
+     *
+     * @param string $screen_width 
+     *
+     * @return $this
+     */
+    public function setScreenWidth($screen_width)
+    {
+        $this->container['screen_width'] = $screen_width;
 
         return $this;
     }
@@ -2281,6 +2423,56 @@ class Transaction implements ModelInterface, ArrayAccess
     public function setVersion($version)
     {
         $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets window_height
+     *
+     * @return string
+     */
+    public function getWindowHeight()
+    {
+        return $this->container['window_height'];
+    }
+
+    /**
+     * Sets window_height
+     *
+     * @param string $window_height 
+     *
+     * @return $this
+     */
+    public function setWindowHeight($window_height)
+    {
+        $this->container['window_height'] = $window_height;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets window_width
+     *
+     * @return string
+     */
+    public function getWindowWidth()
+    {
+        return $this->container['window_width'];
+    }
+
+    /**
+     * Sets window_width
+     *
+     * @param string $window_width 
+     *
+     * @return $this
+     */
+    public function setWindowWidth($window_width)
+    {
+        $this->container['window_width'] = $window_width;
 
         return $this;
     }

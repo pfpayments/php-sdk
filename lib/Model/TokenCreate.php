@@ -121,6 +121,14 @@ class TokenCreate extends AbstractTokenUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        }
+
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }

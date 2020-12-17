@@ -52,13 +52,13 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         'applied_space_view' => 'int',
         'available_from' => '\DateTime',
         'available_until' => '\DateTime',
-        'billing_address_required' => 'bool',
+        'billing_address_handling_mode' => '\PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode',
         'currency' => 'string',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
         'maximal_number_of_transactions' => 'int',
         'name' => 'string',
-        'shipping_address_required' => 'bool'
+        'shipping_address_handling_mode' => '\PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode'
     ];
 
     /**
@@ -71,13 +71,13 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         'applied_space_view' => 'int64',
         'available_from' => 'date-time',
         'available_until' => 'date-time',
-        'billing_address_required' => null,
+        'billing_address_handling_mode' => null,
         'currency' => null,
         'language' => null,
         'line_items' => null,
         'maximal_number_of_transactions' => 'int32',
         'name' => null,
-        'shipping_address_required' => null
+        'shipping_address_handling_mode' => null
     ];
 
     /**
@@ -91,13 +91,13 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         'applied_space_view' => 'appliedSpaceView',
         'available_from' => 'availableFrom',
         'available_until' => 'availableUntil',
-        'billing_address_required' => 'billingAddressRequired',
+        'billing_address_handling_mode' => 'billingAddressHandlingMode',
         'currency' => 'currency',
         'language' => 'language',
         'line_items' => 'lineItems',
         'maximal_number_of_transactions' => 'maximalNumberOfTransactions',
         'name' => 'name',
-        'shipping_address_required' => 'shippingAddressRequired'
+        'shipping_address_handling_mode' => 'shippingAddressHandlingMode'
     ];
 
     /**
@@ -110,13 +110,13 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         'applied_space_view' => 'setAppliedSpaceView',
         'available_from' => 'setAvailableFrom',
         'available_until' => 'setAvailableUntil',
-        'billing_address_required' => 'setBillingAddressRequired',
+        'billing_address_handling_mode' => 'setBillingAddressHandlingMode',
         'currency' => 'setCurrency',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
         'maximal_number_of_transactions' => 'setMaximalNumberOfTransactions',
         'name' => 'setName',
-        'shipping_address_required' => 'setShippingAddressRequired'
+        'shipping_address_handling_mode' => 'setShippingAddressHandlingMode'
     ];
 
     /**
@@ -129,13 +129,13 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         'applied_space_view' => 'getAppliedSpaceView',
         'available_from' => 'getAvailableFrom',
         'available_until' => 'getAvailableUntil',
-        'billing_address_required' => 'getBillingAddressRequired',
+        'billing_address_handling_mode' => 'getBillingAddressHandlingMode',
         'currency' => 'getCurrency',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
         'maximal_number_of_transactions' => 'getMaximalNumberOfTransactions',
         'name' => 'getName',
-        'shipping_address_required' => 'getShippingAddressRequired'
+        'shipping_address_handling_mode' => 'getShippingAddressHandlingMode'
     ];
 
     
@@ -164,7 +164,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         
         $this->container['available_until'] = isset($data['available_until']) ? $data['available_until'] : null;
         
-        $this->container['billing_address_required'] = isset($data['billing_address_required']) ? $data['billing_address_required'] : null;
+        $this->container['billing_address_handling_mode'] = isset($data['billing_address_handling_mode']) ? $data['billing_address_handling_mode'] : null;
         
         $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         
@@ -176,7 +176,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
-        $this->container['shipping_address_required'] = isset($data['shipping_address_required']) ? $data['shipping_address_required'] : null;
+        $this->container['shipping_address_handling_mode'] = isset($data['shipping_address_handling_mode']) ? $data['shipping_address_handling_mode'] : null;
         
     }
 
@@ -374,25 +374,25 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets billing_address_required
+     * Gets billing_address_handling_mode
      *
-     * @return bool
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode
      */
-    public function getBillingAddressRequired()
+    public function getBillingAddressHandlingMode()
     {
-        return $this->container['billing_address_required'];
+        return $this->container['billing_address_handling_mode'];
     }
 
     /**
-     * Sets billing_address_required
+     * Sets billing_address_handling_mode
      *
-     * @param bool $billing_address_required By making the billing address required the transaction can only be created when a billing address is provided within the request.
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode $billing_address_handling_mode The billing address handling mode controls if the address is collected or not and how it is collected.
      *
      * @return $this
      */
-    public function setBillingAddressRequired($billing_address_required)
+    public function setBillingAddressHandlingMode($billing_address_handling_mode)
     {
-        $this->container['billing_address_required'] = $billing_address_required;
+        $this->container['billing_address_handling_mode'] = $billing_address_handling_mode;
 
         return $this;
     }
@@ -528,25 +528,25 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets shipping_address_required
+     * Gets shipping_address_handling_mode
      *
-     * @return bool
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode
      */
-    public function getShippingAddressRequired()
+    public function getShippingAddressHandlingMode()
     {
-        return $this->container['shipping_address_required'];
+        return $this->container['shipping_address_handling_mode'];
     }
 
     /**
-     * Sets shipping_address_required
+     * Sets shipping_address_handling_mode
      *
-     * @param bool $shipping_address_required By making the shipping address required the transaction can only be created when a shipping address is provided within the request.
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentLinkAddressHandlingMode $shipping_address_handling_mode The shipping address handling mode controls if the address is collected or not and how it is collected.
      *
      * @return $this
      */
-    public function setShippingAddressRequired($shipping_address_required)
+    public function setShippingAddressHandlingMode($shipping_address_handling_mode)
     {
-        $this->container['shipping_address_required'] = $shipping_address_required;
+        $this->container['shipping_address_handling_mode'] = $shipping_address_handling_mode;
 
         return $this;
     }

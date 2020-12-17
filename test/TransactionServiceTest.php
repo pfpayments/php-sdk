@@ -116,6 +116,7 @@ class TransactionServiceTest extends TestCase
             $this->transactionPayload->setAutoConfirmationEnabled(true);
             $this->transactionPayload->setBillingAddress($billingAddress);
             $this->transactionPayload->setShippingAddress($billingAddress);
+            $this->transactionPayload->setToken(767);
         }
         return $this->transactionPayload;
     }

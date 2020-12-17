@@ -52,7 +52,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'created_on' => '\DateTime',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
         'planned_purge_date' => '\DateTime',
         'space_view_id' => 'int',
         'tax_amount' => 'float',
@@ -71,7 +70,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'created_on' => 'date-time',
         'language' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
         'planned_purge_date' => 'date-time',
         'space_view_id' => 'int64',
         'tax_amount' => null,
@@ -91,7 +89,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'created_on' => 'createdOn',
         'language' => 'language',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
         'planned_purge_date' => 'plannedPurgeDate',
         'space_view_id' => 'spaceViewId',
         'tax_amount' => 'taxAmount',
@@ -110,7 +107,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'created_on' => 'setCreatedOn',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'space_view_id' => 'setSpaceViewId',
         'tax_amount' => 'setTaxAmount',
@@ -129,7 +125,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'created_on' => 'getCreatedOn',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'space_view_id' => 'getSpaceViewId',
         'tax_amount' => 'getTaxAmount',
@@ -160,8 +155,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -384,31 +377,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

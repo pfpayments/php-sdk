@@ -60,7 +60,6 @@ class TransactionCompletion extends TransactionAwareEntity
         'last_completion' => 'bool',
         'line_item_version' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
         'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
         'next_update_on' => '\DateTime',
         'payment_information' => 'string',
@@ -96,7 +95,6 @@ class TransactionCompletion extends TransactionAwareEntity
         'last_completion' => null,
         'line_item_version' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
         'mode' => null,
         'next_update_on' => 'date-time',
         'payment_information' => null,
@@ -133,7 +131,6 @@ class TransactionCompletion extends TransactionAwareEntity
         'last_completion' => 'lastCompletion',
         'line_item_version' => 'lineItemVersion',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
         'mode' => 'mode',
         'next_update_on' => 'nextUpdateOn',
         'payment_information' => 'paymentInformation',
@@ -169,7 +166,6 @@ class TransactionCompletion extends TransactionAwareEntity
         'last_completion' => 'setLastCompletion',
         'line_item_version' => 'setLineItemVersion',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
         'mode' => 'setMode',
         'next_update_on' => 'setNextUpdateOn',
         'payment_information' => 'setPaymentInformation',
@@ -205,7 +201,6 @@ class TransactionCompletion extends TransactionAwareEntity
         'last_completion' => 'getLastCompletion',
         'line_item_version' => 'getLineItemVersion',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
         'mode' => 'getMode',
         'next_update_on' => 'getNextUpdateOn',
         'payment_information' => 'getPaymentInformation',
@@ -261,8 +256,6 @@ class TransactionCompletion extends TransactionAwareEntity
         $this->container['line_item_version'] = isset($data['line_item_version']) ? $data['line_item_version'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
         
@@ -726,31 +719,6 @@ class TransactionCompletion extends TransactionAwareEntity
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

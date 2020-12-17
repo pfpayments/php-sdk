@@ -53,7 +53,6 @@ class TransactionVoid extends TransactionAwareEntity
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
-        'linked_space_id' => 'int',
         'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionVoidMode',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
@@ -78,7 +77,6 @@ class TransactionVoid extends TransactionAwareEntity
         'failure_reason' => null,
         'labels' => null,
         'language' => null,
-        'linked_space_id' => 'int64',
         'mode' => null,
         'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
@@ -104,7 +102,6 @@ class TransactionVoid extends TransactionAwareEntity
         'failure_reason' => 'failureReason',
         'labels' => 'labels',
         'language' => 'language',
-        'linked_space_id' => 'linkedSpaceId',
         'mode' => 'mode',
         'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -129,7 +126,6 @@ class TransactionVoid extends TransactionAwareEntity
         'failure_reason' => 'setFailureReason',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
-        'linked_space_id' => 'setLinkedSpaceId',
         'mode' => 'setMode',
         'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -154,7 +150,6 @@ class TransactionVoid extends TransactionAwareEntity
         'failure_reason' => 'getFailureReason',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
-        'linked_space_id' => 'getLinkedSpaceId',
         'mode' => 'getMode',
         'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -192,8 +187,6 @@ class TransactionVoid extends TransactionAwareEntity
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
         
@@ -451,31 +444,6 @@ class TransactionVoid extends TransactionAwareEntity
     public function setLanguage($language)
     {
         $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

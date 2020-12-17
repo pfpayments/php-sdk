@@ -51,7 +51,6 @@ class DeliveryIndication extends TransactionAwareEntity
         'automatically_decided_on' => '\DateTime',
         'completion' => 'int',
         'created_on' => '\DateTime',
-        'linked_space_id' => 'int',
         'manual_decision_timeout_on' => '\DateTime',
         'manually_decided_by' => 'int',
         'manually_decided_on' => '\DateTime',
@@ -71,7 +70,6 @@ class DeliveryIndication extends TransactionAwareEntity
         'automatically_decided_on' => 'date-time',
         'completion' => 'int64',
         'created_on' => 'date-time',
-        'linked_space_id' => 'int64',
         'manual_decision_timeout_on' => 'date-time',
         'manually_decided_by' => 'int64',
         'manually_decided_on' => 'date-time',
@@ -92,7 +90,6 @@ class DeliveryIndication extends TransactionAwareEntity
         'automatically_decided_on' => 'automaticallyDecidedOn',
         'completion' => 'completion',
         'created_on' => 'createdOn',
-        'linked_space_id' => 'linkedSpaceId',
         'manual_decision_timeout_on' => 'manualDecisionTimeoutOn',
         'manually_decided_by' => 'manuallyDecidedBy',
         'manually_decided_on' => 'manuallyDecidedOn',
@@ -112,7 +109,6 @@ class DeliveryIndication extends TransactionAwareEntity
         'automatically_decided_on' => 'setAutomaticallyDecidedOn',
         'completion' => 'setCompletion',
         'created_on' => 'setCreatedOn',
-        'linked_space_id' => 'setLinkedSpaceId',
         'manual_decision_timeout_on' => 'setManualDecisionTimeoutOn',
         'manually_decided_by' => 'setManuallyDecidedBy',
         'manually_decided_on' => 'setManuallyDecidedOn',
@@ -132,7 +128,6 @@ class DeliveryIndication extends TransactionAwareEntity
         'automatically_decided_on' => 'getAutomaticallyDecidedOn',
         'completion' => 'getCompletion',
         'created_on' => 'getCreatedOn',
-        'linked_space_id' => 'getLinkedSpaceId',
         'manual_decision_timeout_on' => 'getManualDecisionTimeoutOn',
         'manually_decided_by' => 'getManuallyDecidedBy',
         'manually_decided_on' => 'getManuallyDecidedOn',
@@ -163,8 +158,6 @@ class DeliveryIndication extends TransactionAwareEntity
         $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['manual_decision_timeout_on'] = isset($data['manual_decision_timeout_on']) ? $data['manual_decision_timeout_on'] : null;
         
@@ -366,31 +359,6 @@ class DeliveryIndication extends TransactionAwareEntity
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }

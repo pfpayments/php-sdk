@@ -50,7 +50,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         'checkout_id' => 'string',
         'created_on' => '\DateTime',
         'integration' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegration',
-        'linked_space_id' => 'int',
         'order_id' => 'string',
         'order_name' => 'string',
         'planned_purge_date' => '\DateTime',
@@ -68,7 +67,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         'checkout_id' => null,
         'created_on' => 'date-time',
         'integration' => null,
-        'linked_space_id' => 'int64',
         'order_id' => null,
         'order_name' => null,
         'planned_purge_date' => 'date-time',
@@ -87,7 +85,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         'checkout_id' => 'checkoutId',
         'created_on' => 'createdOn',
         'integration' => 'integration',
-        'linked_space_id' => 'linkedSpaceId',
         'order_id' => 'orderId',
         'order_name' => 'orderName',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -105,7 +102,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         'checkout_id' => 'setCheckoutId',
         'created_on' => 'setCreatedOn',
         'integration' => 'setIntegration',
-        'linked_space_id' => 'setLinkedSpaceId',
         'order_id' => 'setOrderId',
         'order_name' => 'setOrderName',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -123,7 +119,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         'checkout_id' => 'getCheckoutId',
         'created_on' => 'getCreatedOn',
         'integration' => 'getIntegration',
-        'linked_space_id' => 'getLinkedSpaceId',
         'order_id' => 'getOrderId',
         'order_name' => 'getOrderName',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -151,8 +146,6 @@ class ShopifyTransaction extends TransactionAwareEntity
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['integration'] = isset($data['integration']) ? $data['integration'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
         
@@ -327,31 +320,6 @@ class ShopifyTransaction extends TransactionAwareEntity
     public function setIntegration($integration)
     {
         $this->container['integration'] = $integration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
