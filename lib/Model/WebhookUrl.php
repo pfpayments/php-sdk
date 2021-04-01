@@ -49,6 +49,7 @@ class WebhookUrl implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'application_managed' => 'bool',
         'id' => 'int',
         'linked_space_id' => 'int',
         'name' => 'string',
@@ -64,6 +65,7 @@ class WebhookUrl implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'application_managed' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'name' => null,
@@ -80,6 +82,7 @@ class WebhookUrl implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'application_managed' => 'applicationManaged',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
@@ -95,6 +98,7 @@ class WebhookUrl implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'application_managed' => 'setApplicationManaged',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
@@ -110,6 +114,7 @@ class WebhookUrl implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'application_managed' => 'getApplicationManaged',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
@@ -136,6 +141,8 @@ class WebhookUrl implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
+        $this->container['application_managed'] = isset($data['application_managed']) ? $data['application_managed'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -252,6 +259,31 @@ class WebhookUrl implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets application_managed
+     *
+     * @return bool
+     */
+    public function getApplicationManaged()
+    {
+        return $this->container['application_managed'];
+    }
+
+    /**
+     * Sets application_managed
+     *
+     * @param bool $application_managed The webhook URL is managed by the application and cannot be changed via the user interface.
+     *
+     * @return $this
+     */
+    public function setApplicationManaged($application_managed)
+    {
+        $this->container['application_managed'] = $application_managed;
+
+        return $this;
+    }
     
 
     /**

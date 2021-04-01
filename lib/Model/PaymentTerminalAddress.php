@@ -219,24 +219,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
         }
 
-        if (!is_null($this->container['family_name']) && (mb_strlen($this->container['family_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'family_name', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
-        }
-
         if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
             $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
-            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
         }
 
         if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
@@ -454,10 +438,6 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
      */
     public function setFamilyName($family_name)
     {
-        if (!is_null($family_name) && (mb_strlen($family_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $family_name when calling PaymentTerminalAddress., must be smaller than or equal to 100.');
-        }
-
         $this->container['family_name'] = $family_name;
 
         return $this;
@@ -483,10 +463,6 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
      */
     public function setGivenName($given_name)
     {
-        if (!is_null($given_name) && (mb_strlen($given_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $given_name when calling PaymentTerminalAddress., must be smaller than or equal to 100.');
-        }
-
         $this->container['given_name'] = $given_name;
 
         return $this;
@@ -541,10 +517,6 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
      */
     public function setOrganizationName($organization_name)
     {
-        if (!is_null($organization_name) && (mb_strlen($organization_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $organization_name when calling PaymentTerminalAddress., must be smaller than or equal to 100.');
-        }
-
         $this->container['organization_name'] = $organization_name;
 
         return $this;
@@ -570,10 +542,6 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess
      */
     public function setPhoneNumber($phone_number)
     {
-        if (!is_null($phone_number) && (mb_strlen($phone_number) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $phone_number when calling PaymentTerminalAddress., must be smaller than or equal to 100.');
-        }
-
         $this->container['phone_number'] = $phone_number;
 
         return $this;

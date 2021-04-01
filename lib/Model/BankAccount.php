@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocation model
+ * BankAccount model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocation implements ModelInterface, ArrayAccess
+class BankAccount implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocation';
+    protected static $swaggerModelName = 'BankAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,13 +49,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'default_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration',
+        'description' => 'string',
         'id' => 'int',
+        'identifier' => 'string',
         'linked_space_id' => 'int',
-        'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState',
+        'state' => '\PostFinanceCheckout\Sdk\Model\BankAccountState',
+        'type' => 'int',
         'version' => 'int'
     ];
 
@@ -65,13 +65,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
+        'description' => null,
         'id' => 'int64',
+        'identifier' => null,
         'linked_space_id' => 'int64',
-        'name' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
+        'type' => 'int64',
         'version' => 'int32'
     ];
 
@@ -82,13 +82,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
+        'description' => 'description',
         'id' => 'id',
+        'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
+        'type' => 'type',
         'version' => 'version'
     ];
 
@@ -98,13 +98,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
+        'description' => 'setDescription',
         'id' => 'setId',
+        'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
+        'type' => 'setType',
         'version' => 'setVersion'
     ];
 
@@ -114,13 +114,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
+        'description' => 'getDescription',
         'id' => 'getId',
+        'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
+        'type' => 'getType',
         'version' => 'getVersion'
     ];
 
@@ -142,19 +142,19 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        $this->container['identifier'] = isset($data['identifier']) ? $data['identifier'] : null;
         
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -169,8 +169,12 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 100)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['identifier']) && (mb_strlen($this->container['identifier']) > 100)) {
+            $invalidProperties[] = "invalid value for 'identifier', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -254,50 +258,29 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
+     * Gets description
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
+     * @return string
      */
-    public function getContactAddress()
+    public function getDescription()
     {
-        return $this->container['contact_address'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets contact_address
+     * Sets description
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
+     * @param string $description The optional description is shown along the identifier. The intention of the description is to give an alternative name to the bank account.
      *
      * @return $this
      */
-    public function setContactAddress($contact_address)
+    public function setDescription($description)
     {
-        $this->container['contact_address'] = $contact_address;
+        if (!is_null($description) && (mb_strlen($description) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling BankAccount., must be smaller than or equal to 100.');
+        }
 
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_configuration
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration
-     */
-    public function getDefaultConfiguration()
-    {
-        return $this->container['default_configuration'];
-    }
-
-    /**
-     * Sets default_configuration
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
-     *
-     * @return $this
-     */
-    public function setDefaultConfiguration($default_configuration)
-    {
-        $this->container['default_configuration'] = $default_configuration;
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -329,6 +312,35 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets identifier
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->container['identifier'];
+    }
+
+    /**
+     * Sets identifier
+     *
+     * @param string $identifier The bank account identifier is responsible to uniquely identify the bank account.
+     *
+     * @return $this
+     */
+    public function setIdentifier($identifier)
+    {
+        if (!is_null($identifier) && (mb_strlen($identifier) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $identifier when calling BankAccount., must be smaller than or equal to 100.');
+        }
+
+        $this->container['identifier'] = $identifier;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets linked_space_id
      *
      * @return int
@@ -348,35 +360,6 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function setLinkedSpaceId($linked_space_id)
     {
         $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
 
         return $this;
     }
@@ -410,7 +393,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState
+     * @return \PostFinanceCheckout\Sdk\Model\BankAccountState
      */
     public function getState()
     {
@@ -420,13 +403,38 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\BankAccountState $state 
      *
      * @return $this
      */
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param int $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

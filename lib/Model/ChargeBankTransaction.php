@@ -19,12 +19,10 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocation model
+ * ChargeBankTransaction model
  *
  * @category    Class
  * @description 
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocation implements ModelInterface, ArrayAccess
+class ChargeBankTransaction extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +39,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocation';
+    protected static $swaggerModelName = 'ChargeBankTransaction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,13 +47,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'default_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState',
+        'bank_transaction' => '\PostFinanceCheckout\Sdk\Model\BankTransaction',
+        'completion' => 'int',
+        'language' => 'string',
+        'space_view_id' => 'int',
+        'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
+        'transaction_currency_amount' => 'float',
+        'transaction_currency_value_amount' => 'float',
         'version' => 'int'
     ];
 
@@ -65,13 +63,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
+        'bank_transaction' => null,
+        'completion' => 'int64',
+        'language' => null,
+        'space_view_id' => 'int64',
+        'transaction' => null,
+        'transaction_currency_amount' => null,
+        'transaction_currency_value_amount' => null,
         'version' => 'int32'
     ];
 
@@ -82,13 +80,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
+        'bank_transaction' => 'bankTransaction',
+        'completion' => 'completion',
+        'language' => 'language',
+        'space_view_id' => 'spaceViewId',
+        'transaction' => 'transaction',
+        'transaction_currency_amount' => 'transactionCurrencyAmount',
+        'transaction_currency_value_amount' => 'transactionCurrencyValueAmount',
         'version' => 'version'
     ];
 
@@ -98,13 +96,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
+        'bank_transaction' => 'setBankTransaction',
+        'completion' => 'setCompletion',
+        'language' => 'setLanguage',
+        'space_view_id' => 'setSpaceViewId',
+        'transaction' => 'setTransaction',
+        'transaction_currency_amount' => 'setTransactionCurrencyAmount',
+        'transaction_currency_value_amount' => 'setTransactionCurrencyValueAmount',
         'version' => 'setVersion'
     ];
 
@@ -114,24 +112,18 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
+        'bank_transaction' => 'getBankTransaction',
+        'completion' => 'getCompletion',
+        'language' => 'getLanguage',
+        'space_view_id' => 'getSpaceViewId',
+        'transaction' => 'getTransaction',
+        'transaction_currency_amount' => 'getTransactionCurrencyAmount',
+        'transaction_currency_value_amount' => 'getTransactionCurrencyValueAmount',
         'version' => 'getVersion'
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -141,20 +133,22 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
+        $this->container['bank_transaction'] = isset($data['bank_transaction']) ? $data['bank_transaction'] : null;
         
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
+        $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
         
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
         
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        $this->container['transaction_currency_amount'] = isset($data['transaction_currency_amount']) ? $data['transaction_currency_amount'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['transaction_currency_value_amount'] = isset($data['transaction_currency_value_amount']) ? $data['transaction_currency_value_amount'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -167,11 +161,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -183,7 +173,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -193,7 +183,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -205,7 +195,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -215,7 +205,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -225,7 +215,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -254,179 +244,175 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
+     * Gets bank_transaction
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
+     * @return \PostFinanceCheckout\Sdk\Model\BankTransaction
      */
-    public function getContactAddress()
+    public function getBankTransaction()
     {
-        return $this->container['contact_address'];
+        return $this->container['bank_transaction'];
     }
 
     /**
-     * Sets contact_address
+     * Sets bank_transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
+     * @param \PostFinanceCheckout\Sdk\Model\BankTransaction $bank_transaction 
      *
      * @return $this
      */
-    public function setContactAddress($contact_address)
+    public function setBankTransaction($bank_transaction)
     {
-        $this->container['contact_address'] = $contact_address;
+        $this->container['bank_transaction'] = $bank_transaction;
 
         return $this;
     }
     
 
     /**
-     * Gets default_configuration
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration
-     */
-    public function getDefaultConfiguration()
-    {
-        return $this->container['default_configuration'];
-    }
-
-    /**
-     * Sets default_configuration
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
-     *
-     * @return $this
-     */
-    public function setDefaultConfiguration($default_configuration)
-    {
-        $this->container['default_configuration'] = $default_configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
+     * Gets completion
      *
      * @return int
      */
-    public function getId()
+    public function getCompletion()
     {
-        return $this->container['id'];
+        return $this->container['completion'];
     }
 
     /**
-     * Sets id
+     * Sets completion
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $completion 
      *
      * @return $this
      */
-    public function setId($id)
+    public function setCompletion($completion)
     {
-        $this->container['id'] = $id;
+        $this->container['completion'] = $completion;
 
         return $this;
     }
     
 
     /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
+     * Gets language
      *
      * @return string
      */
-    public function getName()
+    public function getLanguage()
     {
-        return $this->container['name'];
+        return $this->container['language'];
     }
 
     /**
-     * Sets name
+     * Sets language
      *
-     * @param string $name The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $language 
      *
      * @return $this
      */
-    public function setName($name)
+    public function setLanguage($language)
     {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['language'] = $language;
 
         return $this;
     }
     
 
     /**
-     * Gets planned_purge_date
+     * Gets space_view_id
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getPlannedPurgeDate()
+    public function getSpaceViewId()
     {
-        return $this->container['planned_purge_date'];
+        return $this->container['space_view_id'];
     }
 
     /**
-     * Sets planned_purge_date
+     * Sets space_view_id
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param int $space_view_id 
      *
      * @return $this
      */
-    public function setPlannedPurgeDate($planned_purge_date)
+    public function setSpaceViewId($space_view_id)
     {
-        $this->container['planned_purge_date'] = $planned_purge_date;
+        $this->container['space_view_id'] = $space_view_id;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets transaction
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState
+     * @return \PostFinanceCheckout\Sdk\Model\Transaction
      */
-    public function getState()
+    public function getTransaction()
     {
-        return $this->container['state'];
+        return $this->container['transaction'];
     }
 
     /**
-     * Sets state
+     * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setTransaction($transaction)
     {
-        $this->container['state'] = $state;
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets transaction_currency_amount
+     *
+     * @return float
+     */
+    public function getTransactionCurrencyAmount()
+    {
+        return $this->container['transaction_currency_amount'];
+    }
+
+    /**
+     * Sets transaction_currency_amount
+     *
+     * @param float $transaction_currency_amount Specify the posting amount in the transaction's currency.
+     *
+     * @return $this
+     */
+    public function setTransactionCurrencyAmount($transaction_currency_amount)
+    {
+        $this->container['transaction_currency_amount'] = $transaction_currency_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets transaction_currency_value_amount
+     *
+     * @return float
+     */
+    public function getTransactionCurrencyValueAmount()
+    {
+        return $this->container['transaction_currency_value_amount'];
+    }
+
+    /**
+     * Sets transaction_currency_value_amount
+     *
+     * @param float $transaction_currency_value_amount 
+     *
+     * @return $this
+     */
+    public function setTransactionCurrencyValueAmount($transaction_currency_value_amount)
+    {
+        $this->container['transaction_currency_value_amount'] = $transaction_currency_value_amount;
 
         return $this;
     }

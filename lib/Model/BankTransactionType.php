@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocation model
+ * BankTransactionType model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocation implements ModelInterface, ArrayAccess
+class BankTransactionType implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocation';
+    protected static $swaggerModelName = 'BankTransactionType';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,14 +49,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'default_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration',
+        'description' => 'map[string,string]',
         'id' => 'int',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState',
-        'version' => 'int'
+        'name' => 'map[string,string]'
     ];
 
     /**
@@ -65,14 +60,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
+        'description' => null,
         'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
-        'version' => 'int32'
+        'name' => null
     ];
 
     /**
@@ -82,14 +72,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
+        'description' => 'description',
         'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
-        'version' => 'version'
+        'name' => 'name'
     ];
 
     /**
@@ -98,14 +83,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
+        'description' => 'setDescription',
         'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
-        'version' => 'setVersion'
+        'name' => 'setName'
     ];
 
     /**
@@ -114,14 +94,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
+        'description' => 'getDescription',
         'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
-        'version' => 'getVersion'
+        'name' => 'getName'
     ];
 
     
@@ -142,21 +117,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -168,10 +133,6 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
 
         return $invalidProperties;
     }
@@ -254,50 +215,25 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
+     * Gets description
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
+     * @return map[string,string]
      */
-    public function getContactAddress()
+    public function getDescription()
     {
-        return $this->container['contact_address'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets contact_address
+     * Sets description
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
+     * @param map[string,string] $description 
      *
      * @return $this
      */
-    public function setContactAddress($contact_address)
+    public function setDescription($description)
     {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_configuration
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration
-     */
-    public function getDefaultConfiguration()
-    {
-        return $this->container['default_configuration'];
-    }
-
-    /**
-     * Sets default_configuration
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
-     *
-     * @return $this
-     */
-    public function setDefaultConfiguration($default_configuration)
-    {
-        $this->container['default_configuration'] = $default_configuration;
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -329,34 +265,9 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets name
      *
-     * @return string
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -366,92 +277,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param map[string,string] $name 
      *
      * @return $this
      */
     public function setName($name)
     {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
-        }
-
         $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState $state 
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
 
         return $this;
     }

@@ -50,6 +50,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
+        'default_currency' => 'string',
         'id' => 'int',
         'identifier' => 'string',
         'linked_space_id' => 'int',
@@ -68,6 +69,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'configuration_version' => null,
+        'default_currency' => null,
         'id' => 'int64',
         'identifier' => null,
         'linked_space_id' => 'int64',
@@ -87,6 +89,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'configuration_version' => 'configurationVersion',
+        'default_currency' => 'defaultCurrency',
         'id' => 'id',
         'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
@@ -105,6 +108,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'configuration_version' => 'setConfigurationVersion',
+        'default_currency' => 'setDefaultCurrency',
         'id' => 'setId',
         'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
@@ -123,6 +127,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'configuration_version' => 'getConfigurationVersion',
+        'default_currency' => 'getDefaultCurrency',
         'id' => 'getId',
         'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
@@ -153,6 +158,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     {
         
         $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
+        
+        $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -287,6 +294,31 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setConfigurationVersion($configuration_version)
     {
         $this->container['configuration_version'] = $configuration_version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets default_currency
+     *
+     * @return string
+     */
+    public function getDefaultCurrency()
+    {
+        return $this->container['default_currency'];
+    }
+
+    /**
+     * Sets default_currency
+     *
+     * @param string $default_currency 
+     *
+     * @return $this
+     */
+    public function setDefaultCurrency($default_currency)
+    {
+        $this->container['default_currency'] = $default_currency;
 
         return $this;
     }

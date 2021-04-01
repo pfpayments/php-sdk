@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocation model
+ * CurrencyBankAccount model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocation implements ModelInterface, ArrayAccess
+class CurrencyBankAccount implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocation';
+    protected static $swaggerModelName = 'CurrencyBankAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,13 +49,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'default_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration',
+        'bank_account' => '\PostFinanceCheckout\Sdk\Model\BankAccount',
+        'currency' => 'string',
+        'environment' => '\PostFinanceCheckout\Sdk\Model\BankAccountEnvironment',
         'id' => 'int',
         'linked_space_id' => 'int',
-        'name' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState',
         'version' => 'int'
     ];
 
@@ -65,13 +63,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
+        'bank_account' => null,
+        'currency' => null,
+        'environment' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
-        'name' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
         'version' => 'int32'
     ];
 
@@ -82,13 +78,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
+        'bank_account' => 'bankAccount',
+        'currency' => 'currency',
+        'environment' => 'environment',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
         'version' => 'version'
     ];
 
@@ -98,13 +92,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
+        'bank_account' => 'setBankAccount',
+        'currency' => 'setCurrency',
+        'environment' => 'setEnvironment',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
         'version' => 'setVersion'
     ];
 
@@ -114,13 +106,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
+        'bank_account' => 'getBankAccount',
+        'currency' => 'getCurrency',
+        'environment' => 'getEnvironment',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
         'version' => 'getVersion'
     ];
 
@@ -142,19 +132,15 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
+        $this->container['bank_account'] = isset($data['bank_account']) ? $data['bank_account'] : null;
         
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
+        
+        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -168,10 +154,6 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
 
         return $invalidProperties;
     }
@@ -254,50 +236,75 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
+     * Gets bank_account
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
+     * @return \PostFinanceCheckout\Sdk\Model\BankAccount
      */
-    public function getContactAddress()
+    public function getBankAccount()
     {
-        return $this->container['contact_address'];
+        return $this->container['bank_account'];
     }
 
     /**
-     * Sets contact_address
+     * Sets bank_account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
+     * @param \PostFinanceCheckout\Sdk\Model\BankAccount $bank_account 
      *
      * @return $this
      */
-    public function setContactAddress($contact_address)
+    public function setBankAccount($bank_account)
     {
-        $this->container['contact_address'] = $contact_address;
+        $this->container['bank_account'] = $bank_account;
 
         return $this;
     }
     
 
     /**
-     * Gets default_configuration
+     * Gets currency
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration
+     * @return string
      */
-    public function getDefaultConfiguration()
+    public function getCurrency()
     {
-        return $this->container['default_configuration'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets default_configuration
+     * Sets currency
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
+     * @param string $currency 
      *
      * @return $this
      */
-    public function setDefaultConfiguration($default_configuration)
+    public function setCurrency($currency)
     {
-        $this->container['default_configuration'] = $default_configuration;
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets environment
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\BankAccountEnvironment
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\BankAccountEnvironment $environment 
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -348,85 +355,6 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function setLinkedSpaceId($linked_space_id)
     {
         $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationState $state 
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
 
         return $this;
     }

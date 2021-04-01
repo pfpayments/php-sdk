@@ -58,7 +58,8 @@ class Permission implements ModelInterface, ArrayAccess
         'parent' => 'int',
         'path_to_root' => 'int[]',
         'title' => 'map[string,string]',
-        'two_factor_required' => 'bool'
+        'two_factor_required' => 'bool',
+        'web_app_enabled' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class Permission implements ModelInterface, ArrayAccess
         'parent' => 'int64',
         'path_to_root' => 'int64',
         'title' => null,
-        'two_factor_required' => null
+        'two_factor_required' => null,
+        'web_app_enabled' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class Permission implements ModelInterface, ArrayAccess
         'parent' => 'parent',
         'path_to_root' => 'pathToRoot',
         'title' => 'title',
-        'two_factor_required' => 'twoFactorRequired'
+        'two_factor_required' => 'twoFactorRequired',
+        'web_app_enabled' => 'webAppEnabled'
     ];
 
     /**
@@ -113,7 +116,8 @@ class Permission implements ModelInterface, ArrayAccess
         'parent' => 'setParent',
         'path_to_root' => 'setPathToRoot',
         'title' => 'setTitle',
-        'two_factor_required' => 'setTwoFactorRequired'
+        'two_factor_required' => 'setTwoFactorRequired',
+        'web_app_enabled' => 'setWebAppEnabled'
     ];
 
     /**
@@ -131,7 +135,8 @@ class Permission implements ModelInterface, ArrayAccess
         'parent' => 'getParent',
         'path_to_root' => 'getPathToRoot',
         'title' => 'getTitle',
-        'two_factor_required' => 'getTwoFactorRequired'
+        'two_factor_required' => 'getTwoFactorRequired',
+        'web_app_enabled' => 'getWebAppEnabled'
     ];
 
     
@@ -171,6 +176,8 @@ class Permission implements ModelInterface, ArrayAccess
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         
         $this->container['two_factor_required'] = isset($data['two_factor_required']) ? $data['two_factor_required'] : null;
+        
+        $this->container['web_app_enabled'] = isset($data['web_app_enabled']) ? $data['web_app_enabled'] : null;
         
     }
 
@@ -508,6 +515,31 @@ class Permission implements ModelInterface, ArrayAccess
     public function setTwoFactorRequired($two_factor_required)
     {
         $this->container['two_factor_required'] = $two_factor_required;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets web_app_enabled
+     *
+     * @return bool
+     */
+    public function getWebAppEnabled()
+    {
+        return $this->container['web_app_enabled'];
+    }
+
+    /**
+     * Sets web_app_enabled
+     *
+     * @param bool $web_app_enabled 
+     *
+     * @return $this
+     */
+    public function setWebAppEnabled($web_app_enabled)
+    {
+        $this->container['web_app_enabled'] = $web_app_enabled;
 
         return $this;
     }

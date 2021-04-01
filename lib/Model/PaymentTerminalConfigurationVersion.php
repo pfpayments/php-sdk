@@ -53,6 +53,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         'connector_configurations' => 'int[]',
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'default_currency' => 'string',
         'id' => 'int',
         'linked_space_id' => 'int',
         'maintenance_window_duration' => 'string',
@@ -74,6 +75,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         'connector_configurations' => 'int64',
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'default_currency' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'maintenance_window_duration' => null,
@@ -96,6 +98,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         'connector_configurations' => 'connectorConfigurations',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'default_currency' => 'defaultCurrency',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'maintenance_window_duration' => 'maintenanceWindowDuration',
@@ -117,6 +120,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         'connector_configurations' => 'setConnectorConfigurations',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'default_currency' => 'setDefaultCurrency',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'maintenance_window_duration' => 'setMaintenanceWindowDuration',
@@ -138,6 +142,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         'connector_configurations' => 'getConnectorConfigurations',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'default_currency' => 'getDefaultCurrency',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'maintenance_window_duration' => 'getMaintenanceWindowDuration',
@@ -174,6 +179,8 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
         $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -379,6 +386,31 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets default_currency
+     *
+     * @return string
+     */
+    public function getDefaultCurrency()
+    {
+        return $this->container['default_currency'];
+    }
+
+    /**
+     * Sets default_currency
+     *
+     * @param string $default_currency The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+     *
+     * @return $this
+     */
+    public function setDefaultCurrency($default_currency)
+    {
+        $this->container['default_currency'] = $default_currency;
 
         return $this;
     }

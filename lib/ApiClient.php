@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.6/php';
+	private $userAgent = 'PHP-Client/3.0.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -572,6 +572,30 @@ final class ApiClient {
         return $this->applicationUserService;
     }
     
+    protected $bankAccountService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\BankAccountService
+     */
+    public function getBankAccountService() {
+        if(is_null($this->bankAccountService)){
+            $this->bankAccountService = new \PostFinanceCheckout\Sdk\Service\BankAccountService($this);
+        }
+        return $this->bankAccountService;
+    }
+    
+    protected $bankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\BankTransactionService
+     */
+    public function getBankTransactionService() {
+        if(is_null($this->bankTransactionService)){
+            $this->bankTransactionService = new \PostFinanceCheckout\Sdk\Service\BankTransactionService($this);
+        }
+        return $this->bankTransactionService;
+    }
+    
     protected $chargeAttemptService;
 
     /**
@@ -582,6 +606,18 @@ final class ApiClient {
             $this->chargeAttemptService = new \PostFinanceCheckout\Sdk\Service\ChargeAttemptService($this);
         }
         return $this->chargeAttemptService;
+    }
+    
+    protected $chargeBankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\ChargeBankTransactionService
+     */
+    public function getChargeBankTransactionService() {
+        if(is_null($this->chargeBankTransactionService)){
+            $this->chargeBankTransactionService = new \PostFinanceCheckout\Sdk\Service\ChargeBankTransactionService($this);
+        }
+        return $this->chargeBankTransactionService;
     }
     
     protected $chargeFlowLevelPaymentLinkService;
@@ -654,6 +690,18 @@ final class ApiClient {
             $this->countryStateService = new \PostFinanceCheckout\Sdk\Service\CountryStateService($this);
         }
         return $this->countryStateService;
+    }
+    
+    protected $currencyBankAccountService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\CurrencyBankAccountService
+     */
+    public function getCurrencyBankAccountService() {
+        if(is_null($this->currencyBankAccountService)){
+            $this->currencyBankAccountService = new \PostFinanceCheckout\Sdk\Service\CurrencyBankAccountService($this);
+        }
+        return $this->currencyBankAccountService;
     }
     
     protected $currencyService;
@@ -740,6 +788,18 @@ final class ApiClient {
         return $this->documentTemplateTypeService;
     }
     
+    protected $externalTransferBankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\ExternalTransferBankTransactionService
+     */
+    public function getExternalTransferBankTransactionService() {
+        if(is_null($this->externalTransferBankTransactionService)){
+            $this->externalTransferBankTransactionService = new \PostFinanceCheckout\Sdk\Service\ExternalTransferBankTransactionService($this);
+        }
+        return $this->externalTransferBankTransactionService;
+    }
+    
     protected $humanUserService;
 
     /**
@@ -750,6 +810,18 @@ final class ApiClient {
             $this->humanUserService = new \PostFinanceCheckout\Sdk\Service\HumanUserService($this);
         }
         return $this->humanUserService;
+    }
+    
+    protected $internalTransferBankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\InternalTransferBankTransactionService
+     */
+    public function getInternalTransferBankTransactionService() {
+        if(is_null($this->internalTransferBankTransactionService)){
+            $this->internalTransferBankTransactionService = new \PostFinanceCheckout\Sdk\Service\InternalTransferBankTransactionService($this);
+        }
+        return $this->internalTransferBankTransactionService;
     }
     
     protected $labelDescriptionGroupService;
@@ -920,6 +992,18 @@ final class ApiClient {
         return $this->permissionService;
     }
     
+    protected $refundBankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\RefundBankTransactionService
+     */
+    public function getRefundBankTransactionService() {
+        if(is_null($this->refundBankTransactionService)){
+            $this->refundBankTransactionService = new \PostFinanceCheckout\Sdk\Service\RefundBankTransactionService($this);
+        }
+        return $this->refundBankTransactionService;
+    }
+    
     protected $refundCommentService;
 
     /**
@@ -930,6 +1014,18 @@ final class ApiClient {
             $this->refundCommentService = new \PostFinanceCheckout\Sdk\Service\RefundCommentService($this);
         }
         return $this->refundCommentService;
+    }
+    
+    protected $refundRecoveryBankTransactionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\RefundRecoveryBankTransactionService
+     */
+    public function getRefundRecoveryBankTransactionService() {
+        if(is_null($this->refundRecoveryBankTransactionService)){
+            $this->refundRecoveryBankTransactionService = new \PostFinanceCheckout\Sdk\Service\RefundRecoveryBankTransactionService($this);
+        }
+        return $this->refundRecoveryBankTransactionService;
     }
     
     protected $refundService;

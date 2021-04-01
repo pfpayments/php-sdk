@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalContactAddress model
+ * InternalTransferBankTransaction model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalContactAddress extends PaymentTerminalAddress 
+class InternalTransferBankTransaction implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalContactAddress';
+    protected static $swaggerModelName = 'InternalTransferBankTransaction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,7 +49,11 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerTypes = [
-        
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'source_bank_transaction' => '\PostFinanceCheckout\Sdk\Model\BankTransaction',
+        'target_bank_transaction' => '\PostFinanceCheckout\Sdk\Model\BankTransaction',
+        'version' => 'int'
     ];
 
     /**
@@ -56,7 +62,11 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerFormats = [
-        
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'source_bank_transaction' => null,
+        'target_bank_transaction' => null,
+        'version' => 'int32'
     ];
 
     /**
@@ -66,7 +76,11 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'source_bank_transaction' => 'sourceBankTransaction',
+        'target_bank_transaction' => 'targetBankTransaction',
+        'version' => 'version'
     ];
 
     /**
@@ -75,7 +89,11 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $setters = [
-        
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'source_bank_transaction' => 'setSourceBankTransaction',
+        'target_bank_transaction' => 'setTargetBankTransaction',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -84,11 +102,21 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $getters = [
-        
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'source_bank_transaction' => 'getSourceBankTransaction',
+        'target_bank_transaction' => 'getTargetBankTransaction',
+        'version' => 'getVersion'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -98,8 +126,16 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['source_bank_transaction'] = isset($data['source_bank_transaction']) ? $data['source_bank_transaction'] : null;
+        
+        $this->container['target_bank_transaction'] = isset($data['target_bank_transaction']) ? $data['target_bank_transaction'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -110,27 +146,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
-
-        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
-            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
-            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
-            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
-        }
-
-        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
-        }
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -142,7 +158,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +168,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +180,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +190,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +200,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -210,6 +226,131 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets source_bank_transaction
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\BankTransaction
+     */
+    public function getSourceBankTransaction()
+    {
+        return $this->container['source_bank_transaction'];
+    }
+
+    /**
+     * Sets source_bank_transaction
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\BankTransaction $source_bank_transaction 
+     *
+     * @return $this
+     */
+    public function setSourceBankTransaction($source_bank_transaction)
+    {
+        $this->container['source_bank_transaction'] = $source_bank_transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets target_bank_transaction
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\BankTransaction
+     */
+    public function getTargetBankTransaction()
+    {
+        return $this->container['target_bank_transaction'];
+    }
+
+    /**
+     * Sets target_bank_transaction
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\BankTransaction $target_bank_transaction 
+     *
+     * @return $this
+     */
+    public function setTargetBankTransaction($target_bank_transaction)
+    {
+        $this->container['target_bank_transaction'] = $target_bank_transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
+    }
     
     /**
      * Returns true if offset exists. False otherwise.
