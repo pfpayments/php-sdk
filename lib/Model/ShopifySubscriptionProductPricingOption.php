@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalState model
+ * ShopifySubscriptionProductPricingOption model
  *
  * @category    Class
  * @description 
@@ -30,17 +30,16 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalState
+class ShopifySubscriptionProductPricingOption
 {
     /**
      * Possible values of this enum
      */
-    const CREATE = 'CREATE';
-    const PREPARING = 'PREPARING';
-    const ACTIVE = 'ACTIVE';
-    const INACTIVE = 'INACTIVE';
-    const DECOMMISSIONING = 'DECOMMISSIONING';
-    const DECOMMISSIONED = 'DECOMMISSIONED';
+    const CURRENT_PRICE = 'CURRENT_PRICE';
+    const ORIGINAL_PRICE = 'ORIGINAL_PRICE';
+    const FIXED_PRICE = 'FIXED_PRICE';
+    const RELATIVE_ADJUSTMENT = 'RELATIVE_ADJUSTMENT';
+    const ABSOLUTE_ADJUSTMENT = 'ABSOLUTE_ADJUSTMENT';
     
     /**
      * Gets allowable values of the enum
@@ -49,12 +48,11 @@ class PaymentTerminalState
     public static function getAllowableEnumValues()
     {
         return [
-            self::CREATE,
-            self::PREPARING,
-            self::ACTIVE,
-            self::INACTIVE,
-            self::DECOMMISSIONING,
-            self::DECOMMISSIONED,
+            self::CURRENT_PRICE,
+            self::ORIGINAL_PRICE,
+            self::FIXED_PRICE,
+            self::RELATIVE_ADJUSTMENT,
+            self::ABSOLUTE_ADJUSTMENT,
         ];
     }
 }

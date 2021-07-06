@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriberCreation model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriberCreation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'email_address' => 'string',
+        'phone_number' => 'string',
+        'shopify_customer_id' => 'string'
     ];
 
     /**
@@ -57,8 +60,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'email_address' => null,
+        'phone_number' => null,
+        'shopify_customer_id' => null
     ];
 
     /**
@@ -68,8 +72,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'email_address' => 'emailAddress',
+        'phone_number' => 'phoneNumber',
+        'shopify_customer_id' => 'shopifyCustomerId'
     ];
 
     /**
@@ -78,8 +83,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'email_address' => 'setEmailAddress',
+        'phone_number' => 'setPhoneNumber',
+        'shopify_customer_id' => 'setShopifyCustomerId'
     ];
 
     /**
@@ -88,12 +94,19 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'email_address' => 'getEmailAddress',
+        'phone_number' => 'getPhoneNumber',
+        'shopify_customer_id' => 'getShopifyCustomerId'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +116,12 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
+        
+        $this->container['shopify_customer_id'] = isset($data['shopify_customer_id']) ? $data['shopify_customer_id'] : null;
         
     }
 
@@ -119,18 +132,10 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
-        }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if ($this->container['shopify_customer_id'] === null) {
+            $invalidProperties[] = "'shopify_customer_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -142,7 +147,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +157,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +169,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +179,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +189,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +218,75 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets email_address
      *
      * @return string
      */
-    public function getExternalId()
+    public function getEmailAddress()
     {
-        return $this->container['external_id'];
+        return $this->container['email_address'];
     }
 
     /**
-     * Sets external_id
+     * Sets email_address
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $email_address 
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setEmailAddress($email_address)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['email_address'] = $email_address;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets phone_number
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return string
      */
-    public function getState()
+    public function getPhoneNumber()
     {
-        return $this->container['state'];
+        return $this->container['phone_number'];
     }
 
     /**
-     * Sets state
+     * Sets phone_number
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param string $phone_number 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setPhoneNumber($phone_number)
     {
-        $this->container['state'] = $state;
+        $this->container['phone_number'] = $phone_number;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shopify_customer_id
+     *
+     * @return string
+     */
+    public function getShopifyCustomerId()
+    {
+        return $this->container['shopify_customer_id'];
+    }
+
+    /**
+     * Sets shopify_customer_id
+     *
+     * @param string $shopify_customer_id The customer ID has to correspond to the ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
+     *
+     * @return $this
+     */
+    public function setShopifyCustomerId($shopify_customer_id)
+    {
+        $this->container['shopify_customer_id'] = $shopify_customer_id;
 
         return $this;
     }

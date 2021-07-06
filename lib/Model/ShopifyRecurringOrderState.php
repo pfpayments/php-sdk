@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalState model
+ * ShopifyRecurringOrderState model
  *
  * @category    Class
  * @description 
@@ -30,17 +30,17 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalState
+class ShopifyRecurringOrderState
 {
     /**
      * Possible values of this enum
      */
-    const CREATE = 'CREATE';
-    const PREPARING = 'PREPARING';
-    const ACTIVE = 'ACTIVE';
-    const INACTIVE = 'INACTIVE';
-    const DECOMMISSIONING = 'DECOMMISSIONING';
-    const DECOMMISSIONED = 'DECOMMISSIONED';
+    const PENDING = 'PENDING';
+    const ONHOLD = 'ONHOLD';
+    const PROCESSING = 'PROCESSING';
+    const CANCELED = 'CANCELED';
+    const BILLED = 'BILLED';
+    const FAILED = 'FAILED';
     
     /**
      * Gets allowable values of the enum
@@ -49,12 +49,12 @@ class PaymentTerminalState
     public static function getAllowableEnumValues()
     {
         return [
-            self::CREATE,
-            self::PREPARING,
-            self::ACTIVE,
-            self::INACTIVE,
-            self::DECOMMISSIONING,
-            self::DECOMMISSIONED,
+            self::PENDING,
+            self::ONHOLD,
+            self::PROCESSING,
+            self::CANCELED,
+            self::BILLED,
+            self::FAILED,
         ];
     }
 }

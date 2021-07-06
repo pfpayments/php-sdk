@@ -125,8 +125,8 @@ class TransactionPending extends AbstractTransactionPending
             $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
         }
 
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 1000.";
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 2000.";
         }
 
         if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
@@ -145,8 +145,8 @@ class TransactionPending extends AbstractTransactionPending
             $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
         }
 
-        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 1000.";
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 2000.";
         }
 
         if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) < 9)) {

@@ -51,6 +51,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
         'default_currency' => 'string',
+        'external_id' => 'string',
         'id' => 'int',
         'identifier' => 'string',
         'linked_space_id' => 'int',
@@ -70,6 +71,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'configuration_version' => null,
         'default_currency' => null,
+        'external_id' => null,
         'id' => 'int64',
         'identifier' => null,
         'linked_space_id' => 'int64',
@@ -90,6 +92,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'configuration_version' => 'configurationVersion',
         'default_currency' => 'defaultCurrency',
+        'external_id' => 'externalId',
         'id' => 'id',
         'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
@@ -109,6 +112,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $setters = [
         'configuration_version' => 'setConfigurationVersion',
         'default_currency' => 'setDefaultCurrency',
+        'external_id' => 'setExternalId',
         'id' => 'setId',
         'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
@@ -128,6 +132,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $getters = [
         'configuration_version' => 'getConfigurationVersion',
         'default_currency' => 'getDefaultCurrency',
+        'external_id' => 'getExternalId',
         'id' => 'getId',
         'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
@@ -160,6 +165,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
         
         $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -319,6 +326,31 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setDefaultCurrency($default_currency)
     {
         $this->container['default_currency'] = $default_currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }

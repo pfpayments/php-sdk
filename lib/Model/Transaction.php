@@ -608,8 +608,8 @@ class Transaction implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be bigger than or equal to 10.";
         }
 
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 1000.";
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 2000.";
         }
 
         if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
@@ -628,8 +628,8 @@ class Transaction implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
         }
 
-        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 1000.";
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 2000.";
         }
 
         if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) < 9)) {
@@ -1521,8 +1521,8 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setFailedUrl($failed_url)
     {
-        if (!is_null($failed_url) && (mb_strlen($failed_url) > 1000)) {
-            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be smaller than or equal to 1000.');
+        if (!is_null($failed_url) && (mb_strlen($failed_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be smaller than or equal to 2000.');
         }
         if (!is_null($failed_url) && (mb_strlen($failed_url) < 9)) {
             throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be bigger than or equal to 9.');
@@ -2165,8 +2165,8 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function setSuccessUrl($success_url)
     {
-        if (!is_null($success_url) && (mb_strlen($success_url) > 1000)) {
-            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be smaller than or equal to 1000.');
+        if (!is_null($success_url) && (mb_strlen($success_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be smaller than or equal to 2000.');
         }
         if (!is_null($success_url) && (mb_strlen($success_url) < 9)) {
             throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be bigger than or equal to 9.');

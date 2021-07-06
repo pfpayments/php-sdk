@@ -246,14 +246,6 @@ class PaymentLink implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
-            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
-        }
-
         if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
         }
@@ -501,19 +493,12 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
     public function setExternalId($external_id)
     {
-        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLink., must be smaller than or equal to 100.');
-        }
-        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLink., must be bigger than or equal to 1.');
-        }
-
         $this->container['external_id'] = $external_id;
 
         return $this;

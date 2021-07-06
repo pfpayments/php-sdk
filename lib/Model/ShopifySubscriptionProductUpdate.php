@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionProductUpdate model
  *
  * @category    Class
  * @description 
@@ -30,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionProductUpdate extends AbstractShopifySubscriptionProductUpdate 
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +39,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionProduct.Update';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +47,8 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'id' => 'int',
+        'version' => 'int'
     ];
 
     /**
@@ -57,8 +57,8 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'id' => 'int64',
+        'version' => 'int64'
     ];
 
     /**
@@ -68,8 +68,8 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'id' => 'id',
+        'version' => 'version'
     ];
 
     /**
@@ -78,8 +78,8 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'id' => 'setId',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -88,8 +88,8 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'id' => 'getId',
+        'version' => 'getVersion'
     ];
 
     
@@ -106,9 +106,9 @@ class TokenCreate extends AbstractTokenUpdate
         parent::__construct($data);
 
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -121,16 +121,11 @@ class TokenCreate extends AbstractTokenUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
         }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
         }
         return $invalidProperties;
     }
@@ -213,50 +208,50 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets id
      *
-     * @return string
+     * @return int
      */
-    public function getExternalId()
+    public function getId()
     {
-        return $this->container['external_id'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets external_id
+     * Sets id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setId($id)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['id'] = $id;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets version
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getVersion()
     {
-        return $this->container['state'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets state
+     * Sets version
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
      *
      * @return $this
      */
-    public function setState($state)
+    public function setVersion($version)
     {
-        $this->container['state'] = $state;
+        $this->container['version'] = $version;
 
         return $this;
     }

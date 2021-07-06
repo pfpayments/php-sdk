@@ -19,18 +19,20 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * TerminalReceiptFetchRequest model
  *
  * @category    Class
- * @description 
+ * @description The receipt fetch request allows to retrieve the receipt documents for a terminal transaction.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class TerminalReceiptFetchRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'TerminalReceiptFetchRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'format' => '\PostFinanceCheckout\Sdk\Model\TerminalReceiptFormat',
+        'transaction' => 'int',
+        'width' => 'int'
     ];
 
     /**
@@ -57,8 +60,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'format' => null,
+        'transaction' => 'int64',
+        'width' => 'int32'
     ];
 
     /**
@@ -68,8 +72,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'format' => 'format',
+        'transaction' => 'transaction',
+        'width' => 'width'
     ];
 
     /**
@@ -78,8 +83,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'format' => 'setFormat',
+        'transaction' => 'setTransaction',
+        'width' => 'setWidth'
     ];
 
     /**
@@ -88,12 +94,19 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'format' => 'getFormat',
+        'transaction' => 'getTransaction',
+        'width' => 'getWidth'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +116,12 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['format'] = isset($data['format']) ? $data['format'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
+        
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         
     }
 
@@ -119,18 +132,13 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if ($this->container['format'] === null) {
+            $invalidProperties[] = "'format' can't be null";
         }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if ($this->container['transaction'] === null) {
+            $invalidProperties[] = "'transaction' can't be null";
         }
         return $invalidProperties;
     }
@@ -142,7 +150,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +160,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +172,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +182,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +192,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +221,75 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets format
      *
-     * @return string
+     * @return \PostFinanceCheckout\Sdk\Model\TerminalReceiptFormat
      */
-    public function getExternalId()
+    public function getFormat()
     {
-        return $this->container['external_id'];
+        return $this->container['format'];
     }
 
     /**
-     * Sets external_id
+     * Sets format
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param \PostFinanceCheckout\Sdk\Model\TerminalReceiptFormat $format The format determines in what format the receipts will be returned in.
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setFormat($format)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['format'] = $format;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets transaction
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getTransaction()
     {
-        return $this->container['state'];
+        return $this->container['transaction'];
     }
 
     /**
-     * Sets state
+     * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $transaction Provide here the ID of the transaction for which the receipts should be fetched.
      *
      * @return $this
      */
-    public function setState($state)
+    public function setTransaction($transaction)
     {
-        $this->container['state'] = $state;
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets width
+     *
+     * @return int
+     */
+    public function getWidth()
+    {
+        return $this->container['width'];
+    }
+
+    /**
+     * Sets width
+     *
+     * @param int $width The width controls how width the document will be rendered. In case of the PDF format the width is in mm. In case of the text format the width is in the number of chars per line.
+     *
+     * @return $this
+     */
+    public function setWidth($width)
+    {
+        $this->container['width'] = $width;
 
         return $this;
     }

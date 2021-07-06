@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * Token model
+ * ShopifySubscription model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class Token implements ModelInterface, ArrayAccess
+class ShopifySubscription implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class Token implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token';
+    protected static $swaggerModelName = 'ShopifySubscription';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,18 +49,22 @@ class Token implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'created_by' => 'int',
         'created_on' => '\DateTime',
-        'customer_email_address' => 'string',
-        'customer_id' => 'string',
-        'enabled_for_one_click_payment' => 'bool',
         'external_id' => 'string',
         'id' => 'int',
+        'initial_execution_date' => '\DateTime',
+        'initial_payment_transaction' => 'int',
+        'initial_shopify_transaction' => 'int',
         'language' => 'string',
         'linked_space_id' => 'int',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-        'time_zone' => 'string',
-        'token_reference' => 'string',
+        'order_recurrence_number' => 'int',
+        'shop' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionState',
+        'subscriber' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriber',
+        'terminated_by' => 'int',
+        'terminated_on' => '\DateTime',
+        'termination_request_date' => '\DateTime',
         'version' => 'int'
     ];
 
@@ -70,18 +74,22 @@ class Token implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'created_by' => 'int64',
         'created_on' => 'date-time',
-        'customer_email_address' => null,
-        'customer_id' => null,
-        'enabled_for_one_click_payment' => null,
         'external_id' => null,
         'id' => 'int64',
+        'initial_execution_date' => 'date-time',
+        'initial_payment_transaction' => 'int64',
+        'initial_shopify_transaction' => 'int64',
         'language' => null,
         'linked_space_id' => 'int64',
-        'planned_purge_date' => 'date-time',
+        'order_recurrence_number' => 'int32',
+        'shop' => 'int64',
         'state' => null,
-        'time_zone' => null,
-        'token_reference' => null,
+        'subscriber' => null,
+        'terminated_by' => 'int64',
+        'terminated_on' => 'date-time',
+        'termination_request_date' => 'date-time',
         'version' => 'int32'
     ];
 
@@ -92,18 +100,22 @@ class Token implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'created_by' => 'createdBy',
         'created_on' => 'createdOn',
-        'customer_email_address' => 'customerEmailAddress',
-        'customer_id' => 'customerId',
-        'enabled_for_one_click_payment' => 'enabledForOneClickPayment',
         'external_id' => 'externalId',
         'id' => 'id',
+        'initial_execution_date' => 'initialExecutionDate',
+        'initial_payment_transaction' => 'initialPaymentTransaction',
+        'initial_shopify_transaction' => 'initialShopifyTransaction',
         'language' => 'language',
         'linked_space_id' => 'linkedSpaceId',
-        'planned_purge_date' => 'plannedPurgeDate',
+        'order_recurrence_number' => 'orderRecurrenceNumber',
+        'shop' => 'shop',
         'state' => 'state',
-        'time_zone' => 'timeZone',
-        'token_reference' => 'tokenReference',
+        'subscriber' => 'subscriber',
+        'terminated_by' => 'terminatedBy',
+        'terminated_on' => 'terminatedOn',
+        'termination_request_date' => 'terminationRequestDate',
         'version' => 'version'
     ];
 
@@ -113,18 +125,22 @@ class Token implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
-        'customer_email_address' => 'setCustomerEmailAddress',
-        'customer_id' => 'setCustomerId',
-        'enabled_for_one_click_payment' => 'setEnabledForOneClickPayment',
         'external_id' => 'setExternalId',
         'id' => 'setId',
+        'initial_execution_date' => 'setInitialExecutionDate',
+        'initial_payment_transaction' => 'setInitialPaymentTransaction',
+        'initial_shopify_transaction' => 'setInitialShopifyTransaction',
         'language' => 'setLanguage',
         'linked_space_id' => 'setLinkedSpaceId',
-        'planned_purge_date' => 'setPlannedPurgeDate',
+        'order_recurrence_number' => 'setOrderRecurrenceNumber',
+        'shop' => 'setShop',
         'state' => 'setState',
-        'time_zone' => 'setTimeZone',
-        'token_reference' => 'setTokenReference',
+        'subscriber' => 'setSubscriber',
+        'terminated_by' => 'setTerminatedBy',
+        'terminated_on' => 'setTerminatedOn',
+        'termination_request_date' => 'setTerminationRequestDate',
         'version' => 'setVersion'
     ];
 
@@ -134,18 +150,22 @@ class Token implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
-        'customer_email_address' => 'getCustomerEmailAddress',
-        'customer_id' => 'getCustomerId',
-        'enabled_for_one_click_payment' => 'getEnabledForOneClickPayment',
         'external_id' => 'getExternalId',
         'id' => 'getId',
+        'initial_execution_date' => 'getInitialExecutionDate',
+        'initial_payment_transaction' => 'getInitialPaymentTransaction',
+        'initial_shopify_transaction' => 'getInitialShopifyTransaction',
         'language' => 'getLanguage',
         'linked_space_id' => 'getLinkedSpaceId',
-        'planned_purge_date' => 'getPlannedPurgeDate',
+        'order_recurrence_number' => 'getOrderRecurrenceNumber',
+        'shop' => 'getShop',
         'state' => 'getState',
-        'time_zone' => 'getTimeZone',
-        'token_reference' => 'getTokenReference',
+        'subscriber' => 'getSubscriber',
+        'terminated_by' => 'getTerminatedBy',
+        'terminated_on' => 'getTerminatedOn',
+        'termination_request_date' => 'getTerminationRequestDate',
         'version' => 'getVersion'
     ];
 
@@ -167,29 +187,37 @@ class Token implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
+        
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['customer_email_address'] = isset($data['customer_email_address']) ? $data['customer_email_address'] : null;
-        
-        $this->container['customer_id'] = isset($data['customer_id']) ? $data['customer_id'] : null;
-        
-        $this->container['enabled_for_one_click_payment'] = isset($data['enabled_for_one_click_payment']) ? $data['enabled_for_one_click_payment'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
+        $this->container['initial_execution_date'] = isset($data['initial_execution_date']) ? $data['initial_execution_date'] : null;
+        
+        $this->container['initial_payment_transaction'] = isset($data['initial_payment_transaction']) ? $data['initial_payment_transaction'] : null;
+        
+        $this->container['initial_shopify_transaction'] = isset($data['initial_shopify_transaction']) ? $data['initial_shopify_transaction'] : null;
+        
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        $this->container['order_recurrence_number'] = isset($data['order_recurrence_number']) ? $data['order_recurrence_number'] : null;
+        
+        $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        $this->container['subscriber'] = isset($data['subscriber']) ? $data['subscriber'] : null;
         
-        $this->container['token_reference'] = isset($data['token_reference']) ? $data['token_reference'] : null;
+        $this->container['terminated_by'] = isset($data['terminated_by']) ? $data['terminated_by'] : null;
+        
+        $this->container['terminated_on'] = isset($data['terminated_on']) ? $data['terminated_on'] : null;
+        
+        $this->container['termination_request_date'] = isset($data['termination_request_date']) ? $data['termination_request_date'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -204,12 +232,12 @@ class Token implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -293,6 +321,31 @@ class Token implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets created_by
+     *
+     * @return int
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int $created_by 
+     *
+     * @return $this
+     */
+    public function setCreatedBy($created_by)
+    {
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets created_on
      *
      * @return \DateTime
@@ -305,92 +358,13 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on 
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customer_email_address
-     *
-     * @return string
-     */
-    public function getCustomerEmailAddress()
-    {
-        return $this->container['customer_email_address'];
-    }
-
-    /**
-     * Sets customer_email_address
-     *
-     * @param string $customer_email_address The customer email address is the email address of the customer.
-     *
-     * @return $this
-     */
-    public function setCustomerEmailAddress($customer_email_address)
-    {
-        if (!is_null($customer_email_address) && (mb_strlen($customer_email_address) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling Token., must be smaller than or equal to 150.');
-        }
-
-        $this->container['customer_email_address'] = $customer_email_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customer_id
-     *
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->container['customer_id'];
-    }
-
-    /**
-     * Sets customer_id
-     *
-     * @param string $customer_id The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
-     *
-     * @return $this
-     */
-    public function setCustomerId($customer_id)
-    {
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets enabled_for_one_click_payment
-     *
-     * @return bool
-     */
-    public function getEnabledForOneClickPayment()
-    {
-        return $this->container['enabled_for_one_click_payment'];
-    }
-
-    /**
-     * Sets enabled_for_one_click_payment
-     *
-     * @param bool $enabled_for_one_click_payment When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
-     *
-     * @return $this
-     */
-    public function setEnabledForOneClickPayment($enabled_for_one_click_payment)
-    {
-        $this->container['enabled_for_one_click_payment'] = $enabled_for_one_click_payment;
 
         return $this;
     }
@@ -409,12 +383,19 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
      *
      * @return $this
      */
     public function setExternalId($external_id)
     {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -441,6 +422,81 @@ class Token implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_execution_date
+     *
+     * @return \DateTime
+     */
+    public function getInitialExecutionDate()
+    {
+        return $this->container['initial_execution_date'];
+    }
+
+    /**
+     * Sets initial_execution_date
+     *
+     * @param \DateTime $initial_execution_date 
+     *
+     * @return $this
+     */
+    public function setInitialExecutionDate($initial_execution_date)
+    {
+        $this->container['initial_execution_date'] = $initial_execution_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_payment_transaction
+     *
+     * @return int
+     */
+    public function getInitialPaymentTransaction()
+    {
+        return $this->container['initial_payment_transaction'];
+    }
+
+    /**
+     * Sets initial_payment_transaction
+     *
+     * @param int $initial_payment_transaction 
+     *
+     * @return $this
+     */
+    public function setInitialPaymentTransaction($initial_payment_transaction)
+    {
+        $this->container['initial_payment_transaction'] = $initial_payment_transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_shopify_transaction
+     *
+     * @return int
+     */
+    public function getInitialShopifyTransaction()
+    {
+        return $this->container['initial_shopify_transaction'];
+    }
+
+    /**
+     * Sets initial_shopify_transaction
+     *
+     * @param int $initial_shopify_transaction 
+     *
+     * @return $this
+     */
+    public function setInitialShopifyTransaction($initial_shopify_transaction)
+    {
+        $this->container['initial_shopify_transaction'] = $initial_shopify_transaction;
 
         return $this;
     }
@@ -497,25 +553,50 @@ class Token implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets planned_purge_date
+     * Gets order_recurrence_number
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getPlannedPurgeDate()
+    public function getOrderRecurrenceNumber()
     {
-        return $this->container['planned_purge_date'];
+        return $this->container['order_recurrence_number'];
     }
 
     /**
-     * Sets planned_purge_date
+     * Sets order_recurrence_number
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param int $order_recurrence_number 
      *
      * @return $this
      */
-    public function setPlannedPurgeDate($planned_purge_date)
+    public function setOrderRecurrenceNumber($order_recurrence_number)
     {
-        $this->container['planned_purge_date'] = $planned_purge_date;
+        $this->container['order_recurrence_number'] = $order_recurrence_number;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shop
+     *
+     * @return int
+     */
+    public function getShop()
+    {
+        return $this->container['shop'];
+    }
+
+    /**
+     * Sets shop
+     *
+     * @param int $shop 
+     *
+     * @return $this
+     */
+    public function setShop($shop)
+    {
+        $this->container['shop'] = $shop;
 
         return $this;
     }
@@ -524,7 +605,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionState
      */
     public function getState()
     {
@@ -534,7 +615,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionState $state 
      *
      * @return $this
      */
@@ -547,54 +628,100 @@ class Token implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets time_zone
+     * Gets subscriber
      *
-     * @return string
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriber
      */
-    public function getTimeZone()
+    public function getSubscriber()
     {
-        return $this->container['time_zone'];
+        return $this->container['subscriber'];
     }
 
     /**
-     * Sets time_zone
+     * Sets subscriber
      *
-     * @param string $time_zone The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriber $subscriber 
      *
      * @return $this
      */
-    public function setTimeZone($time_zone)
+    public function setSubscriber($subscriber)
     {
-        $this->container['time_zone'] = $time_zone;
+        $this->container['subscriber'] = $subscriber;
 
         return $this;
     }
     
 
     /**
-     * Gets token_reference
+     * Gets terminated_by
      *
-     * @return string
+     * @return int
      */
-    public function getTokenReference()
+    public function getTerminatedBy()
     {
-        return $this->container['token_reference'];
+        return $this->container['terminated_by'];
     }
 
     /**
-     * Sets token_reference
+     * Sets terminated_by
      *
-     * @param string $token_reference Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
+     * @param int $terminated_by 
      *
      * @return $this
      */
-    public function setTokenReference($token_reference)
+    public function setTerminatedBy($terminated_by)
     {
-        if (!is_null($token_reference) && (mb_strlen($token_reference) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $token_reference when calling Token., must be smaller than or equal to 100.');
-        }
+        $this->container['terminated_by'] = $terminated_by;
 
-        $this->container['token_reference'] = $token_reference;
+        return $this;
+    }
+    
+
+    /**
+     * Gets terminated_on
+     *
+     * @return \DateTime
+     */
+    public function getTerminatedOn()
+    {
+        return $this->container['terminated_on'];
+    }
+
+    /**
+     * Sets terminated_on
+     *
+     * @param \DateTime $terminated_on 
+     *
+     * @return $this
+     */
+    public function setTerminatedOn($terminated_on)
+    {
+        $this->container['terminated_on'] = $terminated_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets termination_request_date
+     *
+     * @return \DateTime
+     */
+    public function getTerminationRequestDate()
+    {
+        return $this->container['termination_request_date'];
+    }
+
+    /**
+     * Sets termination_request_date
+     *
+     * @param \DateTime $termination_request_date 
+     *
+     * @return $this
+     */
+    public function setTerminationRequestDate($termination_request_date)
+    {
+        $this->container['termination_request_date'] = $termination_request_date;
 
         return $this;
     }

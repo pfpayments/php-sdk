@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionProductCreate model
  *
  * @category    Class
  * @description 
@@ -30,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProductUpdate 
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +39,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionProduct.Create';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +47,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'product_id' => 'string',
+        'product_variant_id' => 'string',
+        'shop' => 'int'
     ];
 
     /**
@@ -57,8 +58,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'product_id' => null,
+        'product_variant_id' => null,
+        'shop' => 'int64'
     ];
 
     /**
@@ -68,8 +70,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'product_id' => 'productId',
+        'product_variant_id' => 'productVariantId',
+        'shop' => 'shop'
     ];
 
     /**
@@ -78,8 +81,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'product_id' => 'setProductId',
+        'product_variant_id' => 'setProductVariantId',
+        'shop' => 'setShop'
     ];
 
     /**
@@ -88,8 +92,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'product_id' => 'getProductId',
+        'product_variant_id' => 'getProductVariantId',
+        'shop' => 'getShop'
     ];
 
     
@@ -106,9 +111,11 @@ class TokenCreate extends AbstractTokenUpdate
         parent::__construct($data);
 
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['product_variant_id'] = isset($data['product_variant_id']) ? $data['product_variant_id'] : null;
+        
+        $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
         
     }
 
@@ -121,16 +128,14 @@ class TokenCreate extends AbstractTokenUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if ($this->container['product_id'] === null) {
+            $invalidProperties[] = "'product_id' can't be null";
         }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        if ($this->container['product_variant_id'] === null) {
+            $invalidProperties[] = "'product_variant_id' can't be null";
         }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if ($this->container['shop'] === null) {
+            $invalidProperties[] = "'shop' can't be null";
         }
         return $invalidProperties;
     }
@@ -213,50 +218,75 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets product_id
      *
      * @return string
      */
-    public function getExternalId()
+    public function getProductId()
     {
-        return $this->container['external_id'];
+        return $this->container['product_id'];
     }
 
     /**
-     * Sets external_id
+     * Sets product_id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $product_id The ID of the Shopify product that is enabled to be ordered as subscription.
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setProductId($product_id)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['product_id'] = $product_id;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets product_variant_id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return string
      */
-    public function getState()
+    public function getProductVariantId()
     {
-        return $this->container['state'];
+        return $this->container['product_variant_id'];
     }
 
     /**
-     * Sets state
+     * Sets product_variant_id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param string $product_variant_id 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setProductVariantId($product_variant_id)
     {
-        $this->container['state'] = $state;
+        $this->container['product_variant_id'] = $product_variant_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shop
+     *
+     * @return int
+     */
+    public function getShop()
+    {
+        return $this->container['shop'];
+    }
+
+    /**
+     * Sets shop
+     *
+     * @param int $shop 
+     *
+     * @return $this
+     */
+    public function setShop($shop)
+    {
+        $this->container['shop'] = $shop;
 
         return $this;
     }

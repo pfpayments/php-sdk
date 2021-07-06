@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionUpdateRequest model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionUpdateRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'billing_configuration' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
+        'id' => 'int',
+        'items' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[]',
+        'store_order_confirmation_email_enabled' => 'bool',
+        'subscriber_suspension_allowed' => 'bool'
     ];
 
     /**
@@ -57,8 +62,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'billing_configuration' => null,
+        'id' => 'int64',
+        'items' => null,
+        'store_order_confirmation_email_enabled' => null,
+        'subscriber_suspension_allowed' => null
     ];
 
     /**
@@ -68,8 +76,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'billing_configuration' => 'billingConfiguration',
+        'id' => 'id',
+        'items' => 'items',
+        'store_order_confirmation_email_enabled' => 'storeOrderConfirmationEmailEnabled',
+        'subscriber_suspension_allowed' => 'subscriberSuspensionAllowed'
     ];
 
     /**
@@ -78,8 +89,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'billing_configuration' => 'setBillingConfiguration',
+        'id' => 'setId',
+        'items' => 'setItems',
+        'store_order_confirmation_email_enabled' => 'setStoreOrderConfirmationEmailEnabled',
+        'subscriber_suspension_allowed' => 'setSubscriberSuspensionAllowed'
     ];
 
     /**
@@ -88,12 +102,21 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'billing_configuration' => 'getBillingConfiguration',
+        'id' => 'getId',
+        'items' => 'getItems',
+        'store_order_confirmation_email_enabled' => 'getStoreOrderConfirmationEmailEnabled',
+        'subscriber_suspension_allowed' => 'getSubscriberSuspensionAllowed'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +126,16 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['billing_configuration'] = isset($data['billing_configuration']) ? $data['billing_configuration'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
+        
+        $this->container['store_order_confirmation_email_enabled'] = isset($data['store_order_confirmation_email_enabled']) ? $data['store_order_confirmation_email_enabled'] : null;
+        
+        $this->container['subscriber_suspension_allowed'] = isset($data['subscriber_suspension_allowed']) ? $data['subscriber_suspension_allowed'] : null;
         
     }
 
@@ -119,19 +146,8 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
-        }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -142,7 +158,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +168,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +180,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +190,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +200,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +229,125 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets billing_configuration
      *
-     * @return string
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration
      */
-    public function getExternalId()
+    public function getBillingConfiguration()
     {
-        return $this->container['external_id'];
+        return $this->container['billing_configuration'];
     }
 
     /**
-     * Sets external_id
+     * Sets billing_configuration
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration $billing_configuration 
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setBillingConfiguration($billing_configuration)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['billing_configuration'] = $billing_configuration;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getId()
     {
-        return $this->container['state'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets state
+     * Sets id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $id 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setId($id)
     {
-        $this->container['state'] = $state;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets items
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[]
+     */
+    public function getItems()
+    {
+        return $this->container['items'];
+    }
+
+    /**
+     * Sets items
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[] $items 
+     *
+     * @return $this
+     */
+    public function setItems($items)
+    {
+        $this->container['items'] = $items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets store_order_confirmation_email_enabled
+     *
+     * @return bool
+     */
+    public function getStoreOrderConfirmationEmailEnabled()
+    {
+        return $this->container['store_order_confirmation_email_enabled'];
+    }
+
+    /**
+     * Sets store_order_confirmation_email_enabled
+     *
+     * @param bool $store_order_confirmation_email_enabled 
+     *
+     * @return $this
+     */
+    public function setStoreOrderConfirmationEmailEnabled($store_order_confirmation_email_enabled)
+    {
+        $this->container['store_order_confirmation_email_enabled'] = $store_order_confirmation_email_enabled;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscriber_suspension_allowed
+     *
+     * @return bool
+     */
+    public function getSubscriberSuspensionAllowed()
+    {
+        return $this->container['subscriber_suspension_allowed'];
+    }
+
+    /**
+     * Sets subscriber_suspension_allowed
+     *
+     * @param bool $subscriber_suspension_allowed 
+     *
+     * @return $this
+     */
+    public function setSubscriberSuspensionAllowed($subscriber_suspension_allowed)
+    {
+        $this->container['subscriber_suspension_allowed'] = $subscriber_suspension_allowed;
 
         return $this;
     }

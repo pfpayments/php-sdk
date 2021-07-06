@@ -54,7 +54,7 @@ class Role implements ModelInterface, ArrayAccess
         'name' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
         'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
         'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
+        'state' => '\PostFinanceCheckout\Sdk\Model\RoleState',
         'two_factor_required' => 'bool',
         'version' => 'int'
     ];
@@ -377,7 +377,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return \PostFinanceCheckout\Sdk\Model\RoleState
      */
     public function getState()
     {
@@ -387,7 +387,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\RoleState $state 
      *
      * @return $this
      */

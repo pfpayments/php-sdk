@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * RenderedTerminalReceipt model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'RenderedTerminalReceipt';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,10 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'data' => 'string',
+        'mime_type' => 'string',
+        'printed' => 'bool',
+        'receipt_type' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalReceiptType'
     ];
 
     /**
@@ -57,8 +61,10 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'data' => 'byte',
+        'mime_type' => null,
+        'printed' => null,
+        'receipt_type' => null
     ];
 
     /**
@@ -68,8 +74,10 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'data' => 'data',
+        'mime_type' => 'mimeType',
+        'printed' => 'printed',
+        'receipt_type' => 'receiptType'
     ];
 
     /**
@@ -78,8 +86,10 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'data' => 'setData',
+        'mime_type' => 'setMimeType',
+        'printed' => 'setPrinted',
+        'receipt_type' => 'setReceiptType'
     ];
 
     /**
@@ -88,12 +98,20 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'data' => 'getData',
+        'mime_type' => 'getMimeType',
+        'printed' => 'getPrinted',
+        'receipt_type' => 'getReceiptType'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +121,14 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
+        
+        $this->container['printed'] = isset($data['printed']) ? $data['printed'] : null;
+        
+        $this->container['receipt_type'] = isset($data['receipt_type']) ? $data['receipt_type'] : null;
         
     }
 
@@ -119,19 +139,8 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
-        }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -142,7 +151,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +161,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +173,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +183,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +193,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +222,102 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets data
      *
      * @return string
      */
-    public function getExternalId()
+    public function getData()
     {
-        return $this->container['external_id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets external_id
+     * Sets data
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $data data
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setData($data)
     {
-        $this->container['external_id'] = $external_id;
+
+
+        $this->container['data'] = $data;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets mime_type
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return string
      */
-    public function getState()
+    public function getMimeType()
     {
-        return $this->container['state'];
+        return $this->container['mime_type'];
     }
 
     /**
-     * Sets state
+     * Sets mime_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
      *
      * @return $this
      */
-    public function setState($state)
+    public function setMimeType($mime_type)
     {
-        $this->container['state'] = $state;
+        $this->container['mime_type'] = $mime_type;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets printed
+     *
+     * @return bool
+     */
+    public function getPrinted()
+    {
+        return $this->container['printed'];
+    }
+
+    /**
+     * Sets printed
+     *
+     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+     *
+     * @return $this
+     */
+    public function setPrinted($printed)
+    {
+        $this->container['printed'] = $printed;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets receipt_type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalReceiptType
+     */
+    public function getReceiptType()
+    {
+        return $this->container['receipt_type'];
+    }
+
+    /**
+     * Sets receipt_type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+     *
+     * @return $this
+     */
+    public function setReceiptType($receipt_type)
+    {
+        $this->container['receipt_type'] = $receipt_type;
 
         return $this;
     }

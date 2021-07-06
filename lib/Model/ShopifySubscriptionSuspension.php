@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocationVersion model
+ * ShopifySubscriptionSuspension model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
+class ShopifySubscriptionSuspension implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocationVersion';
+    protected static $swaggerModelName = 'ShopifySubscriptionSuspension';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,17 +49,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'ended_by' => 'int',
+        'ended_on' => '\DateTime',
         'id' => 'int',
+        'initiator' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionInitiator',
         'linked_space_id' => 'int',
-        'location' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState',
-        'version' => 'int',
-        'version_applied_immediately' => 'bool'
+        'planned_end_date' => '\DateTime',
+        'shop' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionState',
+        'subscription' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscription',
+        'type' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType',
+        'version' => 'int'
     ];
 
     /**
@@ -68,17 +70,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'address' => null,
-        'contact_address' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'ended_by' => 'int64',
+        'ended_on' => 'date-time',
         'id' => 'int64',
+        'initiator' => null,
         'linked_space_id' => 'int64',
-        'location' => null,
-        'planned_purge_date' => 'date-time',
+        'planned_end_date' => 'date-time',
+        'shop' => 'int64',
         'state' => null,
-        'version' => 'int32',
-        'version_applied_immediately' => null
+        'subscription' => null,
+        'type' => null,
+        'version' => 'int32'
     ];
 
     /**
@@ -88,17 +92,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address',
-        'contact_address' => 'contactAddress',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'ended_by' => 'endedBy',
+        'ended_on' => 'endedOn',
         'id' => 'id',
+        'initiator' => 'initiator',
         'linked_space_id' => 'linkedSpaceId',
-        'location' => 'location',
-        'planned_purge_date' => 'plannedPurgeDate',
+        'planned_end_date' => 'plannedEndDate',
+        'shop' => 'shop',
         'state' => 'state',
-        'version' => 'version',
-        'version_applied_immediately' => 'versionAppliedImmediately'
+        'subscription' => 'subscription',
+        'type' => 'type',
+        'version' => 'version'
     ];
 
     /**
@@ -107,17 +113,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress',
-        'contact_address' => 'setContactAddress',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'ended_by' => 'setEndedBy',
+        'ended_on' => 'setEndedOn',
         'id' => 'setId',
+        'initiator' => 'setInitiator',
         'linked_space_id' => 'setLinkedSpaceId',
-        'location' => 'setLocation',
-        'planned_purge_date' => 'setPlannedPurgeDate',
+        'planned_end_date' => 'setPlannedEndDate',
+        'shop' => 'setShop',
         'state' => 'setState',
-        'version' => 'setVersion',
-        'version_applied_immediately' => 'setVersionAppliedImmediately'
+        'subscription' => 'setSubscription',
+        'type' => 'setType',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -126,17 +134,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress',
-        'contact_address' => 'getContactAddress',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'ended_by' => 'getEndedBy',
+        'ended_on' => 'getEndedOn',
         'id' => 'getId',
+        'initiator' => 'getInitiator',
         'linked_space_id' => 'getLinkedSpaceId',
-        'location' => 'getLocation',
-        'planned_purge_date' => 'getPlannedPurgeDate',
+        'planned_end_date' => 'getPlannedEndDate',
+        'shop' => 'getShop',
         'state' => 'getState',
-        'version' => 'getVersion',
-        'version_applied_immediately' => 'getVersionAppliedImmediately'
+        'subscription' => 'getSubscription',
+        'type' => 'getType',
+        'version' => 'getVersion'
     ];
 
     
@@ -157,27 +167,31 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
         $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['ended_by'] = isset($data['ended_by']) ? $data['ended_by'] : null;
+        
+        $this->container['ended_on'] = isset($data['ended_on']) ? $data['ended_on'] : null;
+        
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['initiator'] = isset($data['initiator']) ? $data['initiator'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['location'] = isset($data['location']) ? $data['location'] : null;
+        $this->container['planned_end_date'] = isset($data['planned_end_date']) ? $data['planned_end_date'] : null;
         
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        $this->container['subscription'] = isset($data['subscription']) ? $data['subscription'] : null;
         
-        $this->container['version_applied_immediately'] = isset($data['version_applied_immediately']) ? $data['version_applied_immediately'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -271,56 +285,6 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getAddress()
-    {
-        return $this->container['address'];
-    }
-
-    /**
-     * Sets address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $address 
-     *
-     * @return $this
-     */
-    public function setAddress($address)
-    {
-        $this->container['address'] = $address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets contact_address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getContactAddress()
-    {
-        return $this->container['contact_address'];
-    }
-
-    /**
-     * Sets contact_address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
-     *
-     * @return $this
-     */
-    public function setContactAddress($contact_address)
-    {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets created_by
      *
      * @return int
@@ -358,13 +322,63 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on 
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets ended_by
+     *
+     * @return int
+     */
+    public function getEndedBy()
+    {
+        return $this->container['ended_by'];
+    }
+
+    /**
+     * Sets ended_by
+     *
+     * @param int $ended_by 
+     *
+     * @return $this
+     */
+    public function setEndedBy($ended_by)
+    {
+        $this->container['ended_by'] = $ended_by;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets ended_on
+     *
+     * @return \DateTime
+     */
+    public function getEndedOn()
+    {
+        return $this->container['ended_on'];
+    }
+
+    /**
+     * Sets ended_on
+     *
+     * @param \DateTime $ended_on 
+     *
+     * @return $this
+     */
+    public function setEndedOn($ended_on)
+    {
+        $this->container['ended_on'] = $ended_on;
 
         return $this;
     }
@@ -396,6 +410,31 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets initiator
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionInitiator
+     */
+    public function getInitiator()
+    {
+        return $this->container['initiator'];
+    }
+
+    /**
+     * Sets initiator
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionInitiator $initiator 
+     *
+     * @return $this
+     */
+    public function setInitiator($initiator)
+    {
+        $this->container['initiator'] = $initiator;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets linked_space_id
      *
      * @return int
@@ -421,50 +460,50 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets location
+     * Gets planned_end_date
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation
+     * @return \DateTime
      */
-    public function getLocation()
+    public function getPlannedEndDate()
     {
-        return $this->container['location'];
+        return $this->container['planned_end_date'];
     }
 
     /**
-     * Sets location
+     * Sets planned_end_date
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation $location 
+     * @param \DateTime $planned_end_date 
      *
      * @return $this
      */
-    public function setLocation($location)
+    public function setPlannedEndDate($planned_end_date)
     {
-        $this->container['location'] = $location;
+        $this->container['planned_end_date'] = $planned_end_date;
 
         return $this;
     }
     
 
     /**
-     * Gets planned_purge_date
+     * Gets shop
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getPlannedPurgeDate()
+    public function getShop()
     {
-        return $this->container['planned_purge_date'];
+        return $this->container['shop'];
     }
 
     /**
-     * Sets planned_purge_date
+     * Sets shop
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param int $shop 
      *
      * @return $this
      */
-    public function setPlannedPurgeDate($planned_purge_date)
+    public function setShop($shop)
     {
-        $this->container['planned_purge_date'] = $planned_purge_date;
+        $this->container['shop'] = $shop;
 
         return $this;
     }
@@ -473,7 +512,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionState
      */
     public function getState()
     {
@@ -483,13 +522,63 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionState $state 
      *
      * @return $this
      */
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscription
+     */
+    public function getSubscription()
+    {
+        return $this->container['subscription'];
+    }
+
+    /**
+     * Sets subscription
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscription $subscription 
+     *
+     * @return $this
+     */
+    public function setSubscription($subscription)
+    {
+        $this->container['subscription'] = $subscription;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }
@@ -515,31 +604,6 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     public function setVersion($version)
     {
         $this->container['version'] = $version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version_applied_immediately
-     *
-     * @return bool
-     */
-    public function getVersionAppliedImmediately()
-    {
-        return $this->container['version_applied_immediately'];
-    }
-
-    /**
-     * Sets version_applied_immediately
-     *
-     * @param bool $version_applied_immediately 
-     *
-     * @return $this
-     */
-    public function setVersionAppliedImmediately($version_applied_immediately)
-    {
-        $this->container['version_applied_immediately'] = $version_applied_immediately;
 
         return $this;
     }

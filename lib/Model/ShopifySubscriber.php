@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocationVersion model
+ * ShopifySubscriber model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
+class ShopifySubscriber implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocationVersion';
+    protected static $swaggerModelName = 'ShopifySubscriber';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,17 +49,16 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'contact_address' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress',
-        'created_by' => 'int',
         'created_on' => '\DateTime',
+        'email_address' => 'string',
+        'external_id' => 'string',
         'id' => 'int',
         'linked_space_id' => 'int',
-        'location' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation',
+        'phone_number' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState',
-        'version' => 'int',
-        'version_applied_immediately' => 'bool'
+        'shop' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriberState',
+        'version' => 'int'
     ];
 
     /**
@@ -68,17 +67,16 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'address' => null,
-        'contact_address' => null,
-        'created_by' => 'int64',
         'created_on' => 'date-time',
+        'email_address' => null,
+        'external_id' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
-        'location' => null,
+        'phone_number' => null,
         'planned_purge_date' => 'date-time',
+        'shop' => 'int64',
         'state' => null,
-        'version' => 'int32',
-        'version_applied_immediately' => null
+        'version' => 'int32'
     ];
 
     /**
@@ -88,17 +86,16 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address',
-        'contact_address' => 'contactAddress',
-        'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'email_address' => 'emailAddress',
+        'external_id' => 'externalId',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
-        'location' => 'location',
+        'phone_number' => 'phoneNumber',
         'planned_purge_date' => 'plannedPurgeDate',
+        'shop' => 'shop',
         'state' => 'state',
-        'version' => 'version',
-        'version_applied_immediately' => 'versionAppliedImmediately'
+        'version' => 'version'
     ];
 
     /**
@@ -107,17 +104,16 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress',
-        'contact_address' => 'setContactAddress',
-        'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'email_address' => 'setEmailAddress',
+        'external_id' => 'setExternalId',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
-        'location' => 'setLocation',
+        'phone_number' => 'setPhoneNumber',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'shop' => 'setShop',
         'state' => 'setState',
-        'version' => 'setVersion',
-        'version_applied_immediately' => 'setVersionAppliedImmediately'
+        'version' => 'setVersion'
     ];
 
     /**
@@ -126,17 +122,16 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress',
-        'contact_address' => 'getContactAddress',
-        'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'email_address' => 'getEmailAddress',
+        'external_id' => 'getExternalId',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
-        'location' => 'getLocation',
+        'phone_number' => 'getPhoneNumber',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'shop' => 'getShop',
         'state' => 'getState',
-        'version' => 'getVersion',
-        'version_applied_immediately' => 'getVersionAppliedImmediately'
+        'version' => 'getVersion'
     ];
 
     
@@ -157,27 +152,25 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['location'] = isset($data['location']) ? $data['location'] : null;
+        $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
-        $this->container['version_applied_immediately'] = isset($data['version_applied_immediately']) ? $data['version_applied_immediately'] : null;
         
     }
 
@@ -271,81 +264,6 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getAddress()
-    {
-        return $this->container['address'];
-    }
-
-    /**
-     * Sets address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $address 
-     *
-     * @return $this
-     */
-    public function setAddress($address)
-    {
-        $this->container['address'] = $address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets contact_address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getContactAddress()
-    {
-        return $this->container['contact_address'];
-    }
-
-    /**
-     * Sets contact_address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
-     *
-     * @return $this
-     */
-    public function setContactAddress($contact_address)
-    {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by 
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets created_on
      *
      * @return \DateTime
@@ -358,13 +276,63 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on 
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets email_address
+     *
+     * @return string
+     */
+    public function getEmailAddress()
+    {
+        return $this->container['email_address'];
+    }
+
+    /**
+     * Sets email_address
+     *
+     * @param string $email_address 
+     *
+     * @return $this
+     */
+    public function setEmailAddress($email_address)
+    {
+        $this->container['email_address'] = $email_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
@@ -421,25 +389,25 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets location
+     * Gets phone_number
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation
+     * @return string
      */
-    public function getLocation()
+    public function getPhoneNumber()
     {
-        return $this->container['location'];
+        return $this->container['phone_number'];
     }
 
     /**
-     * Sets location
+     * Sets phone_number
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation $location 
+     * @param string $phone_number 
      *
      * @return $this
      */
-    public function setLocation($location)
+    public function setPhoneNumber($phone_number)
     {
-        $this->container['location'] = $location;
+        $this->container['phone_number'] = $phone_number;
 
         return $this;
     }
@@ -471,9 +439,34 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets shop
+     *
+     * @return int
+     */
+    public function getShop()
+    {
+        return $this->container['shop'];
+    }
+
+    /**
+     * Sets shop
+     *
+     * @param int $shop 
+     *
+     * @return $this
+     */
+    public function setShop($shop)
+    {
+        $this->container['shop'] = $shop;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriberState
      */
     public function getState()
     {
@@ -483,7 +476,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersionState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriberState $state 
      *
      * @return $this
      */
@@ -515,31 +508,6 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     public function setVersion($version)
     {
         $this->container['version'] = $version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version_applied_immediately
-     *
-     * @return bool
-     */
-    public function getVersionAppliedImmediately()
-    {
-        return $this->container['version_applied_immediately'];
-    }
-
-    /**
-     * Sets version_applied_immediately
-     *
-     * @param bool $version_applied_immediately 
-     *
-     * @return $this
-     */
-    public function setVersionAppliedImmediately($version_applied_immediately)
-    {
-        $this->container['version_applied_immediately'] = $version_applied_immediately;
 
         return $this;
     }

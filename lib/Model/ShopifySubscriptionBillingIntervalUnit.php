@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalState model
+ * ShopifySubscriptionBillingIntervalUnit model
  *
  * @category    Class
  * @description 
@@ -30,17 +30,17 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalState
+class ShopifySubscriptionBillingIntervalUnit
 {
     /**
      * Possible values of this enum
      */
-    const CREATE = 'CREATE';
-    const PREPARING = 'PREPARING';
-    const ACTIVE = 'ACTIVE';
-    const INACTIVE = 'INACTIVE';
-    const DECOMMISSIONING = 'DECOMMISSIONING';
-    const DECOMMISSIONED = 'DECOMMISSIONED';
+    const MINUTES = 'MINUTES';
+    const HOURS = 'HOURS';
+    const DAYS = 'DAYS';
+    const WEEKS = 'WEEKS';
+    const MONTHS = 'MONTHS';
+    const YEARS = 'YEARS';
     
     /**
      * Gets allowable values of the enum
@@ -49,12 +49,12 @@ class PaymentTerminalState
     public static function getAllowableEnumValues()
     {
         return [
-            self::CREATE,
-            self::PREPARING,
-            self::ACTIVE,
-            self::INACTIVE,
-            self::DECOMMISSIONING,
-            self::DECOMMISSIONED,
+            self::MINUTES,
+            self::HOURS,
+            self::DAYS,
+            self::WEEKS,
+            self::MONTHS,
+            self::YEARS,
         ];
     }
 }

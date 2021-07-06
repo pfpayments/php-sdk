@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifyTaxLine model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifyTaxLine implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifyTaxLine';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'fraction_rate' => 'float',
+        'id' => 'int',
+        'rate' => 'float',
+        'title' => 'string',
+        'version' => 'int'
     ];
 
     /**
@@ -57,8 +62,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'fraction_rate' => null,
+        'id' => 'int64',
+        'rate' => null,
+        'title' => null,
+        'version' => 'int32'
     ];
 
     /**
@@ -68,8 +76,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'fraction_rate' => 'fractionRate',
+        'id' => 'id',
+        'rate' => 'rate',
+        'title' => 'title',
+        'version' => 'version'
     ];
 
     /**
@@ -78,8 +89,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'fraction_rate' => 'setFractionRate',
+        'id' => 'setId',
+        'rate' => 'setRate',
+        'title' => 'setTitle',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -88,12 +102,21 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'fraction_rate' => 'getFractionRate',
+        'id' => 'getId',
+        'rate' => 'getRate',
+        'title' => 'getTitle',
+        'version' => 'getVersion'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +126,16 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['fraction_rate'] = isset($data['fraction_rate']) ? $data['fraction_rate'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['rate'] = isset($data['rate']) ? $data['rate'] : null;
+        
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        
+        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -119,19 +146,8 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
-        }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -142,7 +158,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +168,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +180,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +190,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +200,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +229,125 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets fraction_rate
      *
-     * @return string
+     * @return float
      */
-    public function getExternalId()
+    public function getFractionRate()
     {
-        return $this->container['external_id'];
+        return $this->container['fraction_rate'];
     }
 
     /**
-     * Sets external_id
+     * Sets fraction_rate
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param float $fraction_rate 
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setFractionRate($fraction_rate)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['fraction_rate'] = $fraction_rate;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getId()
     {
-        return $this->container['state'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets state
+     * Sets id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
      *
      * @return $this
      */
-    public function setState($state)
+    public function setId($id)
     {
-        $this->container['state'] = $state;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets rate
+     *
+     * @return float
+     */
+    public function getRate()
+    {
+        return $this->container['rate'];
+    }
+
+    /**
+     * Sets rate
+     *
+     * @param float $rate 
+     *
+     * @return $this
+     */
+    public function setRate($rate)
+    {
+        $this->container['rate'] = $rate;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string $title 
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
 
         return $this;
     }

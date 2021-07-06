@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionAddress model
  *
  * @category    Class
  * @description 
@@ -30,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionAddress extends Address 
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +39,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +47,7 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        
     ];
 
     /**
@@ -57,8 +56,7 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        
     ];
 
     /**
@@ -68,8 +66,7 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        
     ];
 
     /**
@@ -78,8 +75,7 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        
     ];
 
     /**
@@ -88,8 +84,7 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        
     ];
 
     
@@ -106,10 +101,6 @@ class TokenCreate extends AbstractTokenUpdate
         parent::__construct($data);
 
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
     }
 
     /**
@@ -121,17 +112,50 @@ class TokenCreate extends AbstractTokenUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if (!is_null($this->container['commercial_register_number']) && (mb_strlen($this->container['commercial_register_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'commercial_register_number', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
         }
 
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
         }
+
+        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sales_tax_number']) && (mb_strlen($this->container['sales_tax_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sales_tax_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['social_security_number']) && (mb_strlen($this->container['social_security_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'social_security_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -210,56 +234,6 @@ class TokenCreate extends AbstractTokenUpdate
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
-     *
-     * @return $this
-     */
-    public function setExternalId($external_id)
-    {
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
     
     /**
      * Returns true if offset exists. False otherwise.

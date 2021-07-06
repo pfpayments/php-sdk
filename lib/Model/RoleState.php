@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalState model
+ * RoleState model
  *
  * @category    Class
  * @description 
@@ -30,17 +30,15 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalState
+class RoleState
 {
     /**
      * Possible values of this enum
      */
     const CREATE = 'CREATE';
-    const PREPARING = 'PREPARING';
     const ACTIVE = 'ACTIVE';
-    const INACTIVE = 'INACTIVE';
-    const DECOMMISSIONING = 'DECOMMISSIONING';
-    const DECOMMISSIONED = 'DECOMMISSIONED';
+    const DELETING = 'DELETING';
+    const DELETED = 'DELETED';
     
     /**
      * Gets allowable values of the enum
@@ -50,11 +48,9 @@ class PaymentTerminalState
     {
         return [
             self::CREATE,
-            self::PREPARING,
             self::ACTIVE,
-            self::INACTIVE,
-            self::DECOMMISSIONING,
-            self::DECOMMISSIONED,
+            self::DELETING,
+            self::DELETED,
         ];
     }
 }

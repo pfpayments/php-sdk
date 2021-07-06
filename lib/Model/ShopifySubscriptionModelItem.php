@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionModelItem model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionModel.Item';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'price_including_tax' => 'float',
+        'product_id' => 'int',
+        'quantity' => 'float',
+        'recalculate_price' => 'bool',
+        'tax_lines' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[]'
     ];
 
     /**
@@ -57,8 +62,11 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'price_including_tax' => null,
+        'product_id' => 'int64',
+        'quantity' => null,
+        'recalculate_price' => null,
+        'tax_lines' => null
     ];
 
     /**
@@ -68,8 +76,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'price_including_tax' => 'priceIncludingTax',
+        'product_id' => 'productId',
+        'quantity' => 'quantity',
+        'recalculate_price' => 'recalculatePrice',
+        'tax_lines' => 'taxLines'
     ];
 
     /**
@@ -78,8 +89,11 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'price_including_tax' => 'setPriceIncludingTax',
+        'product_id' => 'setProductId',
+        'quantity' => 'setQuantity',
+        'recalculate_price' => 'setRecalculatePrice',
+        'tax_lines' => 'setTaxLines'
     ];
 
     /**
@@ -88,12 +102,21 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'price_including_tax' => 'getPriceIncludingTax',
+        'product_id' => 'getProductId',
+        'quantity' => 'getQuantity',
+        'recalculate_price' => 'getRecalculatePrice',
+        'tax_lines' => 'getTaxLines'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +126,16 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['price_including_tax'] = isset($data['price_including_tax']) ? $data['price_including_tax'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
+        
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        
+        $this->container['recalculate_price'] = isset($data['recalculate_price']) ? $data['recalculate_price'] : null;
+        
+        $this->container['tax_lines'] = isset($data['tax_lines']) ? $data['tax_lines'] : null;
         
     }
 
@@ -119,19 +146,8 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
-        }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -142,7 +158,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +168,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +180,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +190,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +200,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +229,125 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets price_including_tax
      *
-     * @return string
+     * @return float
      */
-    public function getExternalId()
+    public function getPriceIncludingTax()
     {
-        return $this->container['external_id'];
+        return $this->container['price_including_tax'];
     }
 
     /**
-     * Sets external_id
+     * Sets price_including_tax
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param float $price_including_tax 
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setPriceIncludingTax($price_including_tax)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['price_including_tax'] = $price_including_tax;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets product_id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getProductId()
     {
-        return $this->container['state'];
+        return $this->container['product_id'];
     }
 
     /**
-     * Sets state
+     * Sets product_id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $product_id 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setProductId($product_id)
     {
-        $this->container['state'] = $state;
+        $this->container['product_id'] = $product_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets quantity
+     *
+     * @return float
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
+
+    /**
+     * Sets quantity
+     *
+     * @param float $quantity 
+     *
+     * @return $this
+     */
+    public function setQuantity($quantity)
+    {
+        $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets recalculate_price
+     *
+     * @return bool
+     */
+    public function getRecalculatePrice()
+    {
+        return $this->container['recalculate_price'];
+    }
+
+    /**
+     * Sets recalculate_price
+     *
+     * @param bool $recalculate_price 
+     *
+     * @return $this
+     */
+    public function setRecalculatePrice($recalculate_price)
+    {
+        $this->container['recalculate_price'] = $recalculate_price;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets tax_lines
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[]
+     */
+    public function getTaxLines()
+    {
+        return $this->container['tax_lines'];
+    }
+
+    /**
+     * Sets tax_lines
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[] $tax_lines 
+     *
+     * @return $this
+     */
+    public function setTaxLines($tax_lines)
+    {
+        $this->container['tax_lines'] = $tax_lines;
 
         return $this;
     }

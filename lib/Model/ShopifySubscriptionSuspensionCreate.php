@@ -19,10 +19,12 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TokenCreate model
+ * ShopifySubscriptionSuspensionCreate model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenCreate extends AbstractTokenUpdate 
+class ShopifySubscriptionSuspensionCreate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TokenCreate extends AbstractTokenUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Token.Create';
+    protected static $swaggerModelName = 'ShopifySubscriptionSuspension.Create';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-        'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState'
+        'planned_end_date' => '\DateTime',
+        'subscription' => 'int',
+        'type' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType'
     ];
 
     /**
@@ -57,8 +60,9 @@ class TokenCreate extends AbstractTokenUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-        'state' => null
+        'planned_end_date' => 'date-time',
+        'subscription' => 'int64',
+        'type' => null
     ];
 
     /**
@@ -68,8 +72,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'externalId',
-        'state' => 'state'
+        'planned_end_date' => 'plannedEndDate',
+        'subscription' => 'subscription',
+        'type' => 'type'
     ];
 
     /**
@@ -78,8 +83,9 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-        'state' => 'setState'
+        'planned_end_date' => 'setPlannedEndDate',
+        'subscription' => 'setSubscription',
+        'type' => 'setType'
     ];
 
     /**
@@ -88,12 +94,19 @@ class TokenCreate extends AbstractTokenUpdate
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-        'state' => 'getState'
+        'planned_end_date' => 'getPlannedEndDate',
+        'subscription' => 'getSubscription',
+        'type' => 'getType'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +116,12 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['planned_end_date'] = isset($data['planned_end_date']) ? $data['planned_end_date'] : null;
         
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['subscription'] = isset($data['subscription']) ? $data['subscription'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
     }
 
@@ -119,18 +132,16 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        if ($this->container['planned_end_date'] === null) {
+            $invalidProperties[] = "'planned_end_date' can't be null";
         }
-
-        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        if ($this->container['subscription'] === null) {
+            $invalidProperties[] = "'subscription' can't be null";
         }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
         }
         return $invalidProperties;
     }
@@ -142,7 +153,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +163,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +175,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +185,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +195,7 @@ class TokenCreate extends AbstractTokenUpdate
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -213,50 +224,75 @@ class TokenCreate extends AbstractTokenUpdate
     
 
     /**
-     * Gets external_id
+     * Gets planned_end_date
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getExternalId()
+    public function getPlannedEndDate()
     {
-        return $this->container['external_id'];
+        return $this->container['planned_end_date'];
     }
 
     /**
-     * Sets external_id
+     * Sets planned_end_date
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param \DateTime $planned_end_date 
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setPlannedEndDate($planned_end_date)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['planned_end_date'] = $planned_end_date;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets subscription
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CreationEntityState
+     * @return int
      */
-    public function getState()
+    public function getSubscription()
     {
-        return $this->container['state'];
+        return $this->container['subscription'];
     }
 
     /**
-     * Sets state
+     * Sets subscription
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param int $subscription 
      *
      * @return $this
      */
-    public function setState($state)
+    public function setSubscription($subscription)
     {
-        $this->container['state'] = $state;
+        $this->container['subscription'] = $subscription;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionSuspensionType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }
