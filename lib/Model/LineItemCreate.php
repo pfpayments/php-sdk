@@ -508,7 +508,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \PostFinanceCheckout\Sdk\Model\LineItemType
+     * @return \PostFinanceCheckout\Sdk\Model\LineItemType::*
      */
     public function getType()
     {
@@ -518,7 +518,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemType::* $type 
      *
      * @return $this
      */
