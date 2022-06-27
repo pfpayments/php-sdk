@@ -180,6 +180,119 @@ class ChargeFlowService {
 	}
 
 	/**
+	 * Operation cancelChargeFlow
+	 *
+	 * Cancel Charge Flow
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The ID of the transaction for which the charge flow should be canceled. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\Transaction
+	 */
+	public function cancelChargeFlow($space_id, $id) {
+		return $this->cancelChargeFlowWithHttpInfo($space_id, $id)->getData();
+	}
+
+	/**
+	 * Operation cancelChargeFlowWithHttpInfo
+	 *
+	 * Cancel Charge Flow
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The ID of the transaction for which the charge flow should be canceled. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function cancelChargeFlowWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling cancelChargeFlow');
+		}
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling cancelChargeFlow');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = '/charge-flow/cancel-charge-flow';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\PostFinanceCheckout\Sdk\Model\Transaction',
+				'/charge-flow/cancel-charge-flow'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\Transaction', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\Transaction',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation count
 	 *
 	 * Count
@@ -265,6 +378,119 @@ class ChargeFlowService {
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation fetchChargeFlowPaymentPageUrl
+	 *
+	 * Fetch Charge Flow Payment Page URL
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The transaction id of the transaction for which the URL of the charge flow should be fetched. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return string
+	 */
+	public function fetchChargeFlowPaymentPageUrl($space_id, $id) {
+		return $this->fetchChargeFlowPaymentPageUrlWithHttpInfo($space_id, $id)->getData();
+	}
+
+	/**
+	 * Operation fetchChargeFlowPaymentPageUrlWithHttpInfo
+	 *
+	 * Fetch Charge Flow Payment Page URL
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $id The transaction id of the transaction for which the URL of the charge flow should be fetched. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function fetchChargeFlowPaymentPageUrlWithHttpInfo($space_id, $id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling fetchChargeFlowPaymentPageUrl');
+		}
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling fetchChargeFlowPaymentPageUrl');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json', 'text/plain;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = '/charge-flow/fetch-charge-flow-payment-page-url';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'string',
+				'/charge-flow/fetch-charge-flow-payment-page-url'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

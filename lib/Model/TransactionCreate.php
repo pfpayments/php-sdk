@@ -349,7 +349,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets customers_presence
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
      *
      * @return $this
      */
@@ -499,6 +499,7 @@ class TransactionCreate extends AbstractTransactionPending
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -511,6 +512,7 @@ class TransactionCreate extends AbstractTransactionPending
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -524,6 +526,7 @@ class TransactionCreate extends AbstractTransactionPending
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -540,6 +543,7 @@ class TransactionCreate extends AbstractTransactionPending
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

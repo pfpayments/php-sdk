@@ -48,8 +48,9 @@ final class ApiClientTest extends TestCase
 
     /**
      * Setup before running each test case
+     * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $userId          = getenv('APPLICATION_USER_ID') ? getenv('APPLICATION_USER_ID') : 512;
@@ -63,8 +64,9 @@ final class ApiClientTest extends TestCase
 
     /**
      * Clean up after running each test case
+     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->apiClient = null;
     }

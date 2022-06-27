@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * TransactionLineItemUpdateRequest model
+ * TransactionLineItemVersionCreate model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
+class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TransactionLineItemUpdateRequest';
+    protected static $swaggerModelName = 'TransactionLineItemVersion.Create';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +49,9 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'new_line_items' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
-        'transaction_id' => 'int'
+        'external_id' => 'string',
+        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItemCreate[]',
+        'transaction' => 'int'
     ];
 
     /**
@@ -59,8 +60,9 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'new_line_items' => null,
-        'transaction_id' => 'int64'
+        'external_id' => null,
+        'line_items' => null,
+        'transaction' => 'int64'
     ];
 
     /**
@@ -70,8 +72,9 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'new_line_items' => 'newLineItems',
-        'transaction_id' => 'transactionId'
+        'external_id' => 'externalId',
+        'line_items' => 'lineItems',
+        'transaction' => 'transaction'
     ];
 
     /**
@@ -80,8 +83,9 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'new_line_items' => 'setNewLineItems',
-        'transaction_id' => 'setTransactionId'
+        'external_id' => 'setExternalId',
+        'line_items' => 'setLineItems',
+        'transaction' => 'setTransaction'
     ];
 
     /**
@@ -90,8 +94,9 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'new_line_items' => 'getNewLineItems',
-        'transaction_id' => 'getTransactionId'
+        'external_id' => 'getExternalId',
+        'line_items' => 'getLineItems',
+        'transaction' => 'getTransaction'
     ];
 
     
@@ -112,9 +117,11 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['new_line_items'] = isset($data['new_line_items']) ? $data['new_line_items'] : null;
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
-        $this->container['transaction_id'] = isset($data['transaction_id']) ? $data['transaction_id'] : null;
+        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
         
     }
 
@@ -127,8 +134,14 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['transaction_id'] === null) {
-            $invalidProperties[] = "'transaction_id' can't be null";
+        if ($this->container['external_id'] === null) {
+            $invalidProperties[] = "'external_id' can't be null";
+        }
+        if ($this->container['line_items'] === null) {
+            $invalidProperties[] = "'line_items' can't be null";
+        }
+        if ($this->container['transaction'] === null) {
+            $invalidProperties[] = "'transaction' can't be null";
         }
         return $invalidProperties;
     }
@@ -211,50 +224,75 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets new_line_items
+     * Gets external_id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
+     * @return string
      */
-    public function getNewLineItems()
+    public function getExternalId()
     {
-        return $this->container['new_line_items'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets new_line_items
+     * Sets external_id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $new_line_items 
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
-    public function setNewLineItems($new_line_items)
+    public function setExternalId($external_id)
     {
-        $this->container['new_line_items'] = $new_line_items;
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
     
 
     /**
-     * Gets transaction_id
+     * Gets line_items
      *
-     * @return int
+     * @return \PostFinanceCheckout\Sdk\Model\LineItemCreate[]
      */
-    public function getTransactionId()
+    public function getLineItems()
     {
-        return $this->container['transaction_id'];
+        return $this->container['line_items'];
     }
 
     /**
-     * Sets transaction_id
+     * Sets line_items
      *
-     * @param int $transaction_id 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items 
      *
      * @return $this
      */
-    public function setTransactionId($transaction_id)
+    public function setLineItems($line_items)
     {
-        $this->container['transaction_id'] = $transaction_id;
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets transaction
+     *
+     * @return int
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
+
+    /**
+     * Sets transaction
+     *
+     * @param int $transaction 
+     *
+     * @return $this
+     */
+    public function setTransaction($transaction)
+    {
+        $this->container['transaction'] = $transaction;
 
         return $this;
     }
@@ -266,6 +304,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -278,6 +317,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -291,6 +331,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -307,6 +348,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

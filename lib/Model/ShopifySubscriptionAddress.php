@@ -242,6 +242,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -254,6 +255,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -267,6 +269,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -283,6 +286,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

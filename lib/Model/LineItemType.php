@@ -39,6 +39,7 @@ class LineItemType
     const DISCOUNT = 'DISCOUNT';
     const FEE = 'FEE';
     const PRODUCT = 'PRODUCT';
+    const TIP = 'TIP';
     
     /**
      * Gets allowable values of the enum
@@ -51,6 +52,7 @@ class LineItemType
             self::DISCOUNT,
             self::FEE,
             self::PRODUCT,
+            self::TIP,
         ];
     }
 }

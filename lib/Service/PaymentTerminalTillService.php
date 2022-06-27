@@ -117,7 +117,7 @@ class PaymentTerminalTillService {
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
 		$queryParams = [];
@@ -260,7 +260,7 @@ class PaymentTerminalTillService {
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
 		$queryParams = [];

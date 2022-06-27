@@ -51,6 +51,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior',
         'connector_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration',
         'created_on' => '\DateTime',
+        'customers_presence' => '\PostFinanceCheckout\Sdk\Model\CustomersPresence',
         'environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
         'failed_on' => '\DateTime',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
@@ -83,6 +84,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => null,
         'connector_configuration' => null,
         'created_on' => 'date-time',
+        'customers_presence' => null,
         'environment' => null,
         'failed_on' => 'date-time',
         'failure_reason' => null,
@@ -116,6 +118,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'completionBehavior',
         'connector_configuration' => 'connectorConfiguration',
         'created_on' => 'createdOn',
+        'customers_presence' => 'customersPresence',
         'environment' => 'environment',
         'failed_on' => 'failedOn',
         'failure_reason' => 'failureReason',
@@ -148,6 +151,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'setCompletionBehavior',
         'connector_configuration' => 'setConnectorConfiguration',
         'created_on' => 'setCreatedOn',
+        'customers_presence' => 'setCustomersPresence',
         'environment' => 'setEnvironment',
         'failed_on' => 'setFailedOn',
         'failure_reason' => 'setFailureReason',
@@ -180,6 +184,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'getCompletionBehavior',
         'connector_configuration' => 'getConnectorConfiguration',
         'created_on' => 'getCreatedOn',
+        'customers_presence' => 'getCustomersPresence',
         'environment' => 'getEnvironment',
         'failed_on' => 'getFailedOn',
         'failure_reason' => 'getFailureReason',
@@ -223,6 +228,8 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['connector_configuration'] = isset($data['connector_configuration']) ? $data['connector_configuration'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
         
         $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
@@ -454,6 +461,31 @@ class ChargeAttempt extends TransactionAwareEntity
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets customers_presence
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\CustomersPresence
+     */
+    public function getCustomersPresence()
+    {
+        return $this->container['customers_presence'];
+    }
+
+    /**
+     * Sets customers_presence
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customers presence indicates which kind of customer interaction was used during the charge attempt.
+     *
+     * @return $this
+     */
+    public function setCustomersPresence($customers_presence)
+    {
+        $this->container['customers_presence'] = $customers_presence;
 
         return $this;
     }
@@ -969,6 +1001,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -981,6 +1014,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -994,6 +1028,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -1010,6 +1045,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

@@ -1203,7 +1203,7 @@ class TransactionService {
 	/**
 	 * Operation getLatestTransactionLineItemVersion
 	 *
-	 * getLatestTransactionLineItemVersion
+	 * getLatestSuccessfulTransactionLineItemVersion
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
@@ -1219,7 +1219,7 @@ class TransactionService {
 	/**
 	 * Operation getLatestTransactionLineItemVersionWithHttpInfo
 	 *
-	 * getLatestTransactionLineItemVersion
+	 * getLatestSuccessfulTransactionLineItemVersion
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
@@ -2074,129 +2074,6 @@ class TransactionService {
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\PostFinanceCheckout\Sdk\Model\Transaction',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation updateTransactionLineItems
-	 *
-	 * updateTransactionLineItems
-	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemUpdateRequest $update_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion
-	 */
-	public function updateTransactionLineItems($space_id, $update_request) {
-		return $this->updateTransactionLineItemsWithHttpInfo($space_id, $update_request)->getData();
-	}
-
-	/**
-	 * Operation updateTransactionLineItemsWithHttpInfo
-	 *
-	 * updateTransactionLineItems
-	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemUpdateRequest $update_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function updateTransactionLineItemsWithHttpInfo($space_id, $update_request) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling updateTransactionLineItems');
-		}
-		// verify the required parameter 'update_request' is set
-		if (is_null($update_request)) {
-			throw new \InvalidArgumentException('Missing the required parameter $update_request when calling updateTransactionLineItems');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/transaction/updateTransactionLineItems';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($update_request)) {
-			$tempBody = $update_request;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
-				'/transaction/updateTransactionLineItems'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

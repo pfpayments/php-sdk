@@ -50,11 +50,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'amount' => 'float',
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'external_id' => 'string',
+        'failed_on' => '\DateTime',
+        'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
+        'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
+        'processing_on' => '\DateTime',
         'space_view_id' => 'int',
+        'state' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersionState',
+        'succeeded_on' => '\DateTime',
         'tax_amount' => 'float',
+        'timeout_on' => '\DateTime',
         'transaction' => '\PostFinanceCheckout\Sdk\Model\Transaction',
         'version' => 'int'
     ];
@@ -68,11 +77,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'amount' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'external_id' => null,
+        'failed_on' => 'date-time',
+        'failure_reason' => null,
+        'labels' => null,
         'language' => null,
         'line_items' => null,
+        'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
+        'processing_on' => 'date-time',
         'space_view_id' => 'int64',
+        'state' => null,
+        'succeeded_on' => 'date-time',
         'tax_amount' => null,
+        'timeout_on' => 'date-time',
         'transaction' => null,
         'version' => 'int32'
     ];
@@ -87,11 +105,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'amount' => 'amount',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'external_id' => 'externalId',
+        'failed_on' => 'failedOn',
+        'failure_reason' => 'failureReason',
+        'labels' => 'labels',
         'language' => 'language',
         'line_items' => 'lineItems',
+        'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
+        'processing_on' => 'processingOn',
         'space_view_id' => 'spaceViewId',
+        'state' => 'state',
+        'succeeded_on' => 'succeededOn',
         'tax_amount' => 'taxAmount',
+        'timeout_on' => 'timeoutOn',
         'transaction' => 'transaction',
         'version' => 'version'
     ];
@@ -105,11 +132,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'amount' => 'setAmount',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'external_id' => 'setExternalId',
+        'failed_on' => 'setFailedOn',
+        'failure_reason' => 'setFailureReason',
+        'labels' => 'setLabels',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
+        'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'processing_on' => 'setProcessingOn',
         'space_view_id' => 'setSpaceViewId',
+        'state' => 'setState',
+        'succeeded_on' => 'setSucceededOn',
         'tax_amount' => 'setTaxAmount',
+        'timeout_on' => 'setTimeoutOn',
         'transaction' => 'setTransaction',
         'version' => 'setVersion'
     ];
@@ -123,11 +159,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         'amount' => 'getAmount',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'external_id' => 'getExternalId',
+        'failed_on' => 'getFailedOn',
+        'failure_reason' => 'getFailureReason',
+        'labels' => 'getLabels',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
+        'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'processing_on' => 'getProcessingOn',
         'space_view_id' => 'getSpaceViewId',
+        'state' => 'getState',
+        'succeeded_on' => 'getSucceededOn',
         'tax_amount' => 'getTaxAmount',
+        'timeout_on' => 'getTimeoutOn',
         'transaction' => 'getTransaction',
         'version' => 'getVersion'
     ];
@@ -152,15 +197,33 @@ class TransactionLineItemVersion extends TransactionAwareEntity
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
+        
+        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
+        
+        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
+        
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
         
+        $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
+        
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['processing_on'] = isset($data['processing_on']) ? $data['processing_on'] : null;
         
         $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
         
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['succeeded_on'] = isset($data['succeeded_on']) ? $data['succeeded_on'] : null;
+        
         $this->container['tax_amount'] = isset($data['tax_amount']) ? $data['tax_amount'] : null;
+        
+        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
         
         $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
         
@@ -333,6 +396,106 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     
 
     /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime $failed_on 
+     *
+     * @return $this
+     */
+    public function setFailedOn($failed_on)
+    {
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets failure_reason
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\FailureReason
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason 
+     *
+     * @return $this
+     */
+    public function setFailureReason($failure_reason)
+    {
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets labels
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Label[]
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels 
+     *
+     * @return $this
+     */
+    public function setLabels($labels)
+    {
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets language
      *
      * @return string
@@ -383,6 +546,31 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     
 
     /**
+     * Gets next_update_on
+     *
+     * @return \DateTime
+     */
+    public function getNextUpdateOn()
+    {
+        return $this->container['next_update_on'];
+    }
+
+    /**
+     * Sets next_update_on
+     *
+     * @param \DateTime $next_update_on 
+     *
+     * @return $this
+     */
+    public function setNextUpdateOn($next_update_on)
+    {
+        $this->container['next_update_on'] = $next_update_on;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets planned_purge_date
      *
      * @return \DateTime
@@ -402,6 +590,31 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processing_on
+     *
+     * @return \DateTime
+     */
+    public function getProcessingOn()
+    {
+        return $this->container['processing_on'];
+    }
+
+    /**
+     * Sets processing_on
+     *
+     * @param \DateTime $processing_on 
+     *
+     * @return $this
+     */
+    public function setProcessingOn($processing_on)
+    {
+        $this->container['processing_on'] = $processing_on;
 
         return $this;
     }
@@ -433,6 +646,56 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     
 
     /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersionState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersionState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets succeeded_on
+     *
+     * @return \DateTime
+     */
+    public function getSucceededOn()
+    {
+        return $this->container['succeeded_on'];
+    }
+
+    /**
+     * Sets succeeded_on
+     *
+     * @param \DateTime $succeeded_on 
+     *
+     * @return $this
+     */
+    public function setSucceededOn($succeeded_on)
+    {
+        $this->container['succeeded_on'] = $succeeded_on;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets tax_amount
      *
      * @return float
@@ -452,6 +715,31 @@ class TransactionLineItemVersion extends TransactionAwareEntity
     public function setTaxAmount($tax_amount)
     {
         $this->container['tax_amount'] = $tax_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
+
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime $timeout_on 
+     *
+     * @return $this
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        $this->container['timeout_on'] = $timeout_on;
 
         return $this;
     }
@@ -513,6 +801,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -525,6 +814,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -538,6 +828,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -554,6 +845,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

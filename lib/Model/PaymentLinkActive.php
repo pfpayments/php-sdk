@@ -235,6 +235,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -247,6 +248,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -260,6 +262,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -276,6 +279,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

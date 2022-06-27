@@ -55,7 +55,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'email_address' => 'string',
         'family_name' => 'string',
         'given_name' => 'string',
+        'mobile_phone_number' => 'string',
         'organization_name' => 'string',
+        'phone_number' => 'string',
         'postal_state' => 'string',
         'postcode' => 'string',
         'sales_tax_number' => 'string',
@@ -76,7 +78,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'email_address' => null,
         'family_name' => null,
         'given_name' => null,
+        'mobile_phone_number' => null,
         'organization_name' => null,
+        'phone_number' => null,
         'postal_state' => null,
         'postcode' => null,
         'sales_tax_number' => null,
@@ -98,7 +102,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'email_address' => 'emailAddress',
         'family_name' => 'familyName',
         'given_name' => 'givenName',
+        'mobile_phone_number' => 'mobilePhoneNumber',
         'organization_name' => 'organizationName',
+        'phone_number' => 'phoneNumber',
         'postal_state' => 'postalState',
         'postcode' => 'postcode',
         'sales_tax_number' => 'salesTaxNumber',
@@ -119,7 +125,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'email_address' => 'setEmailAddress',
         'family_name' => 'setFamilyName',
         'given_name' => 'setGivenName',
+        'mobile_phone_number' => 'setMobilePhoneNumber',
         'organization_name' => 'setOrganizationName',
+        'phone_number' => 'setPhoneNumber',
         'postal_state' => 'setPostalState',
         'postcode' => 'setPostcode',
         'sales_tax_number' => 'setSalesTaxNumber',
@@ -140,7 +148,9 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         'email_address' => 'getEmailAddress',
         'family_name' => 'getFamilyName',
         'given_name' => 'getGivenName',
+        'mobile_phone_number' => 'getMobilePhoneNumber',
         'organization_name' => 'getOrganizationName',
+        'phone_number' => 'getPhoneNumber',
         'postal_state' => 'getPostalState',
         'postcode' => 'getPostcode',
         'sales_tax_number' => 'getSalesTaxNumber',
@@ -179,7 +189,11 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         
         $this->container['given_name'] = isset($data['given_name']) ? $data['given_name'] : null;
         
+        $this->container['mobile_phone_number'] = isset($data['mobile_phone_number']) ? $data['mobile_phone_number'] : null;
+        
         $this->container['organization_name'] = isset($data['organization_name']) ? $data['organization_name'] : null;
+        
+        $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
         
         $this->container['postal_state'] = isset($data['postal_state']) ? $data['postal_state'] : null;
         
@@ -216,8 +230,16 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
         }
 
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
         if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
             $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
         }
 
         if (!is_null($this->container['sales_tax_number']) && (mb_strlen($this->container['sales_tax_number']) > 100)) {
@@ -475,6 +497,35 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets mobile_phone_number
+     *
+     * @return string
+     */
+    public function getMobilePhoneNumber()
+    {
+        return $this->container['mobile_phone_number'];
+    }
+
+    /**
+     * Sets mobile_phone_number
+     *
+     * @param string $mobile_phone_number 
+     *
+     * @return $this
+     */
+    public function setMobilePhoneNumber($mobile_phone_number)
+    {
+        if (!is_null($mobile_phone_number) && (mb_strlen($mobile_phone_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $mobile_phone_number when calling SpaceAddressCreate., must be smaller than or equal to 100.');
+        }
+
+        $this->container['mobile_phone_number'] = $mobile_phone_number;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets organization_name
      *
      * @return string
@@ -498,6 +549,35 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
         }
 
         $this->container['organization_name'] = $organization_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets phone_number
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->container['phone_number'];
+    }
+
+    /**
+     * Sets phone_number
+     *
+     * @param string $phone_number 
+     *
+     * @return $this
+     */
+    public function setPhoneNumber($phone_number)
+    {
+        if (!is_null($phone_number) && (mb_strlen($phone_number) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $phone_number when calling SpaceAddressCreate., must be smaller than or equal to 100.');
+        }
+
+        $this->container['phone_number'] = $phone_number;
 
         return $this;
     }
@@ -671,6 +751,7 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -683,6 +764,7 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -696,6 +778,7 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -712,6 +795,7 @@ class SpaceAddressCreate implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

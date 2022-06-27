@@ -178,6 +178,128 @@ class PaymentTerminalService {
 	}
 
 	/**
+	 * Operation link
+	 *
+	 * Link Device With Terminal
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @param string $serial_number  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return void
+	 */
+	public function link($space_id, $terminal_id, $serial_number) {
+		return $this->linkWithHttpInfo($space_id, $terminal_id, $serial_number)->getData();
+	}
+
+	/**
+	 * Operation linkWithHttpInfo
+	 *
+	 * Link Device With Terminal
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @param string $serial_number  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function linkWithHttpInfo($space_id, $terminal_id, $serial_number) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling link');
+		}
+		// verify the required parameter 'terminal_id' is set
+		if (is_null($terminal_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $terminal_id when calling link');
+		}
+		// verify the required parameter 'serial_number' is set
+		if (is_null($serial_number)) {
+			throw new \InvalidArgumentException('Missing the required parameter $serial_number when calling link');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($terminal_id)) {
+			$queryParams['terminalId'] = $this->apiClient->getSerializer()->toQueryValue($terminal_id);
+		}
+		if (!is_null($serial_number)) {
+			$queryParams['serialNumber'] = $this->apiClient->getSerializer()->toQueryValue($serial_number);
+		}
+
+		// path params
+		$resourcePath = '/payment-terminal/link';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/payment-terminal/link'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation read
 	 *
 	 * Read
@@ -380,6 +502,345 @@ class PaymentTerminalService {
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\PostFinanceCheckout\Sdk\Model\PaymentTerminal[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation triggerFinalBalance
+	 *
+	 * Remotely Trigger Final Balance
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return void
+	 */
+	public function triggerFinalBalance($space_id, $terminal_id) {
+		return $this->triggerFinalBalanceWithHttpInfo($space_id, $terminal_id)->getData();
+	}
+
+	/**
+	 * Operation triggerFinalBalanceWithHttpInfo
+	 *
+	 * Remotely Trigger Final Balance
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function triggerFinalBalanceWithHttpInfo($space_id, $terminal_id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling triggerFinalBalance');
+		}
+		// verify the required parameter 'terminal_id' is set
+		if (is_null($terminal_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $terminal_id when calling triggerFinalBalance');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($terminal_id)) {
+			$queryParams['terminalId'] = $this->apiClient->getSerializer()->toQueryValue($terminal_id);
+		}
+
+		// path params
+		$resourcePath = '/payment-terminal/trigger-final-balance';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/payment-terminal/trigger-final-balance'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation triggerFinalBalanceByIdentifier
+	 *
+	 * Remotely Trigger Final Balance By Identifier
+	 *
+	 * @param int $space_id  (required)
+	 * @param string $terminal_identifier  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return void
+	 */
+	public function triggerFinalBalanceByIdentifier($space_id, $terminal_identifier) {
+		return $this->triggerFinalBalanceByIdentifierWithHttpInfo($space_id, $terminal_identifier)->getData();
+	}
+
+	/**
+	 * Operation triggerFinalBalanceByIdentifierWithHttpInfo
+	 *
+	 * Remotely Trigger Final Balance By Identifier
+	 *
+	 * @param int $space_id  (required)
+	 * @param string $terminal_identifier  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function triggerFinalBalanceByIdentifierWithHttpInfo($space_id, $terminal_identifier) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling triggerFinalBalanceByIdentifier');
+		}
+		// verify the required parameter 'terminal_identifier' is set
+		if (is_null($terminal_identifier)) {
+			throw new \InvalidArgumentException('Missing the required parameter $terminal_identifier when calling triggerFinalBalanceByIdentifier');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($terminal_identifier)) {
+			$queryParams['terminalIdentifier'] = $this->apiClient->getSerializer()->toQueryValue($terminal_identifier);
+		}
+
+		// path params
+		$resourcePath = '/payment-terminal/trigger-final-balance-by-identifier';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/payment-terminal/trigger-final-balance-by-identifier'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation unlink
+	 *
+	 * Unlink Device With Terminal
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return void
+	 */
+	public function unlink($space_id, $terminal_id) {
+		return $this->unlinkWithHttpInfo($space_id, $terminal_id)->getData();
+	}
+
+	/**
+	 * Operation unlinkWithHttpInfo
+	 *
+	 * Unlink Device With Terminal
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $terminal_id  (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function unlinkWithHttpInfo($space_id, $terminal_id) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling unlink');
+		}
+		// verify the required parameter 'terminal_id' is set
+		if (is_null($terminal_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $terminal_id when calling unlink');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($terminal_id)) {
+			$queryParams['terminalId'] = $this->apiClient->getSerializer()->toQueryValue($terminal_id);
+		}
+
+		// path params
+		$resourcePath = '/payment-terminal/unlink';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/payment-terminal/unlink'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

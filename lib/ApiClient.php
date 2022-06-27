@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.0.1/php';
+	private $userAgent = 'PHP-Client/3.0.3/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -824,6 +824,42 @@ final class ApiClient {
         return $this->internalTransferBankTransactionService;
     }
     
+    protected $invoiceReconciliationRecordInvoiceLinkService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService
+     */
+    public function getInvoiceReconciliationRecordInvoiceLinkService() {
+        if(is_null($this->invoiceReconciliationRecordInvoiceLinkService)){
+            $this->invoiceReconciliationRecordInvoiceLinkService = new \PostFinanceCheckout\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService($this);
+        }
+        return $this->invoiceReconciliationRecordInvoiceLinkService;
+    }
+    
+    protected $invoiceReconciliationRecordService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\InvoiceReconciliationRecordService
+     */
+    public function getInvoiceReconciliationRecordService() {
+        if(is_null($this->invoiceReconciliationRecordService)){
+            $this->invoiceReconciliationRecordService = new \PostFinanceCheckout\Sdk\Service\InvoiceReconciliationRecordService($this);
+        }
+        return $this->invoiceReconciliationRecordService;
+    }
+    
+    protected $invoiceReimbursementService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\InvoiceReimbursementService
+     */
+    public function getInvoiceReimbursementService() {
+        if(is_null($this->invoiceReimbursementService)){
+            $this->invoiceReimbursementService = new \PostFinanceCheckout\Sdk\Service\InvoiceReimbursementService($this);
+        }
+        return $this->invoiceReimbursementService;
+    }
+    
     protected $labelDescriptionGroupService;
 
     /**
@@ -1002,6 +1038,18 @@ final class ApiClient {
             $this->paymentTerminalTillService = new \PostFinanceCheckout\Sdk\Service\PaymentTerminalTillService($this);
         }
         return $this->paymentTerminalTillService;
+    }
+    
+    protected $paymentTerminalTransactionSummaryService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\PaymentTerminalTransactionSummaryService
+     */
+    public function getPaymentTerminalTransactionSummaryService() {
+        if(is_null($this->paymentTerminalTransactionSummaryService)){
+            $this->paymentTerminalTransactionSummaryService = new \PostFinanceCheckout\Sdk\Service\PaymentTerminalTransactionSummaryService($this);
+        }
+        return $this->paymentTerminalTransactionSummaryService;
     }
     
     protected $permissionService;
@@ -1266,6 +1314,18 @@ final class ApiClient {
             $this->transactionLightboxService = new \PostFinanceCheckout\Sdk\Service\TransactionLightboxService($this);
         }
         return $this->transactionLightboxService;
+    }
+    
+    protected $transactionLineItemVersionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\TransactionLineItemVersionService
+     */
+    public function getTransactionLineItemVersionService() {
+        if(is_null($this->transactionLineItemVersionService)){
+            $this->transactionLineItemVersionService = new \PostFinanceCheckout\Sdk\Service\TransactionLineItemVersionService($this);
+        }
+        return $this->transactionLineItemVersionService;
     }
     
     protected $transactionMobileSdkService;
