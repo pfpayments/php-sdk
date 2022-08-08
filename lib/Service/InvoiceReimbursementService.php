@@ -300,7 +300,7 @@ class InvoiceReimbursementService {
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\InvoiceReimbursement[]
+	 * @return \PostFinanceCheckout\Sdk\Model\InvoiceReimbursementWithRefundReference[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -370,16 +370,16 @@ class InvoiceReimbursementService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\PostFinanceCheckout\Sdk\Model\InvoiceReimbursement[]',
+				'\PostFinanceCheckout\Sdk\Model\InvoiceReimbursementWithRefundReference[]',
 				'/invoice-reimbursement-service/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\InvoiceReimbursement[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\InvoiceReimbursementWithRefundReference[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\InvoiceReimbursement[]',
+                        '\PostFinanceCheckout\Sdk\Model\InvoiceReimbursementWithRefundReference[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

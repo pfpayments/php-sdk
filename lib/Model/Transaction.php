@@ -51,7 +51,7 @@ class Transaction implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'accept_header' => 'string',
         'accept_language_header' => 'string',
-        'allowed_payment_method_brands' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodBrand[]',
+        'allowed_payment_method_brands' => 'int[]',
         'allowed_payment_method_configurations' => 'int[]',
         'authorization_amount' => 'float',
         'authorization_environment' => '\PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment',
@@ -129,7 +129,7 @@ class Transaction implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'accept_header' => null,
         'accept_language_header' => null,
-        'allowed_payment_method_brands' => null,
+        'allowed_payment_method_brands' => 'int64',
         'allowed_payment_method_configurations' => 'int64',
         'authorization_amount' => null,
         'authorization_environment' => null,
@@ -776,7 +776,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets allowed_payment_method_brands
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentMethodBrand[]
+     * @return int[]
      */
     public function getAllowedPaymentMethodBrands()
     {
@@ -786,7 +786,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_brands
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentMethodBrand[] $allowed_payment_method_brands 
+     * @param int[] $allowed_payment_method_brands 
      *
      * @return $this
      */
