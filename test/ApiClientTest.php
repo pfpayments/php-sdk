@@ -132,5 +132,23 @@ final class ApiClientTest extends TestCase
     	$this->apiClient->getTransactionService()->read($this->spaceId, 1);
     }
 
+    /**
+     * Tests that the headers in the response contain headers with SDK information by default.
+     *
+     * @since 3.1.2
+     * @return void
+     */
+    public function testSdkHeaders()
+    {
+        $headers = $this->apiClient->getDefaultHeaders();
+        $this->assertGreaterThanOrEqual(4, count($headers));
+
+        // Check SDK default header values.
+        $this->assertEquals($headers['x-meta-sdk-version'], "3.1.2");
+        $this->assertEquals($headers['x-meta-sdk-language'], 'php');
+        $this->assertEquals($headers['x-meta-sdk-provider'], "PostFinance Checkout");
+        $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());
+    }
+
 }
 

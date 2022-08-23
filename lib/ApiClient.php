@@ -47,14 +47,18 @@ final class ApiClient {
 	 *
 	 * @var array
 	 */
-	private $defaultHeaders = [];
+	private $defaultHeaders = [
+        'x-meta-sdk-version' => "3.1.2",
+        'x-meta-sdk-language' => 'php',
+        'x-meta-sdk-provider' => "PostFinance Checkout",
+    ];
 
 	/**
 	 * The user agent that is sent with any request.
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.1.1/php';
+	private $userAgent = 'PHP-Client/3.1.2/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -138,6 +142,8 @@ final class ApiClient {
 		$this->serializer = new ObjectSerializer();
 		$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
 		$this->serializer->setDebugFile($this->getDebugFile());
+		$this->addDefaultHeader('x-meta-sdk-language-version', phpversion());
+
 	}
 
 	/**
@@ -311,9 +317,19 @@ final class ApiClient {
 			throw new \InvalidArgumentException('The header key must be a string.');
 		}
 
-		$defaultHeaders[$key] = $value;
+		$this->defaultHeaders[$key] = $value;
 		return $this;
 	}
+
+	/**
+     * Gets the default headers that will be sent in the request.
+	 * 
+	 * @since 3.1.2
+	 * @return string[]
+     */
+    function getDefaultHeaders() {
+        return $this->defaultHeaders;
+    }
 
 	/**
 	 * Returns true, when debugging is enabled.
