@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentInitiationAdviceFile model
+ * AnalyticsSchemaColumn model
  *
  * @category    Class
- * @description 
+ * @description Meta information about a column within a table.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
+class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentInitiationAdviceFile';
+    protected static $swaggerModelName = 'AnalyticsSchemaColumn';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,16 +49,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'created_on' => '\DateTime',
-        'failure_message' => 'string',
-        'file_generated_on' => '\DateTime',
-        'forwarded_on' => '\DateTime',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'processed_on' => '\DateTime',
-        'processor' => '\PostFinanceCheckout\Sdk\Model\PaymentProcessor',
-        'state' => '\PostFinanceCheckout\Sdk\Model\PaymentInitiationAdviceFileState'
+        'alias_name' => 'string',
+        'column_name' => 'string',
+        'description' => 'map[string,string]',
+        'precision' => 'int',
+        'referenced_table' => 'string',
+        'scale' => 'int',
+        'table_name' => 'string',
+        'type' => 'string'
     ];
 
     /**
@@ -67,16 +65,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'created_on' => 'date-time',
-        'failure_message' => null,
-        'file_generated_on' => 'date-time',
-        'forwarded_on' => 'date-time',
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'processed_on' => 'date-time',
-        'processor' => null,
-        'state' => null
+        'alias_name' => null,
+        'column_name' => null,
+        'description' => null,
+        'precision' => 'int32',
+        'referenced_table' => null,
+        'scale' => 'int32',
+        'table_name' => null,
+        'type' => null
     ];
 
     /**
@@ -86,16 +82,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'created_on' => 'createdOn',
-        'failure_message' => 'failureMessage',
-        'file_generated_on' => 'fileGeneratedOn',
-        'forwarded_on' => 'forwardedOn',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'processed_on' => 'processedOn',
-        'processor' => 'processor',
-        'state' => 'state'
+        'alias_name' => 'aliasName',
+        'column_name' => 'columnName',
+        'description' => 'description',
+        'precision' => 'precision',
+        'referenced_table' => 'referencedTable',
+        'scale' => 'scale',
+        'table_name' => 'tableName',
+        'type' => 'type'
     ];
 
     /**
@@ -104,16 +98,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'created_on' => 'setCreatedOn',
-        'failure_message' => 'setFailureMessage',
-        'file_generated_on' => 'setFileGeneratedOn',
-        'forwarded_on' => 'setForwardedOn',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'processed_on' => 'setProcessedOn',
-        'processor' => 'setProcessor',
-        'state' => 'setState'
+        'alias_name' => 'setAliasName',
+        'column_name' => 'setColumnName',
+        'description' => 'setDescription',
+        'precision' => 'setPrecision',
+        'referenced_table' => 'setReferencedTable',
+        'scale' => 'setScale',
+        'table_name' => 'setTableName',
+        'type' => 'setType'
     ];
 
     /**
@@ -122,16 +114,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'created_on' => 'getCreatedOn',
-        'failure_message' => 'getFailureMessage',
-        'file_generated_on' => 'getFileGeneratedOn',
-        'forwarded_on' => 'getForwardedOn',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'processed_on' => 'getProcessedOn',
-        'processor' => 'getProcessor',
-        'state' => 'getState'
+        'alias_name' => 'getAliasName',
+        'column_name' => 'getColumnName',
+        'description' => 'getDescription',
+        'precision' => 'getPrecision',
+        'referenced_table' => 'getReferencedTable',
+        'scale' => 'getScale',
+        'table_name' => 'getTableName',
+        'type' => 'getType'
     ];
 
     
@@ -152,25 +142,21 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        $this->container['alias_name'] = isset($data['alias_name']) ? $data['alias_name'] : null;
         
-        $this->container['failure_message'] = isset($data['failure_message']) ? $data['failure_message'] : null;
+        $this->container['column_name'] = isset($data['column_name']) ? $data['column_name'] : null;
         
-        $this->container['file_generated_on'] = isset($data['file_generated_on']) ? $data['file_generated_on'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
-        $this->container['forwarded_on'] = isset($data['forwarded_on']) ? $data['forwarded_on'] : null;
+        $this->container['precision'] = isset($data['precision']) ? $data['precision'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['referenced_table'] = isset($data['referenced_table']) ? $data['referenced_table'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        $this->container['scale'] = isset($data['scale']) ? $data['scale'] : null;
         
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['table_name'] = isset($data['table_name']) ? $data['table_name'] : null;
         
-        $this->container['processed_on'] = isset($data['processed_on']) ? $data['processed_on'] : null;
-        
-        $this->container['processor'] = isset($data['processor']) ? $data['processor'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
     }
 
@@ -264,250 +250,200 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failure_message
+     * Gets alias_name
      *
      * @return string
      */
-    public function getFailureMessage()
+    public function getAliasName()
     {
-        return $this->container['failure_message'];
+        return $this->container['alias_name'];
     }
 
     /**
-     * Sets failure_message
+     * Sets alias_name
      *
-     * @param string $failure_message 
+     * @param string $alias_name The name of the alias defined for the column in the query or null if none is defined.
      *
      * @return $this
      */
-    public function setFailureMessage($failure_message)
+    public function setAliasName($alias_name)
     {
-        $this->container['failure_message'] = $failure_message;
+        $this->container['alias_name'] = $alias_name;
 
         return $this;
     }
     
 
     /**
-     * Gets file_generated_on
-     *
-     * @return \DateTime
-     */
-    public function getFileGeneratedOn()
-    {
-        return $this->container['file_generated_on'];
-    }
-
-    /**
-     * Sets file_generated_on
-     *
-     * @param \DateTime $file_generated_on 
-     *
-     * @return $this
-     */
-    public function setFileGeneratedOn($file_generated_on)
-    {
-        $this->container['file_generated_on'] = $file_generated_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets forwarded_on
-     *
-     * @return \DateTime
-     */
-    public function getForwardedOn()
-    {
-        return $this->container['forwarded_on'];
-    }
-
-    /**
-     * Sets forwarded_on
-     *
-     * @param \DateTime $forwarded_on The shipping date indicates the date on which the pain file was transferred to an external processing system.
-     *
-     * @return $this
-     */
-    public function setForwardedOn($forwarded_on)
-    {
-        $this->container['forwarded_on'] = $forwarded_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
+     * Gets column_name
      *
      * @return string
      */
-    public function getName()
+    public function getColumnName()
     {
-        return $this->container['name'];
+        return $this->container['column_name'];
     }
 
     /**
-     * Sets name
+     * Sets column_name
      *
-     * @param string $name 
+     * @param string $column_name The name of the column in the table or null if this is a synthetic column which is the result of some SQL expression.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setColumnName($column_name)
     {
-        $this->container['name'] = $name;
+        $this->container['column_name'] = $column_name;
 
         return $this;
     }
     
 
     /**
-     * Gets processed_on
+     * Gets description
      *
-     * @return \DateTime
+     * @return map[string,string]
      */
-    public function getProcessedOn()
+    public function getDescription()
     {
-        return $this->container['processed_on'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets processed_on
+     * Sets description
      *
-     * @param \DateTime $processed_on 
+     * @param map[string,string] $description A human readable description of the property contained in this column or null if this is a synthetic column which is the result of some SQL expression.
      *
      * @return $this
      */
-    public function setProcessedOn($processed_on)
+    public function setDescription($description)
     {
-        $this->container['processed_on'] = $processed_on;
+        $this->container['description'] = $description;
 
         return $this;
     }
     
 
     /**
-     * Gets processor
+     * Gets precision
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentProcessor
+     * @return int
      */
-    public function getProcessor()
+    public function getPrecision()
     {
-        return $this->container['processor'];
+        return $this->container['precision'];
     }
 
     /**
-     * Sets processor
+     * Sets precision
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentProcessor $processor 
+     * @param int $precision The precision (maximal number of digits) for decimal data types, otherwise 0.
      *
      * @return $this
      */
-    public function setProcessor($processor)
+    public function setPrecision($precision)
     {
-        $this->container['processor'] = $processor;
+        $this->container['precision'] = $precision;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets referenced_table
      *
-     * @return \PostFinanceCheckout\Sdk\Model\PaymentInitiationAdviceFileState
+     * @return string
      */
-    public function getState()
+    public function getReferencedTable()
     {
-        return $this->container['state'];
+        return $this->container['referenced_table'];
     }
 
     /**
-     * Sets state
+     * Sets referenced_table
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentInitiationAdviceFileState $state 
+     * @param string $referenced_table The name of the referenced table if this column represents a foreign-key relation to the IDs of another table, otherwise null.
      *
      * @return $this
      */
-    public function setState($state)
+    public function setReferencedTable($referenced_table)
     {
-        $this->container['state'] = $state;
+        $this->container['referenced_table'] = $referenced_table;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets scale
+     *
+     * @return int
+     */
+    public function getScale()
+    {
+        return $this->container['scale'];
+    }
+
+    /**
+     * Sets scale
+     *
+     * @param int $scale The scale (maximal number number of digits in the fractional part) in case of a decimal data type, otherwise 0.
+     *
+     * @return $this
+     */
+    public function setScale($scale)
+    {
+        $this->container['scale'] = $scale;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets table_name
+     *
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->container['table_name'];
+    }
+
+    /**
+     * Sets table_name
+     *
+     * @param string $table_name The name of the table which defines this column.
+     *
+     * @return $this
+     */
+    public function setTableName($table_name)
+    {
+        $this->container['table_name'] = $table_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string $type The ORC data type of the column value.
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

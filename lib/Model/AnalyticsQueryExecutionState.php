@@ -22,26 +22,23 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentInitiationAdviceFileState model
+ * AnalyticsQueryExecutionState model
  *
  * @category    Class
- * @description 
+ * @description The state of a query execution.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentInitiationAdviceFileState
+class AnalyticsQueryExecutionState
 {
     /**
      * Possible values of this enum
      */
-    const CREATING = 'CREATING';
-    const FAILED = 'FAILED';
-    const CREATED = 'CREATED';
-    const OVERDUE = 'OVERDUE';
-    const UPLOADED = 'UPLOADED';
-    const DOWNLOADED = 'DOWNLOADED';
+    const PROCESSING = 'PROCESSING';
     const PROCESSED = 'PROCESSED';
+    const FAILED = 'FAILED';
+    const CANCELED = 'CANCELED';
     
     /**
      * Gets allowable values of the enum
@@ -50,13 +47,10 @@ class PaymentInitiationAdviceFileState
     public static function getAllowableEnumValues()
     {
         return [
-            self::CREATING,
-            self::FAILED,
-            self::CREATED,
-            self::OVERDUE,
-            self::UPLOADED,
-            self::DOWNLOADED,
+            self::PROCESSING,
             self::PROCESSED,
+            self::FAILED,
+            self::CANCELED,
         ];
     }
 }

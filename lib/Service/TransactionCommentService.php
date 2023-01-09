@@ -86,7 +86,8 @@ class TransactionCommentService {
 	 * Operation allWithHttpInfo
 	 *
 	 * Find by transaction
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionComment[]',
 				'/transaction-comment/all'
 			);
@@ -199,7 +201,8 @@ class TransactionCommentService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentCreate $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -252,13 +255,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionComment',
 				'/transaction-comment/create'
 			);
@@ -314,7 +318,8 @@ class TransactionCommentService {
 	 * Operation deleteWithHttpInfo
 	 *
 	 * Delete
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -365,13 +370,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/transaction-comment/delete'
 			);
@@ -427,7 +433,8 @@ class TransactionCommentService {
 	 * Operation pinWithHttpInfo
 	 *
 	 * Pin
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -478,13 +485,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/transaction-comment/pin'
 			);
@@ -540,7 +548,8 @@ class TransactionCommentService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -591,13 +600,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionComment',
 				'/transaction-comment/read'
 			);
@@ -653,7 +663,8 @@ class TransactionCommentService {
 	 * Operation unpinWithHttpInfo
 	 *
 	 * Unpin
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -704,13 +715,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/transaction-comment/unpin'
 			);
@@ -766,7 +778,8 @@ class TransactionCommentService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentActive $entity  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -819,13 +832,14 @@ class TransactionCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionComment',
 				'/transaction-comment/update'
 			);

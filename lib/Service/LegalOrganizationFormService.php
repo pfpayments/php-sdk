@@ -84,7 +84,8 @@ class LegalOrganizationFormService {
 	 * Operation allWithHttpInfo
 	 *
 	 * All
-	 *
+     
+     *
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -119,13 +120,14 @@ class LegalOrganizationFormService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\LegalOrganizationForm[]',
 				'/legal-organization-form/all'
 			);
@@ -180,7 +182,8 @@ class LegalOrganizationFormService {
 	 * Operation countryWithHttpInfo
 	 *
 	 * Find by Country
-	 *
+     
+     *
 	 * @param string $code The country in ISO 3166-1 alpha-2 format, for which all legal organization forms should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -223,13 +226,14 @@ class LegalOrganizationFormService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\LegalOrganizationForm[]',
 				'/legal-organization-form/country'
 			);
@@ -284,7 +288,8 @@ class LegalOrganizationFormService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $id The id of the legal organization form which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -327,13 +332,14 @@ class LegalOrganizationFormService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\LegalOrganizationForm',
 				'/legal-organization-form/read'
 			);

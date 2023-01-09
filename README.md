@@ -113,6 +113,9 @@ $client = new \PostFinanceCheckout\Sdk\ApiClient($userId, $secret);
 $httpClientType = \PostFinanceCheckout\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \PostFinanceCheckout\Sdk\Http\HttpClientFactory::TYPE_SOCKET
 
 $client->setHttpClientType($httpClientType);
+
+//Setup a custom connection timeout if needed. (Default value is: 25 seconds)
+$client->setConnectionTimeout(20);
 ```
 
 You can also specify the HTTP client via the `PFC_HTTP_CLIENT` environment variable. The possible string values are `curl` or `socket`.

@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "3.1.2",
+        'x-meta-sdk-version' => "3.1.4",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.1.2/php';
+	private $userAgent = 'PHP-Client/3.1.4/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -74,13 +74,19 @@ final class ApiClient {
 	 */
 	private $enableCertificateAuthorityCheck = true;
 
-	/**
+    /**
+     * the constant for the default connection time out
+     *
+     * @var integer
+     */
+    const INITIAL_CONNECTION_TIMEOUT = 25;
+
+    /**
 	 * The connection timeout in seconds.
 	 *
 	 * @var integer
 	 */
-	private $connectionTimeout = 20;
-	CONST CONNECTION_TIMEOUT = 20;
+	private $connectionTimeout;
 
 	/**
 	 * The http client type to use for communication.
@@ -138,12 +144,12 @@ final class ApiClient {
 		$this->userId = $userId;
         $this->applicationKey = $applicationKey;
 
+        $this->connectionTimeout = self::INITIAL_CONNECTION_TIMEOUT;
 		$this->certificateAuthority = dirname(__FILE__) . '/ca-bundle.crt';
 		$this->serializer = new ObjectSerializer();
 		$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
 		$this->serializer->setDebugFile($this->getDebugFile());
 		$this->addDefaultHeader('x-meta-sdk-language-version', phpversion());
-
 	}
 
 	/**
@@ -254,7 +260,7 @@ final class ApiClient {
 	 * @return ApiClient
 	 */
 	public function resetConnectionTimeout() {
-		$this->connectionTimeout = self::CONNECTION_TIMEOUT;
+		$this->connectionTimeout = self::INITIAL_CONNECTION_TIMEOUT;
 		return $this;
 	}
 
@@ -461,8 +467,8 @@ final class ApiClient {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 */
-	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null) {
-		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken());
+	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $timeOut, $responseType = null, $endpointPath = null) {
+		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken(), $timeOut);
 		$request->setUserAgent($this->getUserAgent());
 		$request->addHeaders(array_merge(
 			(array)$this->defaultHeaders,
@@ -574,6 +580,18 @@ final class ApiClient {
             $this->accountService = new \PostFinanceCheckout\Sdk\Service\AccountService($this);
         }
         return $this->accountService;
+    }
+    
+    protected $analyticsQueryService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\AnalyticsQueryService
+     */
+    public function getAnalyticsQueryService() {
+        if(is_null($this->analyticsQueryService)){
+            $this->analyticsQueryService = new \PostFinanceCheckout\Sdk\Service\AnalyticsQueryService($this);
+        }
+        return $this->analyticsQueryService;
     }
     
     protected $applicationUserService;

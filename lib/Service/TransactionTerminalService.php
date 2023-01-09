@@ -86,7 +86,8 @@ class TransactionTerminalService {
 	 * Operation fetchReceiptsWithHttpInfo
 	 *
 	 * Fetch Receipts
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -139,13 +140,14 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\RenderedTerminalReceipt[]',
 				'/transaction-terminal/fetch-receipts'
 			);
@@ -203,7 +205,8 @@ class TransactionTerminalService {
 	 * Operation tillConnectionCredentialsWithHttpInfo
 	 *
 	 * Create Till Connection Credentials
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
 	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
@@ -266,13 +269,14 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction-terminal/till-connection-credentials'
 			);

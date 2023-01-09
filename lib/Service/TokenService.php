@@ -86,7 +86,8 @@ class TokenService {
 	 * Operation checkTokenCreationPossibleWithHttpInfo
 	 *
 	 * Check If Token Creation Is Possible
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'bool',
 				'/token/check-token-creation-possible'
 			);
@@ -199,7 +201,8 @@ class TokenService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -248,13 +251,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/token/count'
 			);
@@ -310,7 +314,8 @@ class TokenService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TokenCreate $entity The token object with the properties which should be created. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -363,13 +368,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Token',
 				'/token/create'
 			);
@@ -425,7 +431,8 @@ class TokenService {
 	 * Operation createTokenBasedOnTransactionWithHttpInfo
 	 *
 	 * Create Token Based On Transaction
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -476,13 +483,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion',
 				'/token/create-token-based-on-transaction'
 			);
@@ -538,7 +546,8 @@ class TokenService {
 	 * Operation createTransactionForTokenUpdateWithHttpInfo
 	 *
 	 * Create Transaction for Token Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $token_id The id of the token which should be updated. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -589,13 +598,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/token/createTransactionForTokenUpdate'
 			);
@@ -651,7 +661,8 @@ class TokenService {
 	 * Operation deleteWithHttpInfo
 	 *
 	 * Delete
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -704,13 +715,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/token/delete'
 			);
@@ -766,7 +778,8 @@ class TokenService {
 	 * Operation processTransactionWithHttpInfo
 	 *
 	 * Process Transaction
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -817,13 +830,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Charge',
 				'/token/process-transaction'
 			);
@@ -879,7 +893,8 @@ class TokenService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the token which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -930,13 +945,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Token',
 				'/token/read'
 			);
@@ -992,7 +1008,8 @@ class TokenService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the tokens which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1045,13 +1062,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Token[]',
 				'/token/search'
 			);
@@ -1107,7 +1125,8 @@ class TokenService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TokenUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1160,13 +1179,14 @@ class TokenService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Token',
 				'/token/update'
 			);

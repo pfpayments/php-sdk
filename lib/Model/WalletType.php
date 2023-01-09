@@ -22,7 +22,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * PaymentInitiationAdviceFileState model
+ * WalletType model
  *
  * @category    Class
  * @description 
@@ -30,18 +30,12 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentInitiationAdviceFileState
+class WalletType
 {
     /**
      * Possible values of this enum
      */
-    const CREATING = 'CREATING';
-    const FAILED = 'FAILED';
-    const CREATED = 'CREATED';
-    const OVERDUE = 'OVERDUE';
-    const UPLOADED = 'UPLOADED';
-    const DOWNLOADED = 'DOWNLOADED';
-    const PROCESSED = 'PROCESSED';
+    const APPLE_PAY = 'APPLE_PAY';
     
     /**
      * Gets allowable values of the enum
@@ -50,13 +44,7 @@ class PaymentInitiationAdviceFileState
     public static function getAllowableEnumValues()
     {
         return [
-            self::CREATING,
-            self::FAILED,
-            self::CREATED,
-            self::OVERDUE,
-            self::UPLOADED,
-            self::DOWNLOADED,
-            self::PROCESSED,
+            self::APPLE_PAY,
         ];
     }
 }

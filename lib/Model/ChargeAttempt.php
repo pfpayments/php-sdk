@@ -71,7 +71,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => '\DateTime',
         'token_version' => '\PostFinanceCheckout\Sdk\Model\TokenVersion',
         'user_failure_message' => 'string',
-        'version' => 'int'
+        'version' => 'int',
+        'wallet_type' => '\PostFinanceCheckout\Sdk\Model\WalletType'
     ];
 
     /**
@@ -104,7 +105,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'date-time',
         'token_version' => null,
         'user_failure_message' => null,
-        'version' => 'int32'
+        'version' => 'int32',
+        'wallet_type' => null
     ];
 
     /**
@@ -138,7 +140,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'timeoutOn',
         'token_version' => 'tokenVersion',
         'user_failure_message' => 'userFailureMessage',
-        'version' => 'version'
+        'version' => 'version',
+        'wallet_type' => 'walletType'
     ];
 
     /**
@@ -171,7 +174,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'setTimeoutOn',
         'token_version' => 'setTokenVersion',
         'user_failure_message' => 'setUserFailureMessage',
-        'version' => 'setVersion'
+        'version' => 'setVersion',
+        'wallet_type' => 'setWalletType'
     ];
 
     /**
@@ -204,7 +208,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'getTimeoutOn',
         'token_version' => 'getTokenVersion',
         'user_failure_message' => 'getUserFailureMessage',
-        'version' => 'getVersion'
+        'version' => 'getVersion',
+        'wallet_type' => 'getWalletType'
     ];
 
     
@@ -270,6 +275,8 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+        $this->container['wallet_type'] = isset($data['wallet_type']) ? $data['wallet_type'] : null;
         
     }
 
@@ -990,6 +997,31 @@ class ChargeAttempt extends TransactionAwareEntity
     public function setVersion($version)
     {
         $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets wallet_type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\WalletType
+     */
+    public function getWalletType()
+    {
+        return $this->container['wallet_type'];
+    }
+
+    /**
+     * Sets wallet_type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\WalletType $wallet_type 
+     *
+     * @return $this
+     */
+    public function setWalletType($wallet_type)
+    {
+        $this->container['wallet_type'] = $wallet_type;
 
         return $this;
     }

@@ -86,7 +86,8 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/invoice-reconciliation-record-invoice-link-service/count'
 			);
@@ -199,7 +201,8 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 	 * Operation linkWithHttpInfo
 	 *
 	 * Link Invoice
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
 	 * @param int $completion_id The ID of the completion which should be linked. (required)
@@ -262,13 +265,14 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
 				'/invoice-reconciliation-record-invoice-link-service/link'
 			);
@@ -332,7 +336,8 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reconciliation record invoice link which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -383,13 +388,14 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
 				'/invoice-reconciliation-record-invoice-link-service/read'
 			);
@@ -445,7 +451,8 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation record invoice link which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -498,13 +505,14 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReconciliationRecordInvoiceLink[]',
 				'/invoice-reconciliation-record-invoice-link-service/search'
 			);
@@ -561,7 +569,8 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 	 * Operation unlinkTransactionWithHttpInfo
 	 *
 	 * Unlink Invoice
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
 	 * @param int $completion_id The ID of the completion which should be unlinked. (required)
@@ -620,13 +629,14 @@ class InvoiceReconciliationRecordInvoiceLinkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/invoice-reconciliation-record-invoice-link-service/unlink-transaction'
 			);

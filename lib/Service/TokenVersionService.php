@@ -86,7 +86,8 @@ class TokenVersionService {
 	 * Operation activeVersionWithHttpInfo
 	 *
 	 * Active Version
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of a token for which you want to look up the current active token version. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion',
 				'/token-version/active-version'
 			);
@@ -199,7 +201,8 @@ class TokenVersionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -248,13 +251,14 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/token-version/count'
 			);
@@ -310,7 +314,8 @@ class TokenVersionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the token version which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -361,13 +366,14 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion',
 				'/token-version/read'
 			);
@@ -423,7 +429,8 @@ class TokenVersionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the token versions which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -476,13 +483,14 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion[]',
 				'/token-version/search'
 			);

@@ -88,7 +88,8 @@ class PaymentTerminalTillService {
 	 * Operation performTransactionWithHttpInfo
 	 *
 	 * Perform Payment Terminal Transaction
-	 *
+     * (Time out for this request is 90 seconds.)
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
 	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
@@ -151,13 +152,14 @@ class PaymentTerminalTillService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(90);
+			$timeOut = 90;
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/payment-terminal-till/perform-transaction'
 			);
@@ -231,7 +233,8 @@ class PaymentTerminalTillService {
 	 * Operation performTransactionByIdentifierWithHttpInfo
 	 *
 	 * Perform Payment Terminal Transaction (using TID)
-	 *
+     * (Time out for this request is 90 seconds.)
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
 	 * @param string $terminal_identifier The identifier (aka TID) of the terminal which should be used to process the transaction. (required)
@@ -294,13 +297,14 @@ class PaymentTerminalTillService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(90);
+			$timeOut = 90;
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/payment-terminal-till/perform-transaction-by-identifier'
 			);

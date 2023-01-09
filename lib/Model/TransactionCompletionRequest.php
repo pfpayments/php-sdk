@@ -53,6 +53,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'invoice_merchant_reference' => 'string',
         'last_completion' => 'bool',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\CompletionLineItemCreate[]',
+        'statement_descriptor' => 'string',
         'transaction_id' => 'int'
     ];
 
@@ -66,6 +67,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'invoice_merchant_reference' => null,
         'last_completion' => null,
         'line_items' => null,
+        'statement_descriptor' => null,
         'transaction_id' => 'int64'
     ];
 
@@ -80,6 +82,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'invoice_merchant_reference' => 'invoiceMerchantReference',
         'last_completion' => 'lastCompletion',
         'line_items' => 'lineItems',
+        'statement_descriptor' => 'statementDescriptor',
         'transaction_id' => 'transactionId'
     ];
 
@@ -93,6 +96,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'invoice_merchant_reference' => 'setInvoiceMerchantReference',
         'last_completion' => 'setLastCompletion',
         'line_items' => 'setLineItems',
+        'statement_descriptor' => 'setStatementDescriptor',
         'transaction_id' => 'setTransactionId'
     ];
 
@@ -106,6 +110,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'invoice_merchant_reference' => 'getInvoiceMerchantReference',
         'last_completion' => 'getLastCompletion',
         'line_items' => 'getLineItems',
+        'statement_descriptor' => 'getStatementDescriptor',
         'transaction_id' => 'getTransactionId'
     ];
 
@@ -134,6 +139,8 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         $this->container['last_completion'] = isset($data['last_completion']) ? $data['last_completion'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['statement_descriptor'] = isset($data['statement_descriptor']) ? $data['statement_descriptor'] : null;
         
         $this->container['transaction_id'] = isset($data['transaction_id']) ? $data['transaction_id'] : null;
         
@@ -166,6 +173,10 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         if ($this->container['last_completion'] === null) {
             $invalidProperties[] = "'last_completion' can't be null";
         }
+        if (!is_null($this->container['statement_descriptor']) && (mb_strlen($this->container['statement_descriptor']) > 80)) {
+            $invalidProperties[] = "invalid value for 'statement_descriptor', the character length must be smaller than or equal to 80.";
+        }
+
         if ($this->container['transaction_id'] === null) {
             $invalidProperties[] = "'transaction_id' can't be null";
         }
@@ -355,6 +366,35 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets statement_descriptor
+     *
+     * @return string
+     */
+    public function getStatementDescriptor()
+    {
+        return $this->container['statement_descriptor'];
+    }
+
+    /**
+     * Sets statement_descriptor
+     *
+     * @param string $statement_descriptor The statement descriptor explain charges or payments on bank statements.
+     *
+     * @return $this
+     */
+    public function setStatementDescriptor($statement_descriptor)
+    {
+        if (!is_null($statement_descriptor) && (mb_strlen($statement_descriptor) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $statement_descriptor when calling TransactionCompletionRequest., must be smaller than or equal to 80.');
+        }
+
+        $this->container['statement_descriptor'] = $statement_descriptor;
 
         return $this;
     }

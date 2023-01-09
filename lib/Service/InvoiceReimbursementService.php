@@ -86,7 +86,8 @@ class InvoiceReimbursementService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class InvoiceReimbursementService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/invoice-reimbursement-service/count'
 			);
@@ -197,7 +199,8 @@ class InvoiceReimbursementService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reimbursement which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -248,13 +251,14 @@ class InvoiceReimbursementService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReimbursement',
 				'/invoice-reimbursement-service/read'
 			);
@@ -310,7 +314,8 @@ class InvoiceReimbursementService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the invoice reimbursements which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -363,13 +368,14 @@ class InvoiceReimbursementService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReimbursementWithRefundReference[]',
 				'/invoice-reimbursement-service/search'
 			);
@@ -426,7 +432,8 @@ class InvoiceReimbursementService {
 	 * Operation updateConnectorWithHttpInfo
 	 *
 	 * Update payment connector configuration
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reimbursement of which connector should be updated. (required)
 	 * @param int $payment_connector_configuration_id  (required)
@@ -485,13 +492,14 @@ class InvoiceReimbursementService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/invoice-reimbursement-service/update-connector'
 			);
@@ -549,7 +557,8 @@ class InvoiceReimbursementService {
 	 * Operation updateIbanWithHttpInfo
 	 *
 	 * Update IBAN
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reimbursement of which IBANs should be updated. (required)
 	 * @param string $recipient_iban  (optional)
@@ -608,13 +617,14 @@ class InvoiceReimbursementService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/invoice-reimbursement-service/update-iban'
 			);

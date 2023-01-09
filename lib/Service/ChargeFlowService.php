@@ -86,7 +86,8 @@ class ChargeFlowService {
 	 * Operation applyFlowWithHttpInfo
 	 *
 	 * applyFlow
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/charge-flow/applyFlow'
 			);
@@ -199,7 +201,8 @@ class ChargeFlowService {
 	 * Operation cancelChargeFlowWithHttpInfo
 	 *
 	 * Cancel Charge Flow
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the transaction for which the charge flow should be canceled. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -250,13 +253,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/charge-flow/cancel-charge-flow'
 			);
@@ -312,7 +316,8 @@ class ChargeFlowService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -361,13 +366,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/charge-flow/count'
 			);
@@ -423,7 +429,8 @@ class ChargeFlowService {
 	 * Operation fetchChargeFlowPaymentPageUrlWithHttpInfo
 	 *
 	 * Fetch Charge Flow Payment Page URL
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The transaction id of the transaction for which the URL of the charge flow should be fetched. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -474,13 +481,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/charge-flow/fetch-charge-flow-payment-page-url'
 			);
@@ -536,7 +544,8 @@ class ChargeFlowService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge flow which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -587,13 +596,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ChargeFlow',
 				'/charge-flow/read'
 			);
@@ -649,7 +659,8 @@ class ChargeFlowService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -702,13 +713,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ChargeFlow[]',
 				'/charge-flow/search'
 			);
@@ -766,7 +778,8 @@ class ChargeFlowService {
 	 * Operation updateRecipientWithHttpInfo
 	 *
 	 * updateRecipient
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The transaction id of the transaction whose recipient should be updated. (required)
 	 * @param int $type The id of the charge flow configuration type to recipient should be updated for. (required)
@@ -833,13 +846,14 @@ class ChargeFlowService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/charge-flow/updateRecipient'
 			);

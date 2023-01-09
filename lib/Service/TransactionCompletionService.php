@@ -86,7 +86,8 @@ class TransactionCompletionService {
 	 * Operation completeOfflineWithHttpInfo
 	 *
 	 * completeOffline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be completed. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 				'/transaction-completion/completeOffline'
 			);
@@ -199,7 +201,8 @@ class TransactionCompletionService {
 	 * Operation completeOnlineWithHttpInfo
 	 *
 	 * completeOnline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be completed. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -250,13 +253,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 				'/transaction-completion/completeOnline'
 			);
@@ -312,7 +316,8 @@ class TransactionCompletionService {
 	 * Operation completePartiallyOfflineWithHttpInfo
 	 *
 	 * completePartiallyOffline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -365,13 +370,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 				'/transaction-completion/completePartiallyOffline'
 			);
@@ -427,7 +433,8 @@ class TransactionCompletionService {
 	 * Operation completePartiallyOnlineWithHttpInfo
 	 *
 	 * completePartiallyOnline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionRequest $completion  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -480,13 +487,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 				'/transaction-completion/completePartiallyOnline'
 			);
@@ -542,7 +550,8 @@ class TransactionCompletionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -591,13 +600,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/transaction-completion/count'
 			);
@@ -653,7 +663,8 @@ class TransactionCompletionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction completions which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -704,13 +715,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion',
 				'/transaction-completion/read'
 			);
@@ -766,7 +778,8 @@ class TransactionCompletionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction completions which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -819,13 +832,14 @@ class TransactionCompletionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionCompletion[]',
 				'/transaction-completion/search'
 			);

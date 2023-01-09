@@ -86,7 +86,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/invoice-reconciliation-record-service/count'
 			);
@@ -197,7 +199,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation discardWithHttpInfo
 	 *
 	 * Discard
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reconciliation record which should be discarded. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -248,13 +251,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/invoice-reconciliation-record-service/discard'
 			);
@@ -310,7 +314,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reconciliation record which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -361,13 +366,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReconciliationRecord',
 				'/invoice-reconciliation-record-service/read'
 			);
@@ -423,7 +429,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation resolveWithHttpInfo
 	 *
 	 * Resolve
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The ID of the invoice reconciliation record which should be resolved. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -474,13 +481,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/invoice-reconciliation-record-service/resolve'
 			);
@@ -536,7 +544,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation records which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -589,13 +598,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\InvoiceReconciliationRecord[]',
 				'/invoice-reconciliation-record-service/search'
 			);
@@ -651,7 +661,8 @@ class InvoiceReconciliationRecordService {
 	 * Operation searchForInvoicesByQueryWithHttpInfo
 	 *
 	 * Search for matchable invoices by query
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the invoices which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -704,13 +715,14 @@ class InvoiceReconciliationRecordService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionInvoice[]',
 				'/invoice-reconciliation-record-service/search-for-invoices-by-query'
 			);

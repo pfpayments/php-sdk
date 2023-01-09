@@ -86,7 +86,8 @@ class TransactionService {
 	 * Operation confirmWithHttpInfo
 	 *
 	 * Confirm
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionPending $transaction_model The transaction JSON object to update and confirm. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -139,13 +140,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/confirm'
 			);
@@ -209,7 +211,8 @@ class TransactionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -258,13 +261,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/transaction/count'
 			);
@@ -320,7 +324,8 @@ class TransactionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -373,13 +378,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/create'
 			);
@@ -435,7 +441,8 @@ class TransactionService {
 	 * Operation createTransactionCredentialsWithHttpInfo
 	 *
 	 * Create Transaction Credentials
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -486,13 +493,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction/createTransactionCredentials'
 			);
@@ -548,7 +556,8 @@ class TransactionService {
 	 * Operation deleteOneClickTokenWithCredentialsWithHttpInfo
 	 *
 	 * Delete One-Click Token with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $token_id The token ID will be used to find the token which should be removed. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -599,13 +608,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/transaction/deleteOneClickTokenWithCredentials'
 			);
@@ -653,7 +663,8 @@ class TransactionService {
 	 * Operation exportWithHttpInfo
 	 *
 	 * Export
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -706,13 +717,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction/export'
 			);
@@ -767,7 +779,8 @@ class TransactionService {
 	 * Operation fetchOneClickTokensWithCredentialsWithHttpInfo
 	 *
 	 * Fetch One Click Tokens with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -810,13 +823,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion[]',
 				'/transaction/fetchOneClickTokensWithCredentials'
 			);
@@ -873,7 +887,8 @@ class TransactionService {
 	 * Operation fetchPaymentMethodsWithHttpInfo
 	 *
 	 * Fetch Possible Payment Methods
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @param string $integration_mode The integration mode defines the type of integration that is applied on the transaction. (required)
@@ -932,13 +947,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration[]',
 				'/transaction/fetch-payment-methods'
 			);
@@ -994,7 +1010,8 @@ class TransactionService {
 	 * Operation fetchPaymentMethodsWithCredentialsWithHttpInfo
 	 *
 	 * Fetch Possible Payment Methods with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param string $integration_mode The integration mode defines the type of integration that is applied on the transaction. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1045,13 +1062,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration[]',
 				'/transaction/fetch-payment-methods-with-credentials'
 			);
@@ -1107,7 +1125,8 @@ class TransactionService {
 	 * Operation getInvoiceDocumentWithHttpInfo
 	 *
 	 * getInvoiceDocument
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the invoice document for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1158,13 +1177,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\RenderedDocument',
 				'/transaction/getInvoiceDocument'
 			);
@@ -1220,7 +1240,8 @@ class TransactionService {
 	 * Operation getLatestTransactionLineItemVersionWithHttpInfo
 	 *
 	 * getLatestSuccessfulTransactionLineItemVersion
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1271,13 +1292,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
 				'/transaction/getLatestTransactionLineItemVersion'
 			);
@@ -1333,7 +1355,8 @@ class TransactionService {
 	 * Operation getPackingSlipWithHttpInfo
 	 *
 	 * getPackingSlip
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction to get the packing slip for. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1384,13 +1407,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\RenderedDocument',
 				'/transaction/getPackingSlip'
 			);
@@ -1446,7 +1470,8 @@ class TransactionService {
 	 * Operation processOneClickTokenAndRedirectWithCredentialsWithHttpInfo
 	 *
 	 * Process One-Click Token with Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $token_id The token ID is used to load the corresponding token and to process the transaction with it. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1497,13 +1522,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction/processOneClickTokenAndRedirectWithCredentials'
 			);
@@ -1559,7 +1585,8 @@ class TransactionService {
 	 * Operation processWithoutUserInteractionWithHttpInfo
 	 *
 	 * Process Without User Interaction
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be processed. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1610,13 +1637,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/processWithoutUserInteraction'
 			);
@@ -1672,7 +1700,8 @@ class TransactionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1723,13 +1752,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/read'
 			);
@@ -1784,7 +1814,8 @@ class TransactionService {
 	 * Operation readWithCredentialsWithHttpInfo
 	 *
 	 * Read With Credentials
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -1827,13 +1858,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/readWithCredentials'
 			);
@@ -1889,7 +1921,8 @@ class TransactionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -1942,13 +1975,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction[]',
 				'/transaction/search'
 			);
@@ -2004,7 +2038,8 @@ class TransactionService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -2057,13 +2092,14 @@ class TransactionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
 				'/transaction/update'
 			);

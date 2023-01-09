@@ -86,7 +86,8 @@ class CustomerCommentService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/customer-comment/count'
 			);
@@ -197,7 +199,8 @@ class CustomerCommentService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\CustomerCommentCreate $entity The customer object which should be created. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -250,13 +253,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerComment',
 				'/customer-comment/create'
 			);
@@ -312,7 +316,8 @@ class CustomerCommentService {
 	 * Operation deleteWithHttpInfo
 	 *
 	 * Delete
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -365,13 +370,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/customer-comment/delete'
 			);
@@ -427,7 +433,8 @@ class CustomerCommentService {
 	 * Operation pinCommentWithHttpInfo
 	 *
 	 * pinComment
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the customer comment to pin to the top. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -478,13 +485,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/customer-comment/pin-comment'
 			);
@@ -540,7 +548,8 @@ class CustomerCommentService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the customer which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -591,13 +600,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerComment',
 				'/customer-comment/read'
 			);
@@ -653,7 +663,8 @@ class CustomerCommentService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the customers which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -706,13 +717,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerComment[]',
 				'/customer-comment/search'
 			);
@@ -768,7 +780,8 @@ class CustomerCommentService {
 	 * Operation unpinCommentWithHttpInfo
 	 *
 	 * unpinComment
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the customer comment to unpin. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -819,13 +832,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/customer-comment/unpin-comment'
 			);
@@ -881,7 +895,8 @@ class CustomerCommentService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\CustomerCommentActive $entity The customer object with the properties which should be updated. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -934,13 +949,14 @@ class CustomerCommentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerComment',
 				'/customer-comment/update'
 			);

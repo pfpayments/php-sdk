@@ -85,7 +85,8 @@ class TransactionMobileSdkService {
 	 * Operation paymentFormUrlWithHttpInfo
 	 *
 	 * Build Mobile SDK URL
-	 *
+     
+     *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -128,13 +129,14 @@ class TransactionMobileSdkService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction-mobile-sdk/payment-form-url'
 			);

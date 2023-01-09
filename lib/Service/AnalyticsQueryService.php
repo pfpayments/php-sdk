@@ -27,14 +27,14 @@ use PostFinanceCheckout\Sdk\Http\HttpRequest;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionService service
+ * AnalyticsQueryService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionService {
+class AnalyticsQueryService {
 
 	/**
 	 * The API client instance.
@@ -67,272 +67,36 @@ class ShopifySubscriptionService {
 
 
 	/**
-	 * Operation count
+	 * Operation cancelExecution
 	 *
-	 * Count
+	 * Cancel Execution
 	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @param int $id The ID of the query execution to cancel. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return int
+	 * @return void
 	 */
-	public function count($space_id, $filter = null) {
-		return $this->countWithHttpInfo($space_id, $filter)->getData();
+	public function cancelExecution($id) {
+		return $this->cancelExecutionWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation countWithHttpInfo
+	 * Operation cancelExecutionWithHttpInfo
 	 *
-	 * Count
+	 * Cancel Execution
      
      *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @param int $id The ID of the query execution to cancel. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function countWithHttpInfo($space_id, $filter = null) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling count');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscription/count';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($filter)) {
-			$tempBody = $filter;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-                $timeOut,
-				'int',
-				'/shopify-subscription/count'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'int',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation create
-	 *
-	 * Create
-	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionCreationRequest $creation_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion
-	 */
-	public function create($space_id, $creation_request) {
-		return $this->createWithHttpInfo($space_id, $creation_request)->getData();
-	}
-
-	/**
-	 * Operation createWithHttpInfo
-	 *
-	 * Create
-     
-     *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionCreationRequest $creation_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function createWithHttpInfo($space_id, $creation_request) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling create');
-		}
-		// verify the required parameter 'creation_request' is set
-		if (is_null($creation_request)) {
-			throw new \InvalidArgumentException('Missing the required parameter $creation_request when calling create');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscription/create';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($creation_request)) {
-			$tempBody = $creation_request;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-                $timeOut,
-				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
-				'/shopify-subscription/create'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation read
-	 *
-	 * Read
-	 *
-	 * @param int $space_id  (required)
-	 * @param int $id The id of the Shopify subscription which should be returned. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscription
-	 */
-	public function read($space_id, $id) {
-		return $this->readWithHttpInfo($space_id, $id)->getData();
-	}
-
-	/**
-	 * Operation readWithHttpInfo
-	 *
-	 * Read
-     
-     *
-	 * @param int $space_id  (required)
-	 * @param int $id The id of the Shopify subscription which should be returned. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function readWithHttpInfo($space_id, $id) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling read');
-		}
+	public function cancelExecutionWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if (is_null($id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling cancelExecution');
 		}
 		// header params
 		$headerParams = [];
@@ -344,15 +108,125 @@ class ShopifySubscriptionService {
 
 		// query params
 		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
 		if (!is_null($id)) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = '/shopify-subscription/read';
+		$resourcePath = '/analytics-query/cancel-execution';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+            $timeOut = $this->apiClient->getConnectionTimeout();
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+                $timeOut,
+				null,
+				'/analytics-query/cancel-execution'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation fetchResult
+	 *
+	 * Fetch Result
+	 *
+	 * @param int $id The ID of the query execution for which to fetch the result. (required)
+	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
+	 * @param int $max_rows The maximum number of rows to return per batch. (Between 1 and 999. The default is 999.) (optional)
+	 * @param string $next_token The next-token of the preceding batch to get the next result batch or null to get the first result batch. (optional)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\AnalyticsQueryResultBatch
+	 */
+	public function fetchResult($id, $timeout = null, $max_rows = null, $next_token = null) {
+		return $this->fetchResultWithHttpInfo($id, $timeout, $max_rows, $next_token)->getData();
+	}
+
+	/**
+	 * Operation fetchResultWithHttpInfo
+	 *
+	 * Fetch Result
+     
+     *
+	 * @param int $id The ID of the query execution for which to fetch the result. (required)
+	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
+	 * @param int $max_rows The maximum number of rows to return per batch. (Between 1 and 999. The default is 999.) (optional)
+	 * @param string $next_token The next-token of the preceding batch to get the next result batch or null to get the first result batch. (optional)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function fetchResultWithHttpInfo($id, $timeout = null, $max_rows = null, $next_token = null) {
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling fetchResult');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+		if (!is_null($timeout)) {
+			$queryParams['timeout'] = $this->apiClient->getSerializer()->toQueryValue($timeout);
+		}
+		if (!is_null($max_rows)) {
+			$queryParams['maxRows'] = $this->apiClient->getSerializer()->toQueryValue($max_rows);
+		}
+		if (!is_null($next_token)) {
+			$queryParams['nextToken'] = $this->apiClient->getSerializer()->toQueryValue($next_token);
+		}
+
+		// path params
+		$resourcePath = '/analytics-query/fetch-result';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -376,16 +250,16 @@ class ShopifySubscriptionService {
 				$httpBody,
 				$headerParams,
                 $timeOut,
-				'\PostFinanceCheckout\Sdk\Model\ShopifySubscription',
-				'/shopify-subscription/read'
+				'\PostFinanceCheckout\Sdk\Model\AnalyticsQueryResultBatch',
+				'/analytics-query/fetch-result'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscription', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryResultBatch', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ShopifySubscription',
+                        '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryResultBatch',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -412,42 +286,350 @@ class ShopifySubscriptionService {
 	}
 
 	/**
-	 * Operation search
+	 * Operation generateDownloadUrl
 	 *
-	 * Search
+	 * Generate Download URL
 	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the Shopify subscriptions which are returned by the search. (required)
+	 * @param int $id The ID of the query execution for which to generate the download URL. (required)
+	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscription[]
+	 * @return string
 	 */
-	public function search($space_id, $query) {
-		return $this->searchWithHttpInfo($space_id, $query)->getData();
+	public function generateDownloadUrl($id, $timeout = null) {
+		return $this->generateDownloadUrlWithHttpInfo($id, $timeout)->getData();
 	}
 
 	/**
-	 * Operation searchWithHttpInfo
+	 * Operation generateDownloadUrlWithHttpInfo
 	 *
-	 * Search
+	 * Generate Download URL
      
      *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the Shopify subscriptions which are returned by the search. (required)
+	 * @param int $id The ID of the query execution for which to generate the download URL. (required)
+	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function searchWithHttpInfo($space_id, $query) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling search');
+	public function generateDownloadUrlWithHttpInfo($id, $timeout = null) {
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling generateDownloadUrl');
 		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['text/plain']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+		if (!is_null($timeout)) {
+			$queryParams['timeout'] = $this->apiClient->getSerializer()->toQueryValue($timeout);
+		}
+
+		// path params
+		$resourcePath = '/analytics-query/generate-download-url';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+            $timeOut = $this->apiClient->getConnectionTimeout();
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+                $timeOut,
+				'string',
+				'/analytics-query/generate-download-url'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation schema
+	 *
+	 * Get Schemas
+	 *
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\AnalyticsSchemaTable[]
+	 */
+	public function schema() {
+		return $this->schemaWithHttpInfo()->getData();
+	}
+
+	/**
+	 * Operation schemaWithHttpInfo
+	 *
+	 * Get Schemas
+     
+     *
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function schemaWithHttpInfo() {
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+
+		// query params
+		$queryParams = [];
+
+		// path params
+		$resourcePath = '/analytics-query/schema';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+            $timeOut = $this->apiClient->getConnectionTimeout();
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+                $timeOut,
+				'\PostFinanceCheckout\Sdk\Model\AnalyticsSchemaTable[]',
+				'/analytics-query/schema'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\AnalyticsSchemaTable[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\AnalyticsSchemaTable[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation status
+	 *
+	 * Execution Status
+	 *
+	 * @param int $id The ID of the query execution for which to get the status. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution
+	 */
+	public function status($id) {
+		return $this->statusWithHttpInfo($id)->getData();
+	}
+
+	/**
+	 * Operation statusWithHttpInfo
+	 *
+	 * Execution Status
+     
+     *
+	 * @param int $id The ID of the query execution for which to get the status. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function statusWithHttpInfo($id) {
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling status');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = '/analytics-query/status';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+            $timeOut = $this->apiClient->getConnectionTimeout();
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+                $timeOut,
+				'\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution',
+				'/analytics-query/status'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation submitQuery
+	 *
+	 * Submit Query
+	 *
+	 * @param \PostFinanceCheckout\Sdk\Model\AnalyticsQuery $query The query to submit. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution
+	 */
+	public function submitQuery($query) {
+		return $this->submitQueryWithHttpInfo($query)->getData();
+	}
+
+	/**
+	 * Operation submitQueryWithHttpInfo
+	 *
+	 * Submit Query
+     
+     *
+	 * @param \PostFinanceCheckout\Sdk\Model\AnalyticsQuery $query The query to submit. (required)
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function submitQueryWithHttpInfo($query) {
 		// verify the required parameter 'query' is set
 		if (is_null($query)) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling submitQuery');
 		}
 		// header params
 		$headerParams = [];
@@ -459,12 +641,9 @@ class ShopifySubscriptionService {
 
 		// query params
 		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
 
 		// path params
-		$resourcePath = '/shopify-subscription/search';
+		$resourcePath = '/analytics-query/submit-query';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -493,366 +672,16 @@ class ShopifySubscriptionService {
 				$httpBody,
 				$headerParams,
                 $timeOut,
-				'\PostFinanceCheckout\Sdk\Model\ShopifySubscription[]',
-				'/shopify-subscription/search'
+				'\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution',
+				'/analytics-query/submit-query'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscription[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ShopifySubscription[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation terminate
-	 *
-	 * Terminate
-	 *
-	 * @param int $space_id  (required)
-	 * @param int $subscription_id The ID identifies the Shopify subscription which should be terminated. (required)
-	 * @param bool $respect_termination_period The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return void
-	 */
-	public function terminate($space_id, $subscription_id, $respect_termination_period) {
-		return $this->terminateWithHttpInfo($space_id, $subscription_id, $respect_termination_period)->getData();
-	}
-
-	/**
-	 * Operation terminateWithHttpInfo
-	 *
-	 * Terminate
-     
-     *
-	 * @param int $space_id  (required)
-	 * @param int $subscription_id The ID identifies the Shopify subscription which should be terminated. (required)
-	 * @param bool $respect_termination_period The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function terminateWithHttpInfo($space_id, $subscription_id, $respect_termination_period) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling terminate');
-		}
-		// verify the required parameter 'subscription_id' is set
-		if (is_null($subscription_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $subscription_id when calling terminate');
-		}
-		// verify the required parameter 'respect_termination_period' is set
-		if (is_null($respect_termination_period)) {
-			throw new \InvalidArgumentException('Missing the required parameter $respect_termination_period when calling terminate');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-		if (!is_null($subscription_id)) {
-			$queryParams['subscriptionId'] = $this->apiClient->getSerializer()->toQueryValue($subscription_id);
-		}
-		if (!is_null($respect_termination_period)) {
-			$queryParams['respectTerminationPeriod'] = $this->apiClient->getSerializer()->toQueryValue($respect_termination_period);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscription/terminate';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-                $timeOut,
-				null,
-				'/shopify-subscription/terminate'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation update
-	 *
-	 * Update
-	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionUpdateRequest $subscription  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion
-	 */
-	public function update($space_id, $subscription) {
-		return $this->updateWithHttpInfo($space_id, $subscription)->getData();
-	}
-
-	/**
-	 * Operation updateWithHttpInfo
-	 *
-	 * Update
-     
-     *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionUpdateRequest $subscription  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function updateWithHttpInfo($space_id, $subscription) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling update');
-		}
-		// verify the required parameter 'subscription' is set
-		if (is_null($subscription)) {
-			throw new \InvalidArgumentException('Missing the required parameter $subscription when calling update');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscription/update';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($subscription)) {
-			$tempBody = $subscription;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-                $timeOut,
-				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
-				'/shopify-subscription/update'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation updateAddresses
-	 *
-	 * Update Addresses
-	 *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionUpdateAddressesRequest $update_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion
-	 */
-	public function updateAddresses($space_id, $update_request) {
-		return $this->updateAddressesWithHttpInfo($space_id, $update_request)->getData();
-	}
-
-	/**
-	 * Operation updateAddressesWithHttpInfo
-	 *
-	 * Update Addresses
-     
-     *
-	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionUpdateAddressesRequest $update_request  (required)
-	 * @throws \PostFinanceCheckout\Sdk\ApiException
-	 * @throws \PostFinanceCheckout\Sdk\VersioningException
-	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function updateAddressesWithHttpInfo($space_id, $update_request) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling updateAddresses');
-		}
-		// verify the required parameter 'update_request' is set
-		if (is_null($update_request)) {
-			throw new \InvalidArgumentException('Missing the required parameter $update_request when calling updateAddresses');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscription/update-addresses';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($update_request)) {
-			$tempBody = $update_request;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-                $timeOut,
-				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
-				'/shopify-subscription/update-addresses'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
+                        '\PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

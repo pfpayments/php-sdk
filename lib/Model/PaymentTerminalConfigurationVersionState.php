@@ -38,6 +38,7 @@ class PaymentTerminalConfigurationVersionState
     const PENDING = 'PENDING';
     const SCHEDULING = 'SCHEDULING';
     const ACTIVE = 'ACTIVE';
+    const OBSOLETE = 'OBSOLETE';
     const DELETING = 'DELETING';
     const DELETED = 'DELETED';
     
@@ -51,6 +52,7 @@ class PaymentTerminalConfigurationVersionState
             self::PENDING,
             self::SCHEDULING,
             self::ACTIVE,
+            self::OBSOLETE,
             self::DELETING,
             self::DELETED,
         ];

@@ -86,7 +86,8 @@ class TransactionLightboxService {
 	 * Operation javascriptUrlWithHttpInfo
 	 *
 	 * Build JavaScript URL
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -137,13 +138,14 @@ class TransactionLightboxService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/transaction-lightbox/javascript-url'
 			);

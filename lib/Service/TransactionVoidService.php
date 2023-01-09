@@ -86,7 +86,8 @@ class TransactionVoidService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class TransactionVoidService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/transaction-void/count'
 			);
@@ -197,7 +199,8 @@ class TransactionVoidService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction voids which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -248,13 +251,14 @@ class TransactionVoidService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionVoid',
 				'/transaction-void/read'
 			);
@@ -310,7 +314,8 @@ class TransactionVoidService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the transaction voids which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -363,13 +368,14 @@ class TransactionVoidService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionVoid[]',
 				'/transaction-void/search'
 			);
@@ -425,7 +431,8 @@ class TransactionVoidService {
 	 * Operation voidOfflineWithHttpInfo
 	 *
 	 * voidOffline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be voided. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -476,13 +483,14 @@ class TransactionVoidService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionVoid',
 				'/transaction-void/voidOffline'
 			);
@@ -538,7 +546,8 @@ class TransactionVoidService {
 	 * Operation voidOnlineWithHttpInfo
 	 *
 	 * voidOnline
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the transaction which should be voided. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -589,13 +598,14 @@ class TransactionVoidService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TransactionVoid',
 				'/transaction-void/voidOnline'
 			);

@@ -86,7 +86,8 @@ class PaymentTerminalService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -135,13 +136,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/payment-terminal/count'
 			);
@@ -198,7 +200,8 @@ class PaymentTerminalService {
 	 * Operation linkWithHttpInfo
 	 *
 	 * Link Device With Terminal
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $terminal_id  (required)
 	 * @param string $serial_number  (required)
@@ -257,13 +260,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-terminal/link'
 			);
@@ -319,7 +323,8 @@ class PaymentTerminalService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the payment terminal which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -370,13 +375,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
 				'/payment-terminal/read'
 			);
@@ -432,7 +438,8 @@ class PaymentTerminalService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \PostFinanceCheckout\Sdk\Model\EntityQuery $query The query restricts the payment terminals which are returned by the search. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -485,13 +492,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentTerminal[]',
 				'/payment-terminal/search'
 			);
@@ -547,7 +555,8 @@ class PaymentTerminalService {
 	 * Operation triggerFinalBalanceWithHttpInfo
 	 *
 	 * Remotely Trigger Final Balance
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $terminal_id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -598,13 +607,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-terminal/trigger-final-balance'
 			);
@@ -660,7 +670,8 @@ class PaymentTerminalService {
 	 * Operation triggerFinalBalanceByIdentifierWithHttpInfo
 	 *
 	 * Remotely Trigger Final Balance By Identifier
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param string $terminal_identifier  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -711,13 +722,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-terminal/trigger-final-balance-by-identifier'
 			);
@@ -773,7 +785,8 @@ class PaymentTerminalService {
 	 * Operation unlinkWithHttpInfo
 	 *
 	 * Unlink Device With Terminal
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $terminal_id  (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -824,13 +837,14 @@ class PaymentTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-terminal/unlink'
 			);

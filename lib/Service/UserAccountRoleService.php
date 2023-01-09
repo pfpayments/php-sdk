@@ -88,7 +88,8 @@ class UserAccountRoleService {
 	 * Operation addRoleWithHttpInfo
 	 *
 	 * Add Role
-	 *
+     
+     *
 	 * @param int $user_id The id of the user to whom the role is assigned. (required)
 	 * @param int $account_id The account to which the role is mapped. (required)
 	 * @param int $role_id The role which is mapped to the user and account. (required)
@@ -151,13 +152,14 @@ class UserAccountRoleService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\UserAccountRole',
 				'/user-account-role/addRole'
 			);
@@ -213,7 +215,8 @@ class UserAccountRoleService {
 	 * Operation callListWithHttpInfo
 	 *
 	 * List Roles
-	 *
+     
+     *
 	 * @param int $user_id The id of the user to whom the role is assigned. (required)
 	 * @param int $account_id The account to which the role is mapped. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
@@ -264,13 +267,14 @@ class UserAccountRoleService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\UserAccountRole[]',
 				'/user-account-role/list'
 			);
@@ -325,7 +329,8 @@ class UserAccountRoleService {
 	 * Operation removeRoleWithHttpInfo
 	 *
 	 * Remove Role
-	 *
+     
+     *
 	 * @param int $id The id of user account role which should be removed (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
@@ -368,13 +373,14 @@ class UserAccountRoleService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/user-account-role/removeRole'
 			);
