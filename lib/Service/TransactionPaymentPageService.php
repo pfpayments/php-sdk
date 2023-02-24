@@ -138,17 +138,15 @@ class TransactionPaymentPageService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'string',
 				'/transaction-payment-page/payment-page-url'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

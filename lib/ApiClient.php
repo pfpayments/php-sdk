@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "3.1.4",
+        'x-meta-sdk-version' => "3.2.0",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.1.4/php';
+	private $userAgent = 'PHP-Client/3.2.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -467,7 +467,10 @@ final class ApiClient {
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 */
-	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $timeOut, $responseType = null, $endpointPath = null) {
+	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null, $timeOut = null) {
+        if ($timeOut === null) {
+            $timeOut = $this->getConnectionTimeout();
+        }
 		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken(), $timeOut);
 		$request->setUserAgent($this->getUserAgent());
 		$request->addHeaders(array_merge(

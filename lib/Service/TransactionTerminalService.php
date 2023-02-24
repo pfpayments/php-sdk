@@ -140,17 +140,15 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\RenderedTerminalReceipt[]',
 				'/transaction-terminal/fetch-receipts'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RenderedTerminalReceipt[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -269,17 +267,15 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'string',
 				'/transaction-terminal/till-connection-credentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

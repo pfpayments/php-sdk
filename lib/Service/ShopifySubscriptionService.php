@@ -136,17 +136,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'int',
 				'/shopify-subscription/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -253,17 +251,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/create'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -368,17 +364,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ShopifySubscription',
 				'/shopify-subscription/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscription', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -485,17 +479,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ShopifySubscription[]',
 				'/shopify-subscription/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscription[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -609,17 +601,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				null,
 				'/shopify-subscription/terminate'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -718,17 +708,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/update'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -835,17 +823,15 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/update-addresses'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

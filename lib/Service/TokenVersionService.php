@@ -138,17 +138,15 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion',
 				'/token-version/active-version'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TokenVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -251,17 +249,15 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'int',
 				'/token-version/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -366,17 +362,15 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion',
 				'/token-version/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TokenVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -483,17 +477,15 @@ class TokenVersionService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\TokenVersion[]',
 				'/token-version/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\TokenVersion[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

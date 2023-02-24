@@ -136,17 +136,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'int',
 				'/customer-address/count'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -253,17 +251,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerAddress',
 				'/customer-address/create'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\CustomerAddress', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -370,17 +366,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				null,
 				'/customer-address/delete'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -485,17 +479,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerAddress',
 				'/customer-address/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\CustomerAddress', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -602,17 +594,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerAddress[]',
 				'/customer-address/search'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\CustomerAddress[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -717,17 +707,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				null,
 				'/customer-address/select-default-address'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -834,17 +822,15 @@ class CustomerAddressService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\CustomerAddress',
 				'/customer-address/update'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\CustomerAddress', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

@@ -120,17 +120,15 @@ class PaymentMethodService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentMethod[]',
 				'/payment-method/all'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\PaymentMethod[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -226,17 +224,15 @@ class PaymentMethodService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\PaymentMethod',
 				'/payment-method/read'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\PaymentMethod', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

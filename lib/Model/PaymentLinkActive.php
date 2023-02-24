@@ -217,7 +217,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

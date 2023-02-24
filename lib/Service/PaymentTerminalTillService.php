@@ -152,17 +152,16 @@ class PaymentTerminalTillService {
 		}
 		// make the API Call
 		try {
-			$timeOut = 90;
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
-				'/payment-terminal-till/perform-transaction'
-			);
+				'/payment-terminal-till/perform-transaction',
+                90
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
@@ -297,17 +296,16 @@ class PaymentTerminalTillService {
 		}
 		// make the API Call
 		try {
-			$timeOut = 90;
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\PostFinanceCheckout\Sdk\Model\Transaction',
-				'/payment-terminal-till/perform-transaction-by-identifier'
-			);
+				'/payment-terminal-till/perform-transaction-by-identifier',
+                90
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

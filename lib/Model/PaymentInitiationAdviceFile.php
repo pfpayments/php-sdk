@@ -376,7 +376,7 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -401,7 +401,7 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -501,7 +501,7 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentInitiationAdviceFileState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentInitiationAdviceFileState $state The object's current state.
      *
      * @return $this
      */

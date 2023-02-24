@@ -306,7 +306,7 @@ class ChargeBankTransaction extends TransactionAwareEntity
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -431,7 +431,7 @@ class ChargeBankTransaction extends TransactionAwareEntity
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */

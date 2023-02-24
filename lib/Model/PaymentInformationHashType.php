@@ -220,7 +220,7 @@ class PaymentInformationHashType implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */

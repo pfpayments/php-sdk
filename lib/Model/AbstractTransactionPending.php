@@ -610,7 +610,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */

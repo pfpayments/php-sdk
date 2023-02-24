@@ -269,7 +269,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets last_modified_date
      *
-     * @param \DateTime $last_modified_date 
+     * @param \DateTime $last_modified_date The date and time when the object was last modified.
      *
      * @return $this
      */
@@ -401,7 +401,7 @@ class AbstractSpaceUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

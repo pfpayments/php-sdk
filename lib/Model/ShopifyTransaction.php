@@ -288,7 +288,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on The date and time when the object was created.
      *
      * @return $this
      */
@@ -388,7 +388,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -463,7 +463,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */

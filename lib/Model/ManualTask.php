@@ -326,7 +326,7 @@ class ManualTask implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on The date and time when the object was created.
      *
      * @return $this
      */
@@ -376,7 +376,7 @@ class ManualTask implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -401,7 +401,7 @@ class ManualTask implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -426,7 +426,7 @@ class ManualTask implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -476,7 +476,7 @@ class ManualTask implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskState $state The object's current state.
      *
      * @return $this
      */

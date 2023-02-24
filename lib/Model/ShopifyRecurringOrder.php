@@ -473,7 +473,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -573,7 +573,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifyRecurringOrderState $state 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyRecurringOrderState $state The object's current state.
      *
      * @return $this
      */

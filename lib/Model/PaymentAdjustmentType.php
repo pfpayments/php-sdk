@@ -227,7 +227,7 @@ class PaymentAdjustmentType implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description 
+     * @param map[string,string] $description The description of the object translated into different languages.
      *
      * @return $this
      */
@@ -252,7 +252,7 @@ class PaymentAdjustmentType implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -277,7 +277,7 @@ class PaymentAdjustmentType implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name 
+     * @param map[string,string] $name The name of the object translated into different languages.
      *
      * @return $this
      */

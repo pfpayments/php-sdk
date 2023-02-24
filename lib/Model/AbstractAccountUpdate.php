@@ -234,7 +234,7 @@ class AbstractAccountUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets last_modified_date
      *
-     * @param \DateTime $last_modified_date 
+     * @param \DateTime $last_modified_date The date and time when the object was last modified.
      *
      * @return $this
      */
