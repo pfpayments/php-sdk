@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * DatabaseTranslatedStringItem model
+ * TokenizedCardData model
  *
  * @category    Class
- * @description 
+ * @description This model holds the card data in plain.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
+class TokenizedCardData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'DatabaseTranslatedStringItem';
+    protected static $swaggerModelName = 'TokenizedCardData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,9 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'language' => 'string',
-        'language_code' => 'string',
-        'translation' => 'string'
+        'cryptogram' => '\PostFinanceCheckout\Sdk\Model\CardCryptogram',
+        'recurring_indicator' => '\PostFinanceCheckout\Sdk\Model\RecurringIndicator',
+        'token_requestor_id' => 'string'
     ];
 
     /**
@@ -60,9 +60,9 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'language' => null,
-        'language_code' => null,
-        'translation' => null
+        'cryptogram' => null,
+        'recurring_indicator' => null,
+        'token_requestor_id' => null
     ];
 
     /**
@@ -72,9 +72,9 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'language' => 'language',
-        'language_code' => 'languageCode',
-        'translation' => 'translation'
+        'cryptogram' => 'cryptogram',
+        'recurring_indicator' => 'recurringIndicator',
+        'token_requestor_id' => 'tokenRequestorId'
     ];
 
     /**
@@ -83,9 +83,9 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'language' => 'setLanguage',
-        'language_code' => 'setLanguageCode',
-        'translation' => 'setTranslation'
+        'cryptogram' => 'setCryptogram',
+        'recurring_indicator' => 'setRecurringIndicator',
+        'token_requestor_id' => 'setTokenRequestorId'
     ];
 
     /**
@@ -94,9 +94,9 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'language' => 'getLanguage',
-        'language_code' => 'getLanguageCode',
-        'translation' => 'getTranslation'
+        'cryptogram' => 'getCryptogram',
+        'recurring_indicator' => 'getRecurringIndicator',
+        'token_requestor_id' => 'getTokenRequestorId'
     ];
 
     
@@ -117,11 +117,11 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
+        $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
         
-        $this->container['language_code'] = isset($data['language_code']) ? $data['language_code'] : null;
+        $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
         
-        $this->container['translation'] = isset($data['translation']) ? $data['translation'] : null;
+        $this->container['token_requestor_id'] = isset($data['token_requestor_id']) ? $data['token_requestor_id'] : null;
         
     }
 
@@ -133,10 +133,6 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['translation']) && (mb_strlen($this->container['translation']) > 16777216)) {
-            $invalidProperties[] = "invalid value for 'translation', the character length must be smaller than or equal to 16777216.";
-        }
 
         return $invalidProperties;
     }
@@ -219,79 +215,75 @@ class DatabaseTranslatedStringItem implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets language
+     * Gets cryptogram
      *
-     * @return string
+     * @return \PostFinanceCheckout\Sdk\Model\CardCryptogram
      */
-    public function getLanguage()
+    public function getCryptogram()
     {
-        return $this->container['language'];
+        return $this->container['cryptogram'];
     }
 
     /**
-     * Sets language
+     * Sets cryptogram
      *
-     * @param string $language 
+     * @param \PostFinanceCheckout\Sdk\Model\CardCryptogram $cryptogram The additional authentication value used to secure the tokenized card transactions.
      *
      * @return $this
      */
-    public function setLanguage($language)
+    public function setCryptogram($cryptogram)
     {
-        $this->container['language'] = $language;
+        $this->container['cryptogram'] = $cryptogram;
 
         return $this;
     }
     
 
     /**
-     * Gets language_code
+     * Gets recurring_indicator
      *
-     * @return string
+     * @return \PostFinanceCheckout\Sdk\Model\RecurringIndicator
      */
-    public function getLanguageCode()
+    public function getRecurringIndicator()
     {
-        return $this->container['language_code'];
+        return $this->container['recurring_indicator'];
     }
 
     /**
-     * Sets language_code
+     * Sets recurring_indicator
      *
-     * @param string $language_code 
+     * @param \PostFinanceCheckout\Sdk\Model\RecurringIndicator $recurring_indicator 
      *
      * @return $this
      */
-    public function setLanguageCode($language_code)
+    public function setRecurringIndicator($recurring_indicator)
     {
-        $this->container['language_code'] = $language_code;
+        $this->container['recurring_indicator'] = $recurring_indicator;
 
         return $this;
     }
     
 
     /**
-     * Gets translation
+     * Gets token_requestor_id
      *
      * @return string
      */
-    public function getTranslation()
+    public function getTokenRequestorId()
     {
-        return $this->container['translation'];
+        return $this->container['token_requestor_id'];
     }
 
     /**
-     * Sets translation
+     * Sets token_requestor_id
      *
-     * @param string $translation 
+     * @param string $token_requestor_id 
      *
      * @return $this
      */
-    public function setTranslation($translation)
+    public function setTokenRequestorId($token_requestor_id)
     {
-        if (!is_null($translation) && (mb_strlen($translation) > 16777216)) {
-            throw new \InvalidArgumentException('invalid length for $translation when calling DatabaseTranslatedStringItem., must be smaller than or equal to 16777216.');
-        }
-
-        $this->container['translation'] = $translation;
+        $this->container['token_requestor_id'] = $token_requestor_id;
 
         return $this;
     }

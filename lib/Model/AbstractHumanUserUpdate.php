@@ -277,7 +277,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets email_address
      *
-     * @param string $email_address The email address of the user.
+     * @param string $email_address The user's email address.
      *
      * @return $this
      */
@@ -306,7 +306,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets firstname
      *
-     * @param string $firstname The first name of the user.
+     * @param string $firstname The user's first name.
      *
      * @return $this
      */
@@ -335,7 +335,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The preferred language of the user.
+     * @param string $language The user's preferred language.
      *
      * @return $this
      */
@@ -360,7 +360,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets lastname
      *
-     * @param string $lastname The last name of the user.
+     * @param string $lastname The user's last name.
      *
      * @return $this
      */
@@ -389,7 +389,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets mobile_phone_number
      *
-     * @param string $mobile_phone_number 
+     * @param string $mobile_phone_number The user's mobile phone number.
      *
      * @return $this
      */
@@ -443,7 +443,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+     * @param string $time_zone The user's time zone. If none is specified, the one provided by the browser will be used.
      *
      * @return $this
      */
@@ -468,7 +468,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_enabled
      *
-     * @param bool $two_factor_enabled Defines whether two-factor authentication is enabled for this user.
+     * @param bool $two_factor_enabled Whether two-factor authentication is enabled for this user.
      *
      * @return $this
      */

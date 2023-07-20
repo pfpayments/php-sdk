@@ -390,7 +390,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets city
      *
-     * @param string $city 
+     * @param string $city The city, town or village.
      *
      * @return $this
      */
@@ -415,7 +415,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets commercial_register_number
      *
-     * @param string $commercial_register_number 
+     * @param string $commercial_register_number The commercial registration number of the organization.
      *
      * @return $this
      */
@@ -444,7 +444,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets country
      *
-     * @param string $country 
+     * @param string $country The two-letter country code (ISO 3166 format).
      *
      * @return $this
      */
@@ -469,7 +469,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets date_of_birth
      *
-     * @param \DateTime $date_of_birth 
+     * @param \DateTime $date_of_birth The date of birth.
      *
      * @return $this
      */
@@ -494,7 +494,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets dependent_locality
      *
-     * @param string $dependent_locality 
+     * @param string $dependent_locality The dependent locality which is a sub-division of the state.
      *
      * @return $this
      */
@@ -523,7 +523,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets email_address
      *
-     * @param string $email_address 
+     * @param string $email_address The email address.
      *
      * @return $this
      */
@@ -552,7 +552,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets family_name
      *
-     * @param string $family_name 
+     * @param string $family_name The family or last name.
      *
      * @return $this
      */
@@ -577,7 +577,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets gender
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Gender $gender 
+     * @param \PostFinanceCheckout\Sdk\Model\Gender $gender The gender.
      *
      * @return $this
      */
@@ -602,7 +602,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets given_name
      *
-     * @param string $given_name 
+     * @param string $given_name The given or first name.
      *
      * @return $this
      */
@@ -631,7 +631,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets legal_organization_form
      *
-     * @param int $legal_organization_form 
+     * @param int $legal_organization_form The legal form of the organization.
      *
      * @return $this
      */
@@ -656,7 +656,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets mobile_phone_number
      *
-     * @param string $mobile_phone_number 
+     * @param string $mobile_phone_number The phone number of a mobile phone.
      *
      * @return $this
      */
@@ -685,7 +685,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets organization_name
      *
-     * @param string $organization_name 
+     * @param string $organization_name The organization's name.
      *
      * @return $this
      */
@@ -714,7 +714,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets phone_number
      *
-     * @param string $phone_number 
+     * @param string $phone_number The phone number.
      *
      * @return $this
      */
@@ -743,7 +743,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets postal_state
      *
-     * @param string $postal_state 
+     * @param string $postal_state The name of the region, typically a state, county, province or prefecture.
      *
      * @return $this
      */
@@ -768,7 +768,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets postcode
      *
-     * @param string $postcode 
+     * @param string $postcode The postal code, also known as ZIP, postcode, etc.
      *
      * @return $this
      */
@@ -793,7 +793,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets sales_tax_number
      *
-     * @param string $sales_tax_number 
+     * @param string $sales_tax_number The sales tax number of the organization.
      *
      * @return $this
      */
@@ -822,7 +822,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets salutation
      *
-     * @param string $salutation 
+     * @param string $salutation The salutation e.g. Mrs, Mr, Dr.
      *
      * @return $this
      */
@@ -851,7 +851,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets social_security_number
      *
-     * @param string $social_security_number 
+     * @param string $social_security_number The social security number.
      *
      * @return $this
      */
@@ -880,7 +880,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets sorting_code
      *
-     * @param string $sorting_code The sorting code identifies the post office at which the post box is located in.
+     * @param string $sorting_code The sorting code identifying the post office where the PO Box is located.
      *
      * @return $this
      */
@@ -909,7 +909,7 @@ class ShopifySubscriptionAddressCreate implements ModelInterface, ArrayAccess
     /**
      * Sets street
      *
-     * @param string $street 
+     * @param string $street The street or PO Box.
      *
      * @return $this
      */

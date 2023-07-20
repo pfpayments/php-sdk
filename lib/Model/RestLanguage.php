@@ -53,6 +53,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
         'ietf_code' => 'string',
         'iso2_code' => 'string',
         'iso3_code' => 'string',
+        'name' => 'string',
         'plural_expression' => 'string',
         'primary_of_group' => 'bool'
     ];
@@ -67,6 +68,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
         'ietf_code' => null,
         'iso2_code' => null,
         'iso3_code' => null,
+        'name' => null,
         'plural_expression' => null,
         'primary_of_group' => null
     ];
@@ -82,6 +84,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
         'ietf_code' => 'ietfCode',
         'iso2_code' => 'iso2Code',
         'iso3_code' => 'iso3Code',
+        'name' => 'name',
         'plural_expression' => 'pluralExpression',
         'primary_of_group' => 'primaryOfGroup'
     ];
@@ -96,6 +99,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
         'ietf_code' => 'setIetfCode',
         'iso2_code' => 'setIso2Code',
         'iso3_code' => 'setIso3Code',
+        'name' => 'setName',
         'plural_expression' => 'setPluralExpression',
         'primary_of_group' => 'setPrimaryOfGroup'
     ];
@@ -110,6 +114,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
         'ietf_code' => 'getIetfCode',
         'iso2_code' => 'getIso2Code',
         'iso3_code' => 'getIso3Code',
+        'name' => 'getName',
         'plural_expression' => 'getPluralExpression',
         'primary_of_group' => 'getPrimaryOfGroup'
     ];
@@ -139,6 +144,8 @@ class RestLanguage implements ModelInterface, ArrayAccess
         $this->container['iso2_code'] = isset($data['iso2_code']) ? $data['iso2_code'] : null;
         
         $this->container['iso3_code'] = isset($data['iso3_code']) ? $data['iso3_code'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['plural_expression'] = isset($data['plural_expression']) ? $data['plural_expression'] : null;
         
@@ -248,7 +255,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets country_code
      *
-     * @param string $country_code The country code represents the region of the language as a 2 letter ISO code.
+     * @param string $country_code The two-letter code of the language's region (ISO 3166-1 alpha-2 format).
      *
      * @return $this
      */
@@ -273,7 +280,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets ietf_code
      *
-     * @param string $ietf_code The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
+     * @param string $ietf_code The language's IETF tag consisting of the two-letter ISO code and region e.g. en-US, de-CH.
      *
      * @return $this
      */
@@ -298,7 +305,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets iso2_code
      *
-     * @param string $iso2_code The ISO 2 letter code represents the language with two letters.
+     * @param string $iso2_code The language's two-letter code (ISO 639-1 format).
      *
      * @return $this
      */
@@ -323,13 +330,38 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets iso3_code
      *
-     * @param string $iso3_code The ISO 3 letter code represents the language with three letters.
+     * @param string $iso3_code The language's three-letter code (ISO 639-2/T format).
      *
      * @return $this
      */
     public function setIso3Code($iso3_code)
     {
         $this->container['iso3_code'] = $iso3_code;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name The name of the language.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -348,7 +380,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets plural_expression
      *
-     * @param string $plural_expression The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
+     * @param string $plural_expression The expression to determine the plural index for a given number of items used to find the proper plural form for translations.
      *
      * @return $this
      */
@@ -373,7 +405,7 @@ class RestLanguage implements ModelInterface, ArrayAccess
     /**
      * Sets primary_of_group
      *
-     * @param bool $primary_of_group The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
+     * @param bool $primary_of_group Whether this is the primary language in a group of languages.
      *
      * @return $this
      */

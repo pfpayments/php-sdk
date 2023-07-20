@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * DatabaseTranslatedString model
+ * CardCryptogram model
  *
  * @category    Class
- * @description 
+ * @description This model holds the additional card authentication.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DatabaseTranslatedString implements ModelInterface, ArrayAccess
+class CardCryptogram implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'DatabaseTranslatedString';
+    protected static $swaggerModelName = 'CardCryptogram';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,8 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'available_languages' => 'string[]',
-        'display_name' => 'string',
-        'items' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedStringItem[]'
+        'type' => '\PostFinanceCheckout\Sdk\Model\CardCryptogramType',
+        'value' => 'string'
     ];
 
     /**
@@ -60,9 +59,8 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'available_languages' => null,
-        'display_name' => null,
-        'items' => null
+        'type' => null,
+        'value' => null
     ];
 
     /**
@@ -72,9 +70,8 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'available_languages' => 'availableLanguages',
-        'display_name' => 'displayName',
-        'items' => 'items'
+        'type' => 'type',
+        'value' => 'value'
     ];
 
     /**
@@ -83,9 +80,8 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'available_languages' => 'setAvailableLanguages',
-        'display_name' => 'setDisplayName',
-        'items' => 'setItems'
+        'type' => 'setType',
+        'value' => 'setValue'
     ];
 
     /**
@@ -94,9 +90,8 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'available_languages' => 'getAvailableLanguages',
-        'display_name' => 'getDisplayName',
-        'items' => 'getItems'
+        'type' => 'getType',
+        'value' => 'getValue'
     ];
 
     
@@ -117,11 +112,9 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['available_languages'] = isset($data['available_languages']) ? $data['available_languages'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
-        $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
-        
-        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         
     }
 
@@ -215,75 +208,50 @@ class DatabaseTranslatedString implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets available_languages
+     * Gets type
      *
-     * @return string[]
+     * @return \PostFinanceCheckout\Sdk\Model\CardCryptogramType
      */
-    public function getAvailableLanguages()
+    public function getType()
     {
-        return $this->container['available_languages'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets available_languages
+     * Sets type
      *
-     * @param string[] $available_languages 
+     * @param \PostFinanceCheckout\Sdk\Model\CardCryptogramType $type 
      *
      * @return $this
      */
-    public function setAvailableLanguages($available_languages)
+    public function setType($type)
     {
-        $this->container['available_languages'] = $available_languages;
+        $this->container['type'] = $type;
 
         return $this;
     }
     
 
     /**
-     * Gets display_name
+     * Gets value
      *
      * @return string
      */
-    public function getDisplayName()
+    public function getValue()
     {
-        return $this->container['display_name'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets display_name
+     * Sets value
      *
-     * @param string $display_name 
+     * @param string $value 
      *
      * @return $this
      */
-    public function setDisplayName($display_name)
+    public function setValue($value)
     {
-        $this->container['display_name'] = $display_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets items
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedStringItem[]
-     */
-    public function getItems()
-    {
-        return $this->container['items'];
-    }
-
-    /**
-     * Sets items
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedStringItem[] $items 
-     *
-     * @return $this
-     */
-    public function setItems($items)
-    {
-        $this->container['items'] = $items;
+        $this->container['value'] = $value;
 
         return $this;
     }

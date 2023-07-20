@@ -287,7 +287,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets entity
      *
-     * @param int $entity The listener listens on state changes of the entity linked with the listener.
+     * @param int $entity The entity that is to be monitored.
      *
      * @return $this
      */
@@ -312,7 +312,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets entity_states
      *
-     * @param string[] $entity_states The target state identifies the state into which entities need to move into to trigger the webhook listener.
+     * @param string[] $entity_states The entity's target states that are to be monitored.
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets identity
      *
-     * @param \PostFinanceCheckout\Sdk\Model\WebhookIdentity $identity The identity which will be used to sign messages sent by this listener.
+     * @param \PostFinanceCheckout\Sdk\Model\WebhookIdentity $identity The identity used to sign messages.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the webhook listener.
      *
      * @return $this
      */
@@ -441,7 +441,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets notify_every_change
      *
-     * @param bool $notify_every_change Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+     * @param bool $notify_every_change Whether every update of the entity or only state changes are to be monitored.
      *
      * @return $this
      */
@@ -516,7 +516,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets url
      *
-     * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $url The URL which is invoked by the listener to notify the application about the event.
+     * @param \PostFinanceCheckout\Sdk\Model\WebhookUrl $url The URL where notifications about entity changes are sent to.
      *
      * @return $this
      */

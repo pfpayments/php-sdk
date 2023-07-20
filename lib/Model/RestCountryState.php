@@ -50,6 +50,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'code' => 'string',
+        'country' => 'string',
         'country_code' => 'string',
         'id' => 'string',
         'name' => 'string'
@@ -62,6 +63,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'code' => null,
+        'country' => null,
         'country_code' => null,
         'id' => null,
         'name' => null
@@ -75,6 +77,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'code' => 'code',
+        'country' => 'country',
         'country_code' => 'countryCode',
         'id' => 'id',
         'name' => 'name'
@@ -87,6 +90,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'code' => 'setCode',
+        'country' => 'setCountry',
         'country_code' => 'setCountryCode',
         'id' => 'setId',
         'name' => 'setName'
@@ -99,6 +103,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'code' => 'getCode',
+        'country' => 'getCountry',
         'country_code' => 'getCountryCode',
         'id' => 'getId',
         'name' => 'getName'
@@ -123,6 +128,8 @@ class RestCountryState implements ModelInterface, ArrayAccess
     {
         
         $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        
+        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
         
         $this->container['country_code'] = isset($data['country_code']) ? $data['country_code'] : null;
         
@@ -234,13 +241,38 @@ class RestCountryState implements ModelInterface, ArrayAccess
     /**
      * Sets code
      *
-     * @param string $code The code of the state identifies the state. The code is typically used within addresses. Some countries may not provide a code. For those the field is null.
+     * @param string $code The state's code used within addresses.
      *
      * @return $this
      */
     public function setCode($code)
     {
         $this->container['code'] = $code;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string $country 
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->container['country'] = $country;
 
         return $this;
     }
@@ -259,7 +291,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
     /**
      * Sets country_code
      *
-     * @param string $country_code The country code in ISO two letter format (e.g. UK, DE, CH, US).
+     * @param string $country_code The two-letter code of the state's country (ISO 3166-1 alpha-2 format).
      *
      * @return $this
      */
@@ -284,7 +316,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id The ID of the state corresponds to the subdivision identifier defined in ISO 3166-2. The format consists of the country code followed by a dash and a subdivision identifier.
+     * @param string $id The state's code in ISO 3166-2 format.
      *
      * @return $this
      */
@@ -309,7 +341,7 @@ class RestCountryState implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name is a human readable label of the state in the language of the region.
+     * @param string $name The name of the state.
      *
      * @return $this
      */

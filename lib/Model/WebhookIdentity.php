@@ -302,7 +302,7 @@ class WebhookIdentity implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The identity name is used internally to identify the webhook identity in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the webhook identity.
      *
      * @return $this
      */

@@ -216,7 +216,7 @@ class AbstractTransactionCommentActive implements ModelInterface, ArrayAccess
     /**
      * Sets content
      *
-     * @param string $content 
+     * @param string $content The comment's actual content.
      *
      * @return $this
      */

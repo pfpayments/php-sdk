@@ -225,7 +225,7 @@ class AccountCreate extends AbstractAccountUpdate
     /**
      * Sets parent_account
      *
-     * @param int $parent_account The account which is responsible for administering the account.
+     * @param int $parent_account The parent account responsible for administering this account.
      *
      * @return $this
      */
@@ -250,7 +250,7 @@ class AccountCreate extends AbstractAccountUpdate
     /**
      * Sets scope
      *
-     * @param int $scope This is the scope to which the account belongs to.
+     * @param int $scope The scope that the account belongs to.
      *
      * @return $this
      */

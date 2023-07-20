@@ -50,7 +50,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'data_collection_type' => '\PostFinanceCheckout\Sdk\Model\DataCollectionType',
-        'description' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
+        'description' => 'map[string,string]',
         'id' => 'int',
         'image_resource_path' => '\PostFinanceCheckout\Sdk\Model\ModelResourcePath',
         'linked_space_id' => 'int',
@@ -64,7 +64,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
         'sort_order' => 'int',
         'space_id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\CreationEntityState',
-        'title' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
+        'title' => 'map[string,string]',
         'version' => 'int'
     ];
 
@@ -344,7 +344,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -354,7 +354,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString $description The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
+     * @param map[string,string] $description The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
      *
      * @return $this
      */
@@ -698,7 +698,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets title
      *
-     * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getTitle()
     {
@@ -708,7 +708,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString $title The title of the payment method configuration is used within the payment process. The title is visible to the customer.
+     * @param map[string,string] $title The title of the payment method configuration is used within the payment process. The title is visible to the customer.
      *
      * @return $this
      */

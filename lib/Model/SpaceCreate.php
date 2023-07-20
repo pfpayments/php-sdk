@@ -218,7 +218,7 @@ class SpaceCreate extends AbstractSpaceUpdate
     /**
      * Sets account
      *
-     * @param int $account The account to which the space belongs to.
+     * @param int $account The account that the space belongs to.
      *
      * @return $this
      */

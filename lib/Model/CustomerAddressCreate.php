@@ -210,7 +210,7 @@ class CustomerAddressCreate extends AbstractCustomerAddressActive
     /**
      * Sets customer
      *
-     * @param int $customer 
+     * @param int $customer The customer that the object belongs to.
      *
      * @return $this
      */

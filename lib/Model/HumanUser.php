@@ -56,8 +56,8 @@ class HumanUser implements ModelInterface, ArrayAccess
         'lastname' => 'string',
         'mobile_phone_number' => 'string',
         'mobile_phone_verified' => 'bool',
-        'primary_account' => '\PostFinanceCheckout\Sdk\Model\Account',
-        'scope' => '\PostFinanceCheckout\Sdk\Model\Scope',
+        'primary_account' => 'int',
+        'scope' => 'int',
         'time_zone' => 'string',
         'two_factor_enabled' => 'bool',
         'two_factor_type' => '\PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType'
@@ -76,8 +76,8 @@ class HumanUser implements ModelInterface, ArrayAccess
         'lastname' => null,
         'mobile_phone_number' => null,
         'mobile_phone_verified' => null,
-        'primary_account' => null,
-        'scope' => null,
+        'primary_account' => 'int64',
+        'scope' => 'int64',
         'time_zone' => null,
         'two_factor_enabled' => null,
         'two_factor_type' => null
@@ -306,7 +306,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets email_address
      *
-     * @param string $email_address The email address of the user.
+     * @param string $email_address The user's email address.
      *
      * @return $this
      */
@@ -335,7 +335,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets email_address_verified
      *
-     * @param bool $email_address_verified Defines whether a user is verified or not.
+     * @param bool $email_address_verified Whether the user's email address has been verified.
      *
      * @return $this
      */
@@ -360,7 +360,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets firstname
      *
-     * @param string $firstname The first name of the user.
+     * @param string $firstname The user's first name.
      *
      * @return $this
      */
@@ -389,7 +389,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The preferred language of the user.
+     * @param string $language The user's preferred language.
      *
      * @return $this
      */
@@ -414,7 +414,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets lastname
      *
-     * @param string $lastname The last name of the user.
+     * @param string $lastname The user's last name.
      *
      * @return $this
      */
@@ -443,7 +443,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets mobile_phone_number
      *
-     * @param string $mobile_phone_number 
+     * @param string $mobile_phone_number The user's mobile phone number.
      *
      * @return $this
      */
@@ -472,7 +472,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets mobile_phone_verified
      *
-     * @param bool $mobile_phone_verified Defines whether a users mobile phone number is verified or not.
+     * @param bool $mobile_phone_verified Whether the user's mobile phone number has been verified.
      *
      * @return $this
      */
@@ -487,7 +487,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Gets primary_account
      *
-     * @return \PostFinanceCheckout\Sdk\Model\Account
+     * @return int
      */
     public function getPrimaryAccount()
     {
@@ -497,7 +497,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets primary_account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Account $primary_account The primary account links the user to a specific account.
+     * @param int $primary_account The primary account that the user belongs to.
      *
      * @return $this
      */
@@ -512,7 +512,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Gets scope
      *
-     * @return \PostFinanceCheckout\Sdk\Model\Scope
+     * @return int
      */
     public function getScope()
     {
@@ -522,7 +522,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets scope
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Scope $scope The scope to which the user belongs to.
+     * @param int $scope The scope that the user belongs to.
      *
      * @return $this
      */
@@ -547,7 +547,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+     * @param string $time_zone The user's time zone. If none is specified, the one provided by the browser will be used.
      *
      * @return $this
      */
@@ -572,7 +572,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_enabled
      *
-     * @param bool $two_factor_enabled Defines whether two-factor authentication is enabled for this user.
+     * @param bool $two_factor_enabled Whether two-factor authentication is enabled for this user.
      *
      * @return $this
      */
@@ -597,7 +597,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType $two_factor_type 
+     * @param \PostFinanceCheckout\Sdk\Model\TwoFactorAuthenticationType $two_factor_type The type of two-factor authentication that is enabled for the user.
      *
      * @return $this
      */

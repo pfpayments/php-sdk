@@ -256,7 +256,7 @@ class TenantDatabase implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name of the database.
+     * @param string $name The name used to identify the database.
      *
      * @return $this
      */

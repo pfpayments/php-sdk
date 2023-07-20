@@ -241,7 +241,7 @@ class TwoFactorAuthenticationType implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of the object translated into different languages.
+     * @param map[string,string] $description The localized description of the object.
      *
      * @return $this
      */
@@ -266,7 +266,7 @@ class TwoFactorAuthenticationType implements ModelInterface, ArrayAccess
     /**
      * Sets feature
      *
-     * @param int $feature 
+     * @param int $feature The feature that this type belongs to.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class TwoFactorAuthenticationType implements ModelInterface, ArrayAccess
     /**
      * Sets icon
      *
-     * @param string $icon 
+     * @param string $icon The identifier of the icon representing this type.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class TwoFactorAuthenticationType implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the object translated into different languages.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */

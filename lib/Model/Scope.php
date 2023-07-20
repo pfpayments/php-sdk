@@ -302,7 +302,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets domain_name
      *
-     * @param string $domain_name The domain name to which this scope is mapped to.
+     * @param string $domain_name The domain name that belongs to the scope.
      *
      * @return $this
      */
@@ -331,7 +331,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets features
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Feature[] $features 
+     * @param \PostFinanceCheckout\Sdk\Model\Feature[] $features The list of features that are active in the scope.
      *
      * @return $this
      */
@@ -381,7 +381,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets machine_name
      *
-     * @param string $machine_name 
+     * @param string $machine_name The name identifying the scope in e.g. URLs.
      *
      * @return $this
      */
@@ -410,7 +410,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name of the scope is shown to the user where the user should select a scope.
+     * @param string $name The name used to identify the scope.
      *
      * @return $this
      */
@@ -464,7 +464,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets port
      *
-     * @param int $port The port number to which this scope is mapped to.
+     * @param int $port The port where the scope can be accessed.
      *
      * @return $this
      */
@@ -489,7 +489,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets ssl_active
      *
-     * @param bool $ssl_active Define whether the scope supports SSL.
+     * @param bool $ssl_active Whether the scope supports SSL.
      *
      * @return $this
      */
@@ -539,7 +539,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets themes
      *
-     * @param string[] $themes The themes determines how the application layout, look and feel is. By providing multiple themes you can fallback to other themes.
+     * @param string[] $themes The themes that determine the look and feel of the scope's user interface. A fall-through strategy is applied when building the actual theme.
      *
      * @return $this
      */
@@ -564,7 +564,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets url
      *
-     * @param string $url 
+     * @param string $url The URL where the scope can be accessed.
      *
      * @return $this
      */

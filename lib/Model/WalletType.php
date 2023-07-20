@@ -36,6 +36,8 @@ class WalletType
      * Possible values of this enum
      */
     const APPLE_PAY = 'APPLE_PAY';
+    const CLICK_TO_PAY = 'CLICK_TO_PAY';
+    const NONE = 'NONE';
     
     /**
      * Gets allowable values of the enum
@@ -45,6 +47,8 @@ class WalletType
     {
         return [
             self::APPLE_PAY,
+            self::CLICK_TO_PAY,
+            self::NONE,
         ];
     }
 }

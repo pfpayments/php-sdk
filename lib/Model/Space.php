@@ -354,7 +354,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Account $account The account to which the space belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Account $account The account that the space belongs to.
      *
      * @return $this
      */
@@ -379,7 +379,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets active
      *
-     * @param bool $active Active means that this account and all accounts in the hierarchy are active.
+     * @param bool $active Whether this space and all its parent accounts are active.
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets active_or_restricted_active
      *
-     * @param bool $active_or_restricted_active This property is true when all accounts in the hierarchy are active or restricted active.
+     * @param bool $active_or_restricted_active Whether this space and all its parent accounts are active or restricted active.
      *
      * @return $this
      */
@@ -429,7 +429,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by The ID of the user who created this entity.
+     * @param int $created_by The ID of the user the space was created by.
      *
      * @return $this
      */
@@ -454,7 +454,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The date and time when this entity was created.
+     * @param \DateTime $created_on The date and time when the space was created.
      *
      * @return $this
      */
@@ -479,7 +479,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets database
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TenantDatabase $database The database in which the space's data are stored in.
+     * @param \PostFinanceCheckout\Sdk\Model\TenantDatabase $database The database the space is connected to and that holds the space's data.
      *
      * @return $this
      */
@@ -504,7 +504,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets deleted_by
      *
-     * @param int $deleted_by The ID of a user that deleted this entity.
+     * @param int $deleted_by The ID of the user the space was deleted by.
      *
      * @return $this
      */
@@ -529,7 +529,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets deleted_on
      *
-     * @param \DateTime $deleted_on The date and time when this entity was deleted.
+     * @param \DateTime $deleted_on The date and time when the space was deleted.
      *
      * @return $this
      */
@@ -604,7 +604,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the space.
      *
      * @return $this
      */
@@ -661,7 +661,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets postal_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\SpaceAddress $postal_address The address to use in communication with clients for example in email, documents etc.
+     * @param \PostFinanceCheckout\Sdk\Model\SpaceAddress $postal_address The address that is used in communication with clients for example in emails, documents, etc.
      *
      * @return $this
      */
@@ -686,7 +686,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets primary_currency
      *
-     * @param string $primary_currency This is the currency that is used to display aggregated amounts in the space.
+     * @param string $primary_currency The currency that is used to display aggregated amounts in the space.
      *
      * @return $this
      */
@@ -711,7 +711,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets request_limit
      *
-     * @param int $request_limit The request limit defines the maximum number of API request accepted within 2 minutes for this space. This limit can only be changed with special privileges.
+     * @param int $request_limit The maximum number of API requests that are accepted within two minutes. This limit can only be changed with special privileges.
      *
      * @return $this
      */
@@ -736,7 +736,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets restricted_active
      *
-     * @param bool $restricted_active Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
+     * @param bool $restricted_active Whether this space and all its parent accounts are active or restricted active. There is least one parent account that is restricted active.
      *
      * @return $this
      */
@@ -786,7 +786,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets technical_contact_addresses
      *
-     * @param string[] $technical_contact_addresses The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+     * @param string[] $technical_contact_addresses The email address that will receive messages about technical issues and errors that occur in the space.
      *
      * @return $this
      */
@@ -811,7 +811,7 @@ class Space implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
+     * @param string $time_zone The time zone that is used to schedule and run background processes. This does not affect the formatting of dates in the user interface.
      *
      * @return $this
      */

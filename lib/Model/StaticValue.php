@@ -234,7 +234,7 @@ class StaticValue implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of the object translated into different languages.
+     * @param map[string,string] $description The localized description of the object.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class StaticValue implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the object translated into different languages.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */

@@ -283,7 +283,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of the object translated into different languages.
+     * @param map[string,string] $description The localized description of the object.
      *
      * @return $this
      */
@@ -308,7 +308,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets feature
      *
-     * @param int $feature 
+     * @param int $feature The feature that this permission belongs to.
      *
      * @return $this
      */
@@ -333,7 +333,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param bool $group 
+     * @param bool $group Whether this is a permission group.
      *
      * @return $this
      */
@@ -383,7 +383,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets leaf
      *
-     * @param bool $leaf 
+     * @param bool $leaf Whether this is a leaf in the tree of permissions, and not a group.
      *
      * @return $this
      */
@@ -408,7 +408,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the object translated into different languages.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */
@@ -433,7 +433,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets parent
      *
-     * @param int $parent 
+     * @param int $parent The group that this permission belongs to.
      *
      * @return $this
      */
@@ -458,7 +458,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets path_to_root
      *
-     * @param int[] $path_to_root 
+     * @param int[] $path_to_root All parents of this permission up to the root of the permission tree.
      *
      * @return $this
      */
@@ -483,7 +483,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param map[string,string] $title 
+     * @param map[string,string] $title The localized name of the object.
      *
      * @return $this
      */
@@ -508,7 +508,7 @@ class Permission implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_required
      *
-     * @param bool $two_factor_required 
+     * @param bool $two_factor_required Whether users with this permission are required to enable two-factor authentication.
      *
      * @return $this
      */

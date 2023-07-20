@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "3.2.0",
+        'x-meta-sdk-version' => "4.0.0",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.2.0/php';
+	private $userAgent = 'PHP-Client/4.0.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -631,6 +631,18 @@ final class ApiClient {
             $this->bankTransactionService = new \PostFinanceCheckout\Sdk\Service\BankTransactionService($this);
         }
         return $this->bankTransactionService;
+    }
+    
+    protected $cardProcessingService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\CardProcessingService
+     */
+    public function getCardProcessingService() {
+        if(is_null($this->cardProcessingService)){
+            $this->cardProcessingService = new \PostFinanceCheckout\Sdk\Service\CardProcessingService($this);
+        }
+        return $this->cardProcessingService;
     }
     
     protected $chargeAttemptService;

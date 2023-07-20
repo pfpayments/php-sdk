@@ -324,7 +324,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets customer_id
      *
-     * @param string $customer_id 
+     * @param string $customer_id The customer's ID in the merchant's system.
      *
      * @return $this
      */
@@ -353,7 +353,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets email_address
      *
-     * @param string $email_address 
+     * @param string $email_address The customer's email address.
      *
      * @return $this
      */
@@ -382,7 +382,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets family_name
      *
-     * @param string $family_name 
+     * @param string $family_name The customer's family or last name.
      *
      * @return $this
      */
@@ -411,7 +411,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets given_name
      *
-     * @param string $given_name 
+     * @param string $given_name The customer's given or first name.
      *
      * @return $this
      */
@@ -515,7 +515,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets meta_data
      *
-     * @param map[string,string] $meta_data Meta data allow to store additional data along the object.
+     * @param map[string,string] $meta_data Allow to store additional information about the object.
      *
      * @return $this
      */
@@ -540,7 +540,7 @@ class Customer implements ModelInterface, ArrayAccess
     /**
      * Sets preferred_currency
      *
-     * @param string $preferred_currency 
+     * @param string $preferred_currency The customer's preferred currency.
      *
      * @return $this
      */

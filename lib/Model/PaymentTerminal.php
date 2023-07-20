@@ -51,6 +51,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
         'default_currency' => 'string',
+        'device_serial_number' => 'string',
         'external_id' => 'string',
         'id' => 'int',
         'identifier' => 'string',
@@ -71,6 +72,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'configuration_version' => null,
         'default_currency' => null,
+        'device_serial_number' => null,
         'external_id' => null,
         'id' => 'int64',
         'identifier' => null,
@@ -92,6 +94,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'configuration_version' => 'configurationVersion',
         'default_currency' => 'defaultCurrency',
+        'device_serial_number' => 'deviceSerialNumber',
         'external_id' => 'externalId',
         'id' => 'id',
         'identifier' => 'identifier',
@@ -112,6 +115,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $setters = [
         'configuration_version' => 'setConfigurationVersion',
         'default_currency' => 'setDefaultCurrency',
+        'device_serial_number' => 'setDeviceSerialNumber',
         'external_id' => 'setExternalId',
         'id' => 'setId',
         'identifier' => 'setIdentifier',
@@ -132,6 +136,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $getters = [
         'configuration_version' => 'getConfigurationVersion',
         'default_currency' => 'getDefaultCurrency',
+        'device_serial_number' => 'getDeviceSerialNumber',
         'external_id' => 'getExternalId',
         'id' => 'getId',
         'identifier' => 'getIdentifier',
@@ -165,6 +170,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
         
         $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        
+        $this->container['device_serial_number'] = isset($data['device_serial_number']) ? $data['device_serial_number'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
@@ -326,6 +333,31 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setDefaultCurrency($default_currency)
     {
         $this->container['default_currency'] = $default_currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets device_serial_number
+     *
+     * @return string
+     */
+    public function getDeviceSerialNumber()
+    {
+        return $this->container['device_serial_number'];
+    }
+
+    /**
+     * Sets device_serial_number
+     *
+     * @param string $device_serial_number 
+     *
+     * @return $this
+     */
+    public function setDeviceSerialNumber($device_serial_number)
+    {
+        $this->container['device_serial_number'] = $device_serial_number;
 
         return $this;
     }

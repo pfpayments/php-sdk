@@ -262,7 +262,7 @@ class CustomerAddress implements ModelInterface, ArrayAccess
     /**
      * Sets address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomerPostalAddress $address 
+     * @param \PostFinanceCheckout\Sdk\Model\CustomerPostalAddress $address The actual postal address.
      *
      * @return $this
      */
@@ -287,7 +287,7 @@ class CustomerAddress implements ModelInterface, ArrayAccess
     /**
      * Sets address_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomerAddressType $address_type 
+     * @param \PostFinanceCheckout\Sdk\Model\CustomerAddressType $address_type Whether the address is for billing or shipping or both.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class CustomerAddress implements ModelInterface, ArrayAccess
     /**
      * Sets customer
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Customer $customer 
+     * @param \PostFinanceCheckout\Sdk\Model\Customer $customer The customer that the object belongs to.
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ class CustomerAddress implements ModelInterface, ArrayAccess
     /**
      * Sets default_address
      *
-     * @param bool $default_address 
+     * @param bool $default_address Whether this is the customer's default address.
      *
      * @return $this
      */

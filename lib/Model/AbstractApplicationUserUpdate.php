@@ -230,7 +230,7 @@ class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The user name is used to identify the application user in administrative interfaces.
+     * @param string $name The name used to identify the application user.
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets request_limit
      *
-     * @param int $request_limit The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+     * @param int $request_limit The maximum number of API requests that are accepted every 2 minutes.
      *
      * @return $this
      */

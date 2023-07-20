@@ -49,7 +49,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'display_name' => 'string',
         'language' => 'string',
         'string' => 'string'
     ];
@@ -60,7 +59,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'display_name' => null,
         'language' => null,
         'string' => null
     ];
@@ -72,7 +70,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'display_name' => 'displayName',
         'language' => 'language',
         'string' => 'string'
     ];
@@ -83,7 +80,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'display_name' => 'setDisplayName',
         'language' => 'setLanguage',
         'string' => 'setString'
     ];
@@ -94,7 +90,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'display_name' => 'getDisplayName',
         'language' => 'getLanguage',
         'string' => 'getString'
     ];
@@ -116,8 +111,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        
-        $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
@@ -215,31 +208,6 @@ class LocalizedString implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets display_name
-     *
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->container['display_name'];
-    }
-
-    /**
-     * Sets display_name
-     *
-     * @param string $display_name 
-     *
-     * @return $this
-     */
-    public function setDisplayName($display_name)
-    {
-        $this->container['display_name'] = $display_name;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets language
      *
      * @return string
@@ -252,7 +220,7 @@ class LocalizedString implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The term's language.
      *
      * @return $this
      */
@@ -277,7 +245,7 @@ class LocalizedString implements ModelInterface, ArrayAccess
     /**
      * Sets string
      *
-     * @param string $string 
+     * @param string $string The localized term.
      *
      * @return $this
      */

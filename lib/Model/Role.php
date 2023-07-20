@@ -51,7 +51,7 @@ class Role implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'account' => '\PostFinanceCheckout\Sdk\Model\Account',
         'id' => 'int',
-        'name' => '\PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
         'planned_purge_date' => '\DateTime',
         'state' => '\PostFinanceCheckout\Sdk\Model\RoleState',
@@ -262,7 +262,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Account $account The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
+     * @param \PostFinanceCheckout\Sdk\Model\Account $account The account the role belongs to. The role can only be assigned within this account.
      *
      * @return $this
      */
@@ -302,7 +302,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -312,7 +312,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DatabaseTranslatedString $name The name of this role is used to identify the role within administrative interfaces.
+     * @param map[string,string] $name The name used to identify the role.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets permissions
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Permission[] $permissions Set of permissions that are granted to this role.
+     * @param \PostFinanceCheckout\Sdk\Model\Permission[] $permissions The permissions granted to users with this role.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_required
      *
-     * @param bool $two_factor_required Defines whether having been granted this role will force a user to use two-factor authentication.
+     * @param bool $two_factor_required Whether users with this role are required to use two-factor authentication.
      *
      * @return $this
      */

@@ -241,7 +241,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets country
      *
-     * @param string $country 
+     * @param string $country The two-letter code of the country the legal organization form is used in (ISO 3166-1 alpha-2 format).
      *
      * @return $this
      */
@@ -266,7 +266,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $description 
+     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $description The localized descriptions of the legal organization form.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets english_description
      *
-     * @param string $english_description 
+     * @param string $english_description The English name of the legal organization form.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets shortcut
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $shortcut 
+     * @param \PostFinanceCheckout\Sdk\Model\LocalizedString[] $shortcut The localized shortcuts of the legal organization form.
      *
      * @return $this
      */

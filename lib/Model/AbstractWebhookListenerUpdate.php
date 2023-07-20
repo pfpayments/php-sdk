@@ -237,7 +237,7 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets entity_states
      *
-     * @param string[] $entity_states The target state identifies the state into which entities need to move into to trigger the webhook listener.
+     * @param string[] $entity_states The entity's target states that are to be monitored.
      *
      * @return $this
      */
@@ -262,7 +262,7 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the webhook listener.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets notify_every_change
      *
-     * @param bool $notify_every_change Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+     * @param bool $notify_every_change Whether every update of the entity or only state changes are to be monitored.
      *
      * @return $this
      */

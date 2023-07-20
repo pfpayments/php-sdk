@@ -262,7 +262,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory $category 
+     * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptorCategory $category The label's category.
      *
      * @return $this
      */
@@ -287,7 +287,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of the object translated into different languages.
+     * @param map[string,string] $description The localized description of the object.
      *
      * @return $this
      */
@@ -312,7 +312,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets features
      *
-     * @param int[] $features 
+     * @param int[] $features The features that this label belongs to.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param int $group 
+     * @param int $group The group that this label belongs to.
      *
      * @return $this
      */
@@ -387,7 +387,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the object translated into different languages.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param int $type 
+     * @param int $type The type of the label's value.
      *
      * @return $this
      */
@@ -437,7 +437,7 @@ class LabelDescriptor implements ModelInterface, ArrayAccess
     /**
      * Sets weight
      *
-     * @param int $weight 
+     * @param int $weight When listing labels, they can be sorted by this number.
      *
      * @return $this
      */

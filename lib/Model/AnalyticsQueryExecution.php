@@ -50,6 +50,7 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'account' => 'int',
+        'error_message' => 'string',
         'external_id' => 'string',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
         'id' => 'int',
@@ -69,6 +70,7 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'account' => 'int64',
+        'error_message' => null,
         'external_id' => null,
         'failure_reason' => null,
         'id' => 'int64',
@@ -89,6 +91,7 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'account' => 'account',
+        'error_message' => 'errorMessage',
         'external_id' => 'externalId',
         'failure_reason' => 'failureReason',
         'id' => 'id',
@@ -108,6 +111,7 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'account' => 'setAccount',
+        'error_message' => 'setErrorMessage',
         'external_id' => 'setExternalId',
         'failure_reason' => 'setFailureReason',
         'id' => 'setId',
@@ -127,6 +131,7 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'account' => 'getAccount',
+        'error_message' => 'getErrorMessage',
         'external_id' => 'getExternalId',
         'failure_reason' => 'getFailureReason',
         'id' => 'getId',
@@ -158,6 +163,8 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
     {
         
         $this->container['account'] = isset($data['account']) ? $data['account'] : null;
+        
+        $this->container['error_message'] = isset($data['error_message']) ? $data['error_message'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
@@ -290,6 +297,31 @@ class AnalyticsQueryExecution implements ModelInterface, ArrayAccess
     public function setAccount($account)
     {
         $this->container['account'] = $account;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets error_message
+     *
+     * @return string
+     */
+    public function getErrorMessage()
+    {
+        return $this->container['error_message'];
+    }
+
+    /**
+     * Sets error_message
+     *
+     * @param string $error_message The error message if and only if the query has failed, otherwise null.
+     *
+     * @return $this
+     */
+    public function setErrorMessage($error_message)
+    {
+        $this->container['error_message'] = $error_message;
 
         return $this;
     }

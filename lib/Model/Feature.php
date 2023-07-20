@@ -269,7 +269,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets beta
      *
-     * @param bool $beta 
+     * @param bool $beta Whether the feature is in beta stage and there may still be some issues.
      *
      * @return $this
      */
@@ -294,7 +294,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param \PostFinanceCheckout\Sdk\Model\FeatureCategory $category 
+     * @param \PostFinanceCheckout\Sdk\Model\FeatureCategory $category The category that the feature belongs to.
      *
      * @return $this
      */
@@ -319,7 +319,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of the object translated into different languages.
+     * @param map[string,string] $description The localized description of the object.
      *
      * @return $this
      */
@@ -369,7 +369,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets logo_path
      *
-     * @param string $logo_path 
+     * @param string $logo_path The path to the feature's logo image.
      *
      * @return $this
      */
@@ -394,7 +394,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the object translated into different languages.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */
@@ -419,7 +419,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets required_features
      *
-     * @param int[] $required_features 
+     * @param int[] $required_features The features that must be enabled for this feature to work properly.
      *
      * @return $this
      */
@@ -444,7 +444,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets sort_order
      *
-     * @param int $sort_order 
+     * @param int $sort_order When listing features, they can be sorted by this number.
      *
      * @return $this
      */

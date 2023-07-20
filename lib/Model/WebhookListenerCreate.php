@@ -231,7 +231,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
     /**
      * Sets entity
      *
-     * @param int $entity The listener listens on state changes of the entity linked with the listener.
+     * @param int $entity The entity that is to be monitored.
      *
      * @return $this
      */
@@ -256,7 +256,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
     /**
      * Sets identity
      *
-     * @param int $identity The identity which will be used to sign messages sent by this listener.
+     * @param int $identity The identity used to sign messages.
      *
      * @return $this
      */
@@ -281,7 +281,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
     /**
      * Sets url
      *
-     * @param int $url The URL which is invoked by the listener to notify the application about the event.
+     * @param int $url The URL where notifications about entity changes are sent to.
      *
      * @return $this
      */

@@ -234,7 +234,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets post_code_examples
      *
-     * @param string[] $post_code_examples The example post codes allow the user to understand what we expect here.
+     * @param string[] $post_code_examples A list of sample post codes.
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets post_code_regex
      *
-     * @param string $post_code_regex The post code regex is a regular expression which can validates the input of the post code.
+     * @param string $post_code_regex The regular expression to validate post codes.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets required_fields
      *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormatField[] $required_fields The required fields indicate what fields are required within an address to comply with the address format.
+     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormatField[] $required_fields The fields that are required in the address format.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets used_fields
      *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormatField[] $used_fields The used fields indicate what fields are used within this address format.
+     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormatField[] $used_fields The fields that are used in the address format.
      *
      * @return $this
      */

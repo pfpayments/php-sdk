@@ -259,7 +259,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     /**
      * Sets label
      *
-     * @param map[string,string] $label 
+     * @param map[string,string] $label The action's label.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     /**
      * Sets style
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle $style 
+     * @param \PostFinanceCheckout\Sdk\Model\ManualTaskActionStyle $style The action's style.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     /**
      * Sets task_type
      *
-     * @param int $task_type 
+     * @param int $task_type The type of manual tasks this action belongs to.
      *
      * @return $this
      */

@@ -280,7 +280,7 @@ class RefundComment implements ModelInterface, ArrayAccess
     /**
      * Sets content
      *
-     * @param string $content 
+     * @param string $content The comment's actual content.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class RefundComment implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by 
+     * @param int $created_by The ID of the user the comment was created by.
      *
      * @return $this
      */
@@ -359,7 +359,7 @@ class RefundComment implements ModelInterface, ArrayAccess
     /**
      * Sets edited_by
      *
-     * @param int $edited_by 
+     * @param int $edited_by The ID of the user the comment was last updated by.
      *
      * @return $this
      */
@@ -384,7 +384,7 @@ class RefundComment implements ModelInterface, ArrayAccess
     /**
      * Sets edited_on
      *
-     * @param \DateTime $edited_on The date on which the comment was last edited.
+     * @param \DateTime $edited_on The date and time when the comment was last updated.
      *
      * @return $this
      */
@@ -459,7 +459,7 @@ class RefundComment implements ModelInterface, ArrayAccess
     /**
      * Sets pinned
      *
-     * @param bool $pinned 
+     * @param bool $pinned Whether the comment is pinned to the top.
      *
      * @return $this
      */

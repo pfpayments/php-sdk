@@ -248,7 +248,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets iso_code2_letter
      *
-     * @param string $iso_code2_letter The ISO code 2 letter identifies the country by two chars as defined in ISO 3166-1 (e.g. US, DE, CH).
+     * @param string $iso_code2_letter The country's two-letter code (ISO 3166-1 alpha-2 format).
      *
      * @return $this
      */
@@ -273,7 +273,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets iso_code3_letter
      *
-     * @param string $iso_code3_letter The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
+     * @param string $iso_code3_letter The country's three-letter code (ISO 3166-1 alpha-3 format).
      *
      * @return $this
      */
@@ -298,7 +298,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets address_format
      *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormat $address_format The address format of the country indicates how an address has to look like for the country.
+     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
      *
      * @return $this
      */
@@ -323,7 +323,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name labels the country by a name in English.
+     * @param string $name The name of the country.
      *
      * @return $this
      */
@@ -348,7 +348,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets numeric_code
      *
-     * @param string $numeric_code The numeric code identifies the country by a three digit number as defined in ISO 3166-1 (e.g. 840, 826, 756).
+     * @param string $numeric_code The country's three-digit code (ISO 3166-1 numeric format).
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets state_codes
      *
-     * @param string[] $state_codes The state codes field is a list of all states associated with this country. The list contains the identifiers of the states. The identifiers corresponds to the ISO 3166-2 subdivision identifier.
+     * @param string[] $state_codes The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
      *
      * @return $this
      */
