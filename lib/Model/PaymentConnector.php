@@ -60,6 +60,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         'payment_method_brand' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodBrand',
         'primary_risk_taker' => '\PostFinanceCheckout\Sdk\Model\PaymentPrimaryRiskTaker',
         'processor' => 'int',
+        'supported_currencies' => 'string[]',
         'supported_customers_presences' => '\PostFinanceCheckout\Sdk\Model\CustomersPresence[]',
         'supported_features' => 'int[]'
     ];
@@ -81,6 +82,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         'payment_method_brand' => null,
         'primary_risk_taker' => null,
         'processor' => 'int64',
+        'supported_currencies' => null,
         'supported_customers_presences' => null,
         'supported_features' => 'int64'
     ];
@@ -103,6 +105,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         'payment_method_brand' => 'paymentMethodBrand',
         'primary_risk_taker' => 'primaryRiskTaker',
         'processor' => 'processor',
+        'supported_currencies' => 'supportedCurrencies',
         'supported_customers_presences' => 'supportedCustomersPresences',
         'supported_features' => 'supportedFeatures'
     ];
@@ -124,6 +127,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         'payment_method_brand' => 'setPaymentMethodBrand',
         'primary_risk_taker' => 'setPrimaryRiskTaker',
         'processor' => 'setProcessor',
+        'supported_currencies' => 'setSupportedCurrencies',
         'supported_customers_presences' => 'setSupportedCustomersPresences',
         'supported_features' => 'setSupportedFeatures'
     ];
@@ -145,6 +149,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         'payment_method_brand' => 'getPaymentMethodBrand',
         'primary_risk_taker' => 'getPrimaryRiskTaker',
         'processor' => 'getProcessor',
+        'supported_currencies' => 'getSupportedCurrencies',
         'supported_customers_presences' => 'getSupportedCustomersPresences',
         'supported_features' => 'getSupportedFeatures'
     ];
@@ -188,6 +193,8 @@ class PaymentConnector implements ModelInterface, ArrayAccess
         $this->container['primary_risk_taker'] = isset($data['primary_risk_taker']) ? $data['primary_risk_taker'] : null;
         
         $this->container['processor'] = isset($data['processor']) ? $data['processor'] : null;
+        
+        $this->container['supported_currencies'] = isset($data['supported_currencies']) ? $data['supported_currencies'] : null;
         
         $this->container['supported_customers_presences'] = isset($data['supported_customers_presences']) ? $data['supported_customers_presences'] : null;
         
@@ -554,6 +561,31 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     public function setProcessor($processor)
     {
         $this->container['processor'] = $processor;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets supported_currencies
+     *
+     * @return string[]
+     */
+    public function getSupportedCurrencies()
+    {
+        return $this->container['supported_currencies'];
+    }
+
+    /**
+     * Sets supported_currencies
+     *
+     * @param string[] $supported_currencies 
+     *
+     * @return $this
+     */
+    public function setSupportedCurrencies($supported_currencies)
+    {
+        $this->container['supported_currencies'] = $supported_currencies;
 
         return $this;
     }

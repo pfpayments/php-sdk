@@ -532,7 +532,7 @@ class PaymentLinkUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters. If no amount for the payment link is defined, the additional checkout page to enter the amount is shown to the consumer.
      *
      * @return $this
      */

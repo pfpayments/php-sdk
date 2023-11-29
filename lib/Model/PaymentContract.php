@@ -57,6 +57,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'created_on' => '\DateTime',
         'external_id' => 'string',
         'id' => 'int',
+        'last_modified_date' => '\DateTime',
         'rejected_on' => '\DateTime',
         'rejection_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
         'start_terminating_on' => '\DateTime',
@@ -80,6 +81,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'created_on' => 'date-time',
         'external_id' => null,
         'id' => 'int64',
+        'last_modified_date' => 'date-time',
         'rejected_on' => 'date-time',
         'rejection_reason' => null,
         'start_terminating_on' => 'date-time',
@@ -104,6 +106,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'created_on' => 'createdOn',
         'external_id' => 'externalId',
         'id' => 'id',
+        'last_modified_date' => 'lastModifiedDate',
         'rejected_on' => 'rejectedOn',
         'rejection_reason' => 'rejectionReason',
         'start_terminating_on' => 'startTerminatingOn',
@@ -127,6 +130,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'created_on' => 'setCreatedOn',
         'external_id' => 'setExternalId',
         'id' => 'setId',
+        'last_modified_date' => 'setLastModifiedDate',
         'rejected_on' => 'setRejectedOn',
         'rejection_reason' => 'setRejectionReason',
         'start_terminating_on' => 'setStartTerminatingOn',
@@ -150,6 +154,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'created_on' => 'getCreatedOn',
         'external_id' => 'getExternalId',
         'id' => 'getId',
+        'last_modified_date' => 'getLastModifiedDate',
         'rejected_on' => 'getRejectedOn',
         'rejection_reason' => 'getRejectionReason',
         'start_terminating_on' => 'getStartTerminatingOn',
@@ -192,6 +197,8 @@ class PaymentContract implements ModelInterface, ArrayAccess
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['last_modified_date'] = isset($data['last_modified_date']) ? $data['last_modified_date'] : null;
         
         $this->container['rejected_on'] = isset($data['rejected_on']) ? $data['rejected_on'] : null;
         
@@ -493,6 +500,31 @@ class PaymentContract implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets last_modified_date
+     *
+     * @return \DateTime
+     */
+    public function getLastModifiedDate()
+    {
+        return $this->container['last_modified_date'];
+    }
+
+    /**
+     * Sets last_modified_date
+     *
+     * @param \DateTime $last_modified_date The date and time when the object was last modified.
+     *
+     * @return $this
+     */
+    public function setLastModifiedDate($last_modified_date)
+    {
+        $this->container['last_modified_date'] = $last_modified_date;
 
         return $this;
     }

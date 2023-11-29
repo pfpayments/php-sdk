@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.0.0",
+        'x-meta-sdk-version' => "4.0.1",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.0.0/php';
+	private $userAgent = 'PHP-Client/4.0.1/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -1459,6 +1459,30 @@ final class ApiClient {
             $this->userSpaceRoleService = new \PostFinanceCheckout\Sdk\Service\UserSpaceRoleService($this);
         }
         return $this->userSpaceRoleService;
+    }
+    
+    protected $webAppService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\WebAppService
+     */
+    public function getWebAppService() {
+        if(is_null($this->webAppService)){
+            $this->webAppService = new \PostFinanceCheckout\Sdk\Service\WebAppService($this);
+        }
+        return $this->webAppService;
+    }
+    
+    protected $webhookEncryptionService;
+
+    /**
+     * @return \PostFinanceCheckout\Sdk\Service\WebhookEncryptionService
+     */
+    public function getWebhookEncryptionService() {
+        if(is_null($this->webhookEncryptionService)){
+            $this->webhookEncryptionService = new \PostFinanceCheckout\Sdk\Service\WebhookEncryptionService($this);
+        }
+        return $this->webhookEncryptionService;
     }
     
     protected $webhookListenerService;

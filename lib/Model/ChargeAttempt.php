@@ -72,7 +72,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'token_version' => '\PostFinanceCheckout\Sdk\Model\TokenVersion',
         'user_failure_message' => 'string',
         'version' => 'int',
-        'wallet_type' => '\PostFinanceCheckout\Sdk\Model\WalletType'
+        'wallet' => '\PostFinanceCheckout\Sdk\Model\WalletType'
     ];
 
     /**
@@ -106,7 +106,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'token_version' => null,
         'user_failure_message' => null,
         'version' => 'int32',
-        'wallet_type' => null
+        'wallet' => null
     ];
 
     /**
@@ -141,7 +141,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'token_version' => 'tokenVersion',
         'user_failure_message' => 'userFailureMessage',
         'version' => 'version',
-        'wallet_type' => 'walletType'
+        'wallet' => 'wallet'
     ];
 
     /**
@@ -175,7 +175,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'token_version' => 'setTokenVersion',
         'user_failure_message' => 'setUserFailureMessage',
         'version' => 'setVersion',
-        'wallet_type' => 'setWalletType'
+        'wallet' => 'setWallet'
     ];
 
     /**
@@ -209,7 +209,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'token_version' => 'getTokenVersion',
         'user_failure_message' => 'getUserFailureMessage',
         'version' => 'getVersion',
-        'wallet_type' => 'getWalletType'
+        'wallet' => 'getWallet'
     ];
 
     
@@ -276,7 +276,7 @@ class ChargeAttempt extends TransactionAwareEntity
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
-        $this->container['wallet_type'] = isset($data['wallet_type']) ? $data['wallet_type'] : null;
+        $this->container['wallet'] = isset($data['wallet']) ? $data['wallet'] : null;
         
     }
 
@@ -1003,25 +1003,25 @@ class ChargeAttempt extends TransactionAwareEntity
     
 
     /**
-     * Gets wallet_type
+     * Gets wallet
      *
      * @return \PostFinanceCheckout\Sdk\Model\WalletType
      */
-    public function getWalletType()
+    public function getWallet()
     {
-        return $this->container['wallet_type'];
+        return $this->container['wallet'];
     }
 
     /**
-     * Sets wallet_type
+     * Sets wallet
      *
-     * @param \PostFinanceCheckout\Sdk\Model\WalletType $wallet_type 
+     * @param \PostFinanceCheckout\Sdk\Model\WalletType $wallet 
      *
      * @return $this
      */
-    public function setWalletType($wallet_type)
+    public function setWallet($wallet)
     {
-        $this->container['wallet_type'] = $wallet_type;
+        $this->container['wallet'] = $wallet;
 
         return $this;
     }

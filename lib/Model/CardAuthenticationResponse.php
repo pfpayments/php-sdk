@@ -35,11 +35,11 @@ class CardAuthenticationResponse
     /**
      * Possible values of this enum
      */
-    const ENROLLMENT_VERIFICATION_ERROR = 'ENROLLMENT_VERIFICATION_ERROR';
-    const NOT_ENROLLED = 'NOT_ENROLLED';
-    const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-    const AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED';
     const FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED';
+    const AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED';
+    const NOT_ENROLLED = 'NOT_ENROLLED';
+    const ENROLLMENT_ERROR = 'ENROLLMENT_ERROR';
+    const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
     
     /**
      * Gets allowable values of the enum
@@ -48,11 +48,11 @@ class CardAuthenticationResponse
     public static function getAllowableEnumValues()
     {
         return [
-            self::ENROLLMENT_VERIFICATION_ERROR,
-            self::NOT_ENROLLED,
-            self::AUTHENTICATION_ERROR,
-            self::AUTHENTICATION_NOT_REQUIRED,
             self::FULLY_AUTHENTICATED,
+            self::AUTHENTICATION_NOT_REQUIRED,
+            self::NOT_ENROLLED,
+            self::ENROLLMENT_ERROR,
+            self::AUTHENTICATION_ERROR,
         ];
     }
 }

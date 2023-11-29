@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * RestCountry model
+ * WebAppConfirmationRequest model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RestCountry implements ModelInterface, ArrayAccess
+class WebAppConfirmationRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RestCountry';
+    protected static $swaggerModelName = 'WebAppConfirmationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +49,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address_format' => '\PostFinanceCheckout\Sdk\Model\RestAddressFormat',
-        'iso_code2' => 'string',
-        'iso_code3' => 'string',
-        'name' => 'string',
-        'numeric_code' => 'string',
-        'state_codes' => 'string[]'
+        'code' => 'string'
     ];
 
     /**
@@ -63,12 +58,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'address_format' => null,
-        'iso_code2' => null,
-        'iso_code3' => null,
-        'name' => null,
-        'numeric_code' => null,
-        'state_codes' => null
+        'code' => null
     ];
 
     /**
@@ -78,12 +68,7 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address_format' => 'addressFormat',
-        'iso_code2' => 'isoCode2',
-        'iso_code3' => 'isoCode3',
-        'name' => 'name',
-        'numeric_code' => 'numericCode',
-        'state_codes' => 'stateCodes'
+        'code' => 'code'
     ];
 
     /**
@@ -92,12 +77,7 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address_format' => 'setAddressFormat',
-        'iso_code2' => 'setIsoCode2',
-        'iso_code3' => 'setIsoCode3',
-        'name' => 'setName',
-        'numeric_code' => 'setNumericCode',
-        'state_codes' => 'setStateCodes'
+        'code' => 'setCode'
     ];
 
     /**
@@ -106,12 +86,7 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address_format' => 'getAddressFormat',
-        'iso_code2' => 'getIsoCode2',
-        'iso_code3' => 'getIsoCode3',
-        'name' => 'getName',
-        'numeric_code' => 'getNumericCode',
-        'state_codes' => 'getStateCodes'
+        'code' => 'getCode'
     ];
 
     
@@ -132,17 +107,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['address_format'] = isset($data['address_format']) ? $data['address_format'] : null;
-        
-        $this->container['iso_code2'] = isset($data['iso_code2']) ? $data['iso_code2'] : null;
-        
-        $this->container['iso_code3'] = isset($data['iso_code3']) ? $data['iso_code3'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['numeric_code'] = isset($data['numeric_code']) ? $data['numeric_code'] : null;
-        
-        $this->container['state_codes'] = isset($data['state_codes']) ? $data['state_codes'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
         
     }
 
@@ -154,6 +119,10 @@ class RestCountry implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['code']) && (mb_strlen($this->container['code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'code', the character length must be smaller than or equal to 100.";
+        }
 
         return $invalidProperties;
     }
@@ -236,150 +205,29 @@ class RestCountry implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets address_format
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\RestAddressFormat
-     */
-    public function getAddressFormat()
-    {
-        return $this->container['address_format'];
-    }
-
-    /**
-     * Sets address_format
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
-     *
-     * @return $this
-     */
-    public function setAddressFormat($address_format)
-    {
-        $this->container['address_format'] = $address_format;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets iso_code2
+     * Gets code
      *
      * @return string
      */
-    public function getIsoCode2()
+    public function getCode()
     {
-        return $this->container['iso_code2'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets iso_code2
+     * Sets code
      *
-     * @param string $iso_code2 The country's two-letter code (ISO 3166-1 alpha-2 format).
+     * @param string $code The user returns to the web app after granting the permission. The HTTP request contains the code. Provide it here to confirm the web app installation.
      *
      * @return $this
      */
-    public function setIsoCode2($iso_code2)
+    public function setCode($code)
     {
-        $this->container['iso_code2'] = $iso_code2;
+        if (!is_null($code) && (mb_strlen($code) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $code when calling WebAppConfirmationRequest., must be smaller than or equal to 100.');
+        }
 
-        return $this;
-    }
-    
-
-    /**
-     * Gets iso_code3
-     *
-     * @return string
-     */
-    public function getIsoCode3()
-    {
-        return $this->container['iso_code3'];
-    }
-
-    /**
-     * Sets iso_code3
-     *
-     * @param string $iso_code3 The country's three-letter code (ISO 3166-1 alpha-3 format).
-     *
-     * @return $this
-     */
-    public function setIsoCode3($iso_code3)
-    {
-        $this->container['iso_code3'] = $iso_code3;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name of the country.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets numeric_code
-     *
-     * @return string
-     */
-    public function getNumericCode()
-    {
-        return $this->container['numeric_code'];
-    }
-
-    /**
-     * Sets numeric_code
-     *
-     * @param string $numeric_code The country's three-digit code (ISO 3166-1 numeric format).
-     *
-     * @return $this
-     */
-    public function setNumericCode($numeric_code)
-    {
-        $this->container['numeric_code'] = $numeric_code;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state_codes
-     *
-     * @return string[]
-     */
-    public function getStateCodes()
-    {
-        return $this->container['state_codes'];
-    }
-
-    /**
-     * Sets state_codes
-     *
-     * @param string[] $state_codes The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
-     *
-     * @return $this
-     */
-    public function setStateCodes($state_codes)
-    {
-        $this->container['state_codes'] = $state_codes;
+        $this->container['code'] = $code;
 
         return $this;
     }

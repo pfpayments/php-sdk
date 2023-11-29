@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * RestCountry model
+ * WebAppConfirmationResponse model
  *
  * @category    Class
- * @description 
+ * @description The confirmation response provides the details about the installation of the web app.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RestCountry implements ModelInterface, ArrayAccess
+class WebAppConfirmationResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RestCountry';
+    protected static $swaggerModelName = 'WebAppConfirmationResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +49,11 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address_format' => '\PostFinanceCheckout\Sdk\Model\RestAddressFormat',
-        'iso_code2' => 'string',
-        'iso_code3' => 'string',
-        'name' => 'string',
-        'numeric_code' => 'string',
-        'state_codes' => 'string[]'
+        'access_token' => 'string',
+        'scope' => 'string',
+        'space' => '\PostFinanceCheckout\Sdk\Model\Space',
+        'state' => 'string',
+        'token_type' => 'string'
     ];
 
     /**
@@ -63,12 +62,11 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'address_format' => null,
-        'iso_code2' => null,
-        'iso_code3' => null,
-        'name' => null,
-        'numeric_code' => null,
-        'state_codes' => null
+        'access_token' => null,
+        'scope' => null,
+        'space' => null,
+        'state' => null,
+        'token_type' => null
     ];
 
     /**
@@ -78,12 +76,11 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address_format' => 'addressFormat',
-        'iso_code2' => 'isoCode2',
-        'iso_code3' => 'isoCode3',
-        'name' => 'name',
-        'numeric_code' => 'numericCode',
-        'state_codes' => 'stateCodes'
+        'access_token' => 'access_token',
+        'scope' => 'scope',
+        'space' => 'space',
+        'state' => 'state',
+        'token_type' => 'token_type'
     ];
 
     /**
@@ -92,12 +89,11 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address_format' => 'setAddressFormat',
-        'iso_code2' => 'setIsoCode2',
-        'iso_code3' => 'setIsoCode3',
-        'name' => 'setName',
-        'numeric_code' => 'setNumericCode',
-        'state_codes' => 'setStateCodes'
+        'access_token' => 'setAccessToken',
+        'scope' => 'setScope',
+        'space' => 'setSpace',
+        'state' => 'setState',
+        'token_type' => 'setTokenType'
     ];
 
     /**
@@ -106,12 +102,11 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address_format' => 'getAddressFormat',
-        'iso_code2' => 'getIsoCode2',
-        'iso_code3' => 'getIsoCode3',
-        'name' => 'getName',
-        'numeric_code' => 'getNumericCode',
-        'state_codes' => 'getStateCodes'
+        'access_token' => 'getAccessToken',
+        'scope' => 'getScope',
+        'space' => 'getSpace',
+        'state' => 'getState',
+        'token_type' => 'getTokenType'
     ];
 
     
@@ -132,17 +127,15 @@ class RestCountry implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['address_format'] = isset($data['address_format']) ? $data['address_format'] : null;
+        $this->container['access_token'] = isset($data['access_token']) ? $data['access_token'] : null;
         
-        $this->container['iso_code2'] = isset($data['iso_code2']) ? $data['iso_code2'] : null;
+        $this->container['scope'] = isset($data['scope']) ? $data['scope'] : null;
         
-        $this->container['iso_code3'] = isset($data['iso_code3']) ? $data['iso_code3'] : null;
+        $this->container['space'] = isset($data['space']) ? $data['space'] : null;
         
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['numeric_code'] = isset($data['numeric_code']) ? $data['numeric_code'] : null;
-        
-        $this->container['state_codes'] = isset($data['state_codes']) ? $data['state_codes'] : null;
+        $this->container['token_type'] = isset($data['token_type']) ? $data['token_type'] : null;
         
     }
 
@@ -236,150 +229,125 @@ class RestCountry implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets address_format
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\RestAddressFormat
-     */
-    public function getAddressFormat()
-    {
-        return $this->container['address_format'];
-    }
-
-    /**
-     * Sets address_format
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
-     *
-     * @return $this
-     */
-    public function setAddressFormat($address_format)
-    {
-        $this->container['address_format'] = $address_format;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets iso_code2
+     * Gets access_token
      *
      * @return string
      */
-    public function getIsoCode2()
+    public function getAccessToken()
     {
-        return $this->container['iso_code2'];
+        return $this->container['access_token'];
     }
 
     /**
-     * Sets iso_code2
+     * Sets access_token
      *
-     * @param string $iso_code2 The country's two-letter code (ISO 3166-1 alpha-2 format).
+     * @param string $access_token The access code grants permissions to the web service API according to the OAuth standard.
      *
      * @return $this
      */
-    public function setIsoCode2($iso_code2)
+    public function setAccessToken($access_token)
     {
-        $this->container['iso_code2'] = $iso_code2;
+        $this->container['access_token'] = $access_token;
 
         return $this;
     }
     
 
     /**
-     * Gets iso_code3
+     * Gets scope
      *
      * @return string
      */
-    public function getIsoCode3()
+    public function getScope()
     {
-        return $this->container['iso_code3'];
+        return $this->container['scope'];
     }
 
     /**
-     * Sets iso_code3
+     * Sets scope
      *
-     * @param string $iso_code3 The country's three-letter code (ISO 3166-1 alpha-3 format).
+     * @param string $scope The scope contains the permissions granted to the web app within the space.
      *
      * @return $this
      */
-    public function setIsoCode3($iso_code3)
+    public function setScope($scope)
     {
-        $this->container['iso_code3'] = $iso_code3;
+        $this->container['scope'] = $scope;
 
         return $this;
     }
     
 
     /**
-     * Gets name
+     * Gets space
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Space
+     */
+    public function getSpace()
+    {
+        return $this->container['space'];
+    }
+
+    /**
+     * Sets space
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Space $space This is the space into which the web app is installed into.
+     *
+     * @return $this
+     */
+    public function setSpace($space)
+    {
+        $this->container['space'] = $space;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
      *
      * @return string
      */
-    public function getName()
+    public function getState()
     {
-        return $this->container['name'];
+        return $this->container['state'];
     }
 
     /**
-     * Sets name
+     * Sets state
      *
-     * @param string $name The name of the country.
+     * @param string $state The state contains the state parameter content provided when initiating the app installation.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setState($state)
     {
-        $this->container['name'] = $name;
+        $this->container['state'] = $state;
 
         return $this;
     }
     
 
     /**
-     * Gets numeric_code
+     * Gets token_type
      *
      * @return string
      */
-    public function getNumericCode()
+    public function getTokenType()
     {
-        return $this->container['numeric_code'];
+        return $this->container['token_type'];
     }
 
     /**
-     * Sets numeric_code
+     * Sets token_type
      *
-     * @param string $numeric_code The country's three-digit code (ISO 3166-1 numeric format).
+     * @param string $token_type The token type indicates the type of the access token. The type determines the authentication mechanism to use for accessing the web service API.
      *
      * @return $this
      */
-    public function setNumericCode($numeric_code)
+    public function setTokenType($token_type)
     {
-        $this->container['numeric_code'] = $numeric_code;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state_codes
-     *
-     * @return string[]
-     */
-    public function getStateCodes()
-    {
-        return $this->container['state_codes'];
-    }
-
-    /**
-     * Sets state_codes
-     *
-     * @param string[] $state_codes The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
-     *
-     * @return $this
-     */
-    public function setStateCodes($state_codes)
-    {
-        $this->container['state_codes'] = $state_codes;
+        $this->container['token_type'] = $token_type;
 
         return $this;
     }

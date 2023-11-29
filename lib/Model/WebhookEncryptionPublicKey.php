@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * RestCountry model
+ * WebhookEncryptionPublicKey model
  *
  * @category    Class
- * @description 
+ * @description The webhook encryption public key is used to verify the webhook content signature.
  * @package     PostFinanceCheckout\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RestCountry implements ModelInterface, ArrayAccess
+class WebhookEncryptionPublicKey implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RestCountry';
+    protected static $swaggerModelName = 'WebhookEncryptionPublicKey';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +49,8 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address_format' => '\PostFinanceCheckout\Sdk\Model\RestAddressFormat',
-        'iso_code2' => 'string',
-        'iso_code3' => 'string',
-        'name' => 'string',
-        'numeric_code' => 'string',
-        'state_codes' => 'string[]'
+        'id' => 'string',
+        'public_key' => 'string'
     ];
 
     /**
@@ -63,12 +59,8 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'address_format' => null,
-        'iso_code2' => null,
-        'iso_code3' => null,
-        'name' => null,
-        'numeric_code' => null,
-        'state_codes' => null
+        'id' => null,
+        'public_key' => null
     ];
 
     /**
@@ -78,12 +70,8 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address_format' => 'addressFormat',
-        'iso_code2' => 'isoCode2',
-        'iso_code3' => 'isoCode3',
-        'name' => 'name',
-        'numeric_code' => 'numericCode',
-        'state_codes' => 'stateCodes'
+        'id' => 'id',
+        'public_key' => 'publicKey'
     ];
 
     /**
@@ -92,12 +80,8 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address_format' => 'setAddressFormat',
-        'iso_code2' => 'setIsoCode2',
-        'iso_code3' => 'setIsoCode3',
-        'name' => 'setName',
-        'numeric_code' => 'setNumericCode',
-        'state_codes' => 'setStateCodes'
+        'id' => 'setId',
+        'public_key' => 'setPublicKey'
     ];
 
     /**
@@ -106,12 +90,8 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address_format' => 'getAddressFormat',
-        'iso_code2' => 'getIsoCode2',
-        'iso_code3' => 'getIsoCode3',
-        'name' => 'getName',
-        'numeric_code' => 'getNumericCode',
-        'state_codes' => 'getStateCodes'
+        'id' => 'getId',
+        'public_key' => 'getPublicKey'
     ];
 
     
@@ -132,17 +112,9 @@ class RestCountry implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['address_format'] = isset($data['address_format']) ? $data['address_format'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['iso_code2'] = isset($data['iso_code2']) ? $data['iso_code2'] : null;
-        
-        $this->container['iso_code3'] = isset($data['iso_code3']) ? $data['iso_code3'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['numeric_code'] = isset($data['numeric_code']) ? $data['numeric_code'] : null;
-        
-        $this->container['state_codes'] = isset($data['state_codes']) ? $data['state_codes'] : null;
+        $this->container['public_key'] = isset($data['public_key']) ? $data['public_key'] : null;
         
     }
 
@@ -236,150 +208,50 @@ class RestCountry implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets address_format
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\RestAddressFormat
-     */
-    public function getAddressFormat()
-    {
-        return $this->container['address_format'];
-    }
-
-    /**
-     * Sets address_format
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
-     *
-     * @return $this
-     */
-    public function setAddressFormat($address_format)
-    {
-        $this->container['address_format'] = $address_format;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets iso_code2
+     * Gets id
      *
      * @return string
      */
-    public function getIsoCode2()
+    public function getId()
     {
-        return $this->container['iso_code2'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets iso_code2
+     * Sets id
      *
-     * @param string $iso_code2 The country's two-letter code (ISO 3166-1 alpha-2 format).
+     * @param string $id The ID of encryption key
      *
      * @return $this
      */
-    public function setIsoCode2($iso_code2)
+    public function setId($id)
     {
-        $this->container['iso_code2'] = $iso_code2;
+        $this->container['id'] = $id;
 
         return $this;
     }
     
 
     /**
-     * Gets iso_code3
+     * Gets public_key
      *
      * @return string
      */
-    public function getIsoCode3()
+    public function getPublicKey()
     {
-        return $this->container['iso_code3'];
+        return $this->container['public_key'];
     }
 
     /**
-     * Sets iso_code3
+     * Sets public_key
      *
-     * @param string $iso_code3 The country's three-letter code (ISO 3166-1 alpha-3 format).
+     * @param string $public_key The BASE64 encoded public key
      *
      * @return $this
      */
-    public function setIsoCode3($iso_code3)
+    public function setPublicKey($public_key)
     {
-        $this->container['iso_code3'] = $iso_code3;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name of the country.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets numeric_code
-     *
-     * @return string
-     */
-    public function getNumericCode()
-    {
-        return $this->container['numeric_code'];
-    }
-
-    /**
-     * Sets numeric_code
-     *
-     * @param string $numeric_code The country's three-digit code (ISO 3166-1 numeric format).
-     *
-     * @return $this
-     */
-    public function setNumericCode($numeric_code)
-    {
-        $this->container['numeric_code'] = $numeric_code;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state_codes
-     *
-     * @return string[]
-     */
-    public function getStateCodes()
-    {
-        return $this->container['state_codes'];
-    }
-
-    /**
-     * Sets state_codes
-     *
-     * @param string[] $state_codes The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
-     *
-     * @return $this
-     */
-    public function setStateCodes($state_codes)
-    {
-        $this->container['state_codes'] = $state_codes;
+        $this->container['public_key'] = $public_key;
 
         return $this;
     }
