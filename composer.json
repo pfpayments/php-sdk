@@ -1,6 +1,6 @@
 {
     "name": "postfinancecheckout/sdk",
-    "version": "4.0.1",
+    "version": "4.0.2",
 	"description": "PostFinance Checkout SDK for PHP",
 	"keywords": [
 		"postfinancecheckout",
@@ -14,7 +14,8 @@
 	"authors": [
 		{
 			"name": "wallee AG",
-			"homepage": "https://wallee.com"
+			"email": "checkout@postfinance.ch",
+			"homepage": "https://postfinance.ch/en/business/products/e-commerce/postfinance-checkout-all-in-one.html"
 		}
 	],
 	"require": {

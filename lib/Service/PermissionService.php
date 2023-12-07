@@ -31,7 +31,7 @@ use PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PermissionService {
@@ -264,5 +264,6 @@ class PermissionService {
 			throw $e;
 		}
 	}
+
 
 }

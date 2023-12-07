@@ -30,7 +30,7 @@ use PostFinanceCheckout\Sdk\Service\PaymentMethodService;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 final class ApiClientTest extends TestCase
@@ -144,7 +144,7 @@ final class ApiClientTest extends TestCase
         $this->assertGreaterThanOrEqual(4, count($headers));
 
         // Check SDK default header values.
-        $this->assertEquals($headers['x-meta-sdk-version'], "4.0.1");
+        $this->assertEquals($headers['x-meta-sdk-version'], "4.0.2");
         $this->assertEquals($headers['x-meta-sdk-language'], 'php');
         $this->assertEquals($headers['x-meta-sdk-provider'], "PostFinance Checkout");
         $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());

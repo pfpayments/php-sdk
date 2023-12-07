@@ -33,7 +33,7 @@ use PostFinanceCheckout\Sdk\Model\TransactionCreate;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionLightboxServiceTest extends TestCase
