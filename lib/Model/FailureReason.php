@@ -51,7 +51,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'category' => '\PostFinanceCheckout\Sdk\Model\FailureCategory',
         'description' => 'map[string,string]',
-        'features' => 'int[]',
         'id' => 'int',
         'name' => 'map[string,string]'
     ];
@@ -64,7 +63,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'category' => null,
         'description' => null,
-        'features' => 'int64',
         'id' => 'int64',
         'name' => null
     ];
@@ -78,7 +76,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'category' => 'category',
         'description' => 'description',
-        'features' => 'features',
         'id' => 'id',
         'name' => 'name'
     ];
@@ -91,7 +88,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     protected static $setters = [
         'category' => 'setCategory',
         'description' => 'setDescription',
-        'features' => 'setFeatures',
         'id' => 'setId',
         'name' => 'setName'
     ];
@@ -104,7 +100,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     protected static $getters = [
         'category' => 'getCategory',
         'description' => 'getDescription',
-        'features' => 'getFeatures',
         'id' => 'getId',
         'name' => 'getName'
     ];
@@ -130,8 +125,6 @@ class FailureReason implements ModelInterface, ArrayAccess
         $this->container['category'] = isset($data['category']) ? $data['category'] : null;
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['features'] = isset($data['features']) ? $data['features'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -241,7 +234,7 @@ class FailureReason implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param \PostFinanceCheckout\Sdk\Model\FailureCategory $category 
+     * @param \PostFinanceCheckout\Sdk\Model\FailureCategory $category The category that the failure reason belongs to.
      *
      * @return $this
      */
@@ -273,31 +266,6 @@ class FailureReason implements ModelInterface, ArrayAccess
     public function setDescription($description)
     {
         $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets features
-     *
-     * @return int[]
-     */
-    public function getFeatures()
-    {
-        return $this->container['features'];
-    }
-
-    /**
-     * Sets features
-     *
-     * @param int[] $features 
-     *
-     * @return $this
-     */
-    public function setFeatures($features)
-    {
-        $this->container['features'] = $features;
 
         return $this;
     }

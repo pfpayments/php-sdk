@@ -50,7 +50,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'display_name' => 'string',
-        'feature' => '\PostFinanceCheckout\Sdk\Model\Feature',
         'id' => 'int'
     ];
 
@@ -61,7 +60,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'display_name' => null,
-        'feature' => null,
         'id' => 'int64'
     ];
 
@@ -73,7 +71,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'display_name' => 'displayName',
-        'feature' => 'feature',
         'id' => 'id'
     ];
 
@@ -84,7 +81,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'display_name' => 'setDisplayName',
-        'feature' => 'setFeature',
         'id' => 'setId'
     ];
 
@@ -95,7 +91,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'display_name' => 'getDisplayName',
-        'feature' => 'getFeature',
         'id' => 'getId'
     ];
 
@@ -118,8 +113,6 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
     {
         
         $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
-        
-        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -227,38 +220,13 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
     /**
      * Sets display_name
      *
-     * @param string $display_name 
+     * @param string $display_name The name of the feature.
      *
      * @return $this
      */
     public function setDisplayName($display_name)
     {
         $this->container['display_name'] = $display_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets feature
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\Feature
-     */
-    public function getFeature()
-    {
-        return $this->container['feature'];
-    }
-
-    /**
-     * Sets feature
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\Feature $feature 
-     *
-     * @return $this
-     */
-    public function setFeature($feature)
-    {
-        $this->container['feature'] = $feature;
 
         return $this;
     }

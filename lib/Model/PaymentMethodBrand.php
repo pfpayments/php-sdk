@@ -323,7 +323,7 @@ class PaymentMethodBrand implements ModelInterface, ArrayAccess
     /**
      * Sets image_path
      *
-     * @param string $image_path 
+     * @param string $image_path The path to the payment brand's image which is displayed to the customer.
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class PaymentMethodBrand implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method
      *
-     * @param int $payment_method 
+     * @param int $payment_method The payment method that the brand belongs to.
      *
      * @return $this
      */

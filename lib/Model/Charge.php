@@ -384,7 +384,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Sets space_view_id
      *
-     * @param int $space_view_id 
+     * @param int $space_view_id The ID of the space view this object is linked to.
      *
      * @return $this
      */

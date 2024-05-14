@@ -304,7 +304,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $configuration 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfiguration $configuration The payment terminal configuration that the version belongs to.
      *
      * @return $this
      */
@@ -329,7 +329,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets connector_configurations
      *
-     * @param int[] $connector_configurations 
+     * @param int[] $connector_configurations The payment connector configurations that are available on the payment terminal.
      *
      * @return $this
      */
@@ -354,7 +354,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by 
+     * @param int $created_by The ID of the user the payment terminal configuration version was created by.
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets default_currency
      *
-     * @param string $default_currency The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+     * @param string $default_currency The default currency that is used if none is set on the payment terminal itself. If it is empty, the currency is derived from the location of the terminal.
      *
      * @return $this
      */
@@ -479,7 +479,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets maintenance_window_duration
      *
-     * @param string $maintenance_window_duration 
+     * @param string $maintenance_window_duration The permitted duration of the terminals maintenance window.
      *
      * @return $this
      */
@@ -504,7 +504,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets maintenance_window_start
      *
-     * @param string $maintenance_window_start 
+     * @param string $maintenance_window_start The start time of the terminal's maintenance window.
      *
      * @return $this
      */
@@ -579,7 +579,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone 
+     * @param string $time_zone The time zone of the payment terminal used to determine the maintenance window.
      *
      * @return $this
      */
@@ -629,7 +629,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets version_applied_immediately
      *
-     * @param bool $version_applied_immediately 
+     * @param bool $version_applied_immediately Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
      *
      * @return $this
      */

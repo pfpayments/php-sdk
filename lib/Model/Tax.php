@@ -228,7 +228,7 @@ class Tax implements ModelInterface, ArrayAccess
     /**
      * Sets rate
      *
-     * @param float $rate 
+     * @param float $rate The tax rate to be applied.
      *
      * @return $this
      */
@@ -253,7 +253,7 @@ class Tax implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string $title 
+     * @param string $title The name of the tax.
      *
      * @return $this
      */

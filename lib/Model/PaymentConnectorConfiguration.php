@@ -55,6 +55,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'enabled_sales_channels' => '\PostFinanceCheckout\Sdk\Model\SalesChannel[]',
         'enabled_space_views' => 'int[]',
         'id' => 'int',
+        'image_path' => 'string',
         'linked_space_id' => 'int',
         'name' => 'string',
         'payment_method_configuration' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration',
@@ -77,6 +78,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'enabled_sales_channels' => null,
         'enabled_space_views' => 'int64',
         'id' => 'int64',
+        'image_path' => null,
         'linked_space_id' => 'int64',
         'name' => null,
         'payment_method_configuration' => null,
@@ -100,6 +102,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'enabled_sales_channels' => 'enabledSalesChannels',
         'enabled_space_views' => 'enabledSpaceViews',
         'id' => 'id',
+        'image_path' => 'imagePath',
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
         'payment_method_configuration' => 'paymentMethodConfiguration',
@@ -122,6 +125,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'enabled_sales_channels' => 'setEnabledSalesChannels',
         'enabled_space_views' => 'setEnabledSpaceViews',
         'id' => 'setId',
+        'image_path' => 'setImagePath',
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
         'payment_method_configuration' => 'setPaymentMethodConfiguration',
@@ -144,6 +148,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'enabled_sales_channels' => 'getEnabledSalesChannels',
         'enabled_space_views' => 'getEnabledSpaceViews',
         'id' => 'getId',
+        'image_path' => 'getImagePath',
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
         'payment_method_configuration' => 'getPaymentMethodConfiguration',
@@ -183,6 +188,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         $this->container['enabled_space_views'] = isset($data['enabled_space_views']) ? $data['enabled_space_views'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['image_path'] = isset($data['image_path']) ? $data['image_path'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
@@ -308,7 +315,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets applicable_for_transaction_processing
      *
-     * @param bool $applicable_for_transaction_processing This property indicates if the connector is currently used for processing transactions. In case either the payment method configuration or the processor configuration is not active the connector will not be used even though the connector state is active.
+     * @param bool $applicable_for_transaction_processing Whether this connector configuration is enabled for processing payments, taking into account the state of the processor and payment method configurations.
      *
      * @return $this
      */
@@ -333,7 +340,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets conditions
      *
-     * @param int[] $conditions If a transaction meet all selected conditions the connector configuration will be used to process the transaction otherwise the next connector configuration in line will be chosen according to the priorities.
+     * @param int[] $conditions Conditions allow you to define criteria that a transaction must fulfill in order for the connector configuration to be considered for processing the payment.
      *
      * @return $this
      */
@@ -358,7 +365,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets connector
      *
-     * @param int $connector 
+     * @param int $connector The connector that the configuration is for.
      *
      * @return $this
      */
@@ -383,7 +390,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_sales_channels
      *
-     * @param \PostFinanceCheckout\Sdk\Model\SalesChannel[] $enabled_sales_channels Defines the sales channels the connector configuration is enabled for. In case the set is empty, the connector configuration is enabled for all sales channels.
+     * @param \PostFinanceCheckout\Sdk\Model\SalesChannel[] $enabled_sales_channels The sales channels for which the connector configuration is enabled. If empty, it is enabled for all sales channels.
      *
      * @return $this
      */
@@ -408,7 +415,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_space_views
      *
-     * @param int[] $enabled_space_views The connector configuration is only enabled for the selected space views. In case the set is empty the connector configuration is enabled for all space views.
+     * @param int[] $enabled_space_views The space views for which the connector configuration is enabled. If empty, it is enabled for all space views.
      *
      * @return $this
      */
@@ -440,6 +447,31 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets image_path
+     *
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->container['image_path'];
+    }
+
+    /**
+     * Sets image_path
+     *
+     * @param string $image_path The URL to the connector's image.
+     *
+     * @return $this
+     */
+    public function setImagePath($image_path)
+    {
+        $this->container['image_path'] = $image_path;
 
         return $this;
     }
@@ -483,7 +515,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The connector configuration name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the connector configuration.
      *
      * @return $this
      */
@@ -512,7 +544,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method_configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration $payment_method_configuration 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration $payment_method_configuration The payment method configuration that the connector configuration belongs to.
      *
      * @return $this
      */
@@ -562,7 +594,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets priority
      *
-     * @param int $priority The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be. This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
+     * @param int $priority The priority that determines the order in which connector configurations are taken into account when processing a payment. Low values are considered first.
      *
      * @return $this
      */
@@ -587,7 +619,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets processor_configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration $processor_configuration 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentProcessorConfiguration $processor_configuration The processor configuration that the connector configuration belongs to.
      *
      * @return $this
      */

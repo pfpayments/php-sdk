@@ -255,7 +255,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets data_collection_types
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType[] $data_collection_types 
+     * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that are supported by the payment method.
      *
      * @return $this
      */
@@ -330,7 +330,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets image_path
      *
-     * @param string $image_path 
+     * @param string $image_path The path to the payment method's image which is displayed to the customer.
      *
      * @return $this
      */
@@ -405,7 +405,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets supported_currencies
      *
-     * @param string[] $supported_currencies 
+     * @param string[] $supported_currencies The currencies that are supported by the payment method.
      *
      * @return $this
      */

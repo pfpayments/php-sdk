@@ -273,7 +273,7 @@ class PaymentProcessorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets application_managed
      *
-     * @param bool $application_managed The configuration is managed by the application and cannot be changed via the user interface.
+     * @param bool $application_managed Whether the processor configuration is managed by the application and therefore cannot be changed.
      *
      * @return $this
      */
@@ -298,7 +298,7 @@ class PaymentProcessorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets contract_id
      *
-     * @param int $contract_id The contract links the processor configuration with the contract that is used to process payments.
+     * @param int $contract_id The ID of the payment contract the processor configuration is linked to.
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class PaymentProcessorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The processor configuration name is used internally to identify a specific processor configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the payment method configuration.
      *
      * @return $this
      */
@@ -427,7 +427,7 @@ class PaymentProcessorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets processor
      *
-     * @param int $processor A processor handles the connection to a third part company (a Payment Service Provider) that technically manages the transaction and therefore processes the payment. For the same processor multiple processor configuration can be setup.
+     * @param int $processor The payment processor that the configuration is for.
      *
      * @return $this
      */

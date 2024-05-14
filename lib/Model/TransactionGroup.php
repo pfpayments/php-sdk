@@ -266,7 +266,7 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets begin_date
      *
-     * @param \DateTime $begin_date 
+     * @param \DateTime $begin_date The date and time when the initial transaction in the group was created.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets customer_id
      *
-     * @param string $customer_id 
+     * @param string $customer_id The unique identifier of the customer in the external system.
      *
      * @return $this
      */
@@ -320,7 +320,7 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets end_date
      *
-     * @param \DateTime $end_date 
+     * @param \DateTime $end_date The date and time when the final transaction in the group was last updated.
      *
      * @return $this
      */

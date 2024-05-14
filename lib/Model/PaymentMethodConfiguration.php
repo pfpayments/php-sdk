@@ -329,7 +329,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets data_collection_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType $data_collection_type The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
+     * @param \PostFinanceCheckout\Sdk\Model\DataCollectionType $data_collection_type The data collection type specifies how the payment information is collected.
      *
      * @return $this
      */
@@ -354,7 +354,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
+     * @param map[string,string] $description A custom description for the payment method which is displayed to the customer.
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets image_resource_path
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ModelResourcePath $image_resource_path The image of the payment method configuration overrides the default image of the payment method.
+     * @param \PostFinanceCheckout\Sdk\Model\ModelResourcePath $image_resource_path The resource path to a custom image for the payment method which is displayed to the customer.
      *
      * @return $this
      */
@@ -454,7 +454,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The payment method configuration name is used internally to identify the payment method configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the payment method configuration.
      *
      * @return $this
      */
@@ -483,7 +483,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets one_click_payment_mode
      *
-     * @param \PostFinanceCheckout\Sdk\Model\OneClickPaymentMode $one_click_payment_mode When the buyer is present on the payment page or within the iFrame the payment details can be stored automatically. The buyer will be able to use the stored payment details for subsequent transactions. When the transaction already contains a token one-click payments are disabled anyway
+     * @param \PostFinanceCheckout\Sdk\Model\OneClickPaymentMode $one_click_payment_mode The one-click payment mode determines whether the customer can save their payment details for later payments.
      *
      * @return $this
      */
@@ -508,7 +508,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method
      *
-     * @param int $payment_method 
+     * @param int $payment_method The payment method that the configuration is for.
      *
      * @return $this
      */
@@ -558,7 +558,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets resolved_description
      *
-     * @param map[string,string] $resolved_description The resolved description uses the specified description or the default one when it is not overridden.
+     * @param map[string,string] $resolved_description The description for the payment method that is actually displayed to the customer. This is either the custom description, if defined, or otherwise the payment method's default one.
      *
      * @return $this
      */
@@ -583,7 +583,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets resolved_image_url
      *
-     * @param string $resolved_image_url The resolved URL of the image to use with this payment method.
+     * @param string $resolved_image_url The image URL for the payment method that is actually displayed to the customer. This is either the custom image, if defined, or otherwise the payment method's default one.
      *
      * @return $this
      */
@@ -608,7 +608,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets resolved_title
      *
-     * @param map[string,string] $resolved_title The resolved title uses the specified title or the default one when it is not overridden.
+     * @param map[string,string] $resolved_title The title for the payment method that is actually displayed to the customer. This is either the custom title, if defined, or otherwise the payment method's default one.
      *
      * @return $this
      */
@@ -633,7 +633,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets sort_order
      *
-     * @param int $sort_order The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
+     * @param int $sort_order When listing payment methods, they can be sorted by this number.
      *
      * @return $this
      */
@@ -658,7 +658,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets space_id
      *
-     * @param int $space_id 
+     * @param int $space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -708,7 +708,7 @@ class PaymentMethodConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param map[string,string] $title The title of the payment method configuration is used within the payment process. The title is visible to the customer.
+     * @param map[string,string] $title A custom title for the payment method which is displayed to the customer.
      *
      * @return $this
      */

@@ -27,7 +27,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * PaymentProcessor model
  *
  * @category    Class
- * @description 
+ * @description Payment processors handle the connection to third part companies (payment service providers) that technically manage payment transactions and therefore process payments.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -51,7 +51,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'company_name' => 'map[string,string]',
         'description' => 'map[string,string]',
-        'feature' => 'int',
         'headquarters_location' => 'map[string,string]',
         'id' => 'int',
         'logo_path' => 'string',
@@ -67,7 +66,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'company_name' => null,
         'description' => null,
-        'feature' => 'int64',
         'headquarters_location' => null,
         'id' => 'int64',
         'logo_path' => null,
@@ -84,7 +82,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'company_name' => 'companyName',
         'description' => 'description',
-        'feature' => 'feature',
         'headquarters_location' => 'headquartersLocation',
         'id' => 'id',
         'logo_path' => 'logoPath',
@@ -100,7 +97,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     protected static $setters = [
         'company_name' => 'setCompanyName',
         'description' => 'setDescription',
-        'feature' => 'setFeature',
         'headquarters_location' => 'setHeadquartersLocation',
         'id' => 'setId',
         'logo_path' => 'setLogoPath',
@@ -116,7 +112,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     protected static $getters = [
         'company_name' => 'getCompanyName',
         'description' => 'getDescription',
-        'feature' => 'getFeature',
         'headquarters_location' => 'getHeadquartersLocation',
         'id' => 'getId',
         'logo_path' => 'getLogoPath',
@@ -145,8 +140,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
         $this->container['company_name'] = isset($data['company_name']) ? $data['company_name'] : null;
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
         
         $this->container['headquarters_location'] = isset($data['headquarters_location']) ? $data['headquarters_location'] : null;
         
@@ -262,7 +255,7 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets company_name
      *
-     * @param map[string,string] $company_name 
+     * @param map[string,string] $company_name The name of the company to which the processor belongs.
      *
      * @return $this
      */
@@ -300,31 +293,6 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets feature
-     *
-     * @return int
-     */
-    public function getFeature()
-    {
-        return $this->container['feature'];
-    }
-
-    /**
-     * Sets feature
-     *
-     * @param int $feature 
-     *
-     * @return $this
-     */
-    public function setFeature($feature)
-    {
-        $this->container['feature'] = $feature;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets headquarters_location
      *
      * @return map[string,string]
@@ -337,7 +305,7 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets headquarters_location
      *
-     * @param map[string,string] $headquarters_location 
+     * @param map[string,string] $headquarters_location Where the processor's headquarters are located.
      *
      * @return $this
      */
@@ -387,7 +355,7 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets logo_path
      *
-     * @param string $logo_path 
+     * @param string $logo_path The path to the logo image of the processor.
      *
      * @return $this
      */
@@ -437,7 +405,7 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets product_name
      *
-     * @param map[string,string] $product_name 
+     * @param map[string,string] $product_name The name of the processor's product.
      *
      * @return $this
      */

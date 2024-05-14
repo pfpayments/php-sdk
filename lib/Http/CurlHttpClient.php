@@ -39,6 +39,9 @@ final class CurlHttpClient implements IHttpClient {
 
 	public function send(ApiClient $apiClient, HttpRequest $request) {
 		$curl = curl_init();
+
+		$tempCAFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "PostFinance Checkout-ca-bundle.crt";
+
 		// set timeout, if needed
 		if ($request->getTimeOut() !== 0) {
 			curl_setopt($curl, CURLOPT_TIMEOUT, $request->getTimeOut());
@@ -58,7 +61,11 @@ final class CurlHttpClient implements IHttpClient {
 		} else {
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-			curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+			if (file_exists($tempCAFile)) {
+				// use the temporal CA Bundle if it was set, which indicates a previous error.
+				$apiClient->setCertificateAuthority($tempCAFile);
+				curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+			}
 		}
 
 		if ($request->getMethod() === HttpRequest::POST) {
@@ -102,7 +109,22 @@ final class CurlHttpClient implements IHttpClient {
 
 		// Make the request
 		$response = curl_exec($curl);
-		$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
+		if ($response) {
+			$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
+		} else {
+			// if there was an error, try again with the CA bundle provided by this SDK.
+			if (!file_exists($tempCAFile)) {
+				$caContent = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "ca-bundle.crt");
+				file_put_contents($tempCAFile, $caContent);
+
+				// Try again the request, this time with the CA bundle provided by this SDK.
+				$apiClient->setCertificateAuthority($tempCAFile);
+				curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+				$response = curl_exec($curl);
+				$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
+			}
+		}
+
 		curl_close($curl);
 		fclose($debugFilePointer);
 

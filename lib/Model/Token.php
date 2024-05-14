@@ -330,7 +330,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets customer_email_address
      *
-     * @param string $customer_email_address The customer email address is the email address of the customer.
+     * @param string $customer_email_address The customer's email address.
      *
      * @return $this
      */
@@ -359,7 +359,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets customer_id
      *
-     * @param string $customer_id The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
+     * @param string $customer_id The unique identifier of the customer in the external system.
      *
      * @return $this
      */
@@ -384,7 +384,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_for_one_click_payment
      *
-     * @param bool $enabled_for_one_click_payment When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
+     * @param bool $enabled_for_one_click_payment Whether the token is enabled for one-click payments, which simplify the payment process for the customer. One-click tokens are linked to customers via the customer ID.
      *
      * @return $this
      */
@@ -559,7 +559,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+     * @param string $time_zone The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
      *
      * @return $this
      */
@@ -584,7 +584,7 @@ class Token implements ModelInterface, ArrayAccess
     /**
      * Sets token_reference
      *
-     * @param string $token_reference Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
+     * @param string $token_reference The reference used to identify the payment token (e.g. the customer's ID or email address).
      *
      * @return $this
      */

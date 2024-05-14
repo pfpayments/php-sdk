@@ -53,7 +53,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         'icon' => 'string',
         'id' => 'int',
         'name' => 'map[string,string]',
-        'parent' => '\PostFinanceCheckout\Sdk\Model\SalesChannel',
         'sort_order' => 'int'
     ];
 
@@ -67,7 +66,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         'icon' => null,
         'id' => 'int64',
         'name' => null,
-        'parent' => null,
         'sort_order' => 'int32'
     ];
 
@@ -82,7 +80,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         'icon' => 'icon',
         'id' => 'id',
         'name' => 'name',
-        'parent' => 'parent',
         'sort_order' => 'sortOrder'
     ];
 
@@ -96,7 +93,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         'icon' => 'setIcon',
         'id' => 'setId',
         'name' => 'setName',
-        'parent' => 'setParent',
         'sort_order' => 'setSortOrder'
     ];
 
@@ -110,7 +106,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         'icon' => 'getIcon',
         'id' => 'getId',
         'name' => 'getName',
-        'parent' => 'getParent',
         'sort_order' => 'getSortOrder'
     ];
 
@@ -139,8 +134,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['parent'] = isset($data['parent']) ? $data['parent'] : null;
         
         $this->container['sort_order'] = isset($data['sort_order']) ? $data['sort_order'] : null;
         
@@ -273,7 +266,7 @@ class SalesChannel implements ModelInterface, ArrayAccess
     /**
      * Sets icon
      *
-     * @param string $icon 
+     * @param string $icon The identifier of the icon that symbolizes the sales channel.
      *
      * @return $this
      */
@@ -336,31 +329,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets parent
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\SalesChannel
-     */
-    public function getParent()
-    {
-        return $this->container['parent'];
-    }
-
-    /**
-     * Sets parent
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\SalesChannel $parent 
-     *
-     * @return $this
-     */
-    public function setParent($parent)
-    {
-        $this->container['parent'] = $parent;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets sort_order
      *
      * @return int
@@ -373,7 +341,7 @@ class SalesChannel implements ModelInterface, ArrayAccess
     /**
      * Sets sort_order
      *
-     * @param int $sort_order 
+     * @param int $sort_order When listing sales channels, they can be sorted by this number.
      *
      * @return $this
      */

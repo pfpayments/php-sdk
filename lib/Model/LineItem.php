@@ -369,7 +369,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets aggregated_tax_rate
      *
-     * @param float $aggregated_tax_rate The aggregated tax rate is the sum of all tax rates of the line item.
+     * @param float $aggregated_tax_rate The total tax rate applied to the item, calculated from the rates of all tax lines.
      *
      * @return $this
      */
@@ -394,7 +394,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets amount_excluding_tax
      *
-     * @param float $amount_excluding_tax 
+     * @param float $amount_excluding_tax The line item price with discounts applied, excluding taxes.
      *
      * @return $this
      */
@@ -419,7 +419,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets amount_including_tax
      *
-     * @param float $amount_including_tax 
+     * @param float $amount_including_tax The line item price with discounts applied, including taxes.
      *
      * @return $this
      */
@@ -444,7 +444,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets attributes
      *
-     * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttribute] $attributes 
+     * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttribute] $attributes A map of custom information for the item.
      *
      * @return $this
      */
@@ -469,7 +469,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets discount_excluding_tax
      *
-     * @param float $discount_excluding_tax 
+     * @param float $discount_excluding_tax The discount allocated to the item, excluding taxes.
      *
      * @return $this
      */
@@ -494,7 +494,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets discount_including_tax
      *
-     * @param float $discount_including_tax 
+     * @param float $discount_including_tax The discount allocated to the item, including taxes.
      *
      * @return $this
      */
@@ -519,7 +519,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name 
+     * @param string $name The name of the product, ideally in the customer's language.
      *
      * @return $this
      */
@@ -551,7 +551,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity 
+     * @param float $quantity The number of items that were purchased.
      *
      * @return $this
      */
@@ -576,7 +576,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_required
      *
-     * @param bool $shipping_required 
+     * @param bool $shipping_required Whether the item required shipping.
      *
      * @return $this
      */
@@ -601,7 +601,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets sku
      *
-     * @param string $sku 
+     * @param string $sku The SKU (stock-keeping unit) of the product.
      *
      * @return $this
      */
@@ -630,7 +630,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets tax_amount
      *
-     * @param float $tax_amount 
+     * @param float $tax_amount The sum of all taxes applied to the item.
      *
      * @return $this
      */
@@ -655,7 +655,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets tax_amount_per_unit
      *
-     * @param float $tax_amount_per_unit 
+     * @param float $tax_amount_per_unit The calculated tax amount per unit.
      *
      * @return $this
      */
@@ -680,7 +680,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Tax[] $taxes 
+     * @param \PostFinanceCheckout\Sdk\Model\Tax[] $taxes A set of tax lines, each of which specifies a tax applied to the item.
      *
      * @return $this
      */
@@ -705,7 +705,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type The type of the line item.
      *
      * @return $this
      */
@@ -730,7 +730,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets undiscounted_amount_excluding_tax
      *
-     * @param float $undiscounted_amount_excluding_tax 
+     * @param float $undiscounted_amount_excluding_tax The line item price with discounts not applied, excluding taxes.
      *
      * @return $this
      */
@@ -755,7 +755,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets undiscounted_amount_including_tax
      *
-     * @param float $undiscounted_amount_including_tax 
+     * @param float $undiscounted_amount_including_tax The line item price with discounts not applied, including taxes.
      *
      * @return $this
      */
@@ -780,7 +780,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets undiscounted_unit_price_excluding_tax
      *
-     * @param float $undiscounted_unit_price_excluding_tax 
+     * @param float $undiscounted_unit_price_excluding_tax The calculated price per unit with discounts not applied, excluding taxes.
      *
      * @return $this
      */
@@ -805,7 +805,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets undiscounted_unit_price_including_tax
      *
-     * @param float $undiscounted_unit_price_including_tax 
+     * @param float $undiscounted_unit_price_including_tax The calculated price per unit with discounts not applied, including taxes.
      *
      * @return $this
      */
@@ -830,7 +830,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets unique_id
      *
-     * @param string $unique_id The unique id identifies the line item within the set of line items associated with the transaction.
+     * @param string $unique_id The unique identifier of the line item within the set of line items.
      *
      * @return $this
      */
@@ -859,7 +859,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets unit_price_excluding_tax
      *
-     * @param float $unit_price_excluding_tax 
+     * @param float $unit_price_excluding_tax The calculated price per unit with discounts applied, excluding taxes.
      *
      * @return $this
      */
@@ -884,7 +884,7 @@ class LineItem implements ModelInterface, ArrayAccess
     /**
      * Sets unit_price_including_tax
      *
-     * @param float $unit_price_including_tax 
+     * @param float $unit_price_including_tax The calculated price per unit with discounts applied, including taxes.
      *
      * @return $this
      */

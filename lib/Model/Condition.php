@@ -27,7 +27,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * Condition model
  *
  * @category    Class
- * @description A condition configuration controls under which condition a payment connector is applied to a transaction.
+ * @description A condition allows you to define a criteria that a transaction must fulfill in order for a connector configuration to be considered for processing the payment.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -259,7 +259,7 @@ class Condition implements ModelInterface, ArrayAccess
     /**
      * Sets condition_type
      *
-     * @param int $condition_type The selected condition type defines how the configuration is applied to the transactions.
+     * @param int $condition_type The condition type determines the criteria that a transaction must fulfill in order for a connector configuration to be considered for processing the payment.
      *
      * @return $this
      */
@@ -334,7 +334,7 @@ class Condition implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The condition name is used internally to identify the condition. For example the name is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the condition.
      *
      * @return $this
      */

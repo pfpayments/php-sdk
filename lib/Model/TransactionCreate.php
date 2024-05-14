@@ -299,7 +299,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets auto_confirmation_enabled
      *
-     * @param bool $auto_confirmation_enabled When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+     * @param bool $auto_confirmation_enabled Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
      *
      * @return $this
      */
@@ -324,7 +324,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets charge_retry_enabled
      *
-     * @param bool $charge_retry_enabled When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+     * @param bool $charge_retry_enabled Whether the customer can make further payment attempts if the first one has failed. Default is true.
      *
      * @return $this
      */
@@ -349,7 +349,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets customers_presence
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
      *
      * @return $this
      */
@@ -374,7 +374,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets device_session_identifier
      *
-     * @param string $device_session_identifier The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+     * @param string $device_session_identifier Allows to link the transaction to the data collected from the customer's device.
      *
      * @return $this
      */
@@ -406,7 +406,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets emails_disabled
      *
-     * @param bool $emails_disabled Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+     * @param bool $emails_disabled Whether email sending is deactivated for the transaction. Default is false.
      *
      * @return $this
      */
@@ -456,7 +456,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets environment_selection_strategy
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
      *
      * @return $this
      */
@@ -481,7 +481,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets space_view_id
      *
-     * @param int $space_view_id 
+     * @param int $space_view_id The ID of the space view this object is linked to.
      *
      * @return $this
      */

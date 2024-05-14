@@ -49,6 +49,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'enable_payload_signature_and_state' => 'bool',
         'entity' => 'int',
         'entity_states' => 'string[]',
         'id' => 'int',
@@ -68,6 +69,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'enable_payload_signature_and_state' => null,
         'entity' => 'int64',
         'entity_states' => null,
         'id' => 'int64',
@@ -88,6 +90,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'enable_payload_signature_and_state' => 'enablePayloadSignatureAndState',
         'entity' => 'entity',
         'entity_states' => 'entityStates',
         'id' => 'id',
@@ -107,6 +110,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'enable_payload_signature_and_state' => 'setEnablePayloadSignatureAndState',
         'entity' => 'setEntity',
         'entity_states' => 'setEntityStates',
         'id' => 'setId',
@@ -126,6 +130,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'enable_payload_signature_and_state' => 'getEnablePayloadSignatureAndState',
         'entity' => 'getEntity',
         'entity_states' => 'getEntityStates',
         'id' => 'getId',
@@ -156,6 +161,8 @@ class WebhookListener implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        
+        $this->container['enable_payload_signature_and_state'] = isset($data['enable_payload_signature_and_state']) ? $data['enable_payload_signature_and_state'] : null;
         
         $this->container['entity'] = isset($data['entity']) ? $data['entity'] : null;
         
@@ -272,6 +279,31 @@ class WebhookListener implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets enable_payload_signature_and_state
+     *
+     * @return bool
+     */
+    public function getEnablePayloadSignatureAndState()
+    {
+        return $this->container['enable_payload_signature_and_state'];
+    }
+
+    /**
+     * Sets enable_payload_signature_and_state
+     *
+     * @param bool $enable_payload_signature_and_state Whether signature header and state property are enabled in webhook payload.
+     *
+     * @return $this
+     */
+    public function setEnablePayloadSignatureAndState($enable_payload_signature_and_state)
+    {
+        $this->container['enable_payload_signature_and_state'] = $enable_payload_signature_and_state;
+
+        return $this;
+    }
     
 
     /**

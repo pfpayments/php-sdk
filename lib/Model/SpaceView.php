@@ -313,7 +313,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The space view name is used internally to identify the space view in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the space view.
      *
      * @return $this
      */
@@ -370,7 +370,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Sets space
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Space $space The space to which the view belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Space $space The space that the space view belongs to.
      *
      * @return $this
      */

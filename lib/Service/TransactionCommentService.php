@@ -185,7 +185,7 @@ class TransactionCommentService {
 	 * Create
 	 *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentCreate $entity  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentCreate $entity The comment object which should be created. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -202,7 +202,7 @@ class TransactionCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentCreate $entity  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentCreate $entity The comment object which should be created. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -345,9 +345,6 @@ class TransactionCommentService {
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if (!is_null($id)) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
 
 		// path params
 		$resourcePath = '/transaction-comment/delete';
@@ -356,7 +353,12 @@ class TransactionCommentService {
 
 		// form params
 		$formParams = [];
-		
+		// body params
+		$tempBody = null;
+		if (isset($id)) {
+			$tempBody = $id;
+		}
+
 		// for model (json/xml)
 		$httpBody = '';
 		if (isset($tempBody)) {
@@ -413,7 +415,7 @@ class TransactionCommentService {
 	 * Pin
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment to pin to the top. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -430,7 +432,7 @@ class TransactionCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment to pin to the top. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -526,7 +528,7 @@ class TransactionCommentService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -543,7 +545,7 @@ class TransactionCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment which should be returned. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -639,7 +641,7 @@ class TransactionCommentService {
 	 * Unpin
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment to unpin. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -656,7 +658,7 @@ class TransactionCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param int $id  (required)
+	 * @param int $id The id of the comment to unpin. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -752,7 +754,7 @@ class TransactionCommentService {
 	 * Update
 	 *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentActive $entity  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentActive $entity The comment object with the properties which should be updated. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -769,7 +771,7 @@ class TransactionCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentActive $entity  (required)
+	 * @param \PostFinanceCheckout\Sdk\Model\TransactionCommentActive $entity The comment object with the properties which should be updated. (required)
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException

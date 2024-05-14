@@ -283,7 +283,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $address 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $address The postal address of the location where the payment terminals are used.
      *
      * @return $this
      */
@@ -308,7 +308,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets contact_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalAddress $contact_address The contact details if the person responsible for the payment terminals at this location.
      *
      * @return $this
      */
@@ -333,7 +333,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by 
+     * @param int $created_by The ID of the user the payment terminal location version was created by.
      *
      * @return $this
      */
@@ -433,7 +433,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets location
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation $location 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocation $location The payment terminal location that the version belongs to.
      *
      * @return $this
      */
@@ -533,7 +533,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets version_applied_immediately
      *
-     * @param bool $version_applied_immediately 
+     * @param bool $version_applied_immediately Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
      *
      * @return $this
      */

@@ -318,7 +318,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Account $account 
+     * @param \PostFinanceCheckout\Sdk\Model\Account $account This account that the contract belongs to.
      *
      * @return $this
      */
@@ -343,7 +343,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets activated_on
      *
-     * @param \DateTime $activated_on 
+     * @param \DateTime $activated_on The date and time when the contract was activated.
      *
      * @return $this
      */
@@ -368,7 +368,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets contract_identifier
      *
-     * @param string $contract_identifier 
+     * @param string $contract_identifier The identifier of the contract.
      *
      * @return $this
      */
@@ -393,7 +393,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets contract_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentContractType $contract_type 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentContractType $contract_type The type of the contract.
      *
      * @return $this
      */
@@ -418,7 +418,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param \PostFinanceCheckout\Sdk\Model\User $created_by 
+     * @param \PostFinanceCheckout\Sdk\Model\User $created_by The ID of the user the contract was created by.
      *
      * @return $this
      */
@@ -543,7 +543,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets rejected_on
      *
-     * @param \DateTime $rejected_on 
+     * @param \DateTime $rejected_on The date and time when the contract was rejected.
      *
      * @return $this
      */
@@ -568,7 +568,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets rejection_reason
      *
-     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $rejection_reason 
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $rejection_reason The reason for rejecting the contract.
      *
      * @return $this
      */
@@ -593,7 +593,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets start_terminating_on
      *
-     * @param \DateTime $start_terminating_on 
+     * @param \DateTime $start_terminating_on The date and time when the termination process of the contract was started.
      *
      * @return $this
      */
@@ -643,7 +643,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets terminated_by
      *
-     * @param \PostFinanceCheckout\Sdk\Model\User $terminated_by 
+     * @param \PostFinanceCheckout\Sdk\Model\User $terminated_by The ID of the user the contract was terminated by.
      *
      * @return $this
      */
@@ -668,7 +668,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets terminated_on
      *
-     * @param \DateTime $terminated_on 
+     * @param \DateTime $terminated_on The date and time when the contract was terminated.
      *
      * @return $this
      */

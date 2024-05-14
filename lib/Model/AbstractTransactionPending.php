@@ -370,7 +370,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_brands
      *
-     * @param int[] $allowed_payment_method_brands 
+     * @param int[] $allowed_payment_method_brands The payment method brands that can be used to authorize the transaction.
      *
      * @return $this
      */
@@ -395,7 +395,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_configurations
      *
-     * @param int[] $allowed_payment_method_configurations 
+     * @param int[] $allowed_payment_method_configurations The payment method configurations that can be used to authorize the transaction.
      *
      * @return $this
      */
@@ -420,7 +420,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billing_address 
+     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
      *
      * @return $this
      */
@@ -445,7 +445,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets completion_behavior
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior The completion behavior controls when the transaction is completed.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
      *
      * @return $this
      */
@@ -470,7 +470,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency 
+     * @param string $currency The three-letter code (ISO 4217 format) of the transaction's currency.
      *
      * @return $this
      */
@@ -495,7 +495,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets customer_email_address
      *
-     * @param string $customer_email_address The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+     * @param string $customer_email_address The customer's email address.
      *
      * @return $this
      */
@@ -524,7 +524,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets customer_id
      *
-     * @param string $customer_id 
+     * @param string $customer_id The unique identifier of the customer in the external system.
      *
      * @return $this
      */
@@ -549,7 +549,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets failed_url
      *
-     * @param string $failed_url The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
      *
      * @return $this
      */
@@ -581,7 +581,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets invoice_merchant_reference
      *
-     * @param string $invoice_merchant_reference 
+     * @param string $invoice_merchant_reference The merchant's reference used to identify the invoice.
      *
      * @return $this
      */
@@ -635,7 +635,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemCreate[] $line_items The line items purchased by the customer.
      *
      * @return $this
      */
@@ -660,7 +660,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets merchant_reference
      *
-     * @param string $merchant_reference 
+     * @param string $merchant_reference The merchant's reference used to identify the transaction.
      *
      * @return $this
      */
@@ -714,7 +714,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $shipping_address 
+     * @param \PostFinanceCheckout\Sdk\Model\AddressCreate $shipping_address The address to where the order will be shipped.
      *
      * @return $this
      */
@@ -739,7 +739,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_method
      *
-     * @param string $shipping_method 
+     * @param string $shipping_method The name of the shipping method used to ship the products.
      *
      * @return $this
      */
@@ -768,7 +768,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets success_url
      *
-     * @param string $success_url The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
      *
      * @return $this
      */
@@ -800,7 +800,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+     * @param string $time_zone The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
      *
      * @return $this
      */
@@ -825,7 +825,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param int $token 
+     * @param int $token The payment token that should be used to charge the customer.
      *
      * @return $this
      */
@@ -850,7 +850,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets tokenization_mode
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+     * @param \PostFinanceCheckout\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
      *
      * @return $this
      */

@@ -307,7 +307,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets amount_including_tax
      *
-     * @param float $amount_including_tax 
+     * @param float $amount_including_tax The line item price with discounts applied, including taxes.
      *
      * @return $this
      */
@@ -332,7 +332,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets attributes
      *
-     * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate] $attributes 
+     * @param map[string,\PostFinanceCheckout\Sdk\Model\LineItemAttributeCreate] $attributes A map of custom information for the item.
      *
      * @return $this
      */
@@ -357,7 +357,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets discount_including_tax
      *
-     * @param float $discount_including_tax 
+     * @param float $discount_including_tax The discount allocated to the item, including taxes.
      *
      * @return $this
      */
@@ -382,7 +382,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name 
+     * @param string $name The name of the product, ideally in the customer's language.
      *
      * @return $this
      */
@@ -414,7 +414,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity 
+     * @param float $quantity The number of items that were purchased.
      *
      * @return $this
      */
@@ -439,7 +439,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_required
      *
-     * @param bool $shipping_required 
+     * @param bool $shipping_required Whether the item required shipping.
      *
      * @return $this
      */
@@ -464,7 +464,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets sku
      *
-     * @param string $sku 
+     * @param string $sku The SKU (stock-keeping unit) of the product.
      *
      * @return $this
      */
@@ -493,7 +493,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TaxCreate[] $taxes 
+     * @param \PostFinanceCheckout\Sdk\Model\TaxCreate[] $taxes A set of tax lines, each of which specifies a tax applied to the item.
      *
      * @return $this
      */
@@ -518,7 +518,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItemType $type The type of the line item.
      *
      * @return $this
      */
@@ -543,7 +543,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets unique_id
      *
-     * @param string $unique_id The unique id identifies the line item within the set of line items associated with the transaction.
+     * @param string $unique_id The unique identifier of the line item within the set of line items.
      *
      * @return $this
      */

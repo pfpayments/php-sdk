@@ -736,7 +736,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets accept_header
      *
-     * @param string $accept_header 
+     * @param string $accept_header The 'Accept' header of the customer's web browser.
      *
      * @return $this
      */
@@ -761,7 +761,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets accept_language_header
      *
-     * @param string $accept_language_header The accept language contains the header which indicates the language preferences of the buyer.
+     * @param string $accept_language_header The 'Accept Language' header of the customer's web browser.
      *
      * @return $this
      */
@@ -786,7 +786,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_brands
      *
-     * @param int[] $allowed_payment_method_brands 
+     * @param int[] $allowed_payment_method_brands The payment method brands that can be used to authorize the transaction.
      *
      * @return $this
      */
@@ -811,7 +811,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_configurations
      *
-     * @param int[] $allowed_payment_method_configurations 
+     * @param int[] $allowed_payment_method_configurations The payment method configurations that can be used to authorize the transaction.
      *
      * @return $this
      */
@@ -836,7 +836,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets authorization_amount
      *
-     * @param float $authorization_amount 
+     * @param float $authorization_amount The sum of all line item prices including taxes in the transaction's currency.
      *
      * @return $this
      */
@@ -861,7 +861,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets authorization_environment
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment $authorization_environment The environment in which this transaction was successfully authorized.
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeAttemptEnvironment $authorization_environment The environment in which the transaction was authorized.
      *
      * @return $this
      */
@@ -911,7 +911,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets authorization_timeout_on
      *
-     * @param \DateTime $authorization_timeout_on This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
+     * @param \DateTime $authorization_timeout_on The date and time when the transaction must be authorized, otherwise it will canceled.
      *
      * @return $this
      */
@@ -936,7 +936,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets authorized_on
      *
-     * @param \DateTime $authorized_on 
+     * @param \DateTime $authorized_on The date and time when the transaction was authorized.
      *
      * @return $this
      */
@@ -961,7 +961,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets auto_confirmation_enabled
      *
-     * @param bool $auto_confirmation_enabled When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+     * @param bool $auto_confirmation_enabled Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
      *
      * @return $this
      */
@@ -986,7 +986,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address 
+     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
      *
      * @return $this
      */
@@ -1011,7 +1011,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets charge_retry_enabled
      *
-     * @param bool $charge_retry_enabled When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+     * @param bool $charge_retry_enabled Whether the customer can make further payment attempts if the first one has failed. Default is true.
      *
      * @return $this
      */
@@ -1036,7 +1036,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets completed_amount
      *
-     * @param float $completed_amount The completed amount is the total amount which has been captured so far.
+     * @param float $completed_amount The total amount that was completed, in the transaction's currency.
      *
      * @return $this
      */
@@ -1061,7 +1061,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets completed_on
      *
-     * @param \DateTime $completed_on 
+     * @param \DateTime $completed_on The date and time when the transaction was completed.
      *
      * @return $this
      */
@@ -1086,7 +1086,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets completion_behavior
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior The completion behavior controls when the transaction is completed.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
      *
      * @return $this
      */
@@ -1111,7 +1111,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets completion_timeout_on
      *
-     * @param \DateTime $completion_timeout_on 
+     * @param \DateTime $completion_timeout_on The date and time when the transaction is completed automatically.
      *
      * @return $this
      */
@@ -1136,7 +1136,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets confirmed_by
      *
-     * @param int $confirmed_by 
+     * @param int $confirmed_by The ID of the user the transaction was confirmed by.
      *
      * @return $this
      */
@@ -1161,7 +1161,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets confirmed_on
      *
-     * @param \DateTime $confirmed_on 
+     * @param \DateTime $confirmed_on The date and time when the transaction was created.
      *
      * @return $this
      */
@@ -1186,7 +1186,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by 
+     * @param int $created_by The ID of the user the transaction was created by.
      *
      * @return $this
      */
@@ -1236,7 +1236,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency 
+     * @param string $currency The three-letter code (ISO 4217 format) of the transaction's currency.
      *
      * @return $this
      */
@@ -1261,7 +1261,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets customer_email_address
      *
-     * @param string $customer_email_address The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+     * @param string $customer_email_address The customer's email address.
      *
      * @return $this
      */
@@ -1290,7 +1290,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets customer_id
      *
-     * @param string $customer_id 
+     * @param string $customer_id The unique identifier of the customer in the external system.
      *
      * @return $this
      */
@@ -1315,7 +1315,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets customers_presence
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
      *
      * @return $this
      */
@@ -1340,7 +1340,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets delivery_decision_made_on
      *
-     * @param \DateTime $delivery_decision_made_on This date indicates when the decision has been made if a transaction should be delivered or not.
+     * @param \DateTime $delivery_decision_made_on This date and time when the decision was made as to whether the order should be shipped.
      *
      * @return $this
      */
@@ -1365,7 +1365,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets device_session_identifier
      *
-     * @param string $device_session_identifier The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+     * @param string $device_session_identifier Allows to link the transaction to the data collected from the customer's device.
      *
      * @return $this
      */
@@ -1397,7 +1397,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets emails_disabled
      *
-     * @param bool $emails_disabled Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+     * @param bool $emails_disabled Whether email sending is deactivated for the transaction. Default is false.
      *
      * @return $this
      */
@@ -1422,7 +1422,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets end_of_life
      *
-     * @param \DateTime $end_of_life The transaction's end of life indicates the date from which on no operation can be carried out anymore.
+     * @param \DateTime $end_of_life The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
      *
      * @return $this
      */
@@ -1472,7 +1472,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets environment_selection_strategy
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
      *
      * @return $this
      */
@@ -1497,7 +1497,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets failed_on
      *
-     * @param \DateTime $failed_on 
+     * @param \DateTime $failed_on The date and time when the transaction failed.
      *
      * @return $this
      */
@@ -1522,7 +1522,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets failed_url
      *
-     * @param string $failed_url The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
      *
      * @return $this
      */
@@ -1554,7 +1554,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets failure_reason
      *
-     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason The failure reason describes why the transaction failed. This is only provided when the transaction is marked as failed.
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction.
      *
      * @return $this
      */
@@ -1579,7 +1579,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionGroup $group 
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionGroup $group The group that the transaction belongs to.
      *
      * @return $this
      */
@@ -1629,7 +1629,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets internet_protocol_address
      *
-     * @param string $internet_protocol_address The Internet Protocol (IP) address identifies the device of the buyer.
+     * @param string $internet_protocol_address The IP address of the customer's device.
      *
      * @return $this
      */
@@ -1654,7 +1654,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets internet_protocol_address_country
      *
-     * @param string $internet_protocol_address_country 
+     * @param string $internet_protocol_address_country The country determined from the IP address of the customer's device.
      *
      * @return $this
      */
@@ -1679,7 +1679,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets invoice_merchant_reference
      *
-     * @param string $invoice_merchant_reference 
+     * @param string $invoice_merchant_reference The merchant's reference used to identify the invoice.
      *
      * @return $this
      */
@@ -1708,7 +1708,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets java_enabled
      *
-     * @param bool $java_enabled 
+     * @param bool $java_enabled Whether Java is enabled on the customer's web browser.
      *
      * @return $this
      */
@@ -1758,7 +1758,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items 
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items purchased by the customer.
      *
      * @return $this
      */
@@ -1808,7 +1808,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets merchant_reference
      *
-     * @param string $merchant_reference 
+     * @param string $merchant_reference The merchant's reference used to identify the transaction.
      *
      * @return $this
      */
@@ -1862,7 +1862,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets parent
      *
-     * @param int $parent 
+     * @param int $parent The parent transaction which was (partially) replaced by this transaction.
      *
      * @return $this
      */
@@ -1887,7 +1887,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets payment_connector_configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that was used to authorize the transaction.
      *
      * @return $this
      */
@@ -1937,7 +1937,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets processing_on
      *
-     * @param \DateTime $processing_on 
+     * @param \DateTime $processing_on The date and time when the processing of the transaction was started.
      *
      * @return $this
      */
@@ -1962,7 +1962,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets refunded_amount
      *
-     * @param float $refunded_amount The refunded amount is the total amount which has been refunded so far.
+     * @param float $refunded_amount The total amount that was refunded, in the transaction's currency.
      *
      * @return $this
      */
@@ -1987,7 +1987,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets screen_color_depth
      *
-     * @param string $screen_color_depth 
+     * @param string $screen_color_depth The screen color depth of the customer's web browser.
      *
      * @return $this
      */
@@ -2012,7 +2012,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets screen_height
      *
-     * @param string $screen_height 
+     * @param string $screen_height The screen height of the customer's web browser.
      *
      * @return $this
      */
@@ -2037,7 +2037,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets screen_width
      *
-     * @param string $screen_width 
+     * @param string $screen_width The screen width of the customer's web browser.
      *
      * @return $this
      */
@@ -2062,7 +2062,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Address $shipping_address 
+     * @param \PostFinanceCheckout\Sdk\Model\Address $shipping_address The address to where the order will be shipped.
      *
      * @return $this
      */
@@ -2087,7 +2087,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_method
      *
-     * @param string $shipping_method 
+     * @param string $shipping_method The name of the shipping method used to ship the products.
      *
      * @return $this
      */
@@ -2116,7 +2116,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets space_view_id
      *
-     * @param int $space_view_id 
+     * @param int $space_view_id The ID of the space view this object is linked to.
      *
      * @return $this
      */
@@ -2166,7 +2166,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets success_url
      *
-     * @param string $success_url The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
      *
      * @return $this
      */
@@ -2198,7 +2198,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets terminal
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminal $terminal The terminal on which the payment was processed.
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminal $terminal The payment terminal through which the payment was processed.
      *
      * @return $this
      */
@@ -2223,7 +2223,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+     * @param string $time_zone The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
      *
      * @return $this
      */
@@ -2248,7 +2248,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Token $token 
+     * @param \PostFinanceCheckout\Sdk\Model\Token $token The payment token that should be used to charge the customer.
      *
      * @return $this
      */
@@ -2273,7 +2273,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets tokenization_mode
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+     * @param \PostFinanceCheckout\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
      *
      * @return $this
      */
@@ -2298,7 +2298,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets total_applied_fees
      *
-     * @param float $total_applied_fees The total applied fees is the sum of all fees that have been applied so far.
+     * @param float $total_applied_fees The total of all fees charged, in the transaction's currency.
      *
      * @return $this
      */
@@ -2323,7 +2323,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets total_settled_amount
      *
-     * @param float $total_settled_amount The total settled amount is the total amount which has been settled so far.
+     * @param float $total_settled_amount The total amount that was settled, in the transaction's currency.
      *
      * @return $this
      */
@@ -2348,7 +2348,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets user_agent_header
      *
-     * @param string $user_agent_header The user agent header provides the exact string which contains the user agent of the buyer.
+     * @param string $user_agent_header The 'User Agent' header of the customer's web browser.
      *
      * @return $this
      */
@@ -2373,7 +2373,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets user_failure_message
      *
-     * @param string $user_failure_message The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
+     * @param string $user_failure_message The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
      *
      * @return $this
      */
@@ -2398,7 +2398,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets user_interface_type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionUserInterfaceType $user_interface_type The user interface type defines through which user interface the transaction has been processed resp. created.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionUserInterfaceType $user_interface_type The type of user interface the customer used to provide the payment information.
      *
      * @return $this
      */
@@ -2448,7 +2448,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets window_height
      *
-     * @param string $window_height 
+     * @param string $window_height The window height of the customer's web browser.
      *
      * @return $this
      */
@@ -2473,7 +2473,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets window_width
      *
-     * @param string $window_width 
+     * @param string $window_width The window width of the customer's web browser.
      *
      * @return $this
      */
@@ -2498,7 +2498,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets years_to_keep
      *
-     * @param int $years_to_keep The number of years the transaction will be stored after it has been authorized.
+     * @param int $years_to_keep The number of years the transaction is kept after its authorization.
      *
      * @return $this
      */

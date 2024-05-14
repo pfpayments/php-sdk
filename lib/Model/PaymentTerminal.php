@@ -51,6 +51,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
         'default_currency' => 'string',
+        'device_name' => 'string',
         'device_serial_number' => 'string',
         'external_id' => 'string',
         'id' => 'int',
@@ -72,6 +73,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'configuration_version' => null,
         'default_currency' => null,
+        'device_name' => null,
         'device_serial_number' => null,
         'external_id' => null,
         'id' => 'int64',
@@ -94,6 +96,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'configuration_version' => 'configurationVersion',
         'default_currency' => 'defaultCurrency',
+        'device_name' => 'deviceName',
         'device_serial_number' => 'deviceSerialNumber',
         'external_id' => 'externalId',
         'id' => 'id',
@@ -115,6 +118,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $setters = [
         'configuration_version' => 'setConfigurationVersion',
         'default_currency' => 'setDefaultCurrency',
+        'device_name' => 'setDeviceName',
         'device_serial_number' => 'setDeviceSerialNumber',
         'external_id' => 'setExternalId',
         'id' => 'setId',
@@ -136,6 +140,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     protected static $getters = [
         'configuration_version' => 'getConfigurationVersion',
         'default_currency' => 'getDefaultCurrency',
+        'device_name' => 'getDeviceName',
         'device_serial_number' => 'getDeviceSerialNumber',
         'external_id' => 'getExternalId',
         'id' => 'getId',
@@ -170,6 +175,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
         
         $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        
+        $this->container['device_name'] = isset($data['device_name']) ? $data['device_name'] : null;
         
         $this->container['device_serial_number'] = isset($data['device_serial_number']) ? $data['device_serial_number'] : null;
         
@@ -301,7 +308,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets configuration_version
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version The configuration that is assigned to the terminal and determines how it works.
      *
      * @return $this
      */
@@ -326,13 +333,38 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets default_currency
      *
-     * @param string $default_currency 
+     * @param string $default_currency The default currency of the terminal.
      *
      * @return $this
      */
     public function setDefaultCurrency($default_currency)
     {
         $this->container['default_currency'] = $default_currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets device_name
+     *
+     * @return string
+     */
+    public function getDeviceName()
+    {
+        return $this->container['device_name'];
+    }
+
+    /**
+     * Sets device_name
+     *
+     * @param string $device_name The name of the device that is currently linked to the payment terminal.
+     *
+     * @return $this
+     */
+    public function setDeviceName($device_name)
+    {
+        $this->container['device_name'] = $device_name;
 
         return $this;
     }
@@ -351,7 +383,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets device_serial_number
      *
-     * @param string $device_serial_number 
+     * @param string $device_serial_number The serial number of the device that is currently linked to the payment terminal.
      *
      * @return $this
      */
@@ -426,7 +458,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets identifier
      *
-     * @param string $identifier The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
+     * @param string $identifier The unique identifier of the terminal, that is displayed on the device.
      *
      * @return $this
      */
@@ -476,7 +508,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets location_version
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion $location_version 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion $location_version The physical location where the terminal is used.
      *
      * @return $this
      */
@@ -501,7 +533,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the payment terminal.
      *
      * @return $this
      */
@@ -580,7 +612,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalType $type 
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalType $type The type of the payment terminal.
      *
      * @return $this
      */

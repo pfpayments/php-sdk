@@ -57,6 +57,7 @@ class BankTransaction implements ModelInterface, ArrayAccess
         'flow_direction' => '\PostFinanceCheckout\Sdk\Model\BankTransactionFlowDirection',
         'id' => 'int',
         'linked_space_id' => 'int',
+        'payment_date' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'posting_amount' => 'float',
         'reference' => 'string',
@@ -83,6 +84,7 @@ class BankTransaction implements ModelInterface, ArrayAccess
         'flow_direction' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
+        'payment_date' => 'date-time',
         'planned_purge_date' => 'date-time',
         'posting_amount' => null,
         'reference' => null,
@@ -110,6 +112,7 @@ class BankTransaction implements ModelInterface, ArrayAccess
         'flow_direction' => 'flowDirection',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
+        'payment_date' => 'paymentDate',
         'planned_purge_date' => 'plannedPurgeDate',
         'posting_amount' => 'postingAmount',
         'reference' => 'reference',
@@ -136,6 +139,7 @@ class BankTransaction implements ModelInterface, ArrayAccess
         'flow_direction' => 'setFlowDirection',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
+        'payment_date' => 'setPaymentDate',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'posting_amount' => 'setPostingAmount',
         'reference' => 'setReference',
@@ -162,6 +166,7 @@ class BankTransaction implements ModelInterface, ArrayAccess
         'flow_direction' => 'getFlowDirection',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
+        'payment_date' => 'getPaymentDate',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'posting_amount' => 'getPostingAmount',
         'reference' => 'getReference',
@@ -207,6 +212,8 @@ class BankTransaction implements ModelInterface, ArrayAccess
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['payment_date'] = isset($data['payment_date']) ? $data['payment_date'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -529,6 +536,31 @@ class BankTransaction implements ModelInterface, ArrayAccess
     public function setLinkedSpaceId($linked_space_id)
     {
         $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets payment_date
+     *
+     * @return \DateTime
+     */
+    public function getPaymentDate()
+    {
+        return $this->container['payment_date'];
+    }
+
+    /**
+     * Sets payment_date
+     *
+     * @param \DateTime $payment_date The payment date describes the date when the transaction was made.
+     *
+     * @return $this
+     */
+    public function setPaymentDate($payment_date)
+    {
+        $this->container['payment_date'] = $payment_date;
 
         return $this;
     }
