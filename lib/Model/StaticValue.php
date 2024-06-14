@@ -259,7 +259,7 @@ class StaticValue implements ModelInterface, ArrayAccess
     /**
      * Sets features
      *
-     * @param int[] $features 
+     * @param int[] $features The features that this static value belongs to.
      *
      * @return $this
      */

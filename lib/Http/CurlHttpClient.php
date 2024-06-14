@@ -113,16 +113,14 @@ final class CurlHttpClient implements IHttpClient {
 			$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
 		} else {
 			// if there was an error, try again with the CA bundle provided by this SDK.
-			if (!file_exists($tempCAFile)) {
-				$caContent = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "ca-bundle.crt");
-				file_put_contents($tempCAFile, $caContent);
+			$caContent = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "ca-bundle.crt");
+			file_put_contents($tempCAFile, $caContent);
 
-				// Try again the request, this time with the CA bundle provided by this SDK.
-				$apiClient->setCertificateAuthority($tempCAFile);
-				curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
-				$response = curl_exec($curl);
-				$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
-			}
+			// Try again the request, this time with the CA bundle provided by this SDK.
+			$apiClient->setCertificateAuthority($tempCAFile);
+			curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+			$response = curl_exec($curl);
+			$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
 		}
 
 		curl_close($curl);

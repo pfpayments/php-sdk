@@ -248,7 +248,7 @@ class UserAccountRole implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param int $account 
+     * @param int $account The account in which the role is assigned to the user.
      *
      * @return $this
      */
@@ -273,7 +273,7 @@ class UserAccountRole implements ModelInterface, ArrayAccess
     /**
      * Sets applies_on_sub_account
      *
-     * @param bool $applies_on_sub_account 
+     * @param bool $applies_on_sub_account Whether the role is assigned to the user in subaccounts only.
      *
      * @return $this
      */
@@ -323,7 +323,7 @@ class UserAccountRole implements ModelInterface, ArrayAccess
     /**
      * Sets role
      *
-     * @param int $role 
+     * @param int $role The role that is assigned to the user.
      *
      * @return $this
      */
@@ -348,7 +348,7 @@ class UserAccountRole implements ModelInterface, ArrayAccess
     /**
      * Sets user
      *
-     * @param int $user 
+     * @param int $user The user whose role this defines.
      *
      * @return $this
      */

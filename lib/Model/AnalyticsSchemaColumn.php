@@ -312,7 +312,7 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description A human readable description of the property contained in this column or null if this is a synthetic column which is the result of some SQL expression.
+     * @param map[string,string] $description The localized description of the property contained in this column or null if this is a synthetic column which is the result of some SQL expression.
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     /**
      * Sets referenced_table
      *
-     * @param string $referenced_table The name of the referenced table if this column represents a foreign-key relation to the IDs of another table, otherwise null.
+     * @param string $referenced_table The name of the referenced table if this column represents a foreign-key relation to another table, otherwise null.
      *
      * @return $this
      */
@@ -387,7 +387,7 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     /**
      * Sets scale
      *
-     * @param int $scale The scale (maximal number number of digits in the fractional part) in case of a decimal data type, otherwise 0.
+     * @param int $scale The scale (maximal number of digits in the fractional part) in case of a decimal data type, otherwise 0.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     /**
      * Sets table_name
      *
-     * @param string $table_name The name of the table which defines this column.
+     * @param string $table_name The name of the table that the column belongs to.
      *
      * @return $this
      */

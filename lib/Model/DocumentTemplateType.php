@@ -241,7 +241,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description 
+     * @param map[string,string] $description The localized description of the document template type.
      *
      * @return $this
      */
@@ -266,7 +266,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Sets feature
      *
-     * @param int $feature 
+     * @param int $feature The feature that this document template type belongs to.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group 
+     * @param \PostFinanceCheckout\Sdk\Model\DocumentTemplateTypeGroup $group The group that this document template type belongs to.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param map[string,string] $title 
+     * @param map[string,string] $title The localized title of the document template type.
      *
      * @return $this
      */

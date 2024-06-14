@@ -234,7 +234,7 @@ class AnalyticsQueryResultBatch implements ModelInterface, ArrayAccess
     /**
      * Sets columns
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AnalyticsSchemaColumn[] $columns The schemas of the columns returned by the query (in order). Will be null if the results of the query are not (yet) available.
+     * @param \PostFinanceCheckout\Sdk\Model\AnalyticsSchemaColumn[] $columns The schemas of the columns returned by the query (in order).
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class AnalyticsQueryResultBatch implements ModelInterface, ArrayAccess
     /**
      * Sets next_token
      *
-     * @param string $next_token The token to be provided to fetch the next batch of results. May be null if no more result batches are available.
+     * @param string $next_token The token to fetch the next batch of results. Null if no more results are available.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class AnalyticsQueryResultBatch implements ModelInterface, ArrayAccess
     /**
      * Sets query_execution
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution $query_execution The query execution which produced the result.
+     * @param \PostFinanceCheckout\Sdk\Model\AnalyticsQueryExecution $query_execution The query execution that produced the result.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class AnalyticsQueryResultBatch implements ModelInterface, ArrayAccess
     /**
      * Sets rows
      *
-     * @param string[][] $rows The rows of the result set contained in this batch where each row is a list of column values (in order of the columns specified in the query). Will be null if the results of the query are not (yet) available.
+     * @param string[][] $rows The resulting rows contained in this batch where each row is a list of column values.
      *
      * @return $this
      */

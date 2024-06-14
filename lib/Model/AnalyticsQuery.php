@@ -27,7 +27,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * AnalyticsQuery model
  *
  * @category    Class
- * @description Represents a query to be submitted for execution in Analytics.
+ * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -259,7 +259,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets account_id
      *
-     * @param int $account_id The mandatory ID of an account in which the query shall be executed. Must be a valid account ID greater than 0.
+     * @param int $account_id The ID of the account in which the query is to be executed.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client generated nonce which uniquely identifies the query to be executed. Subsequent submissions with the same external ID will not re-execute the query but instead return the existing execution with that ID. Either the External ID or a Maximal Cache Age greater than 0 must be specified. If both are specified the External ID will have precedence and the Maximal Cache Age will be ignored.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets max_cache_age
      *
-     * @param int $max_cache_age The maximal age in minutes of cached query executions to return. If an equivalent query execution with the same Query String, Account ID and Spaces parameters not older than the specified age is already available that execution will be returned instead of a newly started execution. Set to 0 or null (and set a unique, previously unused External ID) to force a new query execution irrespective of previous executions. Either the External ID or a Cache Duration greater than 0 must be specified. If both are specified, the External ID will be preferred (and the Maximal Cache Age ignored).
+     * @param int $max_cache_age The maximum age (in minutes) of queries already executed that are to be taken into account. If an equivalent query is already available and not older than the specified age, its result will be returned instead of re-executing it. To force a new execution, specify a new, unique external ID and no maximum cache age.
      *
      * @return $this
      */
@@ -334,7 +334,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets query_string
      *
-     * @param string $query_string The SQL statement which is being submitted for execution. Must be a valid PrestoDB/Athena SQL statement.
+     * @param string $query_string The PrestoDB/Athena SQL statement to be executed.
      *
      * @return $this
      */
@@ -366,7 +366,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets scanned_data_limit
      *
-     * @param float $scanned_data_limit The maximal amount of scanned data that this query is allowed to scan. After this limit is reached query will be canceled by the system.
+     * @param float $scanned_data_limit The maximum amount of data that the query is allowed to scan. After the limit is reached, the query will be canceled.
      *
      * @return $this
      */
@@ -391,7 +391,7 @@ class AnalyticsQuery implements ModelInterface, ArrayAccess
     /**
      * Sets space_ids
      *
-     * @param int[] $space_ids The IDs of the spaces in which the query shall be executed. At most 5 space IDs may be specified. All specified spaces must be owned by the account specified by the accountId property. The spaces property may be missing or empty to query all spaces of the specified account.
+     * @param int[] $space_ids The IDs of the spaces belonging to the specified account in which the query is to be executed. Do not provide any value to query all spaces in the specified account.
      *
      * @return $this
      */

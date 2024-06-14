@@ -65,6 +65,7 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         'recipient_family_name' => 'string',
         'recipient_given_name' => 'string',
         'recipient_iban' => 'string',
+        'recipient_organization_name' => 'string',
         'recipient_postcode' => 'string',
         'recipient_street' => 'string',
         'sender_iban' => 'string',
@@ -94,6 +95,7 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         'recipient_family_name' => null,
         'recipient_given_name' => null,
         'recipient_iban' => null,
+        'recipient_organization_name' => null,
         'recipient_postcode' => null,
         'recipient_street' => null,
         'sender_iban' => null,
@@ -124,6 +126,7 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         'recipient_family_name' => 'recipientFamilyName',
         'recipient_given_name' => 'recipientGivenName',
         'recipient_iban' => 'recipientIban',
+        'recipient_organization_name' => 'recipientOrganizationName',
         'recipient_postcode' => 'recipientPostcode',
         'recipient_street' => 'recipientStreet',
         'sender_iban' => 'senderIban',
@@ -153,6 +156,7 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         'recipient_family_name' => 'setRecipientFamilyName',
         'recipient_given_name' => 'setRecipientGivenName',
         'recipient_iban' => 'setRecipientIban',
+        'recipient_organization_name' => 'setRecipientOrganizationName',
         'recipient_postcode' => 'setRecipientPostcode',
         'recipient_street' => 'setRecipientStreet',
         'sender_iban' => 'setSenderIban',
@@ -182,6 +186,7 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         'recipient_family_name' => 'getRecipientFamilyName',
         'recipient_given_name' => 'getRecipientGivenName',
         'recipient_iban' => 'getRecipientIban',
+        'recipient_organization_name' => 'getRecipientOrganizationName',
         'recipient_postcode' => 'getRecipientPostcode',
         'recipient_street' => 'getRecipientStreet',
         'sender_iban' => 'getSenderIban',
@@ -238,6 +243,8 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
         $this->container['recipient_given_name'] = isset($data['recipient_given_name']) ? $data['recipient_given_name'] : null;
         
         $this->container['recipient_iban'] = isset($data['recipient_iban']) ? $data['recipient_iban'] : null;
+        
+        $this->container['recipient_organization_name'] = isset($data['recipient_organization_name']) ? $data['recipient_organization_name'] : null;
         
         $this->container['recipient_postcode'] = isset($data['recipient_postcode']) ? $data['recipient_postcode'] : null;
         
@@ -735,6 +742,31 @@ class InvoiceReimbursement implements ModelInterface, ArrayAccess
     public function setRecipientIban($recipient_iban)
     {
         $this->container['recipient_iban'] = $recipient_iban;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets recipient_organization_name
+     *
+     * @return string
+     */
+    public function getRecipientOrganizationName()
+    {
+        return $this->container['recipient_organization_name'];
+    }
+
+    /**
+     * Sets recipient_organization_name
+     *
+     * @param string $recipient_organization_name 
+     *
+     * @return $this
+     */
+    public function setRecipientOrganizationName($recipient_organization_name)
+    {
+        $this->container['recipient_organization_name'] = $recipient_organization_name;
 
         return $this;
     }

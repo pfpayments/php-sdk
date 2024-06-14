@@ -135,6 +135,9 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }
+        if ($this->container['protection_mode'] === null) {
+            $invalidProperties[] = "'protection_mode' can't be null";
+        }
         return $invalidProperties;
     }
 

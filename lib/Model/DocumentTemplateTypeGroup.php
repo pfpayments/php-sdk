@@ -245,7 +245,7 @@ class DocumentTemplateTypeGroup implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param map[string,string] $title 
+     * @param map[string,string] $title The localized title of the group.
      *
      * @return $this
      */
