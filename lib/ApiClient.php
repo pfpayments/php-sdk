@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.2.1",
+        'x-meta-sdk-version' => "4.2.2",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.2.1/php';
+	private $userAgent = 'PHP-Client/4.2.2/php';
 
 	/**
 	 * The path to the certificate authority file.
