@@ -241,7 +241,7 @@ class Label implements ModelInterface, ArrayAccess
     /**
      * Sets content
      *
-     * @param object $content 
+     * @param object $content The label's actual content.
      *
      * @return $this
      */
@@ -266,7 +266,7 @@ class Label implements ModelInterface, ArrayAccess
     /**
      * Sets content_as_string
      *
-     * @param string $content_as_string 
+     * @param string $content_as_string The label's content formatted as string.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class Label implements ModelInterface, ArrayAccess
     /**
      * Sets descriptor
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptor $descriptor 
+     * @param \PostFinanceCheckout\Sdk\Model\LabelDescriptor $descriptor The descriptor that describes what information the label provides.
      *
      * @return $this
      */

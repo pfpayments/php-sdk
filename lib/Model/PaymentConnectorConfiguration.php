@@ -340,7 +340,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets conditions
      *
-     * @param int[] $conditions Conditions allow you to define criteria that a transaction must fulfill in order for the connector configuration to be considered for processing the payment.
+     * @param int[] $conditions Conditions allow to define criteria that a transaction must fulfill in order for the connector configuration to be considered for processing the payment.
      *
      * @return $this
      */

@@ -550,7 +550,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets labels
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels 
+     * @param \PostFinanceCheckout\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */

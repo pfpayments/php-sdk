@@ -40,7 +40,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $basePath = 'https://checkout.postfinance.ch:443/api';
+	private $basePath = 'https://app-wallee.com:443/api';
 
 	/**
 	 * An array of headers that are added to every request.
@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.2.2",
+        'x-meta-sdk-version' => "4.3.0",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "PostFinance Checkout",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.2.2/php';
+	private $userAgent = 'PHP-Client/4.3.0/php';
 
 	/**
 	 * The path to the certificate authority file.
