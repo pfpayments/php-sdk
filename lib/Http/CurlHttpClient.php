@@ -18,6 +18,8 @@
  */
 
 
+declare(strict_types=1);
+
 namespace PostFinanceCheckout\Sdk\Http;
 
 use PostFinanceCheckout\Sdk\Http\ConnectionException;
@@ -33,12 +35,35 @@ use PostFinanceCheckout\Sdk\ApiClient;
  */
 final class CurlHttpClient implements IHttpClient {
 
-	public function isSupported() {
+	/**
+	 * Checks if curl is installed in the system.
+	 *
+	 * @return bool
+	 */
+	public function isSupported(): bool {
 		return function_exists('curl_version');
 	}
 
-	public function send(ApiClient $apiClient, HttpRequest $request) {
+	/**
+	 * Sends the request using curl.
+	 *
+	 * The function will try to use the CA certificates provided by the system, first.
+	 * If an error is detected, a second attempt will be done but this time using the 
+	 * CA certificates provided by this SDK.
+	 * If this second attempt is valid, the SDK's CA certificates wil be stored in a 
+	 * temporal file ensuring upcoming request will use them. But if the second attempt
+	 * also fails, then it means that the SDK's CA certificates do not help either, and
+	 * will not be used anymore.
+	 *
+	 * @param ApiClient $apiClient
+	 * @param HttpRequest $request
+	 * @return HttpResponse
+	 * @throws ConnectionException
+	 */
+	public function send(ApiClient $apiClient, HttpRequest $request): HttpResponse {
 		$curl = curl_init();
+
+		$tempCAFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "tmp-ca-bundle.crt";
 
 		// set timeout, if needed
 		if ($request->getTimeOut() !== 0) {
@@ -59,6 +84,11 @@ final class CurlHttpClient implements IHttpClient {
 		} else {
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+			if (file_exists($tempCAFile)) {
+				// Use the temporal CA Bundle if it was set, which indicates a previous error.
+				$apiClient->setCertificateAuthority($tempCAFile);
+				curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+			}
 		}
 
 		if ($request->getMethod() === HttpRequest::POST) {
@@ -89,7 +119,7 @@ final class CurlHttpClient implements IHttpClient {
 		// debugging for curl
 		$debugFilePointer = fopen($apiClient->getDebugFile(), 'a');
 		if ($apiClient->isDebuggingEnabled()) {
-			error_log("[DEBUG] HTTP Request body  ~BEGIN~".PHP_EOL.print_r($request->getBody(), true).PHP_EOL."~END~".PHP_EOL, 3, $apiClient->getDebugFile());
+			error_log("[DEBUG] HTTP Request body  ~BEGIN~" . PHP_EOL . print_r($request->getBody(), true) . PHP_EOL . "~END~" . PHP_EOL, 3, $apiClient->getDebugFile());
 
 			curl_setopt($curl, CURLOPT_VERBOSE, 1);
 			curl_setopt($curl, CURLOPT_STDERR, $debugFilePointer);
@@ -101,35 +131,78 @@ final class CurlHttpClient implements IHttpClient {
 		curl_setopt($curl, CURLOPT_HEADER, 1);
 
 		// Make the request
-		$response = curl_exec($curl);
+		$curlResponse = curl_exec($curl);
+		if ($curlResponse === FALSE && !file_exists($tempCAFile)) {
+			$errNo = curl_errno($curl);
+			$errStr = curl_error($curl);
+			if ($errNo === CURLE_SSL_CERTPROBLEM || substr_count(strtolower($errStr), "ssl")) {
+				$pathToCABundle = __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "ca-bundle.crt";
+				$caContent = file_get_contents($pathToCABundle);
+				// Create the temporal CA file, so it can be reused later on if needed.
+				file_put_contents($tempCAFile, $caContent);
 
-		$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
+				// Try again the request, this time with the CA bundle provided by this SDK.
+				$apiClient->setCertificateAuthority($tempCAFile);
+				curl_setopt($curl, CURLOPT_CAINFO, $apiClient->getCertificateAuthority());
+				$curlResponse = curl_exec($curl);
+				if ($curlResponse === FALSE) {
+					// The request still failed, so the CA bundle did not help.
+					// Restore system CA, and an error will be triggered later on.
+					unlink($tempCAFile);
+				}
+			}
+		}
 
-		curl_close($curl);
-		fclose($debugFilePointer);
+		try {
+			$httpResponse = $this->handleResponse($apiClient, $request, $curl, $curlResponse, $request->getUrl());
+		}
+		catch (ConnectionException $e) {
+			throw $e;
+		}
+		finally {
+			curl_close($curl);
+			fclose($debugFilePointer);
+		}
 
-		return $response;
+		return $httpResponse;
 	}
 
 	/**
 	 * Puts together the HTTP response.
 	 *
-	 * @param ApiClient $apiClient the API client instance
-	 * @param HttpRequest $request the HTTP request
-	 * @param resource $curl the cURL handler
-	 * @param mixed $response the response the of HTTP request
-	 * @param string $url the url of the HTTP request
+	 * @param ApiClient $apiClient
+	 *    The API client instance
+	 * @param HttpRequest $request
+	 *    The HTTP request
+	 * @param resource \CurlHandle $curl
+	 *    The cURL handler
+	 * @param string|bool $curlResponse
+	 *    The response the from the $request, via curl_exec
+	 * @param string $url
+	 *    The url of the HTTP request
 	 * @return HttpResponse
+	 * @throws ConnectionException
 	 */
-	private function handleResponse(ApiClient $apiClient, HttpRequest $request, $curl, $response, $url) {
+	private function handleResponse(ApiClient $apiClient, HttpRequest $request, \CurlHandle $curl, string|bool $curlResponse, string $url): HttpResponse {
 		$httpHeaderSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-		$httpHeader = substr($response, 0, $httpHeaderSize);
-		$httpBody = substr($response, $httpHeaderSize);
+
+		// Handle the case where $curlResponse is false (indicating an error)
+		if ($curlResponse === FALSE) {
+			$errStr = curl_error($curl);
+
+			if (!empty($errStr)) {
+				throw new ConnectionException($url, $request->getLogToken(), $errStr);
+			} else {
+				throw new ConnectionException($url, $request->getLogToken(), 'API call failed for an unknown reason.');
+			}
+		}
+		$httpHeader = substr($curlResponse, 0, $httpHeaderSize);
+		$httpBody = substr($curlResponse, $httpHeaderSize);
 		$responseInfo = curl_getinfo($curl);
 
 		// debug HTTP response body
 		if ($apiClient->isDebuggingEnabled()) {
-			error_log("[DEBUG] HTTP Response body ~BEGIN~".PHP_EOL.print_r($httpBody, true).PHP_EOL."~END~".PHP_EOL, 3, $apiClient->getDebugFile());
+			error_log("[DEBUG] HTTP Response body ~BEGIN~" . PHP_EOL . print_r($httpBody, true) . PHP_EOL . "~END~".PHP_EOL, 3, $apiClient->getDebugFile());
 		}
 
 		if ($responseInfo['http_code'] === 0) {
@@ -145,5 +218,4 @@ final class CurlHttpClient implements IHttpClient {
 			return new HttpResponse($responseInfo['http_code'], $httpHeader, $httpBody);
 		}
 	}
-
 }

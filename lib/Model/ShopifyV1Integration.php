@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifyIntegration model
+ * ShopifyV1Integration model
  *
  * @category    Class
  * @description A Shopify Integration allows to connect a Shopify shop.
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifyIntegration implements ModelInterface, ArrayAccess
+class ShopifyV1Integration implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifyIntegration';
+    protected static $swaggerModelName = 'ShopifyV1Integration';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -568,7 +568,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setLoginName($login_name)
     {
         if (!is_null($login_name) && (mb_strlen($login_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $login_name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid length for $login_name when calling ShopifyV1Integration., must be smaller than or equal to 100.');
         }
 
         $this->container['login_name'] = $login_name;
@@ -597,7 +597,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setName($name)
     {
         if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid length for $name when calling ShopifyV1Integration., must be smaller than or equal to 100.');
         }
 
         $this->container['name'] = $name;
@@ -751,7 +751,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setShopName($shop_name)
     {
         if (!is_null($shop_name) && (mb_strlen($shop_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $shop_name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid length for $shop_name when calling ShopifyV1Integration., must be smaller than or equal to 100.');
         }
 
         $this->container['shop_name'] = $shop_name;

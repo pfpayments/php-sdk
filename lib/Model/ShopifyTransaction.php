@@ -49,7 +49,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $swaggerTypes = [
         'checkout_id' => 'string',
         'created_on' => '\DateTime',
-        'integration' => '\PostFinanceCheckout\Sdk\Model\ShopifyIntegration',
+        'integration' => '\PostFinanceCheckout\Sdk\Model\ShopifyV1Integration',
         'order_id' => 'string',
         'order_name' => 'string',
         'planned_purge_date' => '\DateTime',
@@ -303,7 +303,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Gets integration
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ShopifyIntegration
+     * @return \PostFinanceCheckout\Sdk\Model\ShopifyV1Integration
      */
     public function getIntegration()
     {
@@ -313,7 +313,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Sets integration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifyIntegration $integration 
+     * @param \PostFinanceCheckout\Sdk\Model\ShopifyV1Integration $integration 
      *
      * @return $this
      */
