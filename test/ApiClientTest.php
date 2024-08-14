@@ -144,7 +144,7 @@ final class ApiClientTest extends TestCase
         $this->assertGreaterThanOrEqual(4, count($headers));
 
         // Check SDK default header values.
-        $this->assertEquals($headers['x-meta-sdk-version'], "4.4.0");
+        $this->assertEquals($headers['x-meta-sdk-version'], "4.5.0");
         $this->assertEquals($headers['x-meta-sdk-language'], 'php');
         $this->assertEquals($headers['x-meta-sdk-provider'], "PostFinance Checkout");
         $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());
