@@ -521,7 +521,7 @@ class TokenService {
 	/**
 	 * Operation createTokenBasedOnTransaction
 	 *
-	 * Create Token Based On Transaction
+	 * Create Token Based On Transaction And Fill It With Stored Payment Information
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
@@ -537,7 +537,7 @@ class TokenService {
 	/**
 	 * Operation createTokenBasedOnTransactionWithHttpInfo
 	 *
-	 * Create Token Based On Transaction
+	 * Create Token Based On Transaction And Fill It With Stored Payment Information
      
      *
 	 * @param int $space_id  (required)
