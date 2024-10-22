@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionModelTaxLine model
+ * PaymentTerminalTransactionSummaryReference model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
+class PaymentTerminalTransactionSummaryReference implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionModel.TaxLine';
+    protected static $swaggerModelName = 'PaymentTerminalTransactionSummaryReference';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +49,10 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'rate' => 'float',
-        'title' => 'string'
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'terminal_id' => 'int',
+        'terminal_identifier' => 'string'
     ];
 
     /**
@@ -59,8 +61,10 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'rate' => null,
-        'title' => null
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'terminal_id' => 'int64',
+        'terminal_identifier' => null
     ];
 
     /**
@@ -70,8 +74,10 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'rate' => 'rate',
-        'title' => 'title'
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'terminal_id' => 'terminalId',
+        'terminal_identifier' => 'terminalIdentifier'
     ];
 
     /**
@@ -80,8 +86,10 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'title' => 'setTitle'
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'terminal_id' => 'setTerminalId',
+        'terminal_identifier' => 'setTerminalIdentifier'
     ];
 
     /**
@@ -90,8 +98,10 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'title' => 'getTitle'
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'terminal_id' => 'getTerminalId',
+        'terminal_identifier' => 'getTerminalIdentifier'
     ];
 
     
@@ -112,9 +122,13 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['rate'] = isset($data['rate']) ? $data['rate'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['terminal_id'] = isset($data['terminal_id']) ? $data['terminal_id'] : null;
+        
+        $this->container['terminal_identifier'] = isset($data['terminal_identifier']) ? $data['terminal_identifier'] : null;
         
     }
 
@@ -208,50 +222,100 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets rate
+     * Gets id
      *
-     * @return float
+     * @return int
      */
-    public function getRate()
+    public function getId()
     {
-        return $this->container['rate'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets rate
+     * Sets id
      *
-     * @param float $rate 
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
-    public function setRate($rate)
+    public function setId($id)
     {
-        $this->container['rate'] = $rate;
+        $this->container['id'] = $id;
 
         return $this;
     }
     
 
     /**
-     * Gets title
+     * Gets linked_space_id
      *
-     * @return string
+     * @return int
      */
-    public function getTitle()
+    public function getLinkedSpaceId()
     {
-        return $this->container['title'];
+        return $this->container['linked_space_id'];
     }
 
     /**
-     * Sets title
+     * Sets linked_space_id
      *
-     * @param string $title 
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
-    public function setTitle($title)
+    public function setLinkedSpaceId($linked_space_id)
     {
-        $this->container['title'] = $title;
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets terminal_id
+     *
+     * @return int
+     */
+    public function getTerminalId()
+    {
+        return $this->container['terminal_id'];
+    }
+
+    /**
+     * Sets terminal_id
+     *
+     * @param int $terminal_id 
+     *
+     * @return $this
+     */
+    public function setTerminalId($terminal_id)
+    {
+        $this->container['terminal_id'] = $terminal_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets terminal_identifier
+     *
+     * @return string
+     */
+    public function getTerminalIdentifier()
+    {
+        return $this->container['terminal_identifier'];
+    }
+
+    /**
+     * Sets terminal_identifier
+     *
+     * @param string $terminal_identifier 
+     *
+     * @return $this
+     */
+    public function setTerminalIdentifier($terminal_identifier)
+    {
+        $this->container['terminal_identifier'] = $terminal_identifier;
 
         return $this;
     }

@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionUpdateRequest model
+ * TaxLine model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
+class TaxLine implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionUpdateRequest';
+    protected static $swaggerModelName = 'TaxLine';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,11 +49,8 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'billing_configuration' => '\PostFinanceCheckout\Sdk\Model\BillingConfiguration',
-        'id' => 'int',
-        'items' => '\PostFinanceCheckout\Sdk\Model\Item[]',
-        'store_order_confirmation_email_enabled' => 'bool',
-        'subscriber_suspension_allowed' => 'bool'
+        'rate' => 'float',
+        'title' => 'string'
     ];
 
     /**
@@ -62,11 +59,8 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'billing_configuration' => null,
-        'id' => 'int64',
-        'items' => null,
-        'store_order_confirmation_email_enabled' => null,
-        'subscriber_suspension_allowed' => null
+        'rate' => null,
+        'title' => null
     ];
 
     /**
@@ -76,11 +70,8 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'billing_configuration' => 'billingConfiguration',
-        'id' => 'id',
-        'items' => 'items',
-        'store_order_confirmation_email_enabled' => 'storeOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'subscriberSuspensionAllowed'
+        'rate' => 'rate',
+        'title' => 'title'
     ];
 
     /**
@@ -89,11 +80,8 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'billing_configuration' => 'setBillingConfiguration',
-        'id' => 'setId',
-        'items' => 'setItems',
-        'store_order_confirmation_email_enabled' => 'setStoreOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'setSubscriberSuspensionAllowed'
+        'rate' => 'setRate',
+        'title' => 'setTitle'
     ];
 
     /**
@@ -102,11 +90,8 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'billing_configuration' => 'getBillingConfiguration',
-        'id' => 'getId',
-        'items' => 'getItems',
-        'store_order_confirmation_email_enabled' => 'getStoreOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'getSubscriberSuspensionAllowed'
+        'rate' => 'getRate',
+        'title' => 'getTitle'
     ];
 
     
@@ -127,15 +112,9 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['billing_configuration'] = isset($data['billing_configuration']) ? $data['billing_configuration'] : null;
+        $this->container['rate'] = isset($data['rate']) ? $data['rate'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
-        
-        $this->container['store_order_confirmation_email_enabled'] = isset($data['store_order_confirmation_email_enabled']) ? $data['store_order_confirmation_email_enabled'] : null;
-        
-        $this->container['subscriber_suspension_allowed'] = isset($data['subscriber_suspension_allowed']) ? $data['subscriber_suspension_allowed'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         
     }
 
@@ -229,125 +208,50 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets billing_configuration
+     * Gets rate
      *
-     * @return \PostFinanceCheckout\Sdk\Model\BillingConfiguration
+     * @return float
      */
-    public function getBillingConfiguration()
+    public function getRate()
     {
-        return $this->container['billing_configuration'];
+        return $this->container['rate'];
     }
 
     /**
-     * Sets billing_configuration
+     * Sets rate
      *
-     * @param \PostFinanceCheckout\Sdk\Model\BillingConfiguration $billing_configuration 
+     * @param float $rate 
      *
      * @return $this
      */
-    public function setBillingConfiguration($billing_configuration)
+    public function setRate($rate)
     {
-        $this->container['billing_configuration'] = $billing_configuration;
+        $this->container['rate'] = $rate;
 
         return $this;
     }
     
 
     /**
-     * Gets id
+     * Gets title
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->container['id'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets id
+     * Sets title
      *
-     * @param int $id 
+     * @param string $title 
      *
      * @return $this
      */
-    public function setId($id)
+    public function setTitle($title)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets items
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\Item[]
-     */
-    public function getItems()
-    {
-        return $this->container['items'];
-    }
-
-    /**
-     * Sets items
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\Item[] $items 
-     *
-     * @return $this
-     */
-    public function setItems($items)
-    {
-        $this->container['items'] = $items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets store_order_confirmation_email_enabled
-     *
-     * @return bool
-     */
-    public function getStoreOrderConfirmationEmailEnabled()
-    {
-        return $this->container['store_order_confirmation_email_enabled'];
-    }
-
-    /**
-     * Sets store_order_confirmation_email_enabled
-     *
-     * @param bool $store_order_confirmation_email_enabled 
-     *
-     * @return $this
-     */
-    public function setStoreOrderConfirmationEmailEnabled($store_order_confirmation_email_enabled)
-    {
-        $this->container['store_order_confirmation_email_enabled'] = $store_order_confirmation_email_enabled;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets subscriber_suspension_allowed
-     *
-     * @return bool
-     */
-    public function getSubscriberSuspensionAllowed()
-    {
-        return $this->container['subscriber_suspension_allowed'];
-    }
-
-    /**
-     * Sets subscriber_suspension_allowed
-     *
-     * @param bool $subscriber_suspension_allowed 
-     *
-     * @return $this
-     */
-    public function setSubscriberSuspensionAllowed($subscriber_suspension_allowed)
-    {
-        $this->container['subscriber_suspension_allowed'] = $subscriber_suspension_allowed;
+        $this->container['title'] = $title;
 
         return $this;
     }

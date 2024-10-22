@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionModelItem model
+ * Item model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
+class Item implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionModel.Item';
+    protected static $swaggerModelName = 'Item';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -53,7 +53,7 @@ class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
         'product_id' => 'int',
         'quantity' => 'float',
         'recalculate_price' => 'bool',
-        'tax_lines' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[]'
+        'tax_lines' => '\PostFinanceCheckout\Sdk\Model\TaxLine[]'
     ];
 
     /**
@@ -331,7 +331,7 @@ class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
     /**
      * Gets tax_lines
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[]
+     * @return \PostFinanceCheckout\Sdk\Model\TaxLine[]
      */
     public function getTaxLines()
     {
@@ -341,7 +341,7 @@ class ShopifySubscriptionModelItem implements ModelInterface, ArrayAccess
     /**
      * Sets tax_lines
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelTaxLine[] $tax_lines 
+     * @param \PostFinanceCheckout\Sdk\Model\TaxLine[] $tax_lines 
      *
      * @return $this
      */

@@ -56,6 +56,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         'number_of_transactions' => 'int',
         'payment_terminal' => 'int',
         'receipt' => 'string',
+        'reference' => 'int',
         'started_on' => '\DateTime',
         'transaction_sums' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalTransactionSum[]',
         'version' => 'int'
@@ -74,6 +75,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         'number_of_transactions' => 'int32',
         'payment_terminal' => 'int64',
         'receipt' => null,
+        'reference' => 'int64',
         'started_on' => 'date-time',
         'transaction_sums' => null,
         'version' => 'int32'
@@ -93,6 +95,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         'number_of_transactions' => 'numberOfTransactions',
         'payment_terminal' => 'paymentTerminal',
         'receipt' => 'receipt',
+        'reference' => 'reference',
         'started_on' => 'startedOn',
         'transaction_sums' => 'transactionSums',
         'version' => 'version'
@@ -111,6 +114,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         'number_of_transactions' => 'setNumberOfTransactions',
         'payment_terminal' => 'setPaymentTerminal',
         'receipt' => 'setReceipt',
+        'reference' => 'setReference',
         'started_on' => 'setStartedOn',
         'transaction_sums' => 'setTransactionSums',
         'version' => 'setVersion'
@@ -129,6 +133,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         'number_of_transactions' => 'getNumberOfTransactions',
         'payment_terminal' => 'getPaymentTerminal',
         'receipt' => 'getReceipt',
+        'reference' => 'getReference',
         'started_on' => 'getStartedOn',
         'transaction_sums' => 'getTransactionSums',
         'version' => 'getVersion'
@@ -165,6 +170,8 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
         $this->container['payment_terminal'] = isset($data['payment_terminal']) ? $data['payment_terminal'] : null;
         
         $this->container['receipt'] = isset($data['receipt']) ? $data['receipt'] : null;
+        
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
         
         $this->container['started_on'] = isset($data['started_on']) ? $data['started_on'] : null;
         
@@ -433,6 +440,31 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
     public function setReceipt($receipt)
     {
         $this->container['receipt'] = $receipt;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets reference
+     *
+     * @return int
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param int $reference 
+     *
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+        $this->container['reference'] = $reference;
 
         return $this;
     }

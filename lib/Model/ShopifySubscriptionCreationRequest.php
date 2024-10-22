@@ -50,12 +50,12 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'billing_address' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionAddressCreate',
-        'billing_configuration' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
+        'billing_configuration' => '\PostFinanceCheckout\Sdk\Model\BillingConfiguration',
         'currency' => 'string',
         'external_id' => 'string',
         'initial_execution_date' => '\DateTime',
         'integration' => 'int',
-        'items' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[]',
+        'items' => '\PostFinanceCheckout\Sdk\Model\Item[]',
         'language' => 'string',
         'shipping_address' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionAddressCreate',
         'shipping_method_name' => 'string',
@@ -343,7 +343,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Gets billing_configuration
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration
+     * @return \PostFinanceCheckout\Sdk\Model\BillingConfiguration
      */
     public function getBillingConfiguration()
     {
@@ -353,7 +353,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets billing_configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelBillingConfiguration $billing_configuration 
+     * @param \PostFinanceCheckout\Sdk\Model\BillingConfiguration $billing_configuration 
      *
      * @return $this
      */
@@ -468,7 +468,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Gets items
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[]
+     * @return \PostFinanceCheckout\Sdk\Model\Item[]
      */
     public function getItems()
     {
@@ -478,7 +478,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ShopifySubscriptionModelItem[] $items 
+     * @param \PostFinanceCheckout\Sdk\Model\Item[] $items 
      *
      * @return $this
      */

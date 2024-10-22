@@ -50,7 +50,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'description' => 'map[string,string]',
-        'icon' => 'string',
         'id' => 'int',
         'name' => 'map[string,string]',
         'sort_order' => 'int'
@@ -63,7 +62,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'description' => null,
-        'icon' => null,
         'id' => 'int64',
         'name' => null,
         'sort_order' => 'int32'
@@ -77,7 +75,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'description' => 'description',
-        'icon' => 'icon',
         'id' => 'id',
         'name' => 'name',
         'sort_order' => 'sortOrder'
@@ -90,7 +87,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'description' => 'setDescription',
-        'icon' => 'setIcon',
         'id' => 'setId',
         'name' => 'setName',
         'sort_order' => 'setSortOrder'
@@ -103,7 +99,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'description' => 'getDescription',
-        'icon' => 'getIcon',
         'id' => 'getId',
         'name' => 'getName',
         'sort_order' => 'getSortOrder'
@@ -128,8 +123,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
     {
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['icon'] = isset($data['icon']) ? $data['icon'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -248,31 +241,6 @@ class SalesChannel implements ModelInterface, ArrayAccess
     public function setDescription($description)
     {
         $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets icon
-     *
-     * @return string
-     */
-    public function getIcon()
-    {
-        return $this->container['icon'];
-    }
-
-    /**
-     * Sets icon
-     *
-     * @param string $icon The identifier of the icon that symbolizes the sales channel.
-     *
-     * @return $this
-     */
-    public function setIcon($icon)
-    {
-        $this->container['icon'] = $icon;
 
         return $this;
     }

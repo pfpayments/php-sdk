@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionModelBillingConfiguration model
+ * BillingConfiguration model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, ArrayAccess
+class BillingConfiguration implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionModel.BillingConfiguration';
+    protected static $swaggerModelName = 'BillingConfiguration';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
