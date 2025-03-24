@@ -49,8 +49,10 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $swaggerTypes = [
         'checkout_id' => 'string',
         'created_on' => '\DateTime',
+        'draft_order_id' => 'string',
+        'draft_order_legacy_id' => 'string',
         'integration' => '\PostFinanceCheckout\Sdk\Model\ShopifyV1Integration',
-        'order_id' => 'string',
+        'order_legacy_id' => 'string',
         'order_name' => 'string',
         'planned_purge_date' => '\DateTime',
         'state' => '\PostFinanceCheckout\Sdk\Model\ShopifyTransactionState',
@@ -66,8 +68,10 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $swaggerFormats = [
         'checkout_id' => null,
         'created_on' => 'date-time',
+        'draft_order_id' => null,
+        'draft_order_legacy_id' => null,
         'integration' => null,
-        'order_id' => null,
+        'order_legacy_id' => null,
         'order_name' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
@@ -84,8 +88,10 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $attributeMap = [
         'checkout_id' => 'checkoutId',
         'created_on' => 'createdOn',
+        'draft_order_id' => 'draftOrderId',
+        'draft_order_legacy_id' => 'draftOrderLegacyId',
         'integration' => 'integration',
-        'order_id' => 'orderId',
+        'order_legacy_id' => 'orderLegacyId',
         'order_name' => 'orderName',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
@@ -101,8 +107,10 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $setters = [
         'checkout_id' => 'setCheckoutId',
         'created_on' => 'setCreatedOn',
+        'draft_order_id' => 'setDraftOrderId',
+        'draft_order_legacy_id' => 'setDraftOrderLegacyId',
         'integration' => 'setIntegration',
-        'order_id' => 'setOrderId',
+        'order_legacy_id' => 'setOrderLegacyId',
         'order_name' => 'setOrderName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
@@ -118,8 +126,10 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $getters = [
         'checkout_id' => 'getCheckoutId',
         'created_on' => 'getCreatedOn',
+        'draft_order_id' => 'getDraftOrderId',
+        'draft_order_legacy_id' => 'getDraftOrderLegacyId',
         'integration' => 'getIntegration',
-        'order_id' => 'getOrderId',
+        'order_legacy_id' => 'getOrderLegacyId',
         'order_name' => 'getOrderName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
@@ -145,9 +155,13 @@ class ShopifyTransaction extends TransactionAwareEntity
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['draft_order_id'] = isset($data['draft_order_id']) ? $data['draft_order_id'] : null;
+        
+        $this->container['draft_order_legacy_id'] = isset($data['draft_order_legacy_id']) ? $data['draft_order_legacy_id'] : null;
+        
         $this->container['integration'] = isset($data['integration']) ? $data['integration'] : null;
         
-        $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
+        $this->container['order_legacy_id'] = isset($data['order_legacy_id']) ? $data['order_legacy_id'] : null;
         
         $this->container['order_name'] = isset($data['order_name']) ? $data['order_name'] : null;
         
@@ -301,6 +315,56 @@ class ShopifyTransaction extends TransactionAwareEntity
     
 
     /**
+     * Gets draft_order_id
+     *
+     * @return string
+     */
+    public function getDraftOrderId()
+    {
+        return $this->container['draft_order_id'];
+    }
+
+    /**
+     * Sets draft_order_id
+     *
+     * @param string $draft_order_id 
+     *
+     * @return $this
+     */
+    public function setDraftOrderId($draft_order_id)
+    {
+        $this->container['draft_order_id'] = $draft_order_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets draft_order_legacy_id
+     *
+     * @return string
+     */
+    public function getDraftOrderLegacyId()
+    {
+        return $this->container['draft_order_legacy_id'];
+    }
+
+    /**
+     * Sets draft_order_legacy_id
+     *
+     * @param string $draft_order_legacy_id 
+     *
+     * @return $this
+     */
+    public function setDraftOrderLegacyId($draft_order_legacy_id)
+    {
+        $this->container['draft_order_legacy_id'] = $draft_order_legacy_id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets integration
      *
      * @return \PostFinanceCheckout\Sdk\Model\ShopifyV1Integration
@@ -326,25 +390,25 @@ class ShopifyTransaction extends TransactionAwareEntity
     
 
     /**
-     * Gets order_id
+     * Gets order_legacy_id
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderLegacyId()
     {
-        return $this->container['order_id'];
+        return $this->container['order_legacy_id'];
     }
 
     /**
-     * Sets order_id
+     * Sets order_legacy_id
      *
-     * @param string $order_id 
+     * @param string $order_legacy_id 
      *
      * @return $this
      */
-    public function setOrderId($order_id)
+    public function setOrderLegacyId($order_legacy_id)
     {
-        $this->container['order_id'] = $order_id;
+        $this->container['order_legacy_id'] = $order_legacy_id;
 
         return $this;
     }

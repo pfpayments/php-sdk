@@ -52,6 +52,7 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         'id' => 'int',
         'version' => 'int',
         'email_address' => 'string',
+        'external_gid' => 'string',
         'external_id' => 'string',
         'phone_number' => 'string'
     ];
@@ -65,6 +66,7 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         'id' => 'int64',
         'version' => 'int64',
         'email_address' => null,
+        'external_gid' => null,
         'external_id' => null,
         'phone_number' => null
     ];
@@ -79,6 +81,7 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         'id' => 'id',
         'version' => 'version',
         'email_address' => 'emailAddress',
+        'external_gid' => 'externalGid',
         'external_id' => 'externalId',
         'phone_number' => 'phoneNumber'
     ];
@@ -92,6 +95,7 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         'id' => 'setId',
         'version' => 'setVersion',
         'email_address' => 'setEmailAddress',
+        'external_gid' => 'setExternalGid',
         'external_id' => 'setExternalId',
         'phone_number' => 'setPhoneNumber'
     ];
@@ -105,6 +109,7 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         'id' => 'getId',
         'version' => 'getVersion',
         'email_address' => 'getEmailAddress',
+        'external_gid' => 'getExternalGid',
         'external_id' => 'getExternalId',
         'phone_number' => 'getPhoneNumber'
     ];
@@ -132,6 +137,8 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
         $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
+        
+        $this->container['external_gid'] = isset($data['external_gid']) ? $data['external_gid'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
@@ -316,6 +323,31 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         }
 
         $this->container['email_address'] = $email_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_gid
+     *
+     * @return string
+     */
+    public function getExternalGid()
+    {
+        return $this->container['external_gid'];
+    }
+
+    /**
+     * Sets external_gid
+     *
+     * @param string $external_gid 
+     *
+     * @return $this
+     */
+    public function setExternalGid($external_gid)
+    {
+        $this->container['external_gid'] = $external_gid;
 
         return $this;
     }

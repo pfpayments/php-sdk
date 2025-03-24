@@ -63,10 +63,12 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'planned_purge_date' => '\DateTime',
         'pricing_option' => '\PostFinanceCheckout\Sdk\Model\ShopifySubscriptionProductPricingOption',
         'product_id' => 'string',
+        'product_legacy_id' => 'string',
         'product_name' => 'string',
         'product_price' => 'float',
         'product_sku' => 'string',
         'product_variant_id' => 'string',
+        'product_variant_legacy_id' => 'string',
         'product_variant_name' => 'string',
         'relative_price_adjustment' => 'float',
         'shipping_required' => 'bool',
@@ -100,10 +102,12 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'date-time',
         'pricing_option' => null,
         'product_id' => null,
+        'product_legacy_id' => null,
         'product_name' => null,
         'product_price' => null,
         'product_sku' => null,
         'product_variant_id' => null,
+        'product_variant_legacy_id' => null,
         'product_variant_name' => null,
         'relative_price_adjustment' => null,
         'shipping_required' => null,
@@ -138,10 +142,12 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'plannedPurgeDate',
         'pricing_option' => 'pricingOption',
         'product_id' => 'productId',
+        'product_legacy_id' => 'productLegacyId',
         'product_name' => 'productName',
         'product_price' => 'productPrice',
         'product_sku' => 'productSku',
         'product_variant_id' => 'productVariantId',
+        'product_variant_legacy_id' => 'productVariantLegacyId',
         'product_variant_name' => 'productVariantName',
         'relative_price_adjustment' => 'relativePriceAdjustment',
         'shipping_required' => 'shippingRequired',
@@ -175,10 +181,12 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'setPlannedPurgeDate',
         'pricing_option' => 'setPricingOption',
         'product_id' => 'setProductId',
+        'product_legacy_id' => 'setProductLegacyId',
         'product_name' => 'setProductName',
         'product_price' => 'setProductPrice',
         'product_sku' => 'setProductSku',
         'product_variant_id' => 'setProductVariantId',
+        'product_variant_legacy_id' => 'setProductVariantLegacyId',
         'product_variant_name' => 'setProductVariantName',
         'relative_price_adjustment' => 'setRelativePriceAdjustment',
         'shipping_required' => 'setShippingRequired',
@@ -212,10 +220,12 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'planned_purge_date' => 'getPlannedPurgeDate',
         'pricing_option' => 'getPricingOption',
         'product_id' => 'getProductId',
+        'product_legacy_id' => 'getProductLegacyId',
         'product_name' => 'getProductName',
         'product_price' => 'getProductPrice',
         'product_sku' => 'getProductSku',
         'product_variant_id' => 'getProductVariantId',
+        'product_variant_legacy_id' => 'getProductVariantLegacyId',
         'product_variant_name' => 'getProductVariantName',
         'relative_price_adjustment' => 'getRelativePriceAdjustment',
         'shipping_required' => 'getShippingRequired',
@@ -275,6 +285,8 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         
         $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
         
+        $this->container['product_legacy_id'] = isset($data['product_legacy_id']) ? $data['product_legacy_id'] : null;
+        
         $this->container['product_name'] = isset($data['product_name']) ? $data['product_name'] : null;
         
         $this->container['product_price'] = isset($data['product_price']) ? $data['product_price'] : null;
@@ -282,6 +294,8 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         $this->container['product_sku'] = isset($data['product_sku']) ? $data['product_sku'] : null;
         
         $this->container['product_variant_id'] = isset($data['product_variant_id']) ? $data['product_variant_id'] : null;
+        
+        $this->container['product_variant_legacy_id'] = isset($data['product_variant_legacy_id']) ? $data['product_variant_legacy_id'] : null;
         
         $this->container['product_variant_name'] = isset($data['product_variant_name']) ? $data['product_variant_name'] : null;
         
@@ -747,6 +761,31 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets product_legacy_id
+     *
+     * @return string
+     */
+    public function getProductLegacyId()
+    {
+        return $this->container['product_legacy_id'];
+    }
+
+    /**
+     * Sets product_legacy_id
+     *
+     * @param string $product_legacy_id The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+     *
+     * @return $this
+     */
+    public function setProductLegacyId($product_legacy_id)
+    {
+        $this->container['product_legacy_id'] = $product_legacy_id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets product_name
      *
      * @return string
@@ -841,6 +880,31 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
     public function setProductVariantId($product_variant_id)
     {
         $this->container['product_variant_id'] = $product_variant_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets product_variant_legacy_id
+     *
+     * @return string
+     */
+    public function getProductVariantLegacyId()
+    {
+        return $this->container['product_variant_legacy_id'];
+    }
+
+    /**
+     * Sets product_variant_legacy_id
+     *
+     * @param string $product_variant_legacy_id 
+     *
+     * @return $this
+     */
+    public function setProductVariantLegacyId($product_variant_legacy_id)
+    {
+        $this->container['product_variant_legacy_id'] = $product_variant_legacy_id;
 
         return $this;
     }

@@ -50,8 +50,10 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'billed_on' => '\DateTime',
         'checkout_token' => 'string',
         'created_on' => '\DateTime',
+        'draft_order_id' => 'string',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
         'order_id' => 'string',
+        'order_legacy_id' => 'string',
         'order_name' => 'string',
         'planned_execution_date' => '\DateTime',
         'planned_purge_date' => '\DateTime',
@@ -72,8 +74,10 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'billed_on' => 'date-time',
         'checkout_token' => null,
         'created_on' => 'date-time',
+        'draft_order_id' => null,
         'failure_reason' => null,
         'order_id' => null,
+        'order_legacy_id' => null,
         'order_name' => null,
         'planned_execution_date' => 'date-time',
         'planned_purge_date' => 'date-time',
@@ -95,8 +99,10 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'billed_on' => 'billedOn',
         'checkout_token' => 'checkoutToken',
         'created_on' => 'createdOn',
+        'draft_order_id' => 'draftOrderId',
         'failure_reason' => 'failureReason',
         'order_id' => 'orderId',
+        'order_legacy_id' => 'orderLegacyId',
         'order_name' => 'orderName',
         'planned_execution_date' => 'plannedExecutionDate',
         'planned_purge_date' => 'plannedPurgeDate',
@@ -117,8 +123,10 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'billed_on' => 'setBilledOn',
         'checkout_token' => 'setCheckoutToken',
         'created_on' => 'setCreatedOn',
+        'draft_order_id' => 'setDraftOrderId',
         'failure_reason' => 'setFailureReason',
         'order_id' => 'setOrderId',
+        'order_legacy_id' => 'setOrderLegacyId',
         'order_name' => 'setOrderName',
         'planned_execution_date' => 'setPlannedExecutionDate',
         'planned_purge_date' => 'setPlannedPurgeDate',
@@ -139,8 +147,10 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'billed_on' => 'getBilledOn',
         'checkout_token' => 'getCheckoutToken',
         'created_on' => 'getCreatedOn',
+        'draft_order_id' => 'getDraftOrderId',
         'failure_reason' => 'getFailureReason',
         'order_id' => 'getOrderId',
+        'order_legacy_id' => 'getOrderLegacyId',
         'order_name' => 'getOrderName',
         'planned_execution_date' => 'getPlannedExecutionDate',
         'planned_purge_date' => 'getPlannedPurgeDate',
@@ -172,9 +182,13 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['draft_order_id'] = isset($data['draft_order_id']) ? $data['draft_order_id'] : null;
+        
         $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
         
         $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
+        
+        $this->container['order_legacy_id'] = isset($data['order_legacy_id']) ? $data['order_legacy_id'] : null;
         
         $this->container['order_name'] = isset($data['order_name']) ? $data['order_name'] : null;
         
@@ -361,6 +375,31 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     
 
     /**
+     * Gets draft_order_id
+     *
+     * @return string
+     */
+    public function getDraftOrderId()
+    {
+        return $this->container['draft_order_id'];
+    }
+
+    /**
+     * Sets draft_order_id
+     *
+     * @param string $draft_order_id 
+     *
+     * @return $this
+     */
+    public function setDraftOrderId($draft_order_id)
+    {
+        $this->container['draft_order_id'] = $draft_order_id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets failure_reason
      *
      * @return \PostFinanceCheckout\Sdk\Model\FailureReason
@@ -405,6 +444,31 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     public function setOrderId($order_id)
     {
         $this->container['order_id'] = $order_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets order_legacy_id
+     *
+     * @return string
+     */
+    public function getOrderLegacyId()
+    {
+        return $this->container['order_legacy_id'];
+    }
+
+    /**
+     * Sets order_legacy_id
+     *
+     * @param string $order_legacy_id 
+     *
+     * @return $this
+     */
+    public function setOrderLegacyId($order_legacy_id)
+    {
+        $this->container['order_legacy_id'] = $order_legacy_id;
 
         return $this;
     }

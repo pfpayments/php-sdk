@@ -48,7 +48,9 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
       */
     protected static $swaggerTypes = [
         'product_id' => 'string',
+        'product_legacy_id' => 'string',
         'product_variant_id' => 'string',
+        'product_variant_legacy_id' => 'string',
         'shop' => 'int'
     ];
 
@@ -59,7 +61,9 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
       */
     protected static $swaggerFormats = [
         'product_id' => null,
+        'product_legacy_id' => null,
         'product_variant_id' => null,
+        'product_variant_legacy_id' => null,
         'shop' => 'int64'
     ];
 
@@ -71,7 +75,9 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
      */
     protected static $attributeMap = [
         'product_id' => 'productId',
+        'product_legacy_id' => 'productLegacyId',
         'product_variant_id' => 'productVariantId',
+        'product_variant_legacy_id' => 'productVariantLegacyId',
         'shop' => 'shop'
     ];
 
@@ -82,7 +88,9 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
      */
     protected static $setters = [
         'product_id' => 'setProductId',
+        'product_legacy_id' => 'setProductLegacyId',
         'product_variant_id' => 'setProductVariantId',
+        'product_variant_legacy_id' => 'setProductVariantLegacyId',
         'shop' => 'setShop'
     ];
 
@@ -93,7 +101,9 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
      */
     protected static $getters = [
         'product_id' => 'getProductId',
+        'product_legacy_id' => 'getProductLegacyId',
         'product_variant_id' => 'getProductVariantId',
+        'product_variant_legacy_id' => 'getProductVariantLegacyId',
         'shop' => 'getShop'
     ];
 
@@ -113,7 +123,11 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
         
         $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
         
+        $this->container['product_legacy_id'] = isset($data['product_legacy_id']) ? $data['product_legacy_id'] : null;
+        
         $this->container['product_variant_id'] = isset($data['product_variant_id']) ? $data['product_variant_id'] : null;
+        
+        $this->container['product_variant_legacy_id'] = isset($data['product_variant_legacy_id']) ? $data['product_variant_legacy_id'] : null;
         
         $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
         
@@ -128,11 +142,11 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['product_id'] === null) {
-            $invalidProperties[] = "'product_id' can't be null";
+        if ($this->container['product_legacy_id'] === null) {
+            $invalidProperties[] = "'product_legacy_id' can't be null";
         }
-        if ($this->container['product_variant_id'] === null) {
-            $invalidProperties[] = "'product_variant_id' can't be null";
+        if ($this->container['product_variant_legacy_id'] === null) {
+            $invalidProperties[] = "'product_variant_legacy_id' can't be null";
         }
         if ($this->container['shop'] === null) {
             $invalidProperties[] = "'shop' can't be null";
@@ -243,6 +257,31 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
     
 
     /**
+     * Gets product_legacy_id
+     *
+     * @return string
+     */
+    public function getProductLegacyId()
+    {
+        return $this->container['product_legacy_id'];
+    }
+
+    /**
+     * Sets product_legacy_id
+     *
+     * @param string $product_legacy_id The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+     *
+     * @return $this
+     */
+    public function setProductLegacyId($product_legacy_id)
+    {
+        $this->container['product_legacy_id'] = $product_legacy_id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets product_variant_id
      *
      * @return string
@@ -262,6 +301,31 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
     public function setProductVariantId($product_variant_id)
     {
         $this->container['product_variant_id'] = $product_variant_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets product_variant_legacy_id
+     *
+     * @return string
+     */
+    public function getProductVariantLegacyId()
+    {
+        return $this->container['product_variant_legacy_id'];
+    }
+
+    /**
+     * Sets product_variant_legacy_id
+     *
+     * @param string $product_variant_legacy_id 
+     *
+     * @return $this
+     */
+    public function setProductVariantLegacyId($product_variant_legacy_id)
+    {
+        $this->container['product_variant_legacy_id'] = $product_variant_legacy_id;
 
         return $this;
     }

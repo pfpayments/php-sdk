@@ -244,7 +244,7 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets enable_payload_signature_and_state
      *
-     * @param bool $enable_payload_signature_and_state Whether signature header and state property are enabled in webhook payload.
+     * @param bool $enable_payload_signature_and_state Whether signature header and 'state' property are enabled in webhook payload.
      *
      * @return $this
      */

@@ -51,6 +51,7 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'email_address' => 'string',
         'phone_number' => 'string',
+        'shopify_customer_gid' => 'string',
         'shopify_customer_id' => 'string'
     ];
 
@@ -62,6 +63,7 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'email_address' => null,
         'phone_number' => null,
+        'shopify_customer_gid' => null,
         'shopify_customer_id' => null
     ];
 
@@ -74,6 +76,7 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'email_address' => 'emailAddress',
         'phone_number' => 'phoneNumber',
+        'shopify_customer_gid' => 'shopifyCustomerGid',
         'shopify_customer_id' => 'shopifyCustomerId'
     ];
 
@@ -85,6 +88,7 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     protected static $setters = [
         'email_address' => 'setEmailAddress',
         'phone_number' => 'setPhoneNumber',
+        'shopify_customer_gid' => 'setShopifyCustomerGid',
         'shopify_customer_id' => 'setShopifyCustomerId'
     ];
 
@@ -96,6 +100,7 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     protected static $getters = [
         'email_address' => 'getEmailAddress',
         'phone_number' => 'getPhoneNumber',
+        'shopify_customer_gid' => 'getShopifyCustomerGid',
         'shopify_customer_id' => 'getShopifyCustomerId'
     ];
 
@@ -120,6 +125,8 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
         $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
         
         $this->container['phone_number'] = isset($data['phone_number']) ? $data['phone_number'] : null;
+        
+        $this->container['shopify_customer_gid'] = isset($data['shopify_customer_gid']) ? $data['shopify_customer_gid'] : null;
         
         $this->container['shopify_customer_id'] = isset($data['shopify_customer_id']) ? $data['shopify_customer_id'] : null;
         
@@ -262,6 +269,31 @@ class ShopifySubscriberCreation implements ModelInterface, ArrayAccess
     public function setPhoneNumber($phone_number)
     {
         $this->container['phone_number'] = $phone_number;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shopify_customer_gid
+     *
+     * @return string
+     */
+    public function getShopifyCustomerGid()
+    {
+        return $this->container['shopify_customer_gid'];
+    }
+
+    /**
+     * Sets shopify_customer_gid
+     *
+     * @param string $shopify_customer_gid The customer Global ID has to correspond to the Global ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
+     *
+     * @return $this
+     */
+    public function setShopifyCustomerGid($shopify_customer_gid)
+    {
+        $this->container['shopify_customer_gid'] = $shopify_customer_gid;
 
         return $this;
     }

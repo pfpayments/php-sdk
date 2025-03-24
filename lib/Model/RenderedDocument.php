@@ -261,7 +261,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets document_template_type
      *
-     * @param int $document_template_type 
+     * @param int $document_template_type The document's template type
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets mime_type
      *
-     * @param string $mime_type 
+     * @param string $mime_type The document's content type
      *
      * @return $this
      */
@@ -311,7 +311,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string $title 
+     * @param string $title The title of the rendered document
      *
      * @return $this
      */

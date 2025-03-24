@@ -673,7 +673,7 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['text/csv', 'application/json;charset=utf-8']);
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8', 'text/csv']);
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}

@@ -51,6 +51,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'amount_excluding_tax' => 'float',
         'amount_including_tax' => 'float',
+        'id' => 'int',
         'rate_in_percentage' => 'float',
         'tax' => '\PostFinanceCheckout\Sdk\Model\Tax',
         'type' => 'int'
@@ -64,6 +65,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'amount_excluding_tax' => null,
         'amount_including_tax' => null,
+        'id' => 'int64',
         'rate_in_percentage' => null,
         'tax' => null,
         'type' => 'int64'
@@ -78,6 +80,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'amount_excluding_tax' => 'amountExcludingTax',
         'amount_including_tax' => 'amountIncludingTax',
+        'id' => 'id',
         'rate_in_percentage' => 'rateInPercentage',
         'tax' => 'tax',
         'type' => 'type'
@@ -91,6 +94,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     protected static $setters = [
         'amount_excluding_tax' => 'setAmountExcludingTax',
         'amount_including_tax' => 'setAmountIncludingTax',
+        'id' => 'setId',
         'rate_in_percentage' => 'setRateInPercentage',
         'tax' => 'setTax',
         'type' => 'setType'
@@ -104,6 +108,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     protected static $getters = [
         'amount_excluding_tax' => 'getAmountExcludingTax',
         'amount_including_tax' => 'getAmountIncludingTax',
+        'id' => 'getId',
         'rate_in_percentage' => 'getRateInPercentage',
         'tax' => 'getTax',
         'type' => 'getType'
@@ -130,6 +135,8 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
         $this->container['amount_excluding_tax'] = isset($data['amount_excluding_tax']) ? $data['amount_excluding_tax'] : null;
         
         $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['rate_in_percentage'] = isset($data['rate_in_percentage']) ? $data['rate_in_percentage'] : null;
         
@@ -273,6 +280,31 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     public function setAmountIncludingTax($amount_including_tax)
     {
         $this->container['amount_including_tax'] = $amount_including_tax;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id A unique identifier for the object.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
         return $this;
     }

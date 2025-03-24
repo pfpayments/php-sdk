@@ -47,7 +47,8 @@ class SpaceCreate extends AbstractSpaceUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'account' => 'int'
+        'account' => 'int',
+        'database' => 'int'
     ];
 
     /**
@@ -56,7 +57,8 @@ class SpaceCreate extends AbstractSpaceUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'account' => 'int64'
+        'account' => 'int64',
+        'database' => 'int64'
     ];
 
     /**
@@ -66,7 +68,8 @@ class SpaceCreate extends AbstractSpaceUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'account' => 'account'
+        'account' => 'account',
+        'database' => 'database'
     ];
 
     /**
@@ -75,7 +78,8 @@ class SpaceCreate extends AbstractSpaceUpdate
      * @var string[]
      */
     protected static $setters = [
-        'account' => 'setAccount'
+        'account' => 'setAccount',
+        'database' => 'setDatabase'
     ];
 
     /**
@@ -84,7 +88,8 @@ class SpaceCreate extends AbstractSpaceUpdate
      * @var string[]
      */
     protected static $getters = [
-        'account' => 'getAccount'
+        'account' => 'getAccount',
+        'database' => 'getDatabase'
     ];
 
     
@@ -102,6 +107,8 @@ class SpaceCreate extends AbstractSpaceUpdate
 
         
         $this->container['account'] = isset($data['account']) ? $data['account'] : null;
+        
+        $this->container['database'] = isset($data['database']) ? $data['database'] : null;
         
     }
 
@@ -225,6 +232,31 @@ class SpaceCreate extends AbstractSpaceUpdate
     public function setAccount($account)
     {
         $this->container['account'] = $account;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets database
+     *
+     * @return int
+     */
+    public function getDatabase()
+    {
+        return $this->container['database'];
+    }
+
+    /**
+     * Sets database
+     *
+     * @param int $database The database the space is connected to and that holds the space's data.
+     *
+     * @return $this
+     */
+    public function setDatabase($database)
+    {
+        $this->container['database'] = $database;
 
         return $this;
     }

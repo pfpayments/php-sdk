@@ -51,9 +51,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'content' => 'object',
         'content_as_string' => 'string',
-        'descriptor' => '\PostFinanceCheckout\Sdk\Model\LabelDescriptor',
-        'id' => 'int',
-        'version' => 'int'
+        'descriptor' => '\PostFinanceCheckout\Sdk\Model\LabelDescriptor'
     ];
 
     /**
@@ -64,9 +62,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'content' => null,
         'content_as_string' => null,
-        'descriptor' => null,
-        'id' => 'int64',
-        'version' => 'int32'
+        'descriptor' => null
     ];
 
     /**
@@ -78,9 +74,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'content' => 'content',
         'content_as_string' => 'contentAsString',
-        'descriptor' => 'descriptor',
-        'id' => 'id',
-        'version' => 'version'
+        'descriptor' => 'descriptor'
     ];
 
     /**
@@ -91,9 +85,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $setters = [
         'content' => 'setContent',
         'content_as_string' => 'setContentAsString',
-        'descriptor' => 'setDescriptor',
-        'id' => 'setId',
-        'version' => 'setVersion'
+        'descriptor' => 'setDescriptor'
     ];
 
     /**
@@ -104,9 +96,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $getters = [
         'content' => 'getContent',
         'content_as_string' => 'getContentAsString',
-        'descriptor' => 'getDescriptor',
-        'id' => 'getId',
-        'version' => 'getVersion'
+        'descriptor' => 'getDescriptor'
     ];
 
     
@@ -132,10 +122,6 @@ class Label implements ModelInterface, ArrayAccess
         $this->container['content_as_string'] = isset($data['content_as_string']) ? $data['content_as_string'] : null;
         
         $this->container['descriptor'] = isset($data['descriptor']) ? $data['descriptor'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
     }
 
@@ -298,56 +284,6 @@ class Label implements ModelInterface, ArrayAccess
     public function setDescriptor($descriptor)
     {
         $this->container['descriptor'] = $descriptor;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
 
         return $this;
     }

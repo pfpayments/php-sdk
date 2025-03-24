@@ -22,23 +22,26 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * AnalyticsQueryExecutionState model
+ * PanType model
  *
  * @category    Class
- * @description The state of a query execution.
+ * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class AnalyticsQueryExecutionState
+class PanType
 {
     /**
      * Possible values of this enum
      */
-    const PROCESSING = 'PROCESSING';
-    const PROCESSED = 'PROCESSED';
-    const FAILED = 'FAILED';
-    const CANCELED = 'CANCELED';
+    const PLAIN = 'PLAIN';
+    const SCHEME_TOKEN = 'SCHEME_TOKEN';
+    const SCHEME_TOKEN_CLICK_TO_PAY = 'SCHEME_TOKEN_CLICK_TO_PAY';
+    const DEVICE_TOKEN_APPLE_PAY = 'DEVICE_TOKEN_APPLE_PAY';
+    const DEVICE_TOKEN_GOOGLE_PAY = 'DEVICE_TOKEN_GOOGLE_PAY';
+    const DEVICE_TOKEN_SAMSUNG_PAY = 'DEVICE_TOKEN_SAMSUNG_PAY';
+    const DEVICE_TOKEN_ANDROID_PAY = 'DEVICE_TOKEN_ANDROID_PAY';
     
     /**
      * Gets allowable values of the enum
@@ -47,10 +50,13 @@ class AnalyticsQueryExecutionState
     public static function getAllowableEnumValues()
     {
         return [
-            self::PROCESSING,
-            self::PROCESSED,
-            self::FAILED,
-            self::CANCELED,
+            self::PLAIN,
+            self::SCHEME_TOKEN,
+            self::SCHEME_TOKEN_CLICK_TO_PAY,
+            self::DEVICE_TOKEN_APPLE_PAY,
+            self::DEVICE_TOKEN_GOOGLE_PAY,
+            self::DEVICE_TOKEN_SAMSUNG_PAY,
+            self::DEVICE_TOKEN_ANDROID_PAY,
         ];
     }
 }

@@ -479,7 +479,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets maintenance_window_duration
      *
-     * @param string $maintenance_window_duration The permitted duration of the terminals maintenance window.
+     * @param string $maintenance_window_duration The permitted duration of the terminal's maintenance window.
      *
      * @return $this
      */

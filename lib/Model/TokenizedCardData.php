@@ -50,6 +50,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'cryptogram' => '\PostFinanceCheckout\Sdk\Model\CardCryptogram',
+        'initial_recurring_transaction' => 'bool',
         'recurring_indicator' => '\PostFinanceCheckout\Sdk\Model\RecurringIndicator',
         'token_requestor_id' => 'string'
     ];
@@ -61,6 +62,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'cryptogram' => null,
+        'initial_recurring_transaction' => null,
         'recurring_indicator' => null,
         'token_requestor_id' => null
     ];
@@ -73,6 +75,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'cryptogram' => 'cryptogram',
+        'initial_recurring_transaction' => 'initialRecurringTransaction',
         'recurring_indicator' => 'recurringIndicator',
         'token_requestor_id' => 'tokenRequestorId'
     ];
@@ -84,6 +87,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'cryptogram' => 'setCryptogram',
+        'initial_recurring_transaction' => 'setInitialRecurringTransaction',
         'recurring_indicator' => 'setRecurringIndicator',
         'token_requestor_id' => 'setTokenRequestorId'
     ];
@@ -95,6 +99,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'cryptogram' => 'getCryptogram',
+        'initial_recurring_transaction' => 'getInitialRecurringTransaction',
         'recurring_indicator' => 'getRecurringIndicator',
         'token_requestor_id' => 'getTokenRequestorId'
     ];
@@ -118,6 +123,8 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     {
         
         $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
+        
+        $this->container['initial_recurring_transaction'] = isset($data['initial_recurring_transaction']) ? $data['initial_recurring_transaction'] : null;
         
         $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
         
@@ -234,6 +241,31 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     public function setCryptogram($cryptogram)
     {
         $this->container['cryptogram'] = $cryptogram;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_recurring_transaction
+     *
+     * @return bool
+     */
+    public function getInitialRecurringTransaction()
+    {
+        return $this->container['initial_recurring_transaction'];
+    }
+
+    /**
+     * Sets initial_recurring_transaction
+     *
+     * @param bool $initial_recurring_transaction 
+     *
+     * @return $this
+     */
+    public function setInitialRecurringTransaction($initial_recurring_transaction)
+    {
+        $this->container['initial_recurring_transaction'] = $initial_recurring_transaction;
 
         return $this;
     }

@@ -53,6 +53,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         'card_verification_code' => 'string',
         'cryptogram' => '\PostFinanceCheckout\Sdk\Model\CardCryptogramCreate',
         'expiry_date' => 'string',
+        'pan_type' => '\PostFinanceCheckout\Sdk\Model\PanType',
         'primary_account_number' => 'string',
         'recurring_indicator' => '\PostFinanceCheckout\Sdk\Model\RecurringIndicator',
         'scheme_transaction_reference' => 'string',
@@ -69,6 +70,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         'card_verification_code' => null,
         'cryptogram' => null,
         'expiry_date' => null,
+        'pan_type' => null,
         'primary_account_number' => null,
         'recurring_indicator' => null,
         'scheme_transaction_reference' => null,
@@ -86,6 +88,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         'card_verification_code' => 'cardVerificationCode',
         'cryptogram' => 'cryptogram',
         'expiry_date' => 'expiryDate',
+        'pan_type' => 'panType',
         'primary_account_number' => 'primaryAccountNumber',
         'recurring_indicator' => 'recurringIndicator',
         'scheme_transaction_reference' => 'schemeTransactionReference',
@@ -102,6 +105,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         'card_verification_code' => 'setCardVerificationCode',
         'cryptogram' => 'setCryptogram',
         'expiry_date' => 'setExpiryDate',
+        'pan_type' => 'setPanType',
         'primary_account_number' => 'setPrimaryAccountNumber',
         'recurring_indicator' => 'setRecurringIndicator',
         'scheme_transaction_reference' => 'setSchemeTransactionReference',
@@ -118,6 +122,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         'card_verification_code' => 'getCardVerificationCode',
         'cryptogram' => 'getCryptogram',
         'expiry_date' => 'getExpiryDate',
+        'pan_type' => 'getPanType',
         'primary_account_number' => 'getPrimaryAccountNumber',
         'recurring_indicator' => 'getRecurringIndicator',
         'scheme_transaction_reference' => 'getSchemeTransactionReference',
@@ -149,6 +154,8 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
         $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
         
         $this->container['expiry_date'] = isset($data['expiry_date']) ? $data['expiry_date'] : null;
+        
+        $this->container['pan_type'] = isset($data['pan_type']) ? $data['pan_type'] : null;
         
         $this->container['primary_account_number'] = isset($data['primary_account_number']) ? $data['primary_account_number'] : null;
         
@@ -382,6 +389,31 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess
     public function setExpiryDate($expiry_date)
     {
         $this->container['expiry_date'] = $expiry_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets pan_type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PanType
+     */
+    public function getPanType()
+    {
+        return $this->container['pan_type'];
+    }
+
+    /**
+     * Sets pan_type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PanType $pan_type 
+     *
+     * @return $this
+     */
+    public function setPanType($pan_type)
+    {
+        $this->container['pan_type'] = $pan_type;
 
         return $this;
     }

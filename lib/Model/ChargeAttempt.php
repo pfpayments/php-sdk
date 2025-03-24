@@ -486,7 +486,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets customers_presence
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customers presence indicates which kind of customer interaction was used during the charge attempt.
+     * @param \PostFinanceCheckout\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates which kind of customer interaction was used during the charge attempt.
      *
      * @return $this
      */

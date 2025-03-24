@@ -51,6 +51,7 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'created_on' => '\DateTime',
         'email_address' => 'string',
+        'external_gid' => 'string',
         'external_id' => 'string',
         'id' => 'int',
         'linked_space_id' => 'int',
@@ -69,6 +70,7 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'created_on' => 'date-time',
         'email_address' => null,
+        'external_gid' => null,
         'external_id' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
@@ -88,6 +90,7 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'created_on' => 'createdOn',
         'email_address' => 'emailAddress',
+        'external_gid' => 'externalGid',
         'external_id' => 'externalId',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
@@ -106,6 +109,7 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
     protected static $setters = [
         'created_on' => 'setCreatedOn',
         'email_address' => 'setEmailAddress',
+        'external_gid' => 'setExternalGid',
         'external_id' => 'setExternalId',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
@@ -124,6 +128,7 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
     protected static $getters = [
         'created_on' => 'getCreatedOn',
         'email_address' => 'getEmailAddress',
+        'external_gid' => 'getExternalGid',
         'external_id' => 'getExternalId',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
@@ -155,6 +160,8 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;
+        
+        $this->container['external_gid'] = isset($data['external_gid']) ? $data['external_gid'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
@@ -320,6 +327,31 @@ class ShopifySubscriber implements ModelInterface, ArrayAccess
         }
 
         $this->container['email_address'] = $email_address;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_gid
+     *
+     * @return string
+     */
+    public function getExternalGid()
+    {
+        return $this->container['external_gid'];
+    }
+
+    /**
+     * Sets external_gid
+     *
+     * @param string $external_gid 
+     *
+     * @return $this
+     */
+    public function setExternalGid($external_gid)
+    {
+        $this->container['external_gid'] = $external_gid;
 
         return $this;
     }

@@ -49,7 +49,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'type' => '\PostFinanceCheckout\Sdk\Model\CardCryptogramType',
+        'eci' => 'string',
         'value' => 'string'
     ];
 
@@ -59,7 +59,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'type' => null,
+        'eci' => null,
         'value' => null
     ];
 
@@ -70,7 +70,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
+        'eci' => 'eci',
         'value' => 'value'
     ];
 
@@ -80,7 +80,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
+        'eci' => 'setEci',
         'value' => 'setValue'
     ];
 
@@ -90,7 +90,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
+        'eci' => 'getEci',
         'value' => 'getValue'
     ];
 
@@ -112,7 +112,7 @@ class CardCryptogram implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['eci'] = isset($data['eci']) ? $data['eci'] : null;
         
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         
@@ -208,25 +208,25 @@ class CardCryptogram implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets type
+     * Gets eci
      *
-     * @return \PostFinanceCheckout\Sdk\Model\CardCryptogramType
+     * @return string
      */
-    public function getType()
+    public function getEci()
     {
-        return $this->container['type'];
+        return $this->container['eci'];
     }
 
     /**
-     * Sets type
+     * Sets eci
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CardCryptogramType $type 
+     * @param string $eci 
      *
      * @return $this
      */
-    public function setType($type)
+    public function setEci($eci)
     {
-        $this->container['type'] = $type;
+        $this->container['eci'] = $eci;
 
         return $this;
     }

@@ -561,7 +561,7 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     /**
      * Sets login_name
      *
-     * @param string $login_name The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shops payment gateway configuration.
+     * @param string $login_name The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shop's payment gateway configuration.
      *
      * @return $this
      */
@@ -669,7 +669,7 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     /**
      * Sets payment_proxy_path
      *
-     * @param string $payment_proxy_path Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+     * @param string $payment_proxy_path Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
      *
      * @return $this
      */
@@ -744,7 +744,7 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     /**
      * Sets shop_name
      *
-     * @param string $shop_name The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopifys admin URL: [storeAddress].myshopify.com
+     * @param string $shop_name The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopify's admin URL: [storeAddress].myshopify.com
      *
      * @return $this
      */
@@ -948,7 +948,7 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     /**
      * Sets subscription_proxy_path
      *
-     * @param string $subscription_proxy_path Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+     * @param string $subscription_proxy_path Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
      *
      * @return $this
      */
