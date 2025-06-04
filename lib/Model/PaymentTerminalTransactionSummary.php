@@ -154,7 +154,7 @@ class PaymentTerminalTransactionSummary implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['dcc_transaction_sums'] = isset($data['dcc_transaction_sums']) ? $data['dcc_transaction_sums'] : null;

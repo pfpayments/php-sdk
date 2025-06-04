@@ -129,7 +129,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['bank_account'] = isset($data['bank_account']) ? $data['bank_account'] : null;

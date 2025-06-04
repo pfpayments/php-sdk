@@ -149,7 +149,7 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;

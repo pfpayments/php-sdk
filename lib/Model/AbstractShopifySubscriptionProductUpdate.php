@@ -33,7 +33,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  */
 class AbstractShopifySubscriptionProductUpdate implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = [];
 
     /**
       * The original name of the model.
@@ -168,7 +168,7 @@ class AbstractShopifySubscriptionProductUpdate implements ModelInterface, ArrayA
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['absolute_price_adjustment'] = isset($data['absolute_price_adjustment']) ? $data['absolute_price_adjustment'] : null;

@@ -129,7 +129,7 @@ class RestCountry implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['address_format'] = isset($data['address_format']) ? $data['address_format'] : null;
