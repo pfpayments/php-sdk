@@ -169,7 +169,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;

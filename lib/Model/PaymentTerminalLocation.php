@@ -134,7 +134,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;

@@ -114,7 +114,7 @@ class LineItemReductionCreate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['line_item_unique_id'] = isset($data['line_item_unique_id']) ? $data['line_item_unique_id'] : null;

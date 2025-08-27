@@ -134,7 +134,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['data_collection_types'] = isset($data['data_collection_types']) ? $data['data_collection_types'] : null;

@@ -139,7 +139,7 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['begin_date'] = isset($data['begin_date']) ? $data['begin_date'] : null;

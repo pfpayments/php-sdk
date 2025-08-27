@@ -33,7 +33,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  */
 class AbstractCustomerActive implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = [];
 
     /**
       * The original name of the model.
@@ -133,7 +133,7 @@ class AbstractCustomerActive implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['customer_id'] = isset($data['customer_id']) ? $data['customer_id'] : null;

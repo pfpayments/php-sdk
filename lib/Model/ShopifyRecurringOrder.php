@@ -194,7 +194,7 @@ class ShopifyRecurringOrder implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['billed_on'] = isset($data['billed_on']) ? $data['billed_on'] : null;

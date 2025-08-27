@@ -33,7 +33,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  */
 class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = [];
 
     /**
       * The original name of the model.
@@ -138,7 +138,7 @@ class AbstractHumanUserUpdate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['email_address'] = isset($data['email_address']) ? $data['email_address'] : null;

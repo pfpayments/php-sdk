@@ -149,7 +149,7 @@ class AuthenticatedCardDataCreate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['card_holder_name'] = isset($data['card_holder_name']) ? $data['card_holder_name'] : null;

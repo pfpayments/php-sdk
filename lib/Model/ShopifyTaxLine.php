@@ -124,7 +124,7 @@ class ShopifyTaxLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['fraction_rate'] = isset($data['fraction_rate']) ? $data['fraction_rate'] : null;

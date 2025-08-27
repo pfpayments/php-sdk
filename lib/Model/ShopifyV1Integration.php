@@ -224,7 +224,7 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['additional_line_item_data'] = isset($data['additional_line_item_data']) ? $data['additional_line_item_data'] : null;

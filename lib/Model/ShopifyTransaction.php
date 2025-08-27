@@ -169,7 +169,7 @@ class ShopifyTransaction implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = [])
     {
         
         $this->container['checkout_id'] = isset($data['checkout_id']) ? $data['checkout_id'] : null;
