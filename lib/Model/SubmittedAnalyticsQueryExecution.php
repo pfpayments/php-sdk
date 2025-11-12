@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.0.0
+ * @version     5.1.0
  * @implements \ArrayAccess<string, mixed>
  */
 class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -55,6 +55,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
+        'query_external_id' => 'string',
         'account_id' => 'int',
         'total_billed_execution_time_ms' => 'int',
         'created_timestamp' => '\DateTime',
@@ -74,6 +75,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'query_external_id' => null,
         'account_id' => 'int64',
         'total_billed_execution_time_ms' => null,
         'created_timestamp' => 'date-time',
@@ -91,6 +93,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'query_external_id' => false,
         'account_id' => false,
         'total_billed_execution_time_ms' => false,
         'created_timestamp' => false,
@@ -188,6 +191,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
+        'query_external_id' => 'queryExternalId',
         'account_id' => 'accountId',
         'total_billed_execution_time_ms' => 'totalBilledExecutionTimeMs',
         'created_timestamp' => 'createdTimestamp',
@@ -205,6 +209,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
+        'query_external_id' => 'setQueryExternalId',
         'account_id' => 'setAccountId',
         'total_billed_execution_time_ms' => 'setTotalBilledExecutionTimeMs',
         'created_timestamp' => 'setCreatedTimestamp',
@@ -222,6 +227,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
+        'query_external_id' => 'getQueryExternalId',
         'account_id' => 'getAccountId',
         'total_billed_execution_time_ms' => 'getTotalBilledExecutionTimeMs',
         'created_timestamp' => 'getCreatedTimestamp',
@@ -290,6 +296,7 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('query_external_id', $data ?? [], null);
         $this->setIfExists('account_id', $data ?? [], null);
         $this->setIfExists('total_billed_execution_time_ms', $data ?? [], null);
         $this->setIfExists('created_timestamp', $data ?? [], null);
@@ -342,6 +349,33 @@ class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets query_external_id
+     *
+     * @return string|null
+     */
+    public function getQueryExternalId()
+    {
+        return $this->container['query_external_id'];
+    }
+
+    /**
+     * Sets query_external_id
+     *
+     * @param string|null $query_external_id The external id associated with this query, if any.
+     *
+     * @return self
+     */
+    public function setQueryExternalId($query_external_id)
+    {
+        if (is_null($query_external_id)) {
+            throw new \InvalidArgumentException('non-nullable query_external_id cannot be null');
+        }
+        $this->container['query_external_id'] = $query_external_id;
+
+        return $this;
+    }
 
     /**
      * Gets account_id

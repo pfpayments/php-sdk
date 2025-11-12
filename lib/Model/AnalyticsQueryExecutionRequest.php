@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.0.0
+ * @version     5.1.0
  * @implements \ArrayAccess<string, mixed>
  */
 class AnalyticsQueryExecutionRequest implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -322,7 +322,7 @@ class AnalyticsQueryExecutionRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets sftp_dispatch_settings_id
      *
-     * @param int|null $sftp_dispatch_settings_id Optional. Active SFTP Dispatch connection settings ID (dispatch settings ID) associated with the target account. Only required if the Analytics query result file is scheduled for delivery to a remote SFTP server.
+     * @param int|null $sftp_dispatch_settings_id Optional. ID of the active SFTP configuration to use (associated with the target account). This is only required if the result file is scheduled for delivery to a remote SFTP server.
      *
      * @return self
      */
@@ -349,7 +349,7 @@ class AnalyticsQueryExecutionRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets sftp_dispatch_result_file_rename_pattern
      *
-     * @param string|null $sftp_dispatch_result_file_rename_pattern Optional. Renaming pattern for Analytics query result file (may be used when Analytics query results file is scheduled for SFTP delivery). Pattern may look like Latin alphabet string with some timestamp placeholder: \"transaction_report_{YYYMMDD_hhmmss}\". Supported placeholder formats are just these: DDMMYY , MMDDYY , YYYYMMDD , DD_MM_YY , DD-MM-YY , YYYY-MM-DD , YYYY_MM_DD , YYYYMMDD_hhmmss , YYYY-MM-DD_hh-mm-ss
+     * @param string|null $sftp_dispatch_result_file_rename_pattern Optional. Renaming pattern used for the result file during SFTP delivery. You can use a combination of fixed Latin text and timestamp variables (e.g., \"transaction_report_{YYYMMDD_hhmmss}\"). Supported variable formats: DDMMYY, MMDDYY, YYYYMMDD, DD_MM_YY, DD-MM-YY, YYYY-MM-DD, YYYY_MM_DD, YYYYMMDD_hhmmss, YYYY-MM-DD_hh-mm-ss.
      *
      * @return self
      */
@@ -376,7 +376,7 @@ class AnalyticsQueryExecutionRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets sql
      *
-     * @param string|null $sql The SQL query (in PrestoDB dialect) to be executed against the analytics database. This query defines the data retrieval operation.
+     * @param string|null $sql The SQL query (in PrestoDB dialect) to execute on the analytics database. This query defines exactly which data should be retrieved.
      *
      * @return self
      */
