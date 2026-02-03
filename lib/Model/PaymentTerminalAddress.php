@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * PaymentTerminalAddress model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -129,7 +129,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -139,7 +139,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -269,7 +269,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -279,7 +279,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -289,7 +289,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -299,7 +299,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -308,14 +308,14 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
@@ -367,12 +367,20 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
             $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
         }
 
+        if (!is_null($this->container['postcode']) && (mb_strlen($this->container['postcode']) > 12)) {
+            $invalidProperties[] = "invalid value for 'postcode', the character length must be smaller than or equal to 12.";
+        }
+
         if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
             $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 80)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 80.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 20)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 20.";
         }
 
         if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
@@ -392,7 +400,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -559,6 +567,10 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
         if (is_null($postcode)) {
             throw new \InvalidArgumentException('non-nullable postcode cannot be null');
         }
+        if ((mb_strlen($postcode) > 12)) {
+            throw new \InvalidArgumentException('invalid length for $postcode when calling PaymentTerminalAddress., must be smaller than or equal to 12.');
+        }
+
         $this->container['postcode'] = $postcode;
 
         return $this;
@@ -617,8 +629,8 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
         if (is_null($email_address)) {
             throw new \InvalidArgumentException('non-nullable email_address cannot be null');
         }
-        if ((mb_strlen($email_address) > 254)) {
-            throw new \InvalidArgumentException('invalid length for $email_address when calling PaymentTerminalAddress., must be smaller than or equal to 254.');
+        if ((mb_strlen($email_address) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling PaymentTerminalAddress., must be smaller than or equal to 80.');
         }
 
         $this->container['email_address'] = $email_address;
@@ -648,6 +660,10 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
         if (is_null($phone_number)) {
             throw new \InvalidArgumentException('non-nullable phone_number cannot be null');
         }
+        if ((mb_strlen($phone_number) > 20)) {
+            throw new \InvalidArgumentException('invalid length for $phone_number when calling PaymentTerminalAddress., must be smaller than or equal to 20.');
+        }
+
         $this->container['phone_number'] = $phone_number;
 
         return $this;
@@ -815,7 +831,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -828,7 +844,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -857,7 +873,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -880,7 +896,7 @@ class PaymentTerminalAddress implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

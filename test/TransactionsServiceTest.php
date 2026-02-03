@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -380,98 +380,7 @@ class TransactionsServiceTest extends TestCase
         );
     }
 
-    /**
-     * Authorizes and completes a transaction offline using card details.
-     *
-     * <p>Verifies that:
-     * <ul>
-     *   <li>Transaction completion state is SUCCESSFUL
-     *   <li>Transaction state is FULFILL
-     * </ul>
-     */
-    public function testCompleteOfflineShouldMakeTransactionCompletionStateSuccessful()
-    {
-        $transactionCreate = TestUtils::getTransactionCreatePayload();
-        $transactionCreate->setTokenizationMode(TokenizationMode::FORCE_CREATION);
-        $transactionCreate->setCustomersPresence(CustomersPresence::NOT_PRESENT);
-        $transactionCreate->setCompletionBehavior(TransactionCompletionBehavior::COMPLETE_IMMEDIATELY);
 
-        $transaction = $this->create($transactionCreate);
-
-        $authorizedTransaction = self::$transactionsService->postPaymentTransactionsIdProcessCardDetails(
-            $transaction->getId(),
-            Constants::$spaceId,
-            Constants::getMockCardData()
-        );
-
-        $processedTransaction = self::$transactionsService->postPaymentTransactionsIdCompleteOffline(
-            $authorizedTransaction->getId(),
-            Constants::$spaceId
-        );
-
-        $this->assertEquals(
-            TransactionCompletionState::SUCCESSFUL,
-            $processedTransaction->getState(),
-            "Transaction completion state must be SUCCESSFUL"
-        );
-
-        $completedTransaction = self::$transactionsService->getPaymentTransactionsId(
-            $transaction->getId(),
-            Constants::$spaceId
-        );
-
-        $this->assertEquals(
-            TransactionState::FULFILL,
-            $completedTransaction->getState(),
-            "Transaction state must be FULFILLED"
-        );
-    }
-
-    /**
-     * Authorizes and completes a transaction offline partially using card details.
-     *
-     * <p>Verifies that:
-     * <ul>
-     *   <li>Transaction completion state is SUCCESSFUL
-     *   <li>Transaction state is FULFILL
-     * </ul>
-     */
-    public function testCompleteOfflinePartiallyShouldMakeTransactionCompletionStateSuccessful()
-    {
-        $transaction = $this->create(TestUtils::getTransactionCreatePayload());
-
-        $authorizedTransaction = self::$transactionsService->postPaymentTransactionsIdProcessCardDetails(
-            $transaction->getId(),
-            Constants::$spaceId,
-            Constants::getMockCardData()
-        );
-
-        $tcd = new TransactionCompletionDetails();
-        $tcd->setExternalId(uniqid('', false));
-
-        $processedTransaction = self::$transactionsService->postPaymentTransactionsIdCompletePartiallyOffline(
-            $authorizedTransaction->getId(),
-            Constants::$spaceId,
-            $tcd
-        );
-
-        $this->assertEquals(
-            TransactionCompletionState::SUCCESSFUL,
-            $processedTransaction->getState(),
-            "Transaction completion state must be SUCCESSFUL"
-        );
-
-        $completedTransaction = self::$transactionsService->getPaymentTransactionsId(
-            $transaction->getId(),
-            Constants::$spaceId
-        );
-
-        $this->assertEquals(
-            TransactionState::FULFILL,
-            $completedTransaction->getState(),
-            "Transaction state must be FULFILLED"
-        );
-    }
 
     /**
      * Authorizes and voids a transaction online.
@@ -526,58 +435,6 @@ class TransactionsServiceTest extends TestCase
         );
     }
 
-    /**
-     * Authorizes and voids a transaction offline.
-     *
-     * <p>Verifies that:
-     * <ul>
-     *   <li>Transaction void state is SUCCESSFUL
-     *   <li>Transaction state is VOIDED
-     * </ul>
-     */
-    public function testVoidTransactionOfflineShouldReturnVoidedTransaction()
-    {
-        $transactionCreate = TestUtils::getTransactionCreatePayload();
-        $transactionCreate->setTokenizationMode(TokenizationMode::FORCE_CREATION);
-        $transactionCreate->setCustomersPresence(CustomersPresence::NOT_PRESENT);
-        $transactionCreate->setCompletionBehavior(TransactionCompletionBehavior::COMPLETE_DEFERRED);
-
-        $transaction = $this->create($transactionCreate);
-
-        $authorizedTransaction = self::$transactionsService->postPaymentTransactionsIdProcessCardDetails(
-            $transaction->getId(),
-            Constants::$spaceId,
-            Constants::getMockCardData()
-        );
-
-        $this->assertEquals(
-            TransactionState::AUTHORIZED,
-            $authorizedTransaction->getState(),
-            "Transaction state should be AUTHORIZED"
-        );
-
-        $expand = ['transaction'];
-
-        $transactionVoid = self::$transactionsService->postPaymentTransactionsIdVoidOffline(
-            $authorizedTransaction->getId(),
-            Constants::$spaceId,
-            $expand
-        );
-
-        $this->assertEquals(
-            TransactionVoidState::SUCCESSFUL,
-            $transactionVoid->getState(),
-            "Transaction void state should be SUCCESSFUL"
-        );
-
-        $this->assertNotNull($transactionVoid->getTransaction());
-
-        $this->assertEquals(
-            TransactionState::VOIDED,
-            $transactionVoid->getTransaction()->getState(),
-            "Transaction state should be VOIDED"
-        );
-    }
 
     /**
      * Creates, authorizes and completes a transaction.

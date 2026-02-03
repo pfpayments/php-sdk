@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * ExpressCheckoutCreateResponse model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -56,7 +56,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPITypes = [
         'iframe_src' => 'string',
-        'session' => 'int'
+        'session' => 'int',
+        'session_token' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       */
     protected static $openAPIFormats = [
         'iframe_src' => null,
-        'session' => 'int64'
+        'session' => 'int64',
+        'session_token' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       */
     protected static array $openAPINullables = [
         'iframe_src' => false,
-        'session' => false
+        'session' => false,
+        'session_token' => false
     ];
 
     /**
@@ -93,7 +96,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -103,7 +106,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -168,7 +171,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $attributeMap = [
         'iframe_src' => 'iframeSrc',
-        'session' => 'session'
+        'session' => 'session',
+        'session_token' => 'sessionToken'
     ];
 
     /**
@@ -178,7 +182,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $setters = [
         'iframe_src' => 'setIframeSrc',
-        'session' => 'setSession'
+        'session' => 'setSession',
+        'session_token' => 'setSessionToken'
     ];
 
     /**
@@ -188,7 +193,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $getters = [
         'iframe_src' => 'getIframeSrc',
-        'session' => 'getSession'
+        'session' => 'getSession',
+        'session_token' => 'getSessionToken'
     ];
 
     /**
@@ -197,7 +203,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -207,7 +213,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -217,7 +223,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -227,7 +233,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -236,20 +242,21 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
         $this->setIfExists('iframe_src', $data ?? [], null);
         $this->setIfExists('session', $data ?? [], null);
+        $this->setIfExists('session_token', $data ?? [], null);
     }
 
     /**
@@ -288,7 +295,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -347,6 +354,33 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
 
         return $this;
     }
+
+    /**
+     * Gets session_token
+     *
+     * @return string|null
+     */
+    public function getSessionToken()
+    {
+        return $this->container['session_token'];
+    }
+
+    /**
+     * Sets session_token
+     *
+     * @param string|null $session_token session_token
+     *
+     * @return self
+     */
+    public function setSessionToken($session_token)
+    {
+        if (is_null($session_token)) {
+            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
+        }
+        $this->container['session_token'] = $session_token;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -367,7 +401,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -380,7 +414,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -409,7 +443,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -432,7 +466,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

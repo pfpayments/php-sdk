@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *

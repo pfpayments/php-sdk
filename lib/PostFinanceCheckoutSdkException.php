@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -23,35 +23,45 @@
 
 namespace PostFinanceCheckout\Sdk;
 
-use Exception;
+use RuntimeException;
 
 /**
  * Exception thrown when an internal SDK error occurs
  */
-class PostFinanceCheckoutSdkException extends \RuntimeException
+class PostFinanceCheckoutSdkException extends RuntimeException
 {
-    private ErrorCode $codeEnum;
+    /**
+     * @var string
+     */
+    private string $errorCode;
 
-    public function __construct(ErrorCode $codeEnum, string $details)
+    /**
+     * Constructor.
+     *
+     * @param string $code SDK error code
+     * @param string $message Exception message details
+     */
+    public function __construct(string $code, string $message)
     {
-        $this->codeEnum = $codeEnum;
+        // Store the string code separately
+        $this->errorCode = $code;
 
-        $message = sprintf(
-            "Error code: %d. %s",
-            $codeEnum->value,
-            $details
+        $formattedMessage = sprintf(
+            "Error code: %s. %s",
+            $code,
+            $message
         );
 
-        parent::__construct($message);
+        parent::__construct($formattedMessage);
     }
 
-    public function getCodeEnum(): ErrorCode
+    /**
+     * Get the SDK error code string
+     *
+     * @return string
+     */
+    public function getErrorCode(): string
     {
-        return $this->codeEnum;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->codeEnum->getDescription();
+        return $this->errorCode;
     }
 }

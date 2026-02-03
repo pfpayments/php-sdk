@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -35,7 +35,7 @@ use PostFinanceCheckout\Sdk\Model\ModelInterface;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class ObjectSerializer
 {
@@ -56,8 +56,8 @@ class ObjectSerializer
      * Serialize data
      *
      * @param mixed  $data   the data to serialize
-     * @param string $type   the OpenAPIToolsType of the data
-     * @param string $format the format of the OpenAPITools type of the data
+     * @param string|null $type   the OpenAPIToolsType of the data
+     * @param string|null $format the format of the OpenAPITools type of the data
      *
      * @return scalar|object|array|null serialized form of $data
      */
@@ -192,6 +192,10 @@ class ObjectSerializer
             case 'boolean':
                 return !in_array($value, [false, 0], true);
 
+            # For string values, '' is considered empty.
+            case 'string':
+                return $value === '';
+
             # For all the other types, any value at this point can be considered empty.
             default:
                 return true;
@@ -263,6 +267,10 @@ class ObjectSerializer
 
         $value = $flattenArray($value, $paramName);
 
+        if ($openApiType === 'array' && $style === 'deepObject' && $explode) {
+            return $value;
+        }
+
         if ($openApiType === 'object' && ($style === 'deepObject' || $explode)) {
             return $value;
         }
@@ -310,24 +318,6 @@ class ObjectSerializer
         }
 
         return self::toString($value);
-    }
-
-    /**
-     * Take value and turn it into a string suitable for inclusion in
-     * the http body (form parameter). If it's a string, pass through unchanged
-     * If it's a datetime object, format it in ISO8601
-     *
-     * @param string|\SplFileObject $value the value of the form parameter
-     *
-     * @return string the form string
-     */
-    public static function toFormValue($value)
-    {
-        if ($value instanceof \SplFileObject) {
-            return $value->getRealPath();
-        } else {
-            return self::toString($value);
-        }
     }
 
     /**
@@ -393,7 +383,7 @@ class ObjectSerializer
      *
      * @param mixed    $data          object or primitive to be deserialized
      * @param string   $class         class name is passed as a string
-     * @param string[] $httpHeaders   HTTP headers
+     * @param string[]|null $httpHeaders   HTTP headers
      *
      * @return object|array|null a single or an array of $class instances
      */
@@ -470,7 +460,7 @@ class ObjectSerializer
             // determine file name
             if (
                 is_array($httpHeaders)
-                && array_key_exists('Content-Disposition', $httpHeaders) 
+                && array_key_exists('Content-Disposition', $httpHeaders)
                 && preg_match('/inline; filename=[\'"]?([^\'"\s]+)[\'"]?$/i', $httpHeaders['Content-Disposition'], $match)
             ) {
                 $filename = Configuration::getDefaultConfiguration()->getTempFolderPath() . DIRECTORY_SEPARATOR . self::sanitizeFilename($match[1]);

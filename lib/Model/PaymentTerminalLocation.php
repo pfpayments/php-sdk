@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * PaymentTerminalLocation model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -56,6 +56,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'linked_space_id' => 'int',
+        'production_merchant_id' => 'string',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
         'external_id' => 'string',
@@ -73,6 +74,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'linked_space_id' => 'int64',
+        'production_merchant_id' => null,
         'name' => null,
         'planned_purge_date' => 'date-time',
         'external_id' => null,
@@ -88,6 +90,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'linked_space_id' => false,
+        'production_merchant_id' => false,
         'name' => false,
         'planned_purge_date' => false,
         'external_id' => false,
@@ -108,7 +111,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -118,7 +121,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -183,6 +186,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $attributeMap = [
         'linked_space_id' => 'linkedSpaceId',
+        'production_merchant_id' => 'productionMerchantId',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
         'external_id' => 'externalId',
@@ -198,6 +202,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'linked_space_id' => 'setLinkedSpaceId',
+        'production_merchant_id' => 'setProductionMerchantId',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'external_id' => 'setExternalId',
@@ -213,6 +218,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'linked_space_id' => 'getLinkedSpaceId',
+        'production_merchant_id' => 'getProductionMerchantId',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'external_id' => 'getExternalId',
@@ -227,7 +233,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -237,7 +243,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -247,7 +253,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -257,7 +263,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -266,19 +272,20 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
         $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('production_merchant_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('planned_purge_date', $data ?? [], null);
         $this->setIfExists('external_id', $data ?? [], null);
@@ -314,6 +321,18 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['production_merchant_id']) && (mb_strlen($this->container['production_merchant_id']) > 15)) {
+            $invalidProperties[] = "invalid value for 'production_merchant_id', the character length must be smaller than or equal to 15.";
+        }
+
+        if (!is_null($this->container['production_merchant_id']) && (mb_strlen($this->container['production_merchant_id']) < 15)) {
+            $invalidProperties[] = "invalid value for 'production_merchant_id', the character length must be bigger than or equal to 15.";
+        }
+
+        if (!is_null($this->container['production_merchant_id']) && !preg_match("/([0-9a-zA-Z])+/", $this->container['production_merchant_id'])) {
+            $invalidProperties[] = "invalid value for 'production_merchant_id', must be conform to the pattern /([0-9a-zA-Z])+/.";
+        }
+
         if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
         }
@@ -327,7 +346,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -356,6 +375,43 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
         }
         $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets production_merchant_id
+     *
+     * @return string|null
+     */
+    public function getProductionMerchantId()
+    {
+        return $this->container['production_merchant_id'];
+    }
+
+    /**
+     * Sets production_merchant_id
+     *
+     * @param string|null $production_merchant_id production_merchant_id
+     *
+     * @return self
+     */
+    public function setProductionMerchantId($production_merchant_id)
+    {
+        if (is_null($production_merchant_id)) {
+            throw new \InvalidArgumentException('non-nullable production_merchant_id cannot be null');
+        }
+        if ((mb_strlen($production_merchant_id) > 15)) {
+            throw new \InvalidArgumentException('invalid length for $production_merchant_id when calling PaymentTerminalLocation., must be smaller than or equal to 15.');
+        }
+        if ((mb_strlen($production_merchant_id) < 15)) {
+            throw new \InvalidArgumentException('invalid length for $production_merchant_id when calling PaymentTerminalLocation., must be bigger than or equal to 15.');
+        }
+        if ((!preg_match("/([0-9a-zA-Z])+/", ObjectSerializer::toString($production_merchant_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$production_merchant_id when calling PaymentTerminalLocation., must conform to the pattern /([0-9a-zA-Z])+/.");
+        }
+
+        $this->container['production_merchant_id'] = $production_merchant_id;
 
         return $this;
     }
@@ -545,7 +601,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -558,7 +614,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -587,7 +643,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -610,7 +666,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

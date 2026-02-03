@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * TransactionCompletion model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -65,6 +65,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => '\DateTime',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
         'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
+        'meta_data' => 'array<string,string>',
         'succeeded_on' => '\DateTime',
         'id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionState',
@@ -106,6 +107,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => 'date-time',
         'line_items' => null,
         'mode' => null,
+        'meta_data' => null,
         'succeeded_on' => 'date-time',
         'id' => 'int64',
         'state' => null,
@@ -145,6 +147,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => false,
         'line_items' => false,
         'mode' => false,
+        'meta_data' => false,
         'succeeded_on' => false,
         'id' => false,
         'state' => false,
@@ -180,7 +183,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -190,7 +193,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -264,6 +267,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => 'createdOn',
         'line_items' => 'lineItems',
         'mode' => 'mode',
+        'meta_data' => 'metaData',
         'succeeded_on' => 'succeededOn',
         'id' => 'id',
         'state' => 'state',
@@ -303,6 +307,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => 'setCreatedOn',
         'line_items' => 'setLineItems',
         'mode' => 'setMode',
+        'meta_data' => 'setMetaData',
         'succeeded_on' => 'setSucceededOn',
         'id' => 'setId',
         'state' => 'setState',
@@ -342,6 +347,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         'created_on' => 'getCreatedOn',
         'line_items' => 'getLineItems',
         'mode' => 'getMode',
+        'meta_data' => 'getMetaData',
         'succeeded_on' => 'getSucceededOn',
         'id' => 'getId',
         'state' => 'getState',
@@ -371,7 +377,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -381,7 +387,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -391,7 +397,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -401,7 +407,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -410,14 +416,14 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
@@ -432,6 +438,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('created_on', $data ?? [], null);
         $this->setIfExists('line_items', $data ?? [], null);
         $this->setIfExists('mode', $data ?? [], null);
+        $this->setIfExists('meta_data', $data ?? [], null);
         $this->setIfExists('succeeded_on', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
@@ -519,7 +526,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -805,6 +812,33 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable mode cannot be null');
         }
         $this->container['mode'] = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta_data
+     *
+     * @return array<string,string>|null
+     */
+    public function getMetaData()
+    {
+        return $this->container['meta_data'];
+    }
+
+    /**
+     * Sets meta_data
+     *
+     * @param array<string,string>|null $meta_data Allow to store additional information about the object.
+     *
+     * @return self
+     */
+    public function setMetaData($meta_data)
+    {
+        if (is_null($meta_data)) {
+            throw new \InvalidArgumentException('non-nullable meta_data cannot be null');
+        }
+        $this->container['meta_data'] = $meta_data;
 
         return $this;
     }
@@ -1407,7 +1441,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -1420,7 +1454,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1449,7 +1483,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -1472,7 +1506,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSeriali
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

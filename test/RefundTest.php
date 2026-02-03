@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -62,7 +62,7 @@ class RefundTest extends TestCase
             Constants::getMockCardData()
         );
 
-        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOffline(
+        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOnline(
             
             $transaction->getId(),
             Constants::$spaceId
@@ -111,7 +111,7 @@ class RefundTest extends TestCase
             Constants::getMockCardData()
         );
 
-        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOffline(
+        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOnline(
             $transaction->getId(),
             Constants::$spaceId
         );

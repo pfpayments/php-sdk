@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * ExpressCheckoutSessionCreate model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -56,6 +56,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPITypes = [
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
+        'merchant_shipping_callback_url' => 'string',
+        'currency' => 'string',
         'shipping_options' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]'
     ];
 
@@ -68,6 +70,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPIFormats = [
         'line_items' => null,
+        'merchant_shipping_callback_url' => null,
+        'currency' => null,
         'shipping_options' => null
     ];
 
@@ -78,6 +82,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       */
     protected static array $openAPINullables = [
         'line_items' => false,
+        'merchant_shipping_callback_url' => false,
+        'currency' => false,
         'shipping_options' => false
     ];
 
@@ -93,7 +99,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -103,7 +109,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -168,6 +174,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      */
     protected static $attributeMap = [
         'line_items' => 'lineItems',
+        'merchant_shipping_callback_url' => 'merchantShippingCallbackUrl',
+        'currency' => 'currency',
         'shipping_options' => 'shippingOptions'
     ];
 
@@ -178,6 +186,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      */
     protected static $setters = [
         'line_items' => 'setLineItems',
+        'merchant_shipping_callback_url' => 'setMerchantShippingCallbackUrl',
+        'currency' => 'setCurrency',
         'shipping_options' => 'setShippingOptions'
     ];
 
@@ -188,6 +198,8 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      */
     protected static $getters = [
         'line_items' => 'getLineItems',
+        'merchant_shipping_callback_url' => 'getMerchantShippingCallbackUrl',
+        'currency' => 'getCurrency',
         'shipping_options' => 'getShippingOptions'
     ];
 
@@ -197,7 +209,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -207,7 +219,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -217,7 +229,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -227,7 +239,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -236,19 +248,21 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
         $this->setIfExists('line_items', $data ?? [], null);
+        $this->setIfExists('merchant_shipping_callback_url', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('shipping_options', $data ?? [], null);
     }
 
@@ -288,7 +302,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -317,6 +331,60 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable line_items cannot be null');
         }
         $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_shipping_callback_url
+     *
+     * @return string|null
+     */
+    public function getMerchantShippingCallbackUrl()
+    {
+        return $this->container['merchant_shipping_callback_url'];
+    }
+
+    /**
+     * Sets merchant_shipping_callback_url
+     *
+     * @param string|null $merchant_shipping_callback_url The URL to fetch the shipping options from.
+     *
+     * @return self
+     */
+    public function setMerchantShippingCallbackUrl($merchant_shipping_callback_url)
+    {
+        if (is_null($merchant_shipping_callback_url)) {
+            throw new \InvalidArgumentException('non-nullable merchant_shipping_callback_url cannot be null');
+        }
+        $this->container['merchant_shipping_callback_url'] = $merchant_shipping_callback_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency The currency of the session.
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+        $this->container['currency'] = $currency;
 
         return $this;
     }
@@ -367,7 +435,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -380,7 +448,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -409,7 +477,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -432,7 +500,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

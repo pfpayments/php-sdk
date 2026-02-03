@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -83,7 +83,7 @@ class WebhookListenersServiceTest extends TestCase
         $this->assertGreaterThanOrEqual(4, count($headers));
 
         // Check SDK default header values.
-        $this->assertEquals($headers['x-meta-sdk-version'], '5.1.0');
+        $this->assertEquals($headers['x-meta-sdk-version'], '5.2.0');
         $this->assertEquals($headers['x-meta-sdk-language'], 'php');
         $this->assertEquals($headers['x-meta-sdk-provider'], 'postfinancecheckout');
         $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());

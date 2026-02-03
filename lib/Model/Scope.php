@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * Scope model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -129,7 +129,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -139,7 +139,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -269,7 +269,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -279,7 +279,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -289,7 +289,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -299,7 +299,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -308,14 +308,14 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
@@ -375,20 +375,20 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = "invalid value for 'port', must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['preprod_domain_name']) && (mb_strlen($this->container['preprod_domain_name']) > 40)) {
-            $invalidProperties[] = "invalid value for 'preprod_domain_name', the character length must be smaller than or equal to 40.";
+        if (!is_null($this->container['preprod_domain_name']) && (mb_strlen($this->container['preprod_domain_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'preprod_domain_name', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['domain_name']) && (mb_strlen($this->container['domain_name']) > 40)) {
-            $invalidProperties[] = "invalid value for 'domain_name', the character length must be smaller than or equal to 40.";
+        if (!is_null($this->container['domain_name']) && (mb_strlen($this->container['domain_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'domain_name', the character length must be smaller than or equal to 100.";
         }
 
         if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
         }
 
-        if (!is_null($this->container['sandbox_domain_name']) && (mb_strlen($this->container['sandbox_domain_name']) > 40)) {
-            $invalidProperties[] = "invalid value for 'sandbox_domain_name', the character length must be smaller than or equal to 40.";
+        if (!is_null($this->container['sandbox_domain_name']) && (mb_strlen($this->container['sandbox_domain_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sandbox_domain_name', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -400,7 +400,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -658,8 +658,8 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($preprod_domain_name)) {
             throw new \InvalidArgumentException('non-nullable preprod_domain_name cannot be null');
         }
-        if ((mb_strlen($preprod_domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $preprod_domain_name when calling Scope., must be smaller than or equal to 40.');
+        if ((mb_strlen($preprod_domain_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $preprod_domain_name when calling Scope., must be smaller than or equal to 100.');
         }
 
         $this->container['preprod_domain_name'] = $preprod_domain_name;
@@ -689,8 +689,8 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($domain_name)) {
             throw new \InvalidArgumentException('non-nullable domain_name cannot be null');
         }
-        if ((mb_strlen($domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $domain_name when calling Scope., must be smaller than or equal to 40.');
+        if ((mb_strlen($domain_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $domain_name when calling Scope., must be smaller than or equal to 100.');
         }
 
         $this->container['domain_name'] = $domain_name;
@@ -805,8 +805,8 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         if (is_null($sandbox_domain_name)) {
             throw new \InvalidArgumentException('non-nullable sandbox_domain_name cannot be null');
         }
-        if ((mb_strlen($sandbox_domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $sandbox_domain_name when calling Scope., must be smaller than or equal to 40.');
+        if ((mb_strlen($sandbox_domain_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sandbox_domain_name when calling Scope., must be smaller than or equal to 100.');
         }
 
         $this->container['sandbox_domain_name'] = $sandbox_domain_name;
@@ -833,7 +833,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -846,7 +846,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -875,7 +875,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -898,7 +898,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -32,7 +32,7 @@ namespace PostFinanceCheckout\Sdk;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class Configuration
 {
@@ -139,7 +139,7 @@ class Configuration
         $this->userId = $userId;
         $this->authenticationKey = $authenticationKey;
         $this->defaultHeaders = [
-            'x-meta-sdk-version' => "5.1.0",
+            'x-meta-sdk-version' => "5.2.0",
             'x-meta-sdk-language' => 'php',
             'x-meta-sdk-provider' => "postfinancecheckout",
             'x-meta-sdk-language-version' => phpversion()
@@ -154,7 +154,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setUserId(int $userId): self
+    public function setUserId(int $userId)
     {
         $this->userId = $userId;
         return $this;
@@ -165,7 +165,7 @@ class Configuration
      *
      * @return int User ID
      */
-    public function getUserId(): int
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -177,7 +177,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setAuthenticationKey(string $authenticationKey): self
+    public function setAuthenticationKey(string $authenticationKey)
     {
         $this->authenticationKey = $authenticationKey;
         return $this;
@@ -188,7 +188,7 @@ class Configuration
      *
      * @return string Authentication key
      */
-    public function getAuthenticationKey(): string
+    public function getAuthenticationKey()
     {
         return $this->authenticationKey;
     }
@@ -200,7 +200,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setBooleanFormatForQueryString(string $booleanFormat): self
+    public function setBooleanFormatForQueryString(string $booleanFormat)
     {
         $this->booleanFormatForQueryString = $booleanFormat;
 
@@ -224,7 +224,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setHost(string $host): self
+    public function setHost($host)
     {
         $this->host = $host;
         return $this;
@@ -235,7 +235,7 @@ class Configuration
      *
      * @return string Host
      */
-    public function getHost(): string
+    public function getHost()
     {
         return $this->host;
     }
@@ -245,10 +245,10 @@ class Configuration
      *
      * @param string $userAgent the user agent of the api client
      *
-     * @return $this
      * @throws \InvalidArgumentException
+     * @return $this
      */
-    public function setUserAgent(string $userAgent): self
+    public function setUserAgent($userAgent)
     {
         if (!is_string($userAgent)) {
             throw new \InvalidArgumentException('User-agent must be a string.');
@@ -263,7 +263,7 @@ class Configuration
      *
      * @return string user agent
      */
-    public function getUserAgent(): string
+    public function getUserAgent()
     {
         return $this->userAgent;
     }
@@ -275,7 +275,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setDebug(bool $debug): self
+    public function setDebug($debug)
     {
         $this->debug = $debug;
         return $this;
@@ -286,7 +286,7 @@ class Configuration
      *
      * @return bool
      */
-    public function getDebug(): bool
+    public function getDebug()
     {
         return $this->debug;
     }
@@ -298,7 +298,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setDebugFile(string $debugFile): self
+    public function setDebugFile($debugFile)
     {
         $this->debugFile = $debugFile;
         return $this;
@@ -309,7 +309,7 @@ class Configuration
      *
      * @return string
      */
-    public function getDebugFile(): string
+    public function getDebugFile()
     {
         return $this->debugFile;
     }
@@ -321,7 +321,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setTempFolderPath(string $tempFolderPath): self
+    public function setTempFolderPath($tempFolderPath)
     {
         $this->tempFolderPath = $tempFolderPath;
         return $this;
@@ -332,7 +332,7 @@ class Configuration
      *
      * @return string Temp folder path
      */
-    public function getTempFolderPath(): string
+    public function getTempFolderPath()
     {
         return $this->tempFolderPath;
     }
@@ -342,7 +342,7 @@ class Configuration
      *
      * @return array Associative array of default headers.
      */
-    public function getDefaultHeaders(): array
+    public function getDefaultHeaders()
     {
         return $this->defaultHeaders;
     }
@@ -366,7 +366,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setRequestTimeout(int $requestTimeout): self
+    public function setRequestTimeout(int $requestTimeout)
     {
         $this->requestTimeout = $requestTimeout;
         return $this;
@@ -377,7 +377,7 @@ class Configuration
      *
      * @return int Request timeout
      */
-    public function getRequestTimeout(): int
+    public function getRequestTimeout()
     {
         return $this->requestTimeout;
     }
@@ -413,7 +413,7 @@ class Configuration
      *
      * @return void
      */
-    public static function setDefaultConfiguration(Configuration $config): void
+    public static function setDefaultConfiguration(Configuration $config)
     {
         self::$defaultConfiguration = $config;
     }
@@ -429,7 +429,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 2.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 5.1.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 5.2.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

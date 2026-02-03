@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -34,7 +34,7 @@ use \Exception;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class ApiException extends Exception
 {
@@ -48,7 +48,7 @@ class ApiException extends Exception
     /**
      * The HTTP header of the server response.
      *
-     * @var string[]|null
+     * @var string[][]|null
      */
     protected $responseHeaders;
 
@@ -64,7 +64,7 @@ class ApiException extends Exception
      *
      * @param string                $message         Error message
      * @param int                   $code            HTTP status code
-     * @param string[]|null         $responseHeaders HTTP response header
+     * @param string[][]|null       $responseHeaders HTTP response header
      * @param \stdClass|string|null $responseBody    HTTP decoded body of the server response either as \stdClass or string
      */
     public function __construct($message = "", $code = 0, $responseHeaders = [], $responseBody = null)
@@ -77,7 +77,7 @@ class ApiException extends Exception
     /**
      * Gets the HTTP response header
      *
-     * @return string[]|null HTTP response header
+     * @return string[][]|null HTTP response header
      */
     public function getResponseHeaders()
     {

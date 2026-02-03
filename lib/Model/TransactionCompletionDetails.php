@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -29,13 +29,13 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * TransactionCompletionDetails model
  *
- * @category    Class
+ * @category Class
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  * @implements \ArrayAccess<string, mixed>
  */
 class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -56,10 +56,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPITypes = [
         'line_items' => '\PostFinanceCheckout\Sdk\Model\CompletionLineItemCreate[]',
+        'meta_data' => 'array<string,string>',
         'last_completion' => 'bool',
         'statement_descriptor' => 'string',
         'external_id' => 'string',
-        'invoice_merchant_reference' => 'string'
+        'invoice_merchant_reference' => 'string',
+        'id' => 'int'
     ];
 
     /**
@@ -71,10 +73,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPIFormats = [
         'line_items' => null,
+        'meta_data' => null,
         'last_completion' => null,
         'statement_descriptor' => null,
         'external_id' => null,
-        'invoice_merchant_reference' => null
+        'invoice_merchant_reference' => null,
+        'id' => 'int64'
     ];
 
     /**
@@ -84,10 +88,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
       */
     protected static array $openAPINullables = [
         'line_items' => false,
+        'meta_data' => false,
         'last_completion' => false,
         'statement_descriptor' => false,
         'external_id' => false,
-        'invoice_merchant_reference' => false
+        'invoice_merchant_reference' => false,
+        'id' => false
     ];
 
     /**
@@ -102,7 +108,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function openAPITypes(): array
+    public static function openAPITypes()
     {
         return self::$openAPITypes;
     }
@@ -112,7 +118,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function openAPIFormats(): array
+    public static function openAPIFormats()
     {
         return self::$openAPIFormats;
     }
@@ -177,10 +183,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      */
     protected static $attributeMap = [
         'line_items' => 'lineItems',
+        'meta_data' => 'metaData',
         'last_completion' => 'lastCompletion',
         'statement_descriptor' => 'statementDescriptor',
         'external_id' => 'externalId',
-        'invoice_merchant_reference' => 'invoiceMerchantReference'
+        'invoice_merchant_reference' => 'invoiceMerchantReference',
+        'id' => 'id'
     ];
 
     /**
@@ -190,10 +198,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      */
     protected static $setters = [
         'line_items' => 'setLineItems',
+        'meta_data' => 'setMetaData',
         'last_completion' => 'setLastCompletion',
         'statement_descriptor' => 'setStatementDescriptor',
         'external_id' => 'setExternalId',
-        'invoice_merchant_reference' => 'setInvoiceMerchantReference'
+        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
+        'id' => 'setId'
     ];
 
     /**
@@ -203,10 +213,12 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      */
     protected static $getters = [
         'line_items' => 'getLineItems',
+        'meta_data' => 'getMetaData',
         'last_completion' => 'getLastCompletion',
         'statement_descriptor' => 'getStatementDescriptor',
         'external_id' => 'getExternalId',
-        'invoice_merchant_reference' => 'getInvoiceMerchantReference'
+        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
+        'id' => 'getId'
     ];
 
     /**
@@ -215,7 +227,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function attributeMap(): array
+    public static function attributeMap()
     {
         return self::$attributeMap;
     }
@@ -225,7 +237,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function setters(): array
+    public static function setters()
     {
         return self::$setters;
     }
@@ -235,7 +247,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return array
      */
-    public static function getters(): array
+    public static function getters()
     {
         return self::$getters;
     }
@@ -245,7 +257,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return string
      */
-    public function getModelName(): string
+    public function getModelName()
     {
         return self::$openAPIModelName;
     }
@@ -254,23 +266,25 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
     /**
      * Associative array for storing property values
      *
-     * @var array
+     * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
         $this->setIfExists('line_items', $data ?? [], null);
+        $this->setIfExists('meta_data', $data ?? [], null);
         $this->setIfExists('last_completion', $data ?? [], null);
         $this->setIfExists('statement_descriptor', $data ?? [], null);
         $this->setIfExists('external_id', $data ?? [], null);
         $this->setIfExists('invoice_merchant_reference', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -337,7 +351,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return bool True if all properties are valid
      */
-    public function valid(): bool
+    public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -366,6 +380,33 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable line_items cannot be null');
         }
         $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta_data
+     *
+     * @return array<string,string>|null
+     */
+    public function getMetaData()
+    {
+        return $this->container['meta_data'];
+    }
+
+    /**
+     * Sets meta_data
+     *
+     * @param array<string,string>|null $meta_data Allow to store additional information about the object.
+     *
+     * @return self
+     */
+    public function setMetaData($meta_data)
+    {
+        if (is_null($meta_data)) {
+            throw new \InvalidArgumentException('non-nullable meta_data cannot be null');
+        }
+        $this->container['meta_data'] = $meta_data;
 
         return $this;
     }
@@ -501,6 +542,33 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
 
         return $this;
     }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -521,7 +589,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset): mixed
+    public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -534,7 +602,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return void
      */
-    public function offsetSet($offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -563,7 +631,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -586,7 +654,7 @@ class TransactionCompletionDetails implements ModelInterface, ArrayAccess, \Json
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

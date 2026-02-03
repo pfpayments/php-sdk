@@ -1,6 +1,6 @@
 <?php
 /**
- * PostFinance Php SDK
+ * PostFinance PHP SDK
  *
  * This library allows to interact with the PostFinance payment service.
  *
@@ -27,14 +27,14 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
 /**
  * TokenizationMode model
  *
- * @category    Class
+ * @category Class
  * @description The tokenization mode controls how the tokenization of payment information is applied on the transaction.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class TokenizationMode
 {
