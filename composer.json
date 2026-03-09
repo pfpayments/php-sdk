@@ -23,7 +23,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "firebase/php-jwt": "^6.8",
+        "firebase/php-jwt": "^7.0",
         "guzzlehttp/guzzle": "^7.7",
         "guzzlehttp/psr7": "^2.5"
     },
