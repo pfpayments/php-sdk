@@ -32,7 +32,7 @@ namespace PostFinanceCheckout\Sdk;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  */
 class Configuration
 {
@@ -139,7 +139,7 @@ class Configuration
         $this->userId = $userId;
         $this->authenticationKey = $authenticationKey;
         $this->defaultHeaders = [
-            'x-meta-sdk-version' => "5.2.0",
+            'x-meta-sdk-version' => "5.2.2",
             'x-meta-sdk-language' => 'php',
             'x-meta-sdk-provider' => "postfinancecheckout",
             'x-meta-sdk-language-version' => phpversion()
@@ -429,7 +429,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 2.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 5.2.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 5.2.2' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

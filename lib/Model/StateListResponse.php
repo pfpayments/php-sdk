@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingMethodChangeResponse model
+ * StateListResponse model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class StateListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingMethodChangeResponse';
+    protected static $openAPIModelName = 'State_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'order_total' => 'float'
+        'data' => '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -67,8 +68,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'line_items' => null,
-        'order_total' => null
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -77,8 +79,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'line_items' => false,
-        'order_total' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -167,8 +170,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'line_items' => 'lineItems',
-        'order_total' => 'orderTotal'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -177,8 +181,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'line_items' => 'setLineItems',
-        'order_total' => 'setOrderTotal'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -187,8 +192,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'line_items' => 'getLineItems',
-        'order_total' => 'getOrderTotal'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -248,8 +254,9 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('line_items', $data ?? [], null);
-        $this->setIfExists('order_total', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -295,55 +302,82 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
 
 
     /**
-     * Gets line_items
+     * Gets data
      *
-     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]|null
+     * @return \PostFinanceCheckout\Sdk\Model\RestCountryState[]|null
      */
-    public function getLineItems()
+    public function getData()
     {
-        return $this->container['line_items'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets line_items
+     * Sets data
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[]|null $line_items line_items
+     * @param \PostFinanceCheckout\Sdk\Model\RestCountryState[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setLineItems($line_items)
+    public function setData($data)
     {
-        if (is_null($line_items)) {
-            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['line_items'] = $line_items;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets order_total
+     * Gets has_more
      *
-     * @return float|null
+     * @return bool|null
      */
-    public function getOrderTotal()
+    public function getHasMore()
     {
-        return $this->container['order_total'];
+        return $this->container['has_more'];
     }
 
     /**
-     * Sets order_total
+     * Sets has_more
      *
-     * @param float|null $order_total order_total
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
      *
      * @return self
      */
-    public function setOrderTotal($order_total)
+    public function setHasMore($has_more)
     {
-        if (is_null($order_total)) {
-            throw new \InvalidArgumentException('non-nullable order_total cannot be null');
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
         }
-        $this->container['order_total'] = $order_total;
+        $this->container['has_more'] = $has_more;
+
+        return $this;
+    }
+
+    /**
+     * Gets limit
+     *
+     * @return int|null
+     */
+    public function getLimit()
+    {
+        return $this->container['limit'];
+    }
+
+    /**
+     * Sets limit
+     *
+     * @param int|null $limit The applied limit on the number of objects returned.
+     *
+     * @return self
+     */
+    public function setLimit($limit)
+    {
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
+        }
+        $this->container['limit'] = $limit;
 
         return $this;
     }

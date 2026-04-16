@@ -1,6 +1,6 @@
 {
     "name": "postfinancecheckout/sdk",
-    "version": "5.2.0",
+    "version": "5.2.2",
     "description": "PostFinance Checkout SDK for PHP",
     "keywords": [
         "postfinancecheckout",
@@ -23,7 +23,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "firebase/php-jwt": "^6.8",
+        "firebase/php-jwt": "^7.0",
         "guzzlehttp/guzzle": "^7.7",
         "guzzlehttp/psr7": "^2.5"
     },

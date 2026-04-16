@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * BogusExpressCheckoutApprovalRequest model
+ * SubscriptionProductDto model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubscriptionProductDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BogusExpressCheckoutApprovalRequest';
+    protected static $openAPIModelName = 'SubscriptionProductDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_data' => '\PostFinanceCheckout\Sdk\Model\BogusExpressCheckoutPaymentData'
+        'name' => 'string',
+        'id' => 'int'
     ];
 
     /**
@@ -66,7 +67,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'payment_data' => null
+        'name' => null,
+        'id' => 'int64'
     ];
 
     /**
@@ -75,7 +77,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'payment_data' => false
+        'name' => false,
+        'id' => false
     ];
 
     /**
@@ -164,7 +167,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payment_data' => 'paymentData'
+        'name' => 'name',
+        'id' => 'id'
     ];
 
     /**
@@ -173,7 +177,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payment_data' => 'setPaymentData'
+        'name' => 'setName',
+        'id' => 'setId'
     ];
 
     /**
@@ -182,7 +187,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payment_data' => 'getPaymentData'
+        'name' => 'getName',
+        'id' => 'getId'
     ];
 
     /**
@@ -242,7 +248,8 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('payment_data', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -288,28 +295,55 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets payment_data
+     * Gets name
      *
-     * @return \PostFinanceCheckout\Sdk\Model\BogusExpressCheckoutPaymentData|null
+     * @return string|null
      */
-    public function getPaymentData()
+    public function getName()
     {
-        return $this->container['payment_data'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets payment_data
+     * Sets name
      *
-     * @param \PostFinanceCheckout\Sdk\Model\BogusExpressCheckoutPaymentData|null $payment_data payment_data
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setPaymentData($payment_data)
+    public function setName($name)
     {
-        if (is_null($payment_data)) {
-            throw new \InvalidArgumentException('non-nullable payment_data cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['payment_data'] = $payment_data;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
 
         return $this;
     }

@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSession model
+ * AbstractWalleejoinPartnership model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerializable
+class AbstractWalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutSession';
+    protected static $openAPIModelName = 'Abstract.WalleejoinPartnership';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,17 +55,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'merchant_shipping_callback_url' => 'string',
-        'linked_space_id' => 'int',
-        'meta_data' => 'array<string,string>',
-        'wallet_type' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutWalletType',
-        'shipping_address' => '\PostFinanceCheckout\Sdk\Model\Address',
-        'currency' => 'string',
-        'billing_address' => '\PostFinanceCheckout\Sdk\Model\Address',
-        'id' => 'int',
-        'state' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState',
-        'shipping_options' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]'
+        'pricing_profile_sell_rate' => 'object',
+        'merchant_account' => 'int',
+        'partnership_type' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType',
+        'state' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState',
+        'subscription_product_id' => 'int',
+        'partner_account' => 'int'
     ];
 
     /**
@@ -76,17 +71,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'line_items' => null,
-        'merchant_shipping_callback_url' => null,
-        'linked_space_id' => 'int64',
-        'meta_data' => null,
-        'wallet_type' => null,
-        'shipping_address' => null,
-        'currency' => null,
-        'billing_address' => null,
-        'id' => 'int64',
+        'pricing_profile_sell_rate' => null,
+        'merchant_account' => 'int64',
+        'partnership_type' => null,
         'state' => null,
-        'shipping_options' => null
+        'subscription_product_id' => 'int64',
+        'partner_account' => 'int64'
     ];
 
     /**
@@ -95,17 +85,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'line_items' => false,
-        'merchant_shipping_callback_url' => false,
-        'linked_space_id' => false,
-        'meta_data' => false,
-        'wallet_type' => false,
-        'shipping_address' => false,
-        'currency' => false,
-        'billing_address' => false,
-        'id' => false,
+        'pricing_profile_sell_rate' => false,
+        'merchant_account' => false,
+        'partnership_type' => false,
         'state' => false,
-        'shipping_options' => false
+        'subscription_product_id' => false,
+        'partner_account' => false
     ];
 
     /**
@@ -194,17 +179,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'line_items' => 'lineItems',
-        'merchant_shipping_callback_url' => 'merchantShippingCallbackUrl',
-        'linked_space_id' => 'linkedSpaceId',
-        'meta_data' => 'metaData',
-        'wallet_type' => 'walletType',
-        'shipping_address' => 'shippingAddress',
-        'currency' => 'currency',
-        'billing_address' => 'billingAddress',
-        'id' => 'id',
+        'pricing_profile_sell_rate' => 'pricingProfileSellRate',
+        'merchant_account' => 'merchantAccount',
+        'partnership_type' => 'partnershipType',
         'state' => 'state',
-        'shipping_options' => 'shippingOptions'
+        'subscription_product_id' => 'subscriptionProductId',
+        'partner_account' => 'partnerAccount'
     ];
 
     /**
@@ -213,17 +193,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'line_items' => 'setLineItems',
-        'merchant_shipping_callback_url' => 'setMerchantShippingCallbackUrl',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'meta_data' => 'setMetaData',
-        'wallet_type' => 'setWalletType',
-        'shipping_address' => 'setShippingAddress',
-        'currency' => 'setCurrency',
-        'billing_address' => 'setBillingAddress',
-        'id' => 'setId',
+        'pricing_profile_sell_rate' => 'setPricingProfileSellRate',
+        'merchant_account' => 'setMerchantAccount',
+        'partnership_type' => 'setPartnershipType',
         'state' => 'setState',
-        'shipping_options' => 'setShippingOptions'
+        'subscription_product_id' => 'setSubscriptionProductId',
+        'partner_account' => 'setPartnerAccount'
     ];
 
     /**
@@ -232,17 +207,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'line_items' => 'getLineItems',
-        'merchant_shipping_callback_url' => 'getMerchantShippingCallbackUrl',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'meta_data' => 'getMetaData',
-        'wallet_type' => 'getWalletType',
-        'shipping_address' => 'getShippingAddress',
-        'currency' => 'getCurrency',
-        'billing_address' => 'getBillingAddress',
-        'id' => 'getId',
+        'pricing_profile_sell_rate' => 'getPricingProfileSellRate',
+        'merchant_account' => 'getMerchantAccount',
+        'partnership_type' => 'getPartnershipType',
         'state' => 'getState',
-        'shipping_options' => 'getShippingOptions'
+        'subscription_product_id' => 'getSubscriptionProductId',
+        'partner_account' => 'getPartnerAccount'
     ];
 
     /**
@@ -302,17 +272,12 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('line_items', $data ?? [], null);
-        $this->setIfExists('merchant_shipping_callback_url', $data ?? [], null);
-        $this->setIfExists('linked_space_id', $data ?? [], null);
-        $this->setIfExists('meta_data', $data ?? [], null);
-        $this->setIfExists('wallet_type', $data ?? [], null);
-        $this->setIfExists('shipping_address', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('billing_address', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rate', $data ?? [], null);
+        $this->setIfExists('merchant_account', $data ?? [], null);
+        $this->setIfExists('partnership_type', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
-        $this->setIfExists('shipping_options', $data ?? [], null);
+        $this->setIfExists('subscription_product_id', $data ?? [], null);
+        $this->setIfExists('partner_account', $data ?? [], null);
     }
 
     /**
@@ -358,244 +323,82 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets line_items
+     * Gets pricing_profile_sell_rate
      *
-     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]|null
+     * @return object|null
      */
-    public function getLineItems()
+    public function getPricingProfileSellRate()
     {
-        return $this->container['line_items'];
+        return $this->container['pricing_profile_sell_rate'];
     }
 
     /**
-     * Sets line_items
+     * Sets pricing_profile_sell_rate
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[]|null $line_items line_items
+     * @param object|null $pricing_profile_sell_rate pricing_profile_sell_rate
      *
      * @return self
      */
-    public function setLineItems($line_items)
+    public function setPricingProfileSellRate($pricing_profile_sell_rate)
     {
-        if (is_null($line_items)) {
-            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        if (is_null($pricing_profile_sell_rate)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate cannot be null');
         }
-        $this->container['line_items'] = $line_items;
+        $this->container['pricing_profile_sell_rate'] = $pricing_profile_sell_rate;
 
         return $this;
     }
 
     /**
-     * Gets merchant_shipping_callback_url
-     *
-     * @return string|null
-     */
-    public function getMerchantShippingCallbackUrl()
-    {
-        return $this->container['merchant_shipping_callback_url'];
-    }
-
-    /**
-     * Sets merchant_shipping_callback_url
-     *
-     * @param string|null $merchant_shipping_callback_url The URL to fetch the shipping options from.
-     *
-     * @return self
-     */
-    public function setMerchantShippingCallbackUrl($merchant_shipping_callback_url)
-    {
-        if (is_null($merchant_shipping_callback_url)) {
-            throw new \InvalidArgumentException('non-nullable merchant_shipping_callback_url cannot be null');
-        }
-        $this->container['merchant_shipping_callback_url'] = $merchant_shipping_callback_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets linked_space_id
+     * Gets merchant_account
      *
      * @return int|null
      */
-    public function getLinkedSpaceId()
+    public function getMerchantAccount()
     {
-        return $this->container['linked_space_id'];
+        return $this->container['merchant_account'];
     }
 
     /**
-     * Sets linked_space_id
+     * Sets merchant_account
      *
-     * @param int|null $linked_space_id The spaceId linked to the entity.
+     * @param int|null $merchant_account The ID of the merchant account.
      *
      * @return self
      */
-    public function setLinkedSpaceId($linked_space_id)
+    public function setMerchantAccount($merchant_account)
     {
-        if (is_null($linked_space_id)) {
-            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        if (is_null($merchant_account)) {
+            throw new \InvalidArgumentException('non-nullable merchant_account cannot be null');
         }
-        $this->container['linked_space_id'] = $linked_space_id;
+        $this->container['merchant_account'] = $merchant_account;
 
         return $this;
     }
 
     /**
-     * Gets meta_data
+     * Gets partnership_type
      *
-     * @return array<string,string>|null
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType|null
      */
-    public function getMetaData()
+    public function getPartnershipType()
     {
-        return $this->container['meta_data'];
+        return $this->container['partnership_type'];
     }
 
     /**
-     * Sets meta_data
+     * Sets partnership_type
      *
-     * @param array<string,string>|null $meta_data meta_data
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType|null $partnership_type partnership_type
      *
      * @return self
      */
-    public function setMetaData($meta_data)
+    public function setPartnershipType($partnership_type)
     {
-        if (is_null($meta_data)) {
-            throw new \InvalidArgumentException('non-nullable meta_data cannot be null');
+        if (is_null($partnership_type)) {
+            throw new \InvalidArgumentException('non-nullable partnership_type cannot be null');
         }
-        $this->container['meta_data'] = $meta_data;
-
-        return $this;
-    }
-
-    /**
-     * Gets wallet_type
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutWalletType|null
-     */
-    public function getWalletType()
-    {
-        return $this->container['wallet_type'];
-    }
-
-    /**
-     * Sets wallet_type
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutWalletType|null $wallet_type wallet_type
-     *
-     * @return self
-     */
-    public function setWalletType($wallet_type)
-    {
-        if (is_null($wallet_type)) {
-            throw new \InvalidArgumentException('non-nullable wallet_type cannot be null');
-        }
-        $this->container['wallet_type'] = $wallet_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets shipping_address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\Address|null
-     */
-    public function getShippingAddress()
-    {
-        return $this->container['shipping_address'];
-    }
-
-    /**
-     * Sets shipping_address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\Address|null $shipping_address shipping_address
-     *
-     * @return self
-     */
-    public function setShippingAddress($shipping_address)
-    {
-        if (is_null($shipping_address)) {
-            throw new \InvalidArgumentException('non-nullable shipping_address cannot be null');
-        }
-        $this->container['shipping_address'] = $shipping_address;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return string|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string|null $currency The currency of the session.
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets billing_address
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\Address|null
-     */
-    public function getBillingAddress()
-    {
-        return $this->container['billing_address'];
-    }
-
-    /**
-     * Sets billing_address
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\Address|null $billing_address billing_address
-     *
-     * @return self
-     */
-    public function setBillingAddress($billing_address)
-    {
-        if (is_null($billing_address)) {
-            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
-        }
-        $this->container['billing_address'] = $billing_address;
-
-        return $this;
-    }
-
-    /**
-     * Gets id
-     *
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int|null $id Id of the entity.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
+        $this->container['partnership_type'] = $partnership_type;
 
         return $this;
     }
@@ -603,7 +406,7 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets state
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState|null
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState|null
      */
     public function getState()
     {
@@ -613,7 +416,7 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets state
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState|null $state state
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState|null $state state
      *
      * @return self
      */
@@ -628,28 +431,55 @@ class ExpressCheckoutSession implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
-     * Gets shipping_options
+     * Gets subscription_product_id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null
+     * @return int|null
      */
-    public function getShippingOptions()
+    public function getSubscriptionProductId()
     {
-        return $this->container['shipping_options'];
+        return $this->container['subscription_product_id'];
     }
 
     /**
-     * Sets shipping_options
+     * Sets subscription_product_id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null $shipping_options shipping_options
+     * @param int|null $subscription_product_id The ID of the product.
      *
      * @return self
      */
-    public function setShippingOptions($shipping_options)
+    public function setSubscriptionProductId($subscription_product_id)
     {
-        if (is_null($shipping_options)) {
-            throw new \InvalidArgumentException('non-nullable shipping_options cannot be null');
+        if (is_null($subscription_product_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
         }
-        $this->container['shipping_options'] = $shipping_options;
+        $this->container['subscription_product_id'] = $subscription_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_account
+     *
+     * @return int|null
+     */
+    public function getPartnerAccount()
+    {
+        return $this->container['partner_account'];
+    }
+
+    /**
+     * Sets partner_account
+     *
+     * @param int|null $partner_account The ID of the partner account.
+     *
+     * @return self
+     */
+    public function setPartnerAccount($partner_account)
+    {
+        if (is_null($partner_account)) {
+            throw new \InvalidArgumentException('non-nullable partner_account cannot be null');
+        }
+        $this->container['partner_account'] = $partner_account;
 
         return $this;
     }

@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
 class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -58,6 +58,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => 'int',
         'tier_pricing' => '\PostFinanceCheckout\Sdk\Model\ProductMeteredTierPricing',
         'metric' => 'int',
+        'number_of_free_trial_periods' => 'int',
         'name' => 'array<string,string>',
         'description' => 'array<string,string>',
         'version' => 'int'
@@ -74,6 +75,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => 'int64',
         'tier_pricing' => null,
         'metric' => 'int64',
+        'number_of_free_trial_periods' => 'int32',
         'name' => null,
         'description' => null,
         'version' => 'int32'
@@ -88,6 +90,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => false,
         'tier_pricing' => false,
         'metric' => false,
+        'number_of_free_trial_periods' => false,
         'name' => false,
         'description' => false,
         'version' => false
@@ -182,6 +185,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => 'component',
         'tier_pricing' => 'tierPricing',
         'metric' => 'metric',
+        'number_of_free_trial_periods' => 'numberOfFreeTrialPeriods',
         'name' => 'name',
         'description' => 'description',
         'version' => 'version'
@@ -196,6 +200,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => 'setComponent',
         'tier_pricing' => 'setTierPricing',
         'metric' => 'setMetric',
+        'number_of_free_trial_periods' => 'setNumberOfFreeTrialPeriods',
         'name' => 'setName',
         'description' => 'setDescription',
         'version' => 'setVersion'
@@ -210,6 +215,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         'component' => 'getComponent',
         'tier_pricing' => 'getTierPricing',
         'metric' => 'getMetric',
+        'number_of_free_trial_periods' => 'getNumberOfFreeTrialPeriods',
         'name' => 'getName',
         'description' => 'getDescription',
         'version' => 'getVersion'
@@ -275,6 +281,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('component', $data ?? [], null);
         $this->setIfExists('tier_pricing', $data ?? [], null);
         $this->setIfExists('metric', $data ?? [], null);
+        $this->setIfExists('number_of_free_trial_periods', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
@@ -402,6 +409,33 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable metric cannot be null');
         }
         $this->container['metric'] = $metric;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_free_trial_periods
+     *
+     * @return int|null
+     */
+    public function getNumberOfFreeTrialPeriods()
+    {
+        return $this->container['number_of_free_trial_periods'];
+    }
+
+    /**
+     * Sets number_of_free_trial_periods
+     *
+     * @param int|null $number_of_free_trial_periods The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
+     *
+     * @return self
+     */
+    public function setNumberOfFreeTrialPeriods($number_of_free_trial_periods)
+    {
+        if (is_null($number_of_free_trial_periods)) {
+            throw new \InvalidArgumentException('non-nullable number_of_free_trial_periods cannot be null');
+        }
+        $this->container['number_of_free_trial_periods'] = $number_of_free_trial_periods;
 
         return $this;
     }

@@ -27,18 +27,19 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingAddressChangeRequest model
+ * StoreTrialSubscriptionRequest model
  *
  * @category Class
+ * @description Model used to store a Trial Subscription, assigning it to an Account
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class StoreTrialSubscriptionRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +48,7 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingAddressChangeRequest';
+    protected static $openAPIModelName = 'StoreTrialSubscriptionRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +56,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'shipping_address' => '\PostFinanceCheckout\Sdk\Model\Address',
-        'billing_address' => '\PostFinanceCheckout\Sdk\Model\Address'
+        'coupon_codes' => 'string[]',
+        'component_configurations' => '\PostFinanceCheckout\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]',
+        'product_id' => 'int',
+        'currency' => 'string',
+        'affiliate_id' => 'int'
     ];
 
     /**
@@ -67,8 +71,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'shipping_address' => null,
-        'billing_address' => null
+        'coupon_codes' => null,
+        'component_configurations' => null,
+        'product_id' => 'int64',
+        'currency' => null,
+        'affiliate_id' => 'int64'
     ];
 
     /**
@@ -77,8 +84,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'shipping_address' => false,
-        'billing_address' => false
+        'coupon_codes' => false,
+        'component_configurations' => false,
+        'product_id' => false,
+        'currency' => false,
+        'affiliate_id' => false
     ];
 
     /**
@@ -167,8 +177,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'shipping_address' => 'shippingAddress',
-        'billing_address' => 'billingAddress'
+        'coupon_codes' => 'couponCodes',
+        'component_configurations' => 'componentConfigurations',
+        'product_id' => 'productId',
+        'currency' => 'currency',
+        'affiliate_id' => 'affiliateId'
     ];
 
     /**
@@ -177,8 +190,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'shipping_address' => 'setShippingAddress',
-        'billing_address' => 'setBillingAddress'
+        'coupon_codes' => 'setCouponCodes',
+        'component_configurations' => 'setComponentConfigurations',
+        'product_id' => 'setProductId',
+        'currency' => 'setCurrency',
+        'affiliate_id' => 'setAffiliateId'
     ];
 
     /**
@@ -187,8 +203,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'shipping_address' => 'getShippingAddress',
-        'billing_address' => 'getBillingAddress'
+        'coupon_codes' => 'getCouponCodes',
+        'component_configurations' => 'getComponentConfigurations',
+        'product_id' => 'getProductId',
+        'currency' => 'getCurrency',
+        'affiliate_id' => 'getAffiliateId'
     ];
 
     /**
@@ -248,8 +267,11 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('shipping_address', $data ?? [], null);
-        $this->setIfExists('billing_address', $data ?? [], null);
+        $this->setIfExists('coupon_codes', $data ?? [], null);
+        $this->setIfExists('component_configurations', $data ?? [], null);
+        $this->setIfExists('product_id', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('affiliate_id', $data ?? [], null);
     }
 
     /**
@@ -295,55 +317,136 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
 
 
     /**
-     * Gets shipping_address
+     * Gets coupon_codes
      *
-     * @return \PostFinanceCheckout\Sdk\Model\Address|null
+     * @return string[]|null
      */
-    public function getShippingAddress()
+    public function getCouponCodes()
     {
-        return $this->container['shipping_address'];
+        return $this->container['coupon_codes'];
     }
 
     /**
-     * Sets shipping_address
+     * Sets coupon_codes
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Address|null $shipping_address shipping_address
+     * @param string[]|null $coupon_codes coupon_codes
      *
      * @return self
      */
-    public function setShippingAddress($shipping_address)
+    public function setCouponCodes($coupon_codes)
     {
-        if (is_null($shipping_address)) {
-            throw new \InvalidArgumentException('non-nullable shipping_address cannot be null');
+        if (is_null($coupon_codes)) {
+            throw new \InvalidArgumentException('non-nullable coupon_codes cannot be null');
         }
-        $this->container['shipping_address'] = $shipping_address;
+        $this->container['coupon_codes'] = $coupon_codes;
 
         return $this;
     }
 
     /**
-     * Gets billing_address
+     * Gets component_configurations
      *
-     * @return \PostFinanceCheckout\Sdk\Model\Address|null
+     * @return \PostFinanceCheckout\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]|null
      */
-    public function getBillingAddress()
+    public function getComponentConfigurations()
     {
-        return $this->container['billing_address'];
+        return $this->container['component_configurations'];
     }
 
     /**
-     * Sets billing_address
+     * Sets component_configurations
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Address|null $billing_address billing_address
+     * @param \PostFinanceCheckout\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]|null $component_configurations component_configurations
      *
      * @return self
      */
-    public function setBillingAddress($billing_address)
+    public function setComponentConfigurations($component_configurations)
     {
-        if (is_null($billing_address)) {
-            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+        if (is_null($component_configurations)) {
+            throw new \InvalidArgumentException('non-nullable component_configurations cannot be null');
         }
-        $this->container['billing_address'] = $billing_address;
+        $this->container['component_configurations'] = $component_configurations;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_id
+     *
+     * @return int|null
+     */
+    public function getProductId()
+    {
+        return $this->container['product_id'];
+    }
+
+    /**
+     * Sets product_id
+     *
+     * @param int|null $product_id ID of the product that will be used for the Trial Subscription assigned to the Account.
+     *
+     * @return self
+     */
+    public function setProductId($product_id)
+    {
+        if (is_null($product_id)) {
+            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
+        }
+        $this->container['product_id'] = $product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets affiliate_id
+     *
+     * @return int|null
+     */
+    public function getAffiliateId()
+    {
+        return $this->container['affiliate_id'];
+    }
+
+    /**
+     * Sets affiliate_id
+     *
+     * @param int|null $affiliate_id ID of the affiliate to be added in the subscription assignment.
+     *
+     * @return self
+     */
+    public function setAffiliateId($affiliate_id)
+    {
+        if (is_null($affiliate_id)) {
+            throw new \InvalidArgumentException('non-nullable affiliate_id cannot be null');
+        }
+        $this->container['affiliate_id'] = $affiliate_id;
 
         return $this;
     }

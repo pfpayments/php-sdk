@@ -40,7 +40,7 @@ use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
 /**
- * ExpressCheckoutService service
+ * WebUiAccountThemeService service
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
@@ -48,9 +48,9 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.0
+ * @version  5.2.2
  */
-class ExpressCheckoutService
+class WebUiAccountThemeService
 {
     /**
      * @var ClientInterface
@@ -79,13 +79,13 @@ class ExpressCheckoutService
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'patchExpressCheckoutShippingAddressChange' => [
+        'deleteAccountUiThemesAccountId' => [
             'application/json',
         ],
-        'patchExpressCheckoutShippingMethodChange' => [
+        'deleteAccountUiThemesAccountIdLogo' => [
             'application/json',
         ],
-        'postExpressCheckoutCreateSession' => [
+        'postAccountUiThemesCreate' => [
             'application/json',
         ],
     ];
@@ -148,42 +148,39 @@ class ExpressCheckoutService
     }
 
     /**
-     * Operation patchExpressCheckoutShippingAddressChange
+     * Operation deleteAccountUiThemesAccountId
      *
-     * Change shipping address
+     * Delete account UI theme
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request express_checkout_shipping_address_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingAddressChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return void
      */
-    public function patchExpressCheckoutShippingAddressChange(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingAddressChange'][0])
+    public function deleteAccountUiThemesAccountId(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountId'][0])
     {
-        list($response) = $this->patchExpressCheckoutShippingAddressChangeWithHttpInfo($session_token, $space, $express_checkout_shipping_address_change_request, $contentType);
-        return $response;
+        $this->deleteAccountUiThemesAccountIdWithHttpInfo($account_id, $account, $contentType);
     }
 
     /**
-     * Operation patchExpressCheckoutShippingAddressChangeWithHttpInfo
+     * Operation deleteAccountUiThemesAccountIdWithHttpInfo
      *
-     * Change shipping address
+     * Delete account UI theme
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request express_checkout_shipping_address_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingAddressChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function patchExpressCheckoutShippingAddressChangeWithHttpInfo(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingAddressChange'][0])
+    public function deleteAccountUiThemesAccountIdWithHttpInfo(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountId'][0])
     {
-        $request = $this->patchExpressCheckoutShippingAddressChangeRequest($session_token, $space, $express_checkout_shipping_address_change_request, $contentType);
+        $request = $this->deleteAccountUiThemesAccountIdRequest($account_id, $account, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -209,112 +206,9 @@ class ExpressCheckoutService
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeResponse',
-                $request,
-                $response,
-            );
+            return [null, $statusCode, $response->getHeaders()];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -348,14 +242,6 @@ class ExpressCheckoutService
                     $e->setResponseObject($data);
                     throw $e;
                 case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
@@ -413,64 +299,55 @@ class ExpressCheckoutService
     }
 
     /**
-     * Create request for operation 'patchExpressCheckoutShippingAddressChange'
+     * Create request for operation 'deleteAccountUiThemesAccountId'
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request express_checkout_shipping_address_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingAddressChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function patchExpressCheckoutShippingAddressChangeRequest(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingAddressChangeRequest $express_checkout_shipping_address_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingAddressChange'][0])
+    public function deleteAccountUiThemesAccountIdRequest(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountId'][0])
     {
 
-        // verify the required parameter 'session_token' is set
-        if ($session_token === null || (is_array($session_token) && count($session_token) === 0)) {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $session_token when calling patchExpressCheckoutShippingAddressChange'
+                'Missing the required parameter $account_id when calling deleteAccountUiThemesAccountId'
             );
         }
 
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling patchExpressCheckoutShippingAddressChange'
-            );
-        }
-
-        // verify the required parameter 'express_checkout_shipping_address_change_request' is set
-        if ($express_checkout_shipping_address_change_request === null || (is_array($express_checkout_shipping_address_change_request) && count($express_checkout_shipping_address_change_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $express_checkout_shipping_address_change_request when calling patchExpressCheckoutShippingAddressChange'
+                'Missing the required parameter $account when calling deleteAccountUiThemesAccountId'
             );
         }
 
 
-        $resourcePath = '/express-checkout/shipping/address-change';
-        $httpMethod = 'PATCH';
+        $resourcePath = '/account/ui-themes/{accountId}';
+        $httpMethod = 'DELETE';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $session_token,
-            'sessionToken', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
         // header params
-        if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
         }
 
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -480,14 +357,7 @@ class ExpressCheckoutService
         );
 
         // for model (json/xml)
-        if (isset($express_checkout_shipping_address_change_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($express_checkout_shipping_address_change_request));
-            } else {
-                $httpBody = $express_checkout_shipping_address_change_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -541,42 +411,39 @@ class ExpressCheckoutService
     }
 
     /**
-     * Operation patchExpressCheckoutShippingMethodChange
+     * Operation deleteAccountUiThemesAccountIdLogo
      *
-     * Change shipping method
+     * Delete account theme logo
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request express_checkout_shipping_method_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingMethodChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountIdLogo'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return void
      */
-    public function patchExpressCheckoutShippingMethodChange(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingMethodChange'][0])
+    public function deleteAccountUiThemesAccountIdLogo(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountIdLogo'][0])
     {
-        list($response) = $this->patchExpressCheckoutShippingMethodChangeWithHttpInfo($session_token, $space, $express_checkout_shipping_method_change_request, $contentType);
-        return $response;
+        $this->deleteAccountUiThemesAccountIdLogoWithHttpInfo($account_id, $account, $contentType);
     }
 
     /**
-     * Operation patchExpressCheckoutShippingMethodChangeWithHttpInfo
+     * Operation deleteAccountUiThemesAccountIdLogoWithHttpInfo
      *
-     * Change shipping method
+     * Delete account theme logo
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request express_checkout_shipping_method_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingMethodChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountIdLogo'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function patchExpressCheckoutShippingMethodChangeWithHttpInfo(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingMethodChange'][0])
+    public function deleteAccountUiThemesAccountIdLogoWithHttpInfo(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountIdLogo'][0])
     {
-        $request = $this->patchExpressCheckoutShippingMethodChangeRequest($session_token, $space, $express_checkout_shipping_method_change_request, $contentType);
+        $request = $this->deleteAccountUiThemesAccountIdLogoRequest($account_id, $account, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -602,112 +469,9 @@ class ExpressCheckoutService
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeResponse',
-                $request,
-                $response,
-            );
+            return [null, $statusCode, $response->getHeaders()];
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -741,14 +505,6 @@ class ExpressCheckoutService
                     $e->setResponseObject($data);
                     throw $e;
                 case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
@@ -806,64 +562,55 @@ class ExpressCheckoutService
     }
 
     /**
-     * Create request for operation 'patchExpressCheckoutShippingMethodChange'
+     * Create request for operation 'deleteAccountUiThemesAccountIdLogo'
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request express_checkout_shipping_method_change_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchExpressCheckoutShippingMethodChange'] to see the possible values for this operation
+     * @param int $account_id account_id (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAccountUiThemesAccountIdLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function patchExpressCheckoutShippingMethodChangeRequest(string $session_token, int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingMethodChangeRequest $express_checkout_shipping_method_change_request, string $contentType = self::contentTypes['patchExpressCheckoutShippingMethodChange'][0])
+    public function deleteAccountUiThemesAccountIdLogoRequest(int $account_id, int $account, string $contentType = self::contentTypes['deleteAccountUiThemesAccountIdLogo'][0])
     {
 
-        // verify the required parameter 'session_token' is set
-        if ($session_token === null || (is_array($session_token) && count($session_token) === 0)) {
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $session_token when calling patchExpressCheckoutShippingMethodChange'
+                'Missing the required parameter $account_id when calling deleteAccountUiThemesAccountIdLogo'
             );
         }
 
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling patchExpressCheckoutShippingMethodChange'
-            );
-        }
-
-        // verify the required parameter 'express_checkout_shipping_method_change_request' is set
-        if ($express_checkout_shipping_method_change_request === null || (is_array($express_checkout_shipping_method_change_request) && count($express_checkout_shipping_method_change_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $express_checkout_shipping_method_change_request when calling patchExpressCheckoutShippingMethodChange'
+                'Missing the required parameter $account when calling deleteAccountUiThemesAccountIdLogo'
             );
         }
 
 
-        $resourcePath = '/express-checkout/shipping/method-change';
-        $httpMethod = 'PATCH';
+        $resourcePath = '/account/ui-themes/{accountId}/logo';
+        $httpMethod = 'DELETE';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $session_token,
-            'sessionToken', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
         // header params
-        if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
         }
 
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -873,14 +620,7 @@ class ExpressCheckoutService
         );
 
         // for model (json/xml)
-        if (isset($express_checkout_shipping_method_change_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($express_checkout_shipping_method_change_request));
-            } else {
-                $httpBody = $express_checkout_shipping_method_change_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -934,40 +674,40 @@ class ExpressCheckoutService
     }
 
     /**
-     * Operation postExpressCheckoutCreateSession
+     * Operation postAccountUiThemesCreate
      *
-     * Create a new Express Checkout Session
+     * Create account UI theme
      *
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create express_checkout_session_create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postExpressCheckoutCreateSession'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param object $body body (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccountUiThemesCreate'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutCreateResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WebUiAccountTheme|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postExpressCheckoutCreateSession(int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create, string $contentType = self::contentTypes['postExpressCheckoutCreateSession'][0])
+    public function postAccountUiThemesCreate(int $account, object $body, string $contentType = self::contentTypes['postAccountUiThemesCreate'][0])
     {
-        list($response) = $this->postExpressCheckoutCreateSessionWithHttpInfo($space, $express_checkout_session_create, $contentType);
+        list($response) = $this->postAccountUiThemesCreateWithHttpInfo($account, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation postExpressCheckoutCreateSessionWithHttpInfo
+     * Operation postAccountUiThemesCreateWithHttpInfo
      *
-     * Create a new Express Checkout Session
+     * Create account UI theme
      *
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create express_checkout_session_create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postExpressCheckoutCreateSession'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param object $body body (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccountUiThemesCreate'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\ExpressCheckoutCreateResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WebUiAccountTheme|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postExpressCheckoutCreateSessionWithHttpInfo(int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create, string $contentType = self::contentTypes['postExpressCheckoutCreateSession'][0])
+    public function postAccountUiThemesCreateWithHttpInfo(int $account, object $body, string $contentType = self::contentTypes['postAccountUiThemesCreate'][0])
     {
-        $request = $this->postExpressCheckoutCreateSessionRequest($space, $express_checkout_session_create, $contentType);
+        $request = $this->postAccountUiThemesCreateRequest($account, $body, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -994,9 +734,9 @@ class ExpressCheckoutService
 
 
             switch($statusCode) {
-                case 200:
+                case 201:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutCreateResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WebUiAccountTheme',
                         $request,
                         $response,
                     );
@@ -1085,16 +825,16 @@ class ExpressCheckoutService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutCreateResponse',
+                '\PostFinanceCheckout\Sdk\Model\WebUiAccountTheme',
                 $request,
                 $response,
             );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutCreateResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WebUiAccountTheme',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1197,34 +937,34 @@ class ExpressCheckoutService
     }
 
     /**
-     * Create request for operation 'postExpressCheckoutCreateSession'
+     * Create request for operation 'postAccountUiThemesCreate'
      *
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create express_checkout_session_create (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postExpressCheckoutCreateSession'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param object $body body (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccountUiThemesCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postExpressCheckoutCreateSessionRequest(int $space, \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionCreate $express_checkout_session_create, string $contentType = self::contentTypes['postExpressCheckoutCreateSession'][0])
+    public function postAccountUiThemesCreateRequest(int $account, object $body, string $contentType = self::contentTypes['postAccountUiThemesCreate'][0])
     {
 
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling postExpressCheckoutCreateSession'
+                'Missing the required parameter $account when calling postAccountUiThemesCreate'
             );
         }
 
-        // verify the required parameter 'express_checkout_session_create' is set
-        if ($express_checkout_session_create === null || (is_array($express_checkout_session_create) && count($express_checkout_session_create) === 0)) {
+        // verify the required parameter 'body' is set
+        if ($body === null || (is_array($body) && count($body) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $express_checkout_session_create when calling postExpressCheckoutCreateSession'
+                'Missing the required parameter $body when calling postAccountUiThemesCreate'
             );
         }
 
 
-        $resourcePath = '/express-checkout/create-session';
+        $resourcePath = '/account/ui-themes/create';
         $httpMethod = 'POST';
         $formParams = [];
         $queryParams = [];
@@ -1234,8 +974,8 @@ class ExpressCheckoutService
 
 
         // header params
-        if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
         }
 
 
@@ -1247,12 +987,12 @@ class ExpressCheckoutService
         );
 
         // for model (json/xml)
-        if (isset($express_checkout_session_create)) {
+        if (isset($body)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($express_checkout_session_create));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
             } else {
-                $httpBody = $express_checkout_session_create;
+                $httpBody = $body;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

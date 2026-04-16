@@ -25,7 +25,7 @@ namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSessionState model
+ * WalleejoinPartnershipState model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -33,22 +33,18 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  */
-class ExpressCheckoutSessionState
+class WalleejoinPartnershipState
 {
     /**
      * Possible values of this enum
      */
     public const PENDING = 'PENDING';
 
-    public const APPROVED = 'APPROVED';
+    public const ACTIVE = 'ACTIVE';
 
-    public const PROCESSING = 'PROCESSING';
-
-    public const AUTHORIZED = 'AUTHORIZED';
-
-    public const FAILED = 'FAILED';
+    public const TERMINATED = 'TERMINATED';
 
     /**
      * Gets allowable values of the enum
@@ -58,10 +54,8 @@ class ExpressCheckoutSessionState
     {
         return [
             self::PENDING,
-            self::APPROVED,
-            self::PROCESSING,
-            self::AUTHORIZED,
-            self::FAILED
+            self::ACTIVE,
+            self::TERMINATED
         ];
     }
 }

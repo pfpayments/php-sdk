@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
 class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -57,6 +57,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
         'name' => 'array<string,string>',
+        'description' => 'array<string,string>',
         'two_factor_required' => 'bool',
         'version' => 'int'
     ];
@@ -71,6 +72,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'permissions' => null,
         'name' => null,
+        'description' => null,
         'two_factor_required' => null,
         'version' => 'int32'
     ];
@@ -83,6 +85,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'permissions' => false,
         'name' => false,
+        'description' => false,
         'two_factor_required' => false,
         'version' => false
     ];
@@ -175,6 +178,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'permissions' => 'permissions',
         'name' => 'name',
+        'description' => 'description',
         'two_factor_required' => 'twoFactorRequired',
         'version' => 'version'
     ];
@@ -187,6 +191,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'permissions' => 'setPermissions',
         'name' => 'setName',
+        'description' => 'setDescription',
         'two_factor_required' => 'setTwoFactorRequired',
         'version' => 'setVersion'
     ];
@@ -199,6 +204,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'permissions' => 'getPermissions',
         'name' => 'getName',
+        'description' => 'getDescription',
         'two_factor_required' => 'getTwoFactorRequired',
         'version' => 'getVersion'
     ];
@@ -262,6 +268,7 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('permissions', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('two_factor_required', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
     }
@@ -363,6 +370,33 @@ class RoleUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return array<string,string>|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param array<string,string>|null $description Additional information that describes the role.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
 
         return $this;
     }

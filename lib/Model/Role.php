@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
 class Role implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -58,6 +58,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => '\PostFinanceCheckout\Sdk\Model\Permission[]',
         'name' => 'array<string,string>',
         'planned_purge_date' => '\DateTime',
+        'description' => 'array<string,string>',
         'id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\RoleState',
         'version' => 'int',
@@ -76,6 +77,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => null,
         'name' => null,
         'planned_purge_date' => 'date-time',
+        'description' => null,
         'id' => 'int64',
         'state' => null,
         'version' => 'int32',
@@ -92,6 +94,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => false,
         'name' => false,
         'planned_purge_date' => false,
+        'description' => false,
         'id' => false,
         'state' => false,
         'version' => false,
@@ -188,6 +191,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => 'permissions',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
+        'description' => 'description',
         'id' => 'id',
         'state' => 'state',
         'version' => 'version',
@@ -204,6 +208,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => 'setPermissions',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'description' => 'setDescription',
         'id' => 'setId',
         'state' => 'setState',
         'version' => 'setVersion',
@@ -220,6 +225,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         'permissions' => 'getPermissions',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'description' => 'getDescription',
         'id' => 'getId',
         'state' => 'getState',
         'version' => 'getVersion',
@@ -287,6 +293,7 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('permissions', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
@@ -415,6 +422,33 @@ class Role implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
         }
         $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return array<string,string>|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param array<string,string>|null $description Additional information that describes the role.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
 
         return $this;
     }

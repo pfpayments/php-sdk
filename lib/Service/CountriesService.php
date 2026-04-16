@@ -48,7 +48,7 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.0
+ * @version  5.2.2
  */
 class CountriesService
 {
@@ -864,15 +864,16 @@ class CountriesService
      * List all states for a country
      *
      * @param string $country_code country_code (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesCountryCodeStates'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\RestCountryState[]|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\StateListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function getCountriesCountryCodeStates(string $country_code, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
+    public function getCountriesCountryCodeStates(string $country_code, ?array $expand = null, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
     {
-        list($response) = $this->getCountriesCountryCodeStatesWithHttpInfo($country_code, $contentType);
+        list($response) = $this->getCountriesCountryCodeStatesWithHttpInfo($country_code, $expand, $contentType);
         return $response;
     }
 
@@ -882,15 +883,16 @@ class CountriesService
      * List all states for a country
      *
      * @param string $country_code country_code (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesCountryCodeStates'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\RestCountryState[]|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\StateListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCountriesCountryCodeStatesWithHttpInfo(string $country_code, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
+    public function getCountriesCountryCodeStatesWithHttpInfo(string $country_code, ?array $expand = null, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
     {
-        $request = $this->getCountriesCountryCodeStatesRequest($country_code, $contentType);
+        $request = $this->getCountriesCountryCodeStatesRequest($country_code, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -919,7 +921,7 @@ class CountriesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                        '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                         $request,
                         $response,
                     );
@@ -1002,7 +1004,7 @@ class CountriesService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                 $request,
                 $response,
             );
@@ -1011,7 +1013,7 @@ class CountriesService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                        '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1109,12 +1111,13 @@ class CountriesService
      * Create request for operation 'getCountriesCountryCodeStates'
      *
      * @param string $country_code country_code (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesCountryCodeStates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getCountriesCountryCodeStatesRequest(string $country_code, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
+    public function getCountriesCountryCodeStatesRequest(string $country_code, ?array $expand = null, string $contentType = self::contentTypes['getCountriesCountryCodeStates'][0])
     {
 
         // verify the required parameter 'country_code' is set
@@ -1124,6 +1127,7 @@ class CountriesService
             );
         }
 
+        
 
         $resourcePath = '/countries/{countryCode}/states';
         $httpMethod = 'GET';
@@ -1133,6 +1137,15 @@ class CountriesService
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -1613,15 +1626,16 @@ class CountriesService
      *
      * List all country states
      *
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStates'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\RestCountryState[]|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\StateListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function getCountriesStates(string $contentType = self::contentTypes['getCountriesStates'][0])
+    public function getCountriesStates(?array $expand = null, string $contentType = self::contentTypes['getCountriesStates'][0])
     {
-        list($response) = $this->getCountriesStatesWithHttpInfo($contentType);
+        list($response) = $this->getCountriesStatesWithHttpInfo($expand, $contentType);
         return $response;
     }
 
@@ -1630,15 +1644,16 @@ class CountriesService
      *
      * List all country states
      *
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStates'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\RestCountryState[]|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\StateListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCountriesStatesWithHttpInfo(string $contentType = self::contentTypes['getCountriesStates'][0])
+    public function getCountriesStatesWithHttpInfo(?array $expand = null, string $contentType = self::contentTypes['getCountriesStates'][0])
     {
-        $request = $this->getCountriesStatesRequest($contentType);
+        $request = $this->getCountriesStatesRequest($expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -1667,7 +1682,7 @@ class CountriesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                        '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                         $request,
                         $response,
                     );
@@ -1750,7 +1765,7 @@ class CountriesService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                 $request,
                 $response,
             );
@@ -1759,7 +1774,7 @@ class CountriesService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestCountryState[]',
+                        '\PostFinanceCheckout\Sdk\Model\StateListResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1856,14 +1871,16 @@ class CountriesService
     /**
      * Create request for operation 'getCountriesStates'
      *
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getCountriesStatesRequest(string $contentType = self::contentTypes['getCountriesStates'][0])
+    public function getCountriesStatesRequest(?array $expand = null, string $contentType = self::contentTypes['getCountriesStates'][0])
     {
 
+        
 
         $resourcePath = '/countries/states';
         $httpMethod = 'GET';
@@ -1873,6 +1890,15 @@ class CountriesService
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
@@ -1943,15 +1969,16 @@ class CountriesService
      * Retrieve a country state
      *
      * @param string $id id (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStatesId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\RestCountryState|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function getCountriesStatesId(string $id, string $contentType = self::contentTypes['getCountriesStatesId'][0])
+    public function getCountriesStatesId(string $id, ?array $expand = null, string $contentType = self::contentTypes['getCountriesStatesId'][0])
     {
-        list($response) = $this->getCountriesStatesIdWithHttpInfo($id, $contentType);
+        list($response) = $this->getCountriesStatesIdWithHttpInfo($id, $expand, $contentType);
         return $response;
     }
 
@@ -1961,15 +1988,16 @@ class CountriesService
      * Retrieve a country state
      *
      * @param string $id id (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStatesId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\RestCountryState|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCountriesStatesIdWithHttpInfo(string $id, string $contentType = self::contentTypes['getCountriesStatesId'][0])
+    public function getCountriesStatesIdWithHttpInfo(string $id, ?array $expand = null, string $contentType = self::contentTypes['getCountriesStatesId'][0])
     {
-        $request = $this->getCountriesStatesIdRequest($id, $contentType);
+        $request = $this->getCountriesStatesIdRequest($id, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2188,12 +2216,13 @@ class CountriesService
      * Create request for operation 'getCountriesStatesId'
      *
      * @param string $id id (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCountriesStatesId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getCountriesStatesIdRequest(string $id, string $contentType = self::contentTypes['getCountriesStatesId'][0])
+    public function getCountriesStatesIdRequest(string $id, ?array $expand = null, string $contentType = self::contentTypes['getCountriesStatesId'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -2203,6 +2232,7 @@ class CountriesService
             );
         }
 
+        
 
         $resourcePath = '/countries/states/{id}';
         $httpMethod = 'GET';
@@ -2212,6 +2242,15 @@ class CountriesService
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params

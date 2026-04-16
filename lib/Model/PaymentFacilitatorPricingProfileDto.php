@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutCreateResponse model
+ * PaymentFacilitatorPricingProfileDto model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentFacilitatorPricingProfileDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutCreateResponse';
+    protected static $openAPIModelName = 'PaymentFacilitatorPricingProfileDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'iframe_src' => 'string',
-        'session' => 'int',
-        'session_token' => 'string'
+        'name' => 'string',
+        'id' => 'int'
     ];
 
     /**
@@ -68,9 +67,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'iframe_src' => null,
-        'session' => 'int64',
-        'session_token' => null
+        'name' => null,
+        'id' => 'int64'
     ];
 
     /**
@@ -79,9 +77,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'iframe_src' => false,
-        'session' => false,
-        'session_token' => false
+        'name' => false,
+        'id' => false
     ];
 
     /**
@@ -170,9 +167,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'iframe_src' => 'iframeSrc',
-        'session' => 'session',
-        'session_token' => 'sessionToken'
+        'name' => 'name',
+        'id' => 'id'
     ];
 
     /**
@@ -181,9 +177,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'iframe_src' => 'setIframeSrc',
-        'session' => 'setSession',
-        'session_token' => 'setSessionToken'
+        'name' => 'setName',
+        'id' => 'setId'
     ];
 
     /**
@@ -192,9 +187,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'iframe_src' => 'getIframeSrc',
-        'session' => 'getSession',
-        'session_token' => 'getSessionToken'
+        'name' => 'getName',
+        'id' => 'getId'
     ];
 
     /**
@@ -254,9 +248,8 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('iframe_src', $data ?? [], null);
-        $this->setIfExists('session', $data ?? [], null);
-        $this->setIfExists('session_token', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -302,82 +295,55 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets iframe_src
+     * Gets name
      *
      * @return string|null
      */
-    public function getIframeSrc()
+    public function getName()
     {
-        return $this->container['iframe_src'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets iframe_src
+     * Sets name
      *
-     * @param string|null $iframe_src iframe_src
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setIframeSrc($iframe_src)
+    public function setName($name)
     {
-        if (is_null($iframe_src)) {
-            throw new \InvalidArgumentException('non-nullable iframe_src cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['iframe_src'] = $iframe_src;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets session
+     * Gets id
      *
      * @return int|null
      */
-    public function getSession()
+    public function getId()
     {
-        return $this->container['session'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets session
+     * Sets id
      *
-     * @param int|null $session session
+     * @param int|null $id id
      *
      * @return self
      */
-    public function setSession($session)
+    public function setId($id)
     {
-        if (is_null($session)) {
-            throw new \InvalidArgumentException('non-nullable session cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_token
-     *
-     * @return string|null
-     */
-    public function getSessionToken()
-    {
-        return $this->container['session_token'];
-    }
-
-    /**
-     * Sets session_token
-     *
-     * @param string|null $session_token session_token
-     *
-     * @return self
-     */
-    public function setSessionToken($session_token)
-    {
-        if (is_null($session_token)) {
-            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
-        }
-        $this->container['session_token'] = $session_token;
+        $this->container['id'] = $id;
 
         return $this;
     }

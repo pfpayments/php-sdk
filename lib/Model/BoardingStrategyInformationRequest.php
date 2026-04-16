@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSessionCreate model
+ * BoardingStrategyInformationRequest model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \JsonSerializable
+class BoardingStrategyInformationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutSession.Create';
+    protected static $openAPIModelName = 'BoardingStrategyInformationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,10 +55,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'merchant_shipping_callback_url' => 'string',
-        'currency' => 'string',
-        'shipping_options' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]'
+        'billing_address' => '\PostFinanceCheckout\Sdk\Model\Setter'
     ];
 
     /**
@@ -69,10 +66,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'line_items' => null,
-        'merchant_shipping_callback_url' => null,
-        'currency' => null,
-        'shipping_options' => null
+        'billing_address' => null
     ];
 
     /**
@@ -81,10 +75,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'line_items' => false,
-        'merchant_shipping_callback_url' => false,
-        'currency' => false,
-        'shipping_options' => false
+        'billing_address' => false
     ];
 
     /**
@@ -173,10 +164,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'line_items' => 'lineItems',
-        'merchant_shipping_callback_url' => 'merchantShippingCallbackUrl',
-        'currency' => 'currency',
-        'shipping_options' => 'shippingOptions'
+        'billing_address' => 'billingAddress'
     ];
 
     /**
@@ -185,10 +173,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'line_items' => 'setLineItems',
-        'merchant_shipping_callback_url' => 'setMerchantShippingCallbackUrl',
-        'currency' => 'setCurrency',
-        'shipping_options' => 'setShippingOptions'
+        'billing_address' => 'setBillingAddress'
     ];
 
     /**
@@ -197,10 +182,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'line_items' => 'getLineItems',
-        'merchant_shipping_callback_url' => 'getMerchantShippingCallbackUrl',
-        'currency' => 'getCurrency',
-        'shipping_options' => 'getShippingOptions'
+        'billing_address' => 'getBillingAddress'
     ];
 
     /**
@@ -260,10 +242,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('line_items', $data ?? [], null);
-        $this->setIfExists('merchant_shipping_callback_url', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('shipping_options', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
     }
 
     /**
@@ -293,6 +272,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
+        if ($this->container['billing_address'] === null) {
+            $invalidProperties[] = "'billing_address' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -309,109 +291,28 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets line_items
+     * Gets billing_address
      *
-     * @return \PostFinanceCheckout\Sdk\Model\LineItem[]|null
+     * @return \PostFinanceCheckout\Sdk\Model\Setter
      */
-    public function getLineItems()
+    public function getBillingAddress()
     {
-        return $this->container['line_items'];
+        return $this->container['billing_address'];
     }
 
     /**
-     * Sets line_items
+     * Sets billing_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[]|null $line_items line_items
+     * @param \PostFinanceCheckout\Sdk\Model\Setter $billing_address billing_address
      *
      * @return self
      */
-    public function setLineItems($line_items)
+    public function setBillingAddress($billing_address)
     {
-        if (is_null($line_items)) {
-            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        if (is_null($billing_address)) {
+            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
         }
-        $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets merchant_shipping_callback_url
-     *
-     * @return string|null
-     */
-    public function getMerchantShippingCallbackUrl()
-    {
-        return $this->container['merchant_shipping_callback_url'];
-    }
-
-    /**
-     * Sets merchant_shipping_callback_url
-     *
-     * @param string|null $merchant_shipping_callback_url The URL to fetch the shipping options from.
-     *
-     * @return self
-     */
-    public function setMerchantShippingCallbackUrl($merchant_shipping_callback_url)
-    {
-        if (is_null($merchant_shipping_callback_url)) {
-            throw new \InvalidArgumentException('non-nullable merchant_shipping_callback_url cannot be null');
-        }
-        $this->container['merchant_shipping_callback_url'] = $merchant_shipping_callback_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return string|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string|null $currency The currency of the session.
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets shipping_options
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null
-     */
-    public function getShippingOptions()
-    {
-        return $this->container['shipping_options'];
-    }
-
-    /**
-     * Sets shipping_options
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null $shipping_options shipping_options
-     *
-     * @return self
-     */
-    public function setShippingOptions($shipping_options)
-    {
-        if (is_null($shipping_options)) {
-            throw new \InvalidArgumentException('non-nullable shipping_options cannot be null');
-        }
-        $this->container['shipping_options'] = $shipping_options;
+        $this->container['billing_address'] = $billing_address;
 
         return $this;
     }

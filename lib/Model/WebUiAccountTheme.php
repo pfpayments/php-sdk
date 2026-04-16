@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingAddressChangeResponse model
+ * WebUiAccountTheme model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebUiAccountTheme implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingAddressChangeResponse';
+    protected static $openAPIModelName = 'WebUiAccountTheme';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @var string[]
       */
     protected static $openAPITypes = [
-        'order_total' => 'float',
-        'shipping_options' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]'
+        'properties' => 'string'
     ];
 
     /**
@@ -67,8 +66,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'order_total' => null,
-        'shipping_options' => null
+        'properties' => null
     ];
 
     /**
@@ -77,8 +75,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'order_total' => false,
-        'shipping_options' => false
+        'properties' => false
     ];
 
     /**
@@ -167,8 +164,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'order_total' => 'orderTotal',
-        'shipping_options' => 'shippingOptions'
+        'properties' => 'properties'
     ];
 
     /**
@@ -177,8 +173,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $setters = [
-        'order_total' => 'setOrderTotal',
-        'shipping_options' => 'setShippingOptions'
+        'properties' => 'setProperties'
     ];
 
     /**
@@ -187,8 +182,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $getters = [
-        'order_total' => 'getOrderTotal',
-        'shipping_options' => 'getShippingOptions'
+        'properties' => 'getProperties'
     ];
 
     /**
@@ -248,8 +242,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('order_total', $data ?? [], null);
-        $this->setIfExists('shipping_options', $data ?? [], null);
+        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -295,55 +288,28 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
 
 
     /**
-     * Gets order_total
+     * Gets properties
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getOrderTotal()
+    public function getProperties()
     {
-        return $this->container['order_total'];
+        return $this->container['properties'];
     }
 
     /**
-     * Sets order_total
+     * Sets properties
      *
-     * @param float|null $order_total order_total
+     * @param string|null $properties properties
      *
      * @return self
      */
-    public function setOrderTotal($order_total)
+    public function setProperties($properties)
     {
-        if (is_null($order_total)) {
-            throw new \InvalidArgumentException('non-nullable order_total cannot be null');
+        if (is_null($properties)) {
+            throw new \InvalidArgumentException('non-nullable properties cannot be null');
         }
-        $this->container['order_total'] = $order_total;
-
-        return $this;
-    }
-
-    /**
-     * Gets shipping_options
-     *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null
-     */
-    public function getShippingOptions()
-    {
-        return $this->container['shipping_options'];
-    }
-
-    /**
-     * Sets shipping_options
-     *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutShippingOption[]|null $shipping_options shipping_options
-     *
-     * @return self
-     */
-    public function setShippingOptions($shipping_options)
-    {
-        if (is_null($shipping_options)) {
-            throw new \InvalidArgumentException('non-nullable shipping_options cannot be null');
-        }
-        $this->container['shipping_options'] = $shipping_options;
+        $this->container['properties'] = $properties;
 
         return $this;
     }

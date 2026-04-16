@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
 class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -55,7 +55,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string'
+        'component_configurations' => '\PostFinanceCheckout\Sdk\Model\SubscriptionComponentReferenceConfiguration[]',
+        'product' => 'int',
+        'currency' => 'string',
+        'respect_termination_period' => 'bool'
     ];
 
     /**
@@ -66,7 +69,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null
+        'component_configurations' => null,
+        'product' => 'int64',
+        'currency' => null,
+        'respect_termination_period' => null
     ];
 
     /**
@@ -75,7 +81,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => false
+        'component_configurations' => false,
+        'product' => false,
+        'currency' => false,
+        'respect_termination_period' => false
     ];
 
     /**
@@ -164,7 +173,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description'
+        'component_configurations' => 'componentConfigurations',
+        'product' => 'product',
+        'currency' => 'currency',
+        'respect_termination_period' => 'respectTerminationPeriod'
     ];
 
     /**
@@ -173,7 +185,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription'
+        'component_configurations' => 'setComponentConfigurations',
+        'product' => 'setProduct',
+        'currency' => 'setCurrency',
+        'respect_termination_period' => 'setRespectTerminationPeriod'
     ];
 
     /**
@@ -182,7 +197,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription'
+        'component_configurations' => 'getComponentConfigurations',
+        'product' => 'getProduct',
+        'currency' => 'getCurrency',
+        'respect_termination_period' => 'getRespectTerminationPeriod'
     ];
 
     /**
@@ -242,7 +260,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('component_configurations', $data ?? [], null);
+        $this->setIfExists('product', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('respect_termination_period', $data ?? [], null);
     }
 
     /**
@@ -272,10 +293,6 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
-            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
-        }
-
         return $invalidProperties;
     }
 
@@ -292,32 +309,111 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets description
+     * Gets component_configurations
      *
-     * @return string|null
+     * @return \PostFinanceCheckout\Sdk\Model\SubscriptionComponentReferenceConfiguration[]|null
      */
-    public function getDescription()
+    public function getComponentConfigurations()
     {
-        return $this->container['description'];
+        return $this->container['component_configurations'];
     }
 
     /**
-     * Sets description
+     * Sets component_configurations
      *
-     * @param string|null $description A description used to identify the subscription.
+     * @param \PostFinanceCheckout\Sdk\Model\SubscriptionComponentReferenceConfiguration[]|null $component_configurations The configurations of the subscription's components.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setComponentConfigurations($component_configurations)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        if ((mb_strlen($description) > 200)) {
-            throw new \InvalidArgumentException('invalid length for $description when calling SubscriptionUpdateRequest., must be smaller than or equal to 200.');
+        if (is_null($component_configurations)) {
+            throw new \InvalidArgumentException('non-nullable component_configurations cannot be null');
         }
 
-        $this->container['description'] = $description;
+
+        $this->container['component_configurations'] = $component_configurations;
+
+        return $this;
+    }
+
+    /**
+     * Gets product
+     *
+     * @return int|null
+     */
+    public function getProduct()
+    {
+        return $this->container['product'];
+    }
+
+    /**
+     * Sets product
+     *
+     * @param int|null $product The product to subscribe to.
+     *
+     * @return self
+     */
+    public function setProduct($product)
+    {
+        if (is_null($product)) {
+            throw new \InvalidArgumentException('non-nullable product cannot be null');
+        }
+        $this->container['product'] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets respect_termination_period
+     *
+     * @return bool|null
+     */
+    public function getRespectTerminationPeriod()
+    {
+        return $this->container['respect_termination_period'];
+    }
+
+    /**
+     * Sets respect_termination_period
+     *
+     * @param bool|null $respect_termination_period Whether the subscriptions' termination periods should be respected.
+     *
+     * @return self
+     */
+    public function setRespectTerminationPeriod($respect_termination_period)
+    {
+        if (is_null($respect_termination_period)) {
+            throw new \InvalidArgumentException('non-nullable respect_termination_period cannot be null');
+        }
+        $this->container['respect_termination_period'] = $respect_termination_period;
 
         return $this;
     }

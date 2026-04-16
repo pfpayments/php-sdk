@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutWalletType model
+ * WalleejoinPartnership model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutWalletType';
+    protected static $openAPIModelName = 'WalleejoinPartnership';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'array<string,string>',
-        'description' => 'array<string,string>',
-        'id' => 'int'
+        'pricing_profile_sell_rate' => 'object',
+        'merchant_account' => 'int',
+        'partnership_type' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType',
+        'state' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState',
+        'version' => 'int',
+        'subscription_product_id' => 'int',
+        'partner_account' => 'int'
     ];
 
     /**
@@ -68,9 +72,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'description' => null,
-        'id' => 'int64'
+        'pricing_profile_sell_rate' => null,
+        'merchant_account' => 'int64',
+        'partnership_type' => null,
+        'state' => null,
+        'version' => 'int32',
+        'subscription_product_id' => 'int64',
+        'partner_account' => 'int64'
     ];
 
     /**
@@ -79,9 +87,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'description' => false,
-        'id' => false
+        'pricing_profile_sell_rate' => false,
+        'merchant_account' => false,
+        'partnership_type' => false,
+        'state' => false,
+        'version' => false,
+        'subscription_product_id' => false,
+        'partner_account' => false
     ];
 
     /**
@@ -170,9 +182,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'description' => 'description',
-        'id' => 'id'
+        'pricing_profile_sell_rate' => 'pricingProfileSellRate',
+        'merchant_account' => 'merchantAccount',
+        'partnership_type' => 'partnershipType',
+        'state' => 'state',
+        'version' => 'version',
+        'subscription_product_id' => 'subscriptionProductId',
+        'partner_account' => 'partnerAccount'
     ];
 
     /**
@@ -181,9 +197,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'description' => 'setDescription',
-        'id' => 'setId'
+        'pricing_profile_sell_rate' => 'setPricingProfileSellRate',
+        'merchant_account' => 'setMerchantAccount',
+        'partnership_type' => 'setPartnershipType',
+        'state' => 'setState',
+        'version' => 'setVersion',
+        'subscription_product_id' => 'setSubscriptionProductId',
+        'partner_account' => 'setPartnerAccount'
     ];
 
     /**
@@ -192,9 +212,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'description' => 'getDescription',
-        'id' => 'getId'
+        'pricing_profile_sell_rate' => 'getPricingProfileSellRate',
+        'merchant_account' => 'getMerchantAccount',
+        'partnership_type' => 'getPartnershipType',
+        'state' => 'getState',
+        'version' => 'getVersion',
+        'subscription_product_id' => 'getSubscriptionProductId',
+        'partner_account' => 'getPartnerAccount'
     ];
 
     /**
@@ -254,9 +278,13 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rate', $data ?? [], null);
+        $this->setIfExists('merchant_account', $data ?? [], null);
+        $this->setIfExists('partnership_type', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('subscription_product_id', $data ?? [], null);
+        $this->setIfExists('partner_account', $data ?? [], null);
     }
 
     /**
@@ -286,6 +314,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -302,82 +333,190 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets name
+     * Gets pricing_profile_sell_rate
      *
-     * @return array<string,string>|null
+     * @return object|null
      */
-    public function getName()
+    public function getPricingProfileSellRate()
     {
-        return $this->container['name'];
+        return $this->container['pricing_profile_sell_rate'];
     }
 
     /**
-     * Sets name
+     * Sets pricing_profile_sell_rate
      *
-     * @param array<string,string>|null $name The localized name of the object.
+     * @param object|null $pricing_profile_sell_rate pricing_profile_sell_rate
      *
      * @return self
      */
-    public function setName($name)
+    public function setPricingProfileSellRate($pricing_profile_sell_rate)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($pricing_profile_sell_rate)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['pricing_profile_sell_rate'] = $pricing_profile_sell_rate;
 
         return $this;
     }
 
     /**
-     * Gets description
-     *
-     * @return array<string,string>|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param array<string,string>|null $description The localized description of the object.
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets id
+     * Gets merchant_account
      *
      * @return int|null
      */
-    public function getId()
+    public function getMerchantAccount()
     {
-        return $this->container['id'];
+        return $this->container['merchant_account'];
     }
 
     /**
-     * Sets id
+     * Sets merchant_account
      *
-     * @param int|null $id A unique identifier for the object.
+     * @param int|null $merchant_account The ID of the merchant account.
      *
      * @return self
      */
-    public function setId($id)
+    public function setMerchantAccount($merchant_account)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($merchant_account)) {
+            throw new \InvalidArgumentException('non-nullable merchant_account cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['merchant_account'] = $merchant_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets partnership_type
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType|null
+     */
+    public function getPartnershipType()
+    {
+        return $this->container['partnership_type'];
+    }
+
+    /**
+     * Sets partnership_type
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType|null $partnership_type partnership_type
+     *
+     * @return self
+     */
+    public function setPartnershipType($partnership_type)
+    {
+        if (is_null($partnership_type)) {
+            throw new \InvalidArgumentException('non-nullable partnership_type cannot be null');
+        }
+        $this->container['partnership_type'] = $partnership_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductId()
+    {
+        return $this->container['subscription_product_id'];
+    }
+
+    /**
+     * Sets subscription_product_id
+     *
+     * @param int|null $subscription_product_id The ID of the product.
+     *
+     * @return self
+     */
+    public function setSubscriptionProductId($subscription_product_id)
+    {
+        if (is_null($subscription_product_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
+        }
+        $this->container['subscription_product_id'] = $subscription_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_account
+     *
+     * @return int|null
+     */
+    public function getPartnerAccount()
+    {
+        return $this->container['partner_account'];
+    }
+
+    /**
+     * Sets partner_account
+     *
+     * @param int|null $partner_account The ID of the partner account.
+     *
+     * @return self
+     */
+    public function setPartnerAccount($partner_account)
+    {
+        if (is_null($partner_account)) {
+            throw new \InvalidArgumentException('non-nullable partner_account cannot be null');
+        }
+        $this->container['partner_account'] = $partner_account;
 
         return $this;
     }

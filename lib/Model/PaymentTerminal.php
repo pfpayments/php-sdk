@@ -35,7 +35,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
 class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -56,6 +56,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'identifier' => 'string',
+        'deactivated_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'external_id' => 'string',
         'type' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalType',
@@ -65,6 +66,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => 'int',
         'configuration_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalConfigurationVersion',
         'location_version' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalLocationVersion',
+        'activated_on' => '\DateTime',
+        'decommissioned_on' => '\DateTime',
         'default_currency' => 'string',
         'name' => 'string',
         'id' => 'int',
@@ -80,6 +83,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'identifier' => null,
+        'deactivated_on' => 'date-time',
         'planned_purge_date' => 'date-time',
         'external_id' => null,
         'type' => null,
@@ -89,6 +93,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => 'int64',
         'configuration_version' => null,
         'location_version' => null,
+        'activated_on' => 'date-time',
+        'decommissioned_on' => 'date-time',
         'default_currency' => null,
         'name' => null,
         'id' => 'int64',
@@ -102,6 +108,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'identifier' => false,
+        'deactivated_on' => false,
         'planned_purge_date' => false,
         'external_id' => false,
         'type' => false,
@@ -111,6 +118,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => false,
         'configuration_version' => false,
         'location_version' => false,
+        'activated_on' => false,
+        'decommissioned_on' => false,
         'default_currency' => false,
         'name' => false,
         'id' => false,
@@ -204,6 +213,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'identifier' => 'identifier',
+        'deactivated_on' => 'deactivatedOn',
         'planned_purge_date' => 'plannedPurgeDate',
         'external_id' => 'externalId',
         'type' => 'type',
@@ -213,6 +223,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => 'linkedSpaceId',
         'configuration_version' => 'configurationVersion',
         'location_version' => 'locationVersion',
+        'activated_on' => 'activatedOn',
+        'decommissioned_on' => 'decommissionedOn',
         'default_currency' => 'defaultCurrency',
         'name' => 'name',
         'id' => 'id',
@@ -226,6 +238,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'identifier' => 'setIdentifier',
+        'deactivated_on' => 'setDeactivatedOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'external_id' => 'setExternalId',
         'type' => 'setType',
@@ -235,6 +248,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => 'setLinkedSpaceId',
         'configuration_version' => 'setConfigurationVersion',
         'location_version' => 'setLocationVersion',
+        'activated_on' => 'setActivatedOn',
+        'decommissioned_on' => 'setDecommissionedOn',
         'default_currency' => 'setDefaultCurrency',
         'name' => 'setName',
         'id' => 'setId',
@@ -248,6 +263,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'identifier' => 'getIdentifier',
+        'deactivated_on' => 'getDeactivatedOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'external_id' => 'getExternalId',
         'type' => 'getType',
@@ -257,6 +273,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'linked_space_id' => 'getLinkedSpaceId',
         'configuration_version' => 'getConfigurationVersion',
         'location_version' => 'getLocationVersion',
+        'activated_on' => 'getActivatedOn',
+        'decommissioned_on' => 'getDecommissionedOn',
         'default_currency' => 'getDefaultCurrency',
         'name' => 'getName',
         'id' => 'getId',
@@ -321,6 +339,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('identifier', $data ?? [], null);
+        $this->setIfExists('deactivated_on', $data ?? [], null);
         $this->setIfExists('planned_purge_date', $data ?? [], null);
         $this->setIfExists('external_id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
@@ -330,6 +349,8 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('linked_space_id', $data ?? [], null);
         $this->setIfExists('configuration_version', $data ?? [], null);
         $this->setIfExists('location_version', $data ?? [], null);
+        $this->setIfExists('activated_on', $data ?? [], null);
+        $this->setIfExists('decommissioned_on', $data ?? [], null);
         $this->setIfExists('default_currency', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
@@ -405,6 +426,33 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable identifier cannot be null');
         }
         $this->container['identifier'] = $identifier;
+
+        return $this;
+    }
+
+    /**
+     * Gets deactivated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getDeactivatedOn()
+    {
+        return $this->container['deactivated_on'];
+    }
+
+    /**
+     * Sets deactivated_on
+     *
+     * @param \DateTime|null $deactivated_on deactivated_on
+     *
+     * @return self
+     */
+    public function setDeactivatedOn($deactivated_on)
+    {
+        if (is_null($deactivated_on)) {
+            throw new \InvalidArgumentException('non-nullable deactivated_on cannot be null');
+        }
+        $this->container['deactivated_on'] = $deactivated_on;
 
         return $this;
     }
@@ -648,6 +696,60 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable location_version cannot be null');
         }
         $this->container['location_version'] = $location_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets activated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getActivatedOn()
+    {
+        return $this->container['activated_on'];
+    }
+
+    /**
+     * Sets activated_on
+     *
+     * @param \DateTime|null $activated_on activated_on
+     *
+     * @return self
+     */
+    public function setActivatedOn($activated_on)
+    {
+        if (is_null($activated_on)) {
+            throw new \InvalidArgumentException('non-nullable activated_on cannot be null');
+        }
+        $this->container['activated_on'] = $activated_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets decommissioned_on
+     *
+     * @return \DateTime|null
+     */
+    public function getDecommissionedOn()
+    {
+        return $this->container['decommissioned_on'];
+    }
+
+    /**
+     * Sets decommissioned_on
+     *
+     * @param \DateTime|null $decommissioned_on decommissioned_on
+     *
+     * @return self
+     */
+    public function setDecommissionedOn($decommissioned_on)
+    {
+        if (is_null($decommissioned_on)) {
+            throw new \InvalidArgumentException('non-nullable decommissioned_on cannot be null');
+        }
+        $this->container['decommissioned_on'] = $decommissioned_on;
 
         return $this;
     }

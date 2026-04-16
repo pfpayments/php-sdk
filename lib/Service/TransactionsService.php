@@ -48,7 +48,7 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.0
+ * @version  5.2.2
  */
 class TransactionsService
 {
@@ -449,7 +449,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -885,7 +885,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
 
@@ -1251,7 +1251,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -1612,7 +1612,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -1986,7 +1986,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -2379,7 +2379,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -2801,7 +2801,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
 
@@ -3167,7 +3167,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -3528,7 +3528,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -3889,7 +3889,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -4250,7 +4250,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -4611,7 +4611,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -4972,7 +4972,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -5346,7 +5346,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -5707,7 +5707,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -6068,7 +6068,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -6461,7 +6461,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -6822,7 +6822,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -7221,7 +7221,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -7646,7 +7646,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
 
@@ -8036,7 +8036,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -8431,7 +8431,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
 
@@ -8815,7 +8815,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -9211,7 +9211,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -9599,7 +9599,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -9908,7 +9908,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -10296,7 +10296,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -10684,7 +10684,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -11082,7 +11082,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -11487,7 +11487,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -11892,7 +11892,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -12297,7 +12297,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -12689,7 +12689,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -13084,7 +13084,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -13472,7 +13472,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -13860,7 +13860,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
@@ -14248,7 +14248,7 @@ class TransactionsService
 
         // header params
         if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params

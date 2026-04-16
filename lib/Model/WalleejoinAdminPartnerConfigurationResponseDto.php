@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingOption model
+ * WalleejoinAdminPartnerConfigurationResponseDto model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinAdminPartnerConfigurationResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingOption';
+    protected static $openAPIModelName = 'WalleejoinAdminPartnerConfigurationResponseDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,13 +55,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'description' => 'string',
-        'currency' => 'string',
-        'id' => 'string',
-        'label' => 'string',
-        'tax_amount' => 'float',
-        'selected' => 'bool'
+        'pricing_profile_sell_rates' => '\PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto[]',
+        'revenue_share' => 'float',
+        'subscription_products' => '\PostFinanceCheckout\Sdk\Model\SubscriptionProductDto[]',
+        'one_off_referral' => 'int',
+        'pricing_profile_buy_rate' => '\PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto',
+        'partnership_types' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType[]',
+        'partner_account' => 'int',
+        'pricing_type' => '\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPricingType'
     ];
 
     /**
@@ -72,13 +73,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'description' => null,
-        'currency' => null,
-        'id' => null,
-        'label' => null,
-        'tax_amount' => null,
-        'selected' => null
+        'pricing_profile_sell_rates' => null,
+        'revenue_share' => null,
+        'subscription_products' => null,
+        'one_off_referral' => 'int32',
+        'pricing_profile_buy_rate' => null,
+        'partnership_types' => null,
+        'partner_account' => 'int64',
+        'pricing_type' => null
     ];
 
     /**
@@ -87,13 +89,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => false,
-        'description' => false,
-        'currency' => false,
-        'id' => false,
-        'label' => false,
-        'tax_amount' => false,
-        'selected' => false
+        'pricing_profile_sell_rates' => false,
+        'revenue_share' => false,
+        'subscription_products' => false,
+        'one_off_referral' => false,
+        'pricing_profile_buy_rate' => false,
+        'partnership_types' => false,
+        'partner_account' => false,
+        'pricing_type' => false
     ];
 
     /**
@@ -182,13 +185,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'description' => 'description',
-        'currency' => 'currency',
-        'id' => 'id',
-        'label' => 'label',
-        'tax_amount' => 'taxAmount',
-        'selected' => 'selected'
+        'pricing_profile_sell_rates' => 'pricingProfileSellRates',
+        'revenue_share' => 'revenueShare',
+        'subscription_products' => 'subscriptionProducts',
+        'one_off_referral' => 'oneOffReferral',
+        'pricing_profile_buy_rate' => 'pricingProfileBuyRate',
+        'partnership_types' => 'partnershipTypes',
+        'partner_account' => 'partnerAccount',
+        'pricing_type' => 'pricingType'
     ];
 
     /**
@@ -197,13 +201,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'description' => 'setDescription',
-        'currency' => 'setCurrency',
-        'id' => 'setId',
-        'label' => 'setLabel',
-        'tax_amount' => 'setTaxAmount',
-        'selected' => 'setSelected'
+        'pricing_profile_sell_rates' => 'setPricingProfileSellRates',
+        'revenue_share' => 'setRevenueShare',
+        'subscription_products' => 'setSubscriptionProducts',
+        'one_off_referral' => 'setOneOffReferral',
+        'pricing_profile_buy_rate' => 'setPricingProfileBuyRate',
+        'partnership_types' => 'setPartnershipTypes',
+        'partner_account' => 'setPartnerAccount',
+        'pricing_type' => 'setPricingType'
     ];
 
     /**
@@ -212,13 +217,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'description' => 'getDescription',
-        'currency' => 'getCurrency',
-        'id' => 'getId',
-        'label' => 'getLabel',
-        'tax_amount' => 'getTaxAmount',
-        'selected' => 'getSelected'
+        'pricing_profile_sell_rates' => 'getPricingProfileSellRates',
+        'revenue_share' => 'getRevenueShare',
+        'subscription_products' => 'getSubscriptionProducts',
+        'one_off_referral' => 'getOneOffReferral',
+        'pricing_profile_buy_rate' => 'getPricingProfileBuyRate',
+        'partnership_types' => 'getPartnershipTypes',
+        'partner_account' => 'getPartnerAccount',
+        'pricing_type' => 'getPricingType'
     ];
 
     /**
@@ -278,13 +284,14 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('label', $data ?? [], null);
-        $this->setIfExists('tax_amount', $data ?? [], null);
-        $this->setIfExists('selected', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rates', $data ?? [], null);
+        $this->setIfExists('revenue_share', $data ?? [], null);
+        $this->setIfExists('subscription_products', $data ?? [], null);
+        $this->setIfExists('one_off_referral', $data ?? [], null);
+        $this->setIfExists('pricing_profile_buy_rate', $data ?? [], null);
+        $this->setIfExists('partnership_types', $data ?? [], null);
+        $this->setIfExists('partner_account', $data ?? [], null);
+        $this->setIfExists('pricing_type', $data ?? [], null);
     }
 
     /**
@@ -330,190 +337,223 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets amount
+     * Gets pricing_profile_sell_rates
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto[]|null
+     */
+    public function getPricingProfileSellRates()
+    {
+        return $this->container['pricing_profile_sell_rates'];
+    }
+
+    /**
+     * Sets pricing_profile_sell_rates
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto[]|null $pricing_profile_sell_rates pricing_profile_sell_rates
+     *
+     * @return self
+     */
+    public function setPricingProfileSellRates($pricing_profile_sell_rates)
+    {
+        if (is_null($pricing_profile_sell_rates)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rates cannot be null');
+        }
+
+
+        $this->container['pricing_profile_sell_rates'] = $pricing_profile_sell_rates;
+
+        return $this;
+    }
+
+    /**
+     * Gets revenue_share
      *
      * @return float|null
      */
-    public function getAmount()
+    public function getRevenueShare()
     {
-        return $this->container['amount'];
+        return $this->container['revenue_share'];
     }
 
     /**
-     * Sets amount
+     * Sets revenue_share
      *
-     * @param float|null $amount Total cost of this shipping option.
+     * @param float|null $revenue_share revenue_share
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setRevenueShare($revenue_share)
     {
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        if (is_null($revenue_share)) {
+            throw new \InvalidArgumentException('non-nullable revenue_share cannot be null');
         }
-        $this->container['amount'] = $amount;
+        $this->container['revenue_share'] = $revenue_share;
 
         return $this;
     }
 
     /**
-     * Gets description
+     * Gets subscription_products
      *
-     * @return string|null
+     * @return \PostFinanceCheckout\Sdk\Model\SubscriptionProductDto[]|null
      */
-    public function getDescription()
+    public function getSubscriptionProducts()
     {
-        return $this->container['description'];
+        return $this->container['subscription_products'];
     }
 
     /**
-     * Sets description
+     * Sets subscription_products
      *
-     * @param string|null $description Description of the option
+     * @param \PostFinanceCheckout\Sdk\Model\SubscriptionProductDto[]|null $subscription_products subscription_products
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setSubscriptionProducts($subscription_products)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($subscription_products)) {
+            throw new \InvalidArgumentException('non-nullable subscription_products cannot be null');
         }
-        $this->container['description'] = $description;
+
+
+        $this->container['subscription_products'] = $subscription_products;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets one_off_referral
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getCurrency()
+    public function getOneOffReferral()
     {
-        return $this->container['currency'];
+        return $this->container['one_off_referral'];
     }
 
     /**
-     * Sets currency
+     * Sets one_off_referral
      *
-     * @param string|null $currency Currency code (ISO-4217) of this shipping option.
+     * @param int|null $one_off_referral one_off_referral
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setOneOffReferral($one_off_referral)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($one_off_referral)) {
+            throw new \InvalidArgumentException('non-nullable one_off_referral cannot be null');
         }
-        $this->container['currency'] = $currency;
+        $this->container['one_off_referral'] = $one_off_referral;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets pricing_profile_buy_rate
      *
-     * @return string|null
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto|null
      */
-    public function getId()
+    public function getPricingProfileBuyRate()
     {
-        return $this->container['id'];
+        return $this->container['pricing_profile_buy_rate'];
     }
 
     /**
-     * Sets id
+     * Sets pricing_profile_buy_rate
      *
-     * @param string|null $id Identifier of the option.
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentFacilitatorPricingProfileDto|null $pricing_profile_buy_rate pricing_profile_buy_rate
      *
      * @return self
      */
-    public function setId($id)
+    public function setPricingProfileBuyRate($pricing_profile_buy_rate)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($pricing_profile_buy_rate)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_buy_rate cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['pricing_profile_buy_rate'] = $pricing_profile_buy_rate;
 
         return $this;
     }
 
     /**
-     * Gets label
+     * Gets partnership_types
      *
-     * @return string|null
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType[]|null
      */
-    public function getLabel()
+    public function getPartnershipTypes()
     {
-        return $this->container['label'];
+        return $this->container['partnership_types'];
     }
 
     /**
-     * Sets label
+     * Sets partnership_types
      *
-     * @param string|null $label Label of the option.
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType[]|null $partnership_types partnership_types
      *
      * @return self
      */
-    public function setLabel($label)
+    public function setPartnershipTypes($partnership_types)
     {
-        if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
+        if (is_null($partnership_types)) {
+            throw new \InvalidArgumentException('non-nullable partnership_types cannot be null');
         }
-        $this->container['label'] = $label;
+
+
+        $this->container['partnership_types'] = $partnership_types;
 
         return $this;
     }
 
     /**
-     * Gets tax_amount
+     * Gets partner_account
      *
-     * @return float|null
+     * @return int|null
      */
-    public function getTaxAmount()
+    public function getPartnerAccount()
     {
-        return $this->container['tax_amount'];
+        return $this->container['partner_account'];
     }
 
     /**
-     * Sets tax_amount
+     * Sets partner_account
      *
-     * @param float|null $tax_amount Amount related to taxes.
+     * @param int|null $partner_account partner_account
      *
      * @return self
      */
-    public function setTaxAmount($tax_amount)
+    public function setPartnerAccount($partner_account)
     {
-        if (is_null($tax_amount)) {
-            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
+        if (is_null($partner_account)) {
+            throw new \InvalidArgumentException('non-nullable partner_account cannot be null');
         }
-        $this->container['tax_amount'] = $tax_amount;
+        $this->container['partner_account'] = $partner_account;
 
         return $this;
     }
 
     /**
-     * Gets selected
+     * Gets pricing_type
      *
-     * @return bool|null
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPricingType|null
      */
-    public function getSelected()
+    public function getPricingType()
     {
-        return $this->container['selected'];
+        return $this->container['pricing_type'];
     }
 
     /**
-     * Sets selected
+     * Sets pricing_type
      *
-     * @param bool|null $selected Whether it was the option selected by the customer.
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPricingType|null $pricing_type pricing_type
      *
      * @return self
      */
-    public function setSelected($selected)
+    public function setPricingType($pricing_type)
     {
-        if (is_null($selected)) {
-            throw new \InvalidArgumentException('non-nullable selected cannot be null');
+        if (is_null($pricing_type)) {
+            throw new \InvalidArgumentException('non-nullable pricing_type cannot be null');
         }
-        $this->container['selected'] = $selected;
+        $this->container['pricing_type'] = $pricing_type;
 
         return $this;
     }

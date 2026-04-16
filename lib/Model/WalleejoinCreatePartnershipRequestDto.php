@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutApprovalResponse model
+ * WalleejoinCreatePartnershipRequestDto model
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
@@ -35,10 +35,10 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutApprovalResponse';
+    protected static $openAPIModelName = 'WalleejoinCreatePartnershipRequestDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'merchant_redirect_url' => 'string',
-        'session_id' => 'int',
-        'state' => '\PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState'
+        'partner_account_id' => 'int',
+        'pricing_profile_sell_rate_id' => 'int',
+        'subscription_product_id' => 'int',
+        'merchant_email_address' => 'string'
     ];
 
     /**
@@ -68,9 +69,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'merchant_redirect_url' => null,
-        'session_id' => 'int64',
-        'state' => null
+        'partner_account_id' => 'int64',
+        'pricing_profile_sell_rate_id' => 'int64',
+        'subscription_product_id' => 'int64',
+        'merchant_email_address' => null
     ];
 
     /**
@@ -79,9 +81,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'merchant_redirect_url' => false,
-        'session_id' => false,
-        'state' => false
+        'partner_account_id' => false,
+        'pricing_profile_sell_rate_id' => false,
+        'subscription_product_id' => false,
+        'merchant_email_address' => false
     ];
 
     /**
@@ -170,9 +173,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'merchant_redirect_url' => 'merchantRedirectUrl',
-        'session_id' => 'sessionId',
-        'state' => 'state'
+        'partner_account_id' => 'partnerAccountId',
+        'pricing_profile_sell_rate_id' => 'pricingProfileSellRateId',
+        'subscription_product_id' => 'subscriptionProductId',
+        'merchant_email_address' => 'merchantEmailAddress'
     ];
 
     /**
@@ -181,9 +185,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'merchant_redirect_url' => 'setMerchantRedirectUrl',
-        'session_id' => 'setSessionId',
-        'state' => 'setState'
+        'partner_account_id' => 'setPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'setPricingProfileSellRateId',
+        'subscription_product_id' => 'setSubscriptionProductId',
+        'merchant_email_address' => 'setMerchantEmailAddress'
     ];
 
     /**
@@ -192,9 +197,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'merchant_redirect_url' => 'getMerchantRedirectUrl',
-        'session_id' => 'getSessionId',
-        'state' => 'getState'
+        'partner_account_id' => 'getPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'getPricingProfileSellRateId',
+        'subscription_product_id' => 'getSubscriptionProductId',
+        'merchant_email_address' => 'getMerchantEmailAddress'
     ];
 
     /**
@@ -254,9 +260,10 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('merchant_redirect_url', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
-        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('partner_account_id', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rate_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_id', $data ?? [], null);
+        $this->setIfExists('merchant_email_address', $data ?? [], null);
     }
 
     /**
@@ -302,82 +309,109 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets merchant_redirect_url
-     *
-     * @return string|null
-     */
-    public function getMerchantRedirectUrl()
-    {
-        return $this->container['merchant_redirect_url'];
-    }
-
-    /**
-     * Sets merchant_redirect_url
-     *
-     * @param string|null $merchant_redirect_url merchant_redirect_url
-     *
-     * @return self
-     */
-    public function setMerchantRedirectUrl($merchant_redirect_url)
-    {
-        if (is_null($merchant_redirect_url)) {
-            throw new \InvalidArgumentException('non-nullable merchant_redirect_url cannot be null');
-        }
-        $this->container['merchant_redirect_url'] = $merchant_redirect_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_id
+     * Gets partner_account_id
      *
      * @return int|null
      */
-    public function getSessionId()
+    public function getPartnerAccountId()
     {
-        return $this->container['session_id'];
+        return $this->container['partner_account_id'];
     }
 
     /**
-     * Sets session_id
+     * Sets partner_account_id
      *
-     * @param int|null $session_id session_id
+     * @param int|null $partner_account_id partner_account_id
      *
      * @return self
      */
-    public function setSessionId($session_id)
+    public function setPartnerAccountId($partner_account_id)
     {
-        if (is_null($session_id)) {
-            throw new \InvalidArgumentException('non-nullable session_id cannot be null');
+        if (is_null($partner_account_id)) {
+            throw new \InvalidArgumentException('non-nullable partner_account_id cannot be null');
         }
-        $this->container['session_id'] = $session_id;
+        $this->container['partner_account_id'] = $partner_account_id;
 
         return $this;
     }
 
     /**
-     * Gets state
+     * Gets pricing_profile_sell_rate_id
      *
-     * @return \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState|null
+     * @return int|null
      */
-    public function getState()
+    public function getPricingProfileSellRateId()
     {
-        return $this->container['state'];
+        return $this->container['pricing_profile_sell_rate_id'];
     }
 
     /**
-     * Sets state
+     * Sets pricing_profile_sell_rate_id
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ExpressCheckoutSessionState|null $state state
+     * @param int|null $pricing_profile_sell_rate_id pricing_profile_sell_rate_id
      *
      * @return self
      */
-    public function setState($state)
+    public function setPricingProfileSellRateId($pricing_profile_sell_rate_id)
     {
-        if (is_null($state)) {
-            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        if (is_null($pricing_profile_sell_rate_id)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate_id cannot be null');
         }
-        $this->container['state'] = $state;
+        $this->container['pricing_profile_sell_rate_id'] = $pricing_profile_sell_rate_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductId()
+    {
+        return $this->container['subscription_product_id'];
+    }
+
+    /**
+     * Sets subscription_product_id
+     *
+     * @param int|null $subscription_product_id subscription_product_id
+     *
+     * @return self
+     */
+    public function setSubscriptionProductId($subscription_product_id)
+    {
+        if (is_null($subscription_product_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
+        }
+        $this->container['subscription_product_id'] = $subscription_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_email_address
+     *
+     * @return string|null
+     */
+    public function getMerchantEmailAddress()
+    {
+        return $this->container['merchant_email_address'];
+    }
+
+    /**
+     * Sets merchant_email_address
+     *
+     * @param string|null $merchant_email_address merchant_email_address
+     *
+     * @return self
+     */
+    public function setMerchantEmailAddress($merchant_email_address)
+    {
+        if (is_null($merchant_email_address)) {
+            throw new \InvalidArgumentException('non-nullable merchant_email_address cannot be null');
+        }
+        $this->container['merchant_email_address'] = $merchant_email_address;
 
         return $this;
     }
