@@ -222,7 +222,29 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
+    /**
+     * Gets enable_payload_signature_and_state
+     *
+     * @return bool
+     */
+    public function getEnablePayloadSignatureAndState()
+    {
+        return $this->container['enable_payload_signature_and_state'];
+    }
+
+    /**
+     * Sets enable_payload_signature_and_state
+     *
+     * @param bool $enable_payload_signature_and_state Whether signature header and 'state' property are enabled in webhook payload.
+     *
+     * @return $this
+     */
+    public function setEnablePayloadSignatureAndState($enable_payload_signature_and_state)
+    {
+        $this->container['enable_payload_signature_and_state'] = $enable_payload_signature_and_state;
+
+        return $this;
+    }
 
     /**
      * Gets entity_states
