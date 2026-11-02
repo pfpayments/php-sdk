@@ -31,11 +31,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -55,8 +55,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'required_features' => '\PostFinanceCheckout\Sdk\Model\Feature[]',
         'feature' => '\PostFinanceCheckout\Sdk\Model\Feature',
+        'standard_checkout_supported' => 'bool',
         'sort_order' => 'int',
+        'express_checkout_supported' => 'bool',
         'name' => 'array<string,string>',
         'description' => 'array<string,string>',
         'navigation_path' => 'string',
@@ -71,8 +74,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'required_features' => null,
         'feature' => null,
+        'standard_checkout_supported' => null,
         'sort_order' => 'int32',
+        'express_checkout_supported' => null,
         'name' => null,
         'description' => null,
         'navigation_path' => null,
@@ -85,8 +91,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'required_features' => false,
         'feature' => false,
+        'standard_checkout_supported' => false,
         'sort_order' => false,
+        'express_checkout_supported' => false,
         'name' => false,
         'description' => false,
         'navigation_path' => false,
@@ -179,8 +188,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'required_features' => 'requiredFeatures',
         'feature' => 'feature',
+        'standard_checkout_supported' => 'standardCheckoutSupported',
         'sort_order' => 'sortOrder',
+        'express_checkout_supported' => 'expressCheckoutSupported',
         'name' => 'name',
         'description' => 'description',
         'navigation_path' => 'navigationPath',
@@ -193,8 +205,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'required_features' => 'setRequiredFeatures',
         'feature' => 'setFeature',
+        'standard_checkout_supported' => 'setStandardCheckoutSupported',
         'sort_order' => 'setSortOrder',
+        'express_checkout_supported' => 'setExpressCheckoutSupported',
         'name' => 'setName',
         'description' => 'setDescription',
         'navigation_path' => 'setNavigationPath',
@@ -207,8 +222,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'required_features' => 'getRequiredFeatures',
         'feature' => 'getFeature',
+        'standard_checkout_supported' => 'getStandardCheckoutSupported',
         'sort_order' => 'getSortOrder',
+        'express_checkout_supported' => 'getExpressCheckoutSupported',
         'name' => 'getName',
         'description' => 'getDescription',
         'navigation_path' => 'getNavigationPath',
@@ -272,8 +290,11 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('required_features', $data ?? [], null);
         $this->setIfExists('feature', $data ?? [], null);
+        $this->setIfExists('standard_checkout_supported', $data ?? [], null);
         $this->setIfExists('sort_order', $data ?? [], null);
+        $this->setIfExists('express_checkout_supported', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('navigation_path', $data ?? [], null);
@@ -323,6 +344,35 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
+     * Gets required_features
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\Feature[]|null
+     */
+    public function getRequiredFeatures()
+    {
+        return $this->container['required_features'];
+    }
+
+    /**
+     * Sets required_features
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\Feature[]|null $required_features required_features
+     *
+     * @return self
+     */
+    public function setRequiredFeatures($required_features)
+    {
+        if (is_null($required_features)) {
+            throw new \InvalidArgumentException('non-nullable required_features cannot be null');
+        }
+
+
+        $this->container['required_features'] = $required_features;
+
+        return $this;
+    }
+
+    /**
      * Gets feature
      *
      * @return \PostFinanceCheckout\Sdk\Model\Feature|null
@@ -350,6 +400,33 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets standard_checkout_supported
+     *
+     * @return bool|null
+     */
+    public function getStandardCheckoutSupported()
+    {
+        return $this->container['standard_checkout_supported'];
+    }
+
+    /**
+     * Sets standard_checkout_supported
+     *
+     * @param bool|null $standard_checkout_supported standard_checkout_supported
+     *
+     * @return self
+     */
+    public function setStandardCheckoutSupported($standard_checkout_supported)
+    {
+        if (is_null($standard_checkout_supported)) {
+            throw new \InvalidArgumentException('non-nullable standard_checkout_supported cannot be null');
+        }
+        $this->container['standard_checkout_supported'] = $standard_checkout_supported;
+
+        return $this;
+    }
+
+    /**
      * Gets sort_order
      *
      * @return int|null
@@ -372,6 +449,33 @@ class WalletType implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable sort_order cannot be null');
         }
         $this->container['sort_order'] = $sort_order;
+
+        return $this;
+    }
+
+    /**
+     * Gets express_checkout_supported
+     *
+     * @return bool|null
+     */
+    public function getExpressCheckoutSupported()
+    {
+        return $this->container['express_checkout_supported'];
+    }
+
+    /**
+     * Sets express_checkout_supported
+     *
+     * @param bool|null $express_checkout_supported express_checkout_supported
+     *
+     * @return self
+     */
+    public function setExpressCheckoutSupported($express_checkout_supported)
+    {
+        if (is_null($express_checkout_supported)) {
+            throw new \InvalidArgumentException('non-nullable express_checkout_supported cannot be null');
+        }
+        $this->container['express_checkout_supported'] = $express_checkout_supported;
 
         return $this;
     }

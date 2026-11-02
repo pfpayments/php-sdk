@@ -23,7 +23,6 @@
 
 namespace PostFinanceCheckout\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\Configuration;
 use PostFinanceCheckout\Sdk\FormDataProcessor;
 use PostFinanceCheckout\Sdk\HeaderSelector;
+use PostFinanceCheckout\Sdk\CaBundleFallbackClientFactory;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
@@ -44,11 +44,11 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   wallee AG
+ * @author   PostFinance Ltd
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class PaymentTerminalsService
 {
@@ -85,6 +85,9 @@ class PaymentTerminalsService
         'getPaymentTerminals' => [
             'application/json',
         ],
+        'getPaymentTerminalsActivationStatus' => [
+            'application/json',
+        ],
         'getPaymentTerminalsId' => [
             'application/json',
         ],
@@ -103,6 +106,9 @@ class PaymentTerminalsService
         'postPaymentTerminalsByIdentifierIdentifierPerformTransaction' => [
             'application/json',
         ],
+        'postPaymentTerminalsByIdentifierIdentifierRefresh' => [
+            'application/json',
+        ],
         'postPaymentTerminalsByIdentifierIdentifierTriggerConfiguration' => [
             'application/json',
         ],
@@ -115,6 +121,9 @@ class PaymentTerminalsService
         'postPaymentTerminalsIdPerformTransaction' => [
             'application/json',
         ],
+        'postPaymentTerminalsIdRefresh' => [
+            'application/json',
+        ],
         'postPaymentTerminalsIdTriggerConfiguration' => [
             'application/json',
         ],
@@ -122,6 +131,9 @@ class PaymentTerminalsService
             'application/json',
         ],
         'postPaymentTerminalsIdUnlink' => [
+            'application/json',
+        ],
+        'postPaymentTerminalsTriggerReversal' => [
             'application/json',
         ],
     ];
@@ -138,7 +150,7 @@ class PaymentTerminalsService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -794,6 +806,449 @@ class PaymentTerminalsService
             $order,
             'order', // param base name
             'SortingOrder', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPaymentTerminalsActivationStatus
+     *
+     * Search payment terminal activation status
+     *
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param bool|null $activation_code_active Filters payment terminals that have an active activation code (optional)
+     * @param int|null $configuration_id Filters payment terminals by their configuration ID (optional)
+     * @param string|null $environment Filters payment terminals by their environment (TEST/PRODUCTION) (optional)
+     * @param bool|null $has_activation_code Filters payment terminals that have an activation code (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $location_id Filters payment terminals by their location ID (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTerminalsActivationStatus'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminalActivationStatusDetailSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     */
+    public function getPaymentTerminalsActivationStatus(int $space, ?bool $activation_code_active = null, ?int $configuration_id = null, ?string $environment = null, ?bool $has_activation_code = null, ?int $limit = null, ?int $location_id = null, ?int $offset = null, string $contentType = self::contentTypes['getPaymentTerminalsActivationStatus'][0])
+    {
+        list($response) = $this->getPaymentTerminalsActivationStatusWithHttpInfo($space, $activation_code_active, $configuration_id, $environment, $has_activation_code, $limit, $location_id, $offset, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPaymentTerminalsActivationStatusWithHttpInfo
+     *
+     * Search payment terminal activation status
+     *
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param bool|null $activation_code_active Filters payment terminals that have an active activation code (optional)
+     * @param int|null $configuration_id Filters payment terminals by their configuration ID (optional)
+     * @param string|null $environment Filters payment terminals by their environment (TEST/PRODUCTION) (optional)
+     * @param bool|null $has_activation_code Filters payment terminals that have an activation code (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $location_id Filters payment terminals by their location ID (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTerminalsActivationStatus'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \PostFinanceCheckout\Sdk\Model\PaymentTerminalActivationStatusDetailSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPaymentTerminalsActivationStatusWithHttpInfo(int $space, ?bool $activation_code_active = null, ?int $configuration_id = null, ?string $environment = null, ?bool $has_activation_code = null, ?int $limit = null, ?int $location_id = null, ?int $offset = null, string $contentType = self::contentTypes['getPaymentTerminalsActivationStatus'][0])
+    {
+        $request = $this->getPaymentTerminalsActivationStatusRequest($space, $activation_code_active, $configuration_id, $environment, $has_activation_code, $limit, $location_id, $offset, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminalActivationStatusDetailSearchResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\PostFinanceCheckout\Sdk\Model\PaymentTerminalActivationStatusDetailSearchResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminalActivationStatusDetailSearchResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getPaymentTerminalsActivationStatus'
+     *
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param bool|null $activation_code_active Filters payment terminals that have an active activation code (optional)
+     * @param int|null $configuration_id Filters payment terminals by their configuration ID (optional)
+     * @param string|null $environment Filters payment terminals by their environment (TEST/PRODUCTION) (optional)
+     * @param bool|null $has_activation_code Filters payment terminals that have an activation code (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $location_id Filters payment terminals by their location ID (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTerminalsActivationStatus'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaymentTerminalsActivationStatusRequest(int $space, ?bool $activation_code_active = null, ?int $configuration_id = null, ?string $environment = null, ?bool $has_activation_code = null, ?int $limit = null, ?int $location_id = null, ?int $offset = null, string $contentType = self::contentTypes['getPaymentTerminalsActivationStatus'][0])
+    {
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling getPaymentTerminalsActivationStatus'
+            );
+        }
+
+
+
+
+
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling PaymentTerminalsService.getPaymentTerminalsActivationStatus, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling PaymentTerminalsService.getPaymentTerminalsActivationStatus, must be bigger than or equal to 1.');
+        }
+        
+
+        if ($offset !== null && $offset > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling PaymentTerminalsService.getPaymentTerminalsActivationStatus, must be smaller than or equal to 10000.');
+        }
+        
+
+        $resourcePath = '/payment/terminals/activation-status';
+        $httpMethod = 'GET';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $activation_code_active,
+            'activationCodeActive', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $configuration_id,
+            'configurationId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $environment,
+            'environment', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $has_activation_code,
+            'hasActivationCode', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $location_id,
+            'locationId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -2461,7 +2916,7 @@ class PaymentTerminalsService
      * Create a payment terminal
      *
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create payment_terminal_create (required)
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request payment_terminal_creation_request (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminals'] to see the possible values for this operation
      *
@@ -2469,9 +2924,9 @@ class PaymentTerminalsService
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postPaymentTerminals(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
+    public function postPaymentTerminals(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
     {
-        list($response) = $this->postPaymentTerminalsWithHttpInfo($space, $payment_terminal_create, $expand, $contentType);
+        list($response) = $this->postPaymentTerminalsWithHttpInfo($space, $payment_terminal_creation_request, $expand, $contentType);
         return $response;
     }
 
@@ -2481,7 +2936,7 @@ class PaymentTerminalsService
      * Create a payment terminal
      *
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create payment_terminal_create (required)
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request payment_terminal_creation_request (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminals'] to see the possible values for this operation
      *
@@ -2489,9 +2944,9 @@ class PaymentTerminalsService
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postPaymentTerminalsWithHttpInfo(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
+    public function postPaymentTerminalsWithHttpInfo(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
     {
-        $request = $this->postPaymentTerminalsRequest($space, $payment_terminal_create, $expand, $contentType);
+        $request = $this->postPaymentTerminalsRequest($space, $payment_terminal_creation_request, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2724,14 +3179,14 @@ class PaymentTerminalsService
      * Create request for operation 'postPaymentTerminals'
      *
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create payment_terminal_create (required)
+     * @param \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request payment_terminal_creation_request (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminals'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postPaymentTerminalsRequest(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreate $payment_terminal_create, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
+    public function postPaymentTerminalsRequest(int $space, \PostFinanceCheckout\Sdk\Model\PaymentTerminalCreationRequest $payment_terminal_creation_request, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminals'][0])
     {
 
         // verify the required parameter 'space' is set
@@ -2741,10 +3196,10 @@ class PaymentTerminalsService
             );
         }
 
-        // verify the required parameter 'payment_terminal_create' is set
-        if ($payment_terminal_create === null || (is_array($payment_terminal_create) && count($payment_terminal_create) === 0)) {
+        // verify the required parameter 'payment_terminal_creation_request' is set
+        if ($payment_terminal_creation_request === null || (is_array($payment_terminal_creation_request) && count($payment_terminal_creation_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_terminal_create when calling postPaymentTerminals'
+                'Missing the required parameter $payment_terminal_creation_request when calling postPaymentTerminals'
             );
         }
 
@@ -2782,12 +3237,12 @@ class PaymentTerminalsService
         );
 
         // for model (json/xml)
-        if (isset($payment_terminal_create)) {
+        if (isset($payment_terminal_creation_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($payment_terminal_create));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($payment_terminal_creation_request));
             } else {
-                $httpBody = $payment_terminal_create;
+                $httpBody = $payment_terminal_creation_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -3177,6 +3632,394 @@ class PaymentTerminalsService
             true, // explode
             false // required
         ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+        // path params
+        if ($identifier !== null) {
+            $resourcePath = str_replace(
+                '{' . 'identifier' . '}',
+                ObjectSerializer::toPathValue($identifier),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentTerminalsByIdentifierIdentifierRefresh
+     *
+     * Refresh a physical terminal state by identifier
+     *
+     * @param string $identifier The unique identifier of the terminal. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentTerminalsByIdentifierIdentifierRefresh(string $identifier, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'][0])
+    {
+        list($response) = $this->postPaymentTerminalsByIdentifierIdentifierRefreshWithHttpInfo($identifier, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentTerminalsByIdentifierIdentifierRefreshWithHttpInfo
+     *
+     * Refresh a physical terminal state by identifier
+     *
+     * @param string $identifier The unique identifier of the terminal. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentTerminalsByIdentifierIdentifierRefreshWithHttpInfo(string $identifier, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'][0])
+    {
+        $request = $this->postPaymentTerminalsByIdentifierIdentifierRefreshRequest($identifier, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = 30;
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postPaymentTerminalsByIdentifierIdentifierRefresh'
+     *
+     * @param string $identifier The unique identifier of the terminal. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postPaymentTerminalsByIdentifierIdentifierRefreshRequest(string $identifier, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsByIdentifierIdentifierRefresh'][0])
+    {
+
+        // verify the required parameter 'identifier' is set
+        if ($identifier === null || (is_array($identifier) && count($identifier) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $identifier when calling postPaymentTerminalsByIdentifierIdentifierRefresh'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling postPaymentTerminalsByIdentifierIdentifierRefresh'
+            );
+        }
+
+        
+
+        $resourcePath = '/payment/terminals/by-identifier/{identifier}/refresh';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $expand,
@@ -4619,6 +5462,394 @@ class PaymentTerminalsService
     }
 
     /**
+     * Operation postPaymentTerminalsIdRefresh
+     *
+     * Refresh a physical terminal state
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsIdRefresh'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentTerminalsIdRefresh(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsIdRefresh'][0])
+    {
+        list($response) = $this->postPaymentTerminalsIdRefreshWithHttpInfo($id, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentTerminalsIdRefreshWithHttpInfo
+     *
+     * Refresh a physical terminal state
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsIdRefresh'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \PostFinanceCheckout\Sdk\Model\PaymentTerminal|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentTerminalsIdRefreshWithHttpInfo(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsIdRefresh'][0])
+    {
+        $request = $this->postPaymentTerminalsIdRefreshRequest($id, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = 30;
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\PaymentTerminal',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postPaymentTerminalsIdRefresh'
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsIdRefresh'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postPaymentTerminalsIdRefreshRequest(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsIdRefresh'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling postPaymentTerminalsIdRefresh'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling postPaymentTerminalsIdRefresh'
+            );
+        }
+
+        
+
+        $resourcePath = '/payment/terminals/{id}/refresh';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation postPaymentTerminalsIdTriggerConfiguration
      *
      * Remotely trigger the configuration
@@ -5473,6 +6704,395 @@ class PaymentTerminalsService
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentTerminalsTriggerReversal
+     *
+     * Revert terminal transaction
+     *
+     * @param int $transaction_id transaction_id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsTriggerReversal'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \PostFinanceCheckout\Sdk\Model\TransactionVoid|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentTerminalsTriggerReversal(int $transaction_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsTriggerReversal'][0])
+    {
+        list($response) = $this->postPaymentTerminalsTriggerReversalWithHttpInfo($transaction_id, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentTerminalsTriggerReversalWithHttpInfo
+     *
+     * Revert terminal transaction
+     *
+     * @param int $transaction_id transaction_id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsTriggerReversal'] to see the possible values for this operation
+     *
+     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \PostFinanceCheckout\Sdk\Model\TransactionVoid|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentTerminalsTriggerReversalWithHttpInfo(int $transaction_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsTriggerReversal'][0])
+    {
+        $request = $this->postPaymentTerminalsTriggerReversalRequest($transaction_id, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = 90;
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\TransactionVoid',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\PostFinanceCheckout\Sdk\Model\TransactionVoid',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\TransactionVoid',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postPaymentTerminalsTriggerReversal'
+     *
+     * @param int $transaction_id transaction_id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTerminalsTriggerReversal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postPaymentTerminalsTriggerReversalRequest(int $transaction_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentTerminalsTriggerReversal'][0])
+    {
+
+        // verify the required parameter 'transaction_id' is set
+        if ($transaction_id === null || (is_array($transaction_id) && count($transaction_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $transaction_id when calling postPaymentTerminalsTriggerReversal'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling postPaymentTerminalsTriggerReversal'
+            );
+        }
+
+        
+
+        $resourcePath = '/payment/terminals/trigger-reversal';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $transaction_id,
+            'transactionId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
 
 
         $headers = $this->headerSelector->selectHeaders(

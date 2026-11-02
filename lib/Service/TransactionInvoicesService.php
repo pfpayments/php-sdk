@@ -23,7 +23,6 @@
 
 namespace PostFinanceCheckout\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\Configuration;
 use PostFinanceCheckout\Sdk\FormDataProcessor;
 use PostFinanceCheckout\Sdk\HeaderSelector;
+use PostFinanceCheckout\Sdk\CaBundleFallbackClientFactory;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
@@ -44,11 +44,11 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   wallee AG
+ * @author   PostFinance Ltd
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class TransactionInvoicesService
 {
@@ -120,7 +120,7 @@ class TransactionInvoicesService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -2495,15 +2495,16 @@ class TransactionInvoicesService
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param string|null $success_url success_url (optional)
      * @param string|null $failure_url failure_url (optional)
+     * @param int|null $ttl_in_minutes Optional TTL in minutes relative to now. Allowed range is 1 to 561600 (13 months in minutes). If omitted, 30 minutes is used. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return string|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postPaymentTransactionsInvoicesIdInstantPaymentUrl(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
+    public function postPaymentTransactionsInvoicesIdInstantPaymentUrl(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, ?int $ttl_in_minutes = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
     {
-        list($response) = $this->postPaymentTransactionsInvoicesIdInstantPaymentUrlWithHttpInfo($id, $space, $success_url, $failure_url, $contentType);
+        list($response) = $this->postPaymentTransactionsInvoicesIdInstantPaymentUrlWithHttpInfo($id, $space, $success_url, $failure_url, $ttl_in_minutes, $contentType);
         return $response;
     }
 
@@ -2516,15 +2517,16 @@ class TransactionInvoicesService
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param string|null $success_url success_url (optional)
      * @param string|null $failure_url failure_url (optional)
+     * @param int|null $ttl_in_minutes Optional TTL in minutes relative to now. Allowed range is 1 to 561600 (13 months in minutes). If omitted, 30 minutes is used. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of string|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postPaymentTransactionsInvoicesIdInstantPaymentUrlWithHttpInfo(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
+    public function postPaymentTransactionsInvoicesIdInstantPaymentUrlWithHttpInfo(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, ?int $ttl_in_minutes = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
     {
-        $request = $this->postPaymentTransactionsInvoicesIdInstantPaymentUrlRequest($id, $space, $success_url, $failure_url, $contentType);
+        $request = $this->postPaymentTransactionsInvoicesIdInstantPaymentUrlRequest($id, $space, $success_url, $failure_url, $ttl_in_minutes, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2760,12 +2762,13 @@ class TransactionInvoicesService
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param string|null $success_url success_url (optional)
      * @param string|null $failure_url failure_url (optional)
+     * @param int|null $ttl_in_minutes Optional TTL in minutes relative to now. Allowed range is 1 to 561600 (13 months in minutes). If omitted, 30 minutes is used. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postPaymentTransactionsInvoicesIdInstantPaymentUrlRequest(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
+    public function postPaymentTransactionsInvoicesIdInstantPaymentUrlRequest(int $id, int $space, ?string $success_url = null, ?string $failure_url = null, ?int $ttl_in_minutes = null, string $contentType = self::contentTypes['postPaymentTransactionsInvoicesIdInstantPaymentUrl'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -2781,6 +2784,7 @@ class TransactionInvoicesService
                 'Missing the required parameter $space when calling postPaymentTransactionsInvoicesIdInstantPaymentUrl'
             );
         }
+
 
 
 
@@ -2807,6 +2811,15 @@ class TransactionInvoicesService
             $failure_url,
             'failureUrl', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $ttl_in_minutes,
+            'ttlInMinutes', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required

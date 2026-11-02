@@ -1,0 +1,577 @@
+<?php
+/**
+ * PostFinance PHP SDK
+ *
+ * This library allows to interact with the PostFinance payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.postfinance.ch/en/private.html
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace PostFinanceCheckout\Sdk\Model;
+
+use \ArrayAccess;
+use \PostFinanceCheckout\Sdk\ObjectSerializer;
+
+/**
+ * MerchantApplicationDataDto model
+ *
+ * @category Class
+ * @package     PostFinanceCheckout\Sdk
+ * @author      PostFinance Ltd
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.2.3
+ * @implements \ArrayAccess<string, mixed>
+ */
+class MerchantApplicationDataDto implements ModelInterface, ArrayAccess, \JsonSerializable
+{
+    public const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $openAPIModelName = 'MerchantApplicationDataDto';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $openAPITypes = [
+        'related_persons' => '\PostFinanceCheckout\Sdk\Model\MerchantRelatedPersonsDto',
+        'bank_details' => '\PostFinanceCheckout\Sdk\Model\MerchantBankDetailsDto',
+        'company_details' => '\PostFinanceCheckout\Sdk\Model\MerchantCompanyDetailsDto',
+        'payment_channels' => '\PostFinanceCheckout\Sdk\Model\MerchantPaymentChannelsDto',
+        'contract_revenue' => '\PostFinanceCheckout\Sdk\Model\MerchantContractRevenueDto',
+        'ecommerce_details' => '\PostFinanceCheckout\Sdk\Model\MerchantEcommerceDetailsDto'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
+    protected static $openAPIFormats = [
+        'related_persons' => null,
+        'bank_details' => null,
+        'company_details' => null,
+        'payment_channels' => null,
+        'contract_revenue' => null,
+        'ecommerce_details' => null
+    ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'related_persons' => false,
+        'bank_details' => false,
+        'company_details' => false,
+        'payment_channels' => false,
+        'contract_revenue' => false,
+        'ecommerce_details' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes()
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats()
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'related_persons' => 'relatedPersons',
+        'bank_details' => 'bankDetails',
+        'company_details' => 'companyDetails',
+        'payment_channels' => 'paymentChannels',
+        'contract_revenue' => 'contractRevenue',
+        'ecommerce_details' => 'ecommerceDetails'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'related_persons' => 'setRelatedPersons',
+        'bank_details' => 'setBankDetails',
+        'company_details' => 'setCompanyDetails',
+        'payment_channels' => 'setPaymentChannels',
+        'contract_revenue' => 'setContractRevenue',
+        'ecommerce_details' => 'setEcommerceDetails'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'related_persons' => 'getRelatedPersons',
+        'bank_details' => 'getBankDetails',
+        'company_details' => 'getCompanyDetails',
+        'payment_channels' => 'getPaymentChannels',
+        'contract_revenue' => 'getContractRevenue',
+        'ecommerce_details' => 'getEcommerceDetails'
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$openAPIModelName;
+    }
+
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[]|null $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(?array $data = null)
+    {
+        $this->setIfExists('related_persons', $data ?? [], null);
+        $this->setIfExists('bank_details', $data ?? [], null);
+        $this->setIfExists('company_details', $data ?? [], null);
+        $this->setIfExists('payment_channels', $data ?? [], null);
+        $this->setIfExists('contract_revenue', $data ?? [], null);
+        $this->setIfExists('ecommerce_details', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        return $invalidProperties;
+    }
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
+     * Gets related_persons
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantRelatedPersonsDto|null
+     */
+    public function getRelatedPersons()
+    {
+        return $this->container['related_persons'];
+    }
+
+    /**
+     * Sets related_persons
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantRelatedPersonsDto|null $related_persons related_persons
+     *
+     * @return self
+     */
+    public function setRelatedPersons($related_persons)
+    {
+        if (is_null($related_persons)) {
+            throw new \InvalidArgumentException('non-nullable related_persons cannot be null');
+        }
+        $this->container['related_persons'] = $related_persons;
+
+        return $this;
+    }
+
+    /**
+     * Gets bank_details
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantBankDetailsDto|null
+     */
+    public function getBankDetails()
+    {
+        return $this->container['bank_details'];
+    }
+
+    /**
+     * Sets bank_details
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantBankDetailsDto|null $bank_details bank_details
+     *
+     * @return self
+     */
+    public function setBankDetails($bank_details)
+    {
+        if (is_null($bank_details)) {
+            throw new \InvalidArgumentException('non-nullable bank_details cannot be null');
+        }
+        $this->container['bank_details'] = $bank_details;
+
+        return $this;
+    }
+
+    /**
+     * Gets company_details
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantCompanyDetailsDto|null
+     */
+    public function getCompanyDetails()
+    {
+        return $this->container['company_details'];
+    }
+
+    /**
+     * Sets company_details
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantCompanyDetailsDto|null $company_details company_details
+     *
+     * @return self
+     */
+    public function setCompanyDetails($company_details)
+    {
+        if (is_null($company_details)) {
+            throw new \InvalidArgumentException('non-nullable company_details cannot be null');
+        }
+        $this->container['company_details'] = $company_details;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_channels
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantPaymentChannelsDto|null
+     */
+    public function getPaymentChannels()
+    {
+        return $this->container['payment_channels'];
+    }
+
+    /**
+     * Sets payment_channels
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantPaymentChannelsDto|null $payment_channels payment_channels
+     *
+     * @return self
+     */
+    public function setPaymentChannels($payment_channels)
+    {
+        if (is_null($payment_channels)) {
+            throw new \InvalidArgumentException('non-nullable payment_channels cannot be null');
+        }
+        $this->container['payment_channels'] = $payment_channels;
+
+        return $this;
+    }
+
+    /**
+     * Gets contract_revenue
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantContractRevenueDto|null
+     */
+    public function getContractRevenue()
+    {
+        return $this->container['contract_revenue'];
+    }
+
+    /**
+     * Sets contract_revenue
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantContractRevenueDto|null $contract_revenue contract_revenue
+     *
+     * @return self
+     */
+    public function setContractRevenue($contract_revenue)
+    {
+        if (is_null($contract_revenue)) {
+            throw new \InvalidArgumentException('non-nullable contract_revenue cannot be null');
+        }
+        $this->container['contract_revenue'] = $contract_revenue;
+
+        return $this;
+    }
+
+    /**
+     * Gets ecommerce_details
+     *
+     * @return \PostFinanceCheckout\Sdk\Model\MerchantEcommerceDetailsDto|null
+     */
+    public function getEcommerceDetails()
+    {
+        return $this->container['ecommerce_details'];
+    }
+
+    /**
+     * Sets ecommerce_details
+     *
+     * @param \PostFinanceCheckout\Sdk\Model\MerchantEcommerceDetailsDto|null $ecommerce_details ecommerce_details
+     *
+     * @return self
+     */
+    public function setEcommerceDetails($ecommerce_details)
+    {
+        if (is_null($ecommerce_details)) {
+            throw new \InvalidArgumentException('non-nullable ecommerce_details cannot be null');
+        }
+        $this->container['ecommerce_details'] = $ecommerce_details;
+
+        return $this;
+    }
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset): bool
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed|null
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
+    {
+        return $this->container[$offset] ?? null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value): void
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset): void
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
+
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue()
+    {
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+}
+
+

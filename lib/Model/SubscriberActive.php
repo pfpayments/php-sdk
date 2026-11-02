@@ -32,11 +32,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @category Class
  * @description A subscriber represents everyone who is subscribed to a product.
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class SubscriberActive implements ModelInterface, ArrayAccess, \JsonSerializable

@@ -32,11 +32,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @category Class
  * @description Payment processors serve as intermediaries that establish connections with third-party companies, known as payment service providers. These providers are responsible for managing the technical aspects of payment transactions, ensuring seamless and secure payment processing.
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class PaymentProcessor implements ModelInterface, ArrayAccess, \JsonSerializable

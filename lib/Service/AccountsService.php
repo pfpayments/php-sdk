@@ -23,7 +23,6 @@
 
 namespace PostFinanceCheckout\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\Configuration;
 use PostFinanceCheckout\Sdk\FormDataProcessor;
 use PostFinanceCheckout\Sdk\HeaderSelector;
+use PostFinanceCheckout\Sdk\CaBundleFallbackClientFactory;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
@@ -44,11 +44,11 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   wallee AG
+ * @author   PostFinance Ltd
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class AccountsService
 {
@@ -117,7 +117,7 @@ class AccountsService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -1976,7 +1976,8 @@ class AccountsService
      *
      * Create an account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AccountCreate $account_create account_create (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner account_create_with_owner (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccounts'] to see the possible values for this operation
      *
@@ -1984,9 +1985,9 @@ class AccountsService
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\Account|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postAccounts(\PostFinanceCheckout\Sdk\Model\AccountCreate $account_create, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
+    public function postAccounts(int $account, \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
     {
-        list($response) = $this->postAccountsWithHttpInfo($account_create, $expand, $contentType);
+        list($response) = $this->postAccountsWithHttpInfo($account, $account_create_with_owner, $expand, $contentType);
         return $response;
     }
 
@@ -1995,7 +1996,8 @@ class AccountsService
      *
      * Create an account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AccountCreate $account_create account_create (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner account_create_with_owner (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccounts'] to see the possible values for this operation
      *
@@ -2003,9 +2005,9 @@ class AccountsService
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\Account|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postAccountsWithHttpInfo(\PostFinanceCheckout\Sdk\Model\AccountCreate $account_create, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
+    public function postAccountsWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
     {
-        $request = $this->postAccountsRequest($account_create, $expand, $contentType);
+        $request = $this->postAccountsRequest($account, $account_create_with_owner, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2237,20 +2239,28 @@ class AccountsService
     /**
      * Create request for operation 'postAccounts'
      *
-     * @param \PostFinanceCheckout\Sdk\Model\AccountCreate $account_create account_create (required)
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner account_create_with_owner (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postAccountsRequest(\PostFinanceCheckout\Sdk\Model\AccountCreate $account_create, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
+    public function postAccountsRequest(int $account, \PostFinanceCheckout\Sdk\Model\AccountCreateWithOwner $account_create_with_owner, ?array $expand = null, string $contentType = self::contentTypes['postAccounts'][0])
     {
 
-        // verify the required parameter 'account_create' is set
-        if ($account_create === null || (is_array($account_create) && count($account_create) === 0)) {
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $account_create when calling postAccounts'
+                'Missing the required parameter $account when calling postAccounts'
+            );
+        }
+
+        // verify the required parameter 'account_create_with_owner' is set
+        if ($account_create_with_owner === null || (is_array($account_create_with_owner) && count($account_create_with_owner) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_create_with_owner when calling postAccounts'
             );
         }
 
@@ -2274,6 +2284,10 @@ class AccountsService
             false // required
         ) ?? []);
 
+        // header params
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
+        }
 
 
 
@@ -2284,12 +2298,12 @@ class AccountsService
         );
 
         // for model (json/xml)
-        if (isset($account_create)) {
+        if (isset($account_create_with_owner)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($account_create));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($account_create_with_owner));
             } else {
-                $httpBody = $account_create;
+                $httpBody = $account_create_with_owner;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

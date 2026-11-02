@@ -23,7 +23,6 @@
 
 namespace PostFinanceCheckout\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\Configuration;
 use PostFinanceCheckout\Sdk\FormDataProcessor;
 use PostFinanceCheckout\Sdk\HeaderSelector;
+use PostFinanceCheckout\Sdk\CaBundleFallbackClientFactory;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
@@ -44,11 +44,11 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   wallee AG
+ * @author   PostFinance Ltd
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class JoinAdminPartnerConfigurationService
 {
@@ -79,16 +79,16 @@ class JoinAdminPartnerConfigurationService
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'deleteAdminJoinProgramPartnersConfigurationsId' => [
+        'deleteScopeJoinProgramPartnersConfigurationsId' => [
             'application/json',
         ],
-        'getAdminJoinProgramPartnersConfigurationsId' => [
+        'getScopeJoinProgramPartnersConfigurationsId' => [
             'application/json',
         ],
-        'patchAdminJoinProgramPartnersConfigurationsId' => [
+        'patchScopeJoinProgramPartnersConfigurationsPartnerAccountId' => [
             'application/json',
         ],
-        'postAdminJoinProgramPartnersConfigurations' => [
+        'postScopeJoinProgramPartnersConfigurations' => [
             'application/json',
         ],
     ];
@@ -105,7 +105,7 @@ class JoinAdminPartnerConfigurationService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -151,37 +151,37 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Operation deleteAdminJoinProgramPartnersConfigurationsId
+     * Operation deleteScopeJoinProgramPartnersConfigurationsId
      *
      * Delete a join admin partner configuration
      *
      * @param int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteAdminJoinProgramPartnersConfigurationsId(int $id, string $contentType = self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'][0])
+    public function deleteScopeJoinProgramPartnersConfigurationsId(int $id, string $contentType = self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'][0])
     {
-        $this->deleteAdminJoinProgramPartnersConfigurationsIdWithHttpInfo($id, $contentType);
+        $this->deleteScopeJoinProgramPartnersConfigurationsIdWithHttpInfo($id, $contentType);
     }
 
     /**
-     * Operation deleteAdminJoinProgramPartnersConfigurationsIdWithHttpInfo
+     * Operation deleteScopeJoinProgramPartnersConfigurationsIdWithHttpInfo
      *
      * Delete a join admin partner configuration
      *
      * @param int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteAdminJoinProgramPartnersConfigurationsIdWithHttpInfo(int $id, string $contentType = self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'][0])
+    public function deleteScopeJoinProgramPartnersConfigurationsIdWithHttpInfo(int $id, string $contentType = self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'][0])
     {
-        $request = $this->deleteAdminJoinProgramPartnersConfigurationsIdRequest($id, $contentType);
+        $request = $this->deleteScopeJoinProgramPartnersConfigurationsIdRequest($id, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -300,26 +300,26 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Create request for operation 'deleteAdminJoinProgramPartnersConfigurationsId'
+     * Create request for operation 'deleteScopeJoinProgramPartnersConfigurationsId'
      *
      * @param int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteAdminJoinProgramPartnersConfigurationsIdRequest(int $id, string $contentType = self::contentTypes['deleteAdminJoinProgramPartnersConfigurationsId'][0])
+    public function deleteScopeJoinProgramPartnersConfigurationsIdRequest(int $id, string $contentType = self::contentTypes['deleteScopeJoinProgramPartnersConfigurationsId'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling deleteAdminJoinProgramPartnersConfigurationsId'
+                'Missing the required parameter $id when calling deleteScopeJoinProgramPartnersConfigurationsId'
             );
         }
 
 
-        $resourcePath = '/admin/join-program/partners/configurations/{id}';
+        $resourcePath = '/scope/join-program/partners/configurations/{id}';
         $httpMethod = 'DELETE';
         $formParams = [];
         $queryParams = [];
@@ -400,40 +400,40 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Operation getAdminJoinProgramPartnersConfigurationsId
+     * Operation getScopeJoinProgramPartnersConfigurationsId
      *
      * Retrieve a join admin partner configuration
      *
      * @param int $id id (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function getAdminJoinProgramPartnersConfigurationsId(int $id, ?array $expand = null, string $contentType = self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'][0])
+    public function getScopeJoinProgramPartnersConfigurationsId(int $id, ?array $expand = null, string $contentType = self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'][0])
     {
-        list($response) = $this->getAdminJoinProgramPartnersConfigurationsIdWithHttpInfo($id, $expand, $contentType);
+        list($response) = $this->getScopeJoinProgramPartnersConfigurationsIdWithHttpInfo($id, $expand, $contentType);
         return $response;
     }
 
     /**
-     * Operation getAdminJoinProgramPartnersConfigurationsIdWithHttpInfo
+     * Operation getScopeJoinProgramPartnersConfigurationsIdWithHttpInfo
      *
      * Retrieve a join admin partner configuration
      *
      * @param int $id id (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAdminJoinProgramPartnersConfigurationsIdWithHttpInfo(int $id, ?array $expand = null, string $contentType = self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'][0])
+    public function getScopeJoinProgramPartnersConfigurationsIdWithHttpInfo(int $id, ?array $expand = null, string $contentType = self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'][0])
     {
-        $request = $this->getAdminJoinProgramPartnersConfigurationsIdRequest($id, $expand, $contentType);
+        $request = $this->getScopeJoinProgramPartnersConfigurationsIdRequest($id, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -649,28 +649,28 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Create request for operation 'getAdminJoinProgramPartnersConfigurationsId'
+     * Create request for operation 'getScopeJoinProgramPartnersConfigurationsId'
      *
      * @param int $id id (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAdminJoinProgramPartnersConfigurationsIdRequest(int $id, ?array $expand = null, string $contentType = self::contentTypes['getAdminJoinProgramPartnersConfigurationsId'][0])
+    public function getScopeJoinProgramPartnersConfigurationsIdRequest(int $id, ?array $expand = null, string $contentType = self::contentTypes['getScopeJoinProgramPartnersConfigurationsId'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getAdminJoinProgramPartnersConfigurationsId'
+                'Missing the required parameter $id when calling getScopeJoinProgramPartnersConfigurationsId'
             );
         }
 
         
 
-        $resourcePath = '/admin/join-program/partners/configurations/{id}';
+        $resourcePath = '/scope/join-program/partners/configurations/{id}';
         $httpMethod = 'GET';
         $formParams = [];
         $queryParams = [];
@@ -760,42 +760,42 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Operation patchAdminJoinProgramPartnersConfigurationsId
+     * Operation patchScopeJoinProgramPartnersConfigurationsPartnerAccountId
      *
      * Update a join admin partner configuration
      *
-     * @param int $id id (required)
+     * @param int $partner_account_id partner_account_id (required)
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function patchAdminJoinProgramPartnersConfigurationsId(int $id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'][0])
+    public function patchScopeJoinProgramPartnersConfigurationsPartnerAccountId(int $partner_account_id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'][0])
     {
-        list($response) = $this->patchAdminJoinProgramPartnersConfigurationsIdWithHttpInfo($id, $walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
+        list($response) = $this->patchScopeJoinProgramPartnersConfigurationsPartnerAccountIdWithHttpInfo($partner_account_id, $walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
         return $response;
     }
 
     /**
-     * Operation patchAdminJoinProgramPartnersConfigurationsIdWithHttpInfo
+     * Operation patchScopeJoinProgramPartnersConfigurationsPartnerAccountIdWithHttpInfo
      *
      * Update a join admin partner configuration
      *
-     * @param int $id id (required)
+     * @param int $partner_account_id partner_account_id (required)
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function patchAdminJoinProgramPartnersConfigurationsIdWithHttpInfo(int $id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'][0])
+    public function patchScopeJoinProgramPartnersConfigurationsPartnerAccountIdWithHttpInfo(int $partner_account_id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'][0])
     {
-        $request = $this->patchAdminJoinProgramPartnersConfigurationsIdRequest($id, $walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
+        $request = $this->patchScopeJoinProgramPartnersConfigurationsPartnerAccountIdRequest($partner_account_id, $walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -1025,36 +1025,36 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Create request for operation 'patchAdminJoinProgramPartnersConfigurationsId'
+     * Create request for operation 'patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'
      *
-     * @param int $id id (required)
+     * @param int $partner_account_id partner_account_id (required)
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function patchAdminJoinProgramPartnersConfigurationsIdRequest(int $id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchAdminJoinProgramPartnersConfigurationsId'][0])
+    public function patchScopeJoinProgramPartnersConfigurationsPartnerAccountIdRequest(int $partner_account_id, \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'][0])
     {
 
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
+        // verify the required parameter 'partner_account_id' is set
+        if ($partner_account_id === null || (is_array($partner_account_id) && count($partner_account_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling patchAdminJoinProgramPartnersConfigurationsId'
+                'Missing the required parameter $partner_account_id when calling patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'
             );
         }
 
         // verify the required parameter 'walleejoin_admin_partner_configuration_request_dto' is set
         if ($walleejoin_admin_partner_configuration_request_dto === null || (is_array($walleejoin_admin_partner_configuration_request_dto) && count($walleejoin_admin_partner_configuration_request_dto) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $walleejoin_admin_partner_configuration_request_dto when calling patchAdminJoinProgramPartnersConfigurationsId'
+                'Missing the required parameter $walleejoin_admin_partner_configuration_request_dto when calling patchScopeJoinProgramPartnersConfigurationsPartnerAccountId'
             );
         }
 
         
 
-        $resourcePath = '/admin/join-program/partners/configurations/{id}';
+        $resourcePath = '/scope/join-program/partners/configurations/{partnerAccountId}';
         $httpMethod = 'PATCH';
         $formParams = [];
         $queryParams = [];
@@ -1074,10 +1074,10 @@ class JoinAdminPartnerConfigurationService
 
 
         // path params
-        if ($id !== null) {
+        if ($partner_account_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
+                '{' . 'partnerAccountId' . '}',
+                ObjectSerializer::toPathValue($partner_account_id),
                 $resourcePath
             );
         }
@@ -1151,40 +1151,40 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Operation postAdminJoinProgramPartnersConfigurations
+     * Operation postScopeJoinProgramPartnersConfigurations
      *
      * Create a join admin partner configuration
      *
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAdminJoinProgramPartnersConfigurations'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postScopeJoinProgramPartnersConfigurations'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postAdminJoinProgramPartnersConfigurations(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postAdminJoinProgramPartnersConfigurations'][0])
+    public function postScopeJoinProgramPartnersConfigurations(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postScopeJoinProgramPartnersConfigurations'][0])
     {
-        list($response) = $this->postAdminJoinProgramPartnersConfigurationsWithHttpInfo($walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
+        list($response) = $this->postScopeJoinProgramPartnersConfigurationsWithHttpInfo($walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
         return $response;
     }
 
     /**
-     * Operation postAdminJoinProgramPartnersConfigurationsWithHttpInfo
+     * Operation postScopeJoinProgramPartnersConfigurationsWithHttpInfo
      *
      * Create a join admin partner configuration
      *
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAdminJoinProgramPartnersConfigurations'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postScopeJoinProgramPartnersConfigurations'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postAdminJoinProgramPartnersConfigurationsWithHttpInfo(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postAdminJoinProgramPartnersConfigurations'][0])
+    public function postScopeJoinProgramPartnersConfigurationsWithHttpInfo(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postScopeJoinProgramPartnersConfigurations'][0])
     {
-        $request = $this->postAdminJoinProgramPartnersConfigurationsRequest($walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
+        $request = $this->postScopeJoinProgramPartnersConfigurationsRequest($walleejoin_admin_partner_configuration_request_dto, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -1414,28 +1414,28 @@ class JoinAdminPartnerConfigurationService
     }
 
     /**
-     * Create request for operation 'postAdminJoinProgramPartnersConfigurations'
+     * Create request for operation 'postScopeJoinProgramPartnersConfigurations'
      *
      * @param \PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto walleejoin_admin_partner_configuration_request_dto (required)
      * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postAdminJoinProgramPartnersConfigurations'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postScopeJoinProgramPartnersConfigurations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postAdminJoinProgramPartnersConfigurationsRequest(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postAdminJoinProgramPartnersConfigurations'][0])
+    public function postScopeJoinProgramPartnersConfigurationsRequest(\PostFinanceCheckout\Sdk\Model\WalleejoinAdminPartnerConfigurationRequestDto $walleejoin_admin_partner_configuration_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postScopeJoinProgramPartnersConfigurations'][0])
     {
 
         // verify the required parameter 'walleejoin_admin_partner_configuration_request_dto' is set
         if ($walleejoin_admin_partner_configuration_request_dto === null || (is_array($walleejoin_admin_partner_configuration_request_dto) && count($walleejoin_admin_partner_configuration_request_dto) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $walleejoin_admin_partner_configuration_request_dto when calling postAdminJoinProgramPartnersConfigurations'
+                'Missing the required parameter $walleejoin_admin_partner_configuration_request_dto when calling postScopeJoinProgramPartnersConfigurations'
             );
         }
 
         
 
-        $resourcePath = '/admin/join-program/partners/configurations';
+        $resourcePath = '/scope/join-program/partners/configurations';
         $httpMethod = 'POST';
         $formParams = [];
         $queryParams = [];

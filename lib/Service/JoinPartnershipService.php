@@ -23,7 +23,6 @@
 
 namespace PostFinanceCheckout\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use PostFinanceCheckout\Sdk\ApiException;
 use PostFinanceCheckout\Sdk\Configuration;
 use PostFinanceCheckout\Sdk\FormDataProcessor;
 use PostFinanceCheckout\Sdk\HeaderSelector;
+use PostFinanceCheckout\Sdk\CaBundleFallbackClientFactory;
 use PostFinanceCheckout\Sdk\ObjectSerializer;
 use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
 
@@ -44,11 +44,11 @@ use PostFinanceCheckout\Sdk\Auth\HttpBearerAuth;
  *
  * @category Class
  * @package  PostFinanceCheckout\Sdk
- * @author   wallee AG
+ * @author   PostFinance Ltd
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class JoinPartnershipService
 {
@@ -91,9 +91,6 @@ class JoinPartnershipService
         'getJoinProgramPartnershipsSearch' => [
             'application/json',
         ],
-        'patchJoinProgramPartnershipsId' => [
-            'application/json',
-        ],
         'postJoinProgramPartnershipsCreateAffiliate' => [
             'application/json',
         ],
@@ -117,7 +114,7 @@ class JoinPartnershipService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -440,7 +437,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
     public function getJoinProgramPartnerships(int $account, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getJoinProgramPartnerships'][0])
     {
@@ -463,7 +460,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoListResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getJoinProgramPartnershipsWithHttpInfo(int $account, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getJoinProgramPartnerships'][0])
     {
@@ -496,7 +493,7 @@ class JoinPartnershipService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipListResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoListResponse',
                         $request,
                         $response,
                     );
@@ -579,7 +576,7 @@ class JoinPartnershipService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipListResponse',
+                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoListResponse',
                 $request,
                 $response,
             );
@@ -588,7 +585,7 @@ class JoinPartnershipService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipListResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoListResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -857,7 +854,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
     public function getJoinProgramPartnershipsId(int $id, int $account, ?array $expand = null, string $contentType = self::contentTypes['getJoinProgramPartnershipsId'][0])
     {
@@ -877,7 +874,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getJoinProgramPartnershipsIdWithHttpInfo(int $id, int $account, ?array $expand = null, string $contentType = self::contentTypes['getJoinProgramPartnershipsId'][0])
     {
@@ -910,7 +907,7 @@ class JoinPartnershipService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $request,
                         $response,
                     );
@@ -993,7 +990,7 @@ class JoinPartnershipService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                 $request,
                 $response,
             );
@@ -1002,7 +999,7 @@ class JoinPartnershipService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1234,7 +1231,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
     public function getJoinProgramPartnershipsSearch(int $account, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getJoinProgramPartnershipsSearch'][0])
     {
@@ -1257,7 +1254,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoSearchResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getJoinProgramPartnershipsSearchWithHttpInfo(int $account, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getJoinProgramPartnershipsSearch'][0])
     {
@@ -1290,7 +1287,7 @@ class JoinPartnershipService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipSearchResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoSearchResponse',
                         $request,
                         $response,
                     );
@@ -1373,7 +1370,7 @@ class JoinPartnershipService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipSearchResponse',
+                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoSearchResponse',
                 $request,
                 $response,
             );
@@ -1382,7 +1379,7 @@ class JoinPartnershipService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleeJoinPartnershipSearchResponse',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDtoSearchResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1637,426 +1634,21 @@ class JoinPartnershipService
     }
 
     /**
-     * Operation patchJoinProgramPartnershipsId
-     *
-     * Update a join partnership
-     *
-     * @param int $id id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership walleejoin_partnership (required)
-     * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchJoinProgramPartnershipsId'] to see the possible values for this operation
-     *
-     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
-     */
-    public function patchJoinProgramPartnershipsId(int $id, int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership, ?array $expand = null, string $contentType = self::contentTypes['patchJoinProgramPartnershipsId'][0])
-    {
-        list($response) = $this->patchJoinProgramPartnershipsIdWithHttpInfo($id, $account, $walleejoin_partnership, $expand, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation patchJoinProgramPartnershipsIdWithHttpInfo
-     *
-     * Update a join partnership
-     *
-     * @param int $id id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership walleejoin_partnership (required)
-     * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchJoinProgramPartnershipsId'] to see the possible values for this operation
-     *
-     * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function patchJoinProgramPartnershipsIdWithHttpInfo(int $id, int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership, ?array $expand = null, string $contentType = self::contentTypes['patchJoinProgramPartnershipsId'][0])
-    {
-        $request = $this->patchJoinProgramPartnershipsIdRequest($id, $account, $walleejoin_partnership, $expand, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'patchJoinProgramPartnershipsId'
-     *
-     * @param int $id id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership walleejoin_partnership (required)
-     * @param string[]|null $expand expand (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchJoinProgramPartnershipsId'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function patchJoinProgramPartnershipsIdRequest(int $id, int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership $walleejoin_partnership, ?array $expand = null, string $contentType = self::contentTypes['patchJoinProgramPartnershipsId'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling patchJoinProgramPartnershipsId'
-            );
-        }
-
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling patchJoinProgramPartnershipsId'
-            );
-        }
-
-        // verify the required parameter 'walleejoin_partnership' is set
-        if ($walleejoin_partnership === null || (is_array($walleejoin_partnership) && count($walleejoin_partnership) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $walleejoin_partnership when calling patchJoinProgramPartnershipsId'
-            );
-        }
-
-        
-
-        $resourcePath = '/join-program/partnerships/{id}';
-        $httpMethod = 'PATCH';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $expand,
-            'expand', // param base name
-            'array', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-        // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
-        }
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($walleejoin_partnership)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($walleejoin_partnership));
-            } else {
-                $httpBody = $walleejoin_partnership;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation postJoinProgramPartnershipsCreateAffiliate
      *
      * Create a join account partnership
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postJoinProgramPartnershipsCreateAffiliate(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
+    public function postJoinProgramPartnershipsCreateAffiliate(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
     {
-        list($response) = $this->postJoinProgramPartnershipsCreateAffiliateWithHttpInfo($account, $walleejoin_create_partnership_request_dto, $contentType);
+        list($response) = $this->postJoinProgramPartnershipsCreateAffiliateWithHttpInfo($account, $walleejoin_create_partnership_api_request_dto, $contentType);
         return $response;
     }
 
@@ -2066,16 +1658,16 @@ class JoinPartnershipService
      * Create a join account partnership
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postJoinProgramPartnershipsCreateAffiliateWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
+    public function postJoinProgramPartnershipsCreateAffiliateWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
     {
-        $request = $this->postJoinProgramPartnershipsCreateAffiliateRequest($account, $walleejoin_create_partnership_request_dto, $contentType);
+        $request = $this->postJoinProgramPartnershipsCreateAffiliateRequest($account, $walleejoin_create_partnership_api_request_dto, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2308,13 +1900,13 @@ class JoinPartnershipService
      * Create request for operation 'postJoinProgramPartnershipsCreateAffiliate'
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postJoinProgramPartnershipsCreateAffiliateRequest(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
+    public function postJoinProgramPartnershipsCreateAffiliateRequest(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateAffiliate'][0])
     {
 
         // verify the required parameter 'account' is set
@@ -2324,10 +1916,10 @@ class JoinPartnershipService
             );
         }
 
-        // verify the required parameter 'walleejoin_create_partnership_request_dto' is set
-        if ($walleejoin_create_partnership_request_dto === null || (is_array($walleejoin_create_partnership_request_dto) && count($walleejoin_create_partnership_request_dto) === 0)) {
+        // verify the required parameter 'walleejoin_create_partnership_api_request_dto' is set
+        if ($walleejoin_create_partnership_api_request_dto === null || (is_array($walleejoin_create_partnership_api_request_dto) && count($walleejoin_create_partnership_api_request_dto) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $walleejoin_create_partnership_request_dto when calling postJoinProgramPartnershipsCreateAffiliate'
+                'Missing the required parameter $walleejoin_create_partnership_api_request_dto when calling postJoinProgramPartnershipsCreateAffiliate'
             );
         }
 
@@ -2355,12 +1947,12 @@ class JoinPartnershipService
         );
 
         // for model (json/xml)
-        if (isset($walleejoin_create_partnership_request_dto)) {
+        if (isset($walleejoin_create_partnership_api_request_dto)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($walleejoin_create_partnership_request_dto));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($walleejoin_create_partnership_api_request_dto));
             } else {
-                $httpBody = $walleejoin_create_partnership_request_dto;
+                $httpBody = $walleejoin_create_partnership_api_request_dto;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2421,16 +2013,17 @@ class JoinPartnershipService
      * Create a join platform partnership
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateIsv'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
-    public function postJoinProgramPartnershipsCreateIsv(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
+    public function postJoinProgramPartnershipsCreateIsv(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
     {
-        list($response) = $this->postJoinProgramPartnershipsCreateIsvWithHttpInfo($account, $walleejoin_create_partnership_request_dto, $contentType);
+        list($response) = $this->postJoinProgramPartnershipsCreateIsvWithHttpInfo($account, $walleejoin_create_partnership_api_request_dto, $expand, $contentType);
         return $response;
     }
 
@@ -2440,16 +2033,17 @@ class JoinPartnershipService
      * Create a join platform partnership
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateIsv'] to see the possible values for this operation
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postJoinProgramPartnershipsCreateIsvWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
+    public function postJoinProgramPartnershipsCreateIsvWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
     {
-        $request = $this->postJoinProgramPartnershipsCreateIsvRequest($account, $walleejoin_create_partnership_request_dto, $contentType);
+        $request = $this->postJoinProgramPartnershipsCreateIsvRequest($account, $walleejoin_create_partnership_api_request_dto, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2478,7 +2072,7 @@ class JoinPartnershipService
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $request,
                         $response,
                     );
@@ -2567,7 +2161,7 @@ class JoinPartnershipService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                 $request,
                 $response,
             );
@@ -2576,7 +2170,7 @@ class JoinPartnershipService
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2682,13 +2276,14 @@ class JoinPartnershipService
      * Create request for operation 'postJoinProgramPartnershipsCreateIsv'
      *
      * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto walleejoin_create_partnership_request_dto (required)
+     * @param \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto walleejoin_create_partnership_api_request_dto (required)
+     * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postJoinProgramPartnershipsCreateIsv'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postJoinProgramPartnershipsCreateIsvRequest(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipRequestDto $walleejoin_create_partnership_request_dto, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
+    public function postJoinProgramPartnershipsCreateIsvRequest(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinCreatePartnershipApiRequestDto $walleejoin_create_partnership_api_request_dto, ?array $expand = null, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateIsv'][0])
     {
 
         // verify the required parameter 'account' is set
@@ -2698,13 +2293,14 @@ class JoinPartnershipService
             );
         }
 
-        // verify the required parameter 'walleejoin_create_partnership_request_dto' is set
-        if ($walleejoin_create_partnership_request_dto === null || (is_array($walleejoin_create_partnership_request_dto) && count($walleejoin_create_partnership_request_dto) === 0)) {
+        // verify the required parameter 'walleejoin_create_partnership_api_request_dto' is set
+        if ($walleejoin_create_partnership_api_request_dto === null || (is_array($walleejoin_create_partnership_api_request_dto) && count($walleejoin_create_partnership_api_request_dto) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $walleejoin_create_partnership_request_dto when calling postJoinProgramPartnershipsCreateIsv'
+                'Missing the required parameter $walleejoin_create_partnership_api_request_dto when calling postJoinProgramPartnershipsCreateIsv'
             );
         }
 
+        
 
         $resourcePath = '/join-program/partnerships/create-isv';
         $httpMethod = 'POST';
@@ -2714,6 +2310,15 @@ class JoinPartnershipService
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
         // header params
         if ($account !== null) {
@@ -2729,12 +2334,12 @@ class JoinPartnershipService
         );
 
         // for model (json/xml)
-        if (isset($walleejoin_create_partnership_request_dto)) {
+        if (isset($walleejoin_create_partnership_api_request_dto)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($walleejoin_create_partnership_request_dto));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($walleejoin_create_partnership_api_request_dto));
             } else {
-                $httpBody = $walleejoin_create_partnership_request_dto;
+                $httpBody = $walleejoin_create_partnership_api_request_dto;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -2801,7 +2406,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
+     * @return \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse
      */
     public function postJoinProgramPartnershipsCreateSimple(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipCreate $walleejoin_partnership_create, ?array $expand = null, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateSimple'][0])
     {
@@ -2821,7 +2426,7 @@ class JoinPartnershipService
      *
      * @throws \PostFinanceCheckout\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnership|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse|\PostFinanceCheckout\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function postJoinProgramPartnershipsCreateSimpleWithHttpInfo(int $account, \PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipCreate $walleejoin_partnership_create, ?array $expand = null, string $contentType = self::contentTypes['postJoinProgramPartnershipsCreateSimple'][0])
     {
@@ -2854,7 +2459,7 @@ class JoinPartnershipService
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $request,
                         $response,
                     );
@@ -2943,7 +2548,7 @@ class JoinPartnershipService
             }
 
             return $this->handleResponseWithDataType(
-                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                 $request,
                 $response,
             );
@@ -2952,7 +2557,7 @@ class JoinPartnershipService
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnership',
+                        '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipResponseDto',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -32,11 +32,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @category Class
  * @description The product component reference links components from different product versions, which makes it possible to carry out migrations.
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class SubscriptionProductComponentReference implements ModelInterface, ArrayAccess, \JsonSerializable

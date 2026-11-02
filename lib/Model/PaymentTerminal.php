@@ -31,11 +31,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -70,6 +70,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => '\DateTime',
         'default_currency' => 'string',
         'name' => 'string',
+        'activation_code' => 'string',
         'id' => 'int',
         'state' => '\PostFinanceCheckout\Sdk\Model\PaymentTerminalState'
     ];
@@ -97,6 +98,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => 'date-time',
         'default_currency' => null,
         'name' => null,
+        'activation_code' => null,
         'id' => 'int64',
         'state' => null
     ];
@@ -122,6 +124,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => false,
         'default_currency' => false,
         'name' => false,
+        'activation_code' => false,
         'id' => false,
         'state' => false
     ];
@@ -227,6 +230,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => 'decommissionedOn',
         'default_currency' => 'defaultCurrency',
         'name' => 'name',
+        'activation_code' => 'activationCode',
         'id' => 'id',
         'state' => 'state'
     ];
@@ -252,6 +256,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => 'setDecommissionedOn',
         'default_currency' => 'setDefaultCurrency',
         'name' => 'setName',
+        'activation_code' => 'setActivationCode',
         'id' => 'setId',
         'state' => 'setState'
     ];
@@ -277,6 +282,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         'decommissioned_on' => 'getDecommissionedOn',
         'default_currency' => 'getDefaultCurrency',
         'name' => 'getName',
+        'activation_code' => 'getActivationCode',
         'id' => 'getId',
         'state' => 'getState'
     ];
@@ -353,6 +359,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('decommissioned_on', $data ?? [], null);
         $this->setIfExists('default_currency', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('activation_code', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
     }
@@ -808,6 +815,33 @@ class PaymentTerminal implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets activation_code
+     *
+     * @return string|null
+     */
+    public function getActivationCode()
+    {
+        return $this->container['activation_code'];
+    }
+
+    /**
+     * Sets activation_code
+     *
+     * @param string|null $activation_code activation_code
+     *
+     * @return self
+     */
+    public function setActivationCode($activation_code)
+    {
+        if (is_null($activation_code)) {
+            throw new \InvalidArgumentException('non-nullable activation_code cannot be null');
+        }
+        $this->container['activation_code'] = $activation_code;
 
         return $this;
     }

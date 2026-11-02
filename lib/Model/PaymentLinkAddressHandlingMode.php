@@ -30,11 +30,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @category Class
  * @description The address handling mode controls if the address is required and how it is enforced to be provided.
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  */
 class PaymentLinkAddressHandlingMode
 {

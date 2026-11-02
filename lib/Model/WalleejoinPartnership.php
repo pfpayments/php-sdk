@@ -31,11 +31,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -55,8 +55,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
+        'terminated_on' => '\DateTime',
         'pricing_profile_sell_rate' => 'object',
+        'activated_on' => '\DateTime',
         'merchant_account' => 'int',
+        'invitation_email_address' => 'string',
         'partnership_type' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipType',
         'state' => '\PostFinanceCheckout\Sdk\Model\WalleejoinPartnershipState',
         'version' => 'int',
@@ -72,8 +75,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'terminated_on' => 'date-time',
         'pricing_profile_sell_rate' => null,
+        'activated_on' => 'date-time',
         'merchant_account' => 'int64',
+        'invitation_email_address' => null,
         'partnership_type' => null,
         'state' => null,
         'version' => 'int32',
@@ -87,8 +93,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'terminated_on' => false,
         'pricing_profile_sell_rate' => false,
+        'activated_on' => false,
         'merchant_account' => false,
+        'invitation_email_address' => false,
         'partnership_type' => false,
         'state' => false,
         'version' => false,
@@ -182,8 +191,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
+        'terminated_on' => 'terminatedOn',
         'pricing_profile_sell_rate' => 'pricingProfileSellRate',
+        'activated_on' => 'activatedOn',
         'merchant_account' => 'merchantAccount',
+        'invitation_email_address' => 'invitationEmailAddress',
         'partnership_type' => 'partnershipType',
         'state' => 'state',
         'version' => 'version',
@@ -197,8 +209,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
+        'terminated_on' => 'setTerminatedOn',
         'pricing_profile_sell_rate' => 'setPricingProfileSellRate',
+        'activated_on' => 'setActivatedOn',
         'merchant_account' => 'setMerchantAccount',
+        'invitation_email_address' => 'setInvitationEmailAddress',
         'partnership_type' => 'setPartnershipType',
         'state' => 'setState',
         'version' => 'setVersion',
@@ -212,8 +227,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
+        'terminated_on' => 'getTerminatedOn',
         'pricing_profile_sell_rate' => 'getPricingProfileSellRate',
+        'activated_on' => 'getActivatedOn',
         'merchant_account' => 'getMerchantAccount',
+        'invitation_email_address' => 'getInvitationEmailAddress',
         'partnership_type' => 'getPartnershipType',
         'state' => 'getState',
         'version' => 'getVersion',
@@ -278,8 +296,11 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('terminated_on', $data ?? [], null);
         $this->setIfExists('pricing_profile_sell_rate', $data ?? [], null);
+        $this->setIfExists('activated_on', $data ?? [], null);
         $this->setIfExists('merchant_account', $data ?? [], null);
+        $this->setIfExists('invitation_email_address', $data ?? [], null);
         $this->setIfExists('partnership_type', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
@@ -333,6 +354,33 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
+     * Gets terminated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getTerminatedOn()
+    {
+        return $this->container['terminated_on'];
+    }
+
+    /**
+     * Sets terminated_on
+     *
+     * @param \DateTime|null $terminated_on The date and time when the partnership was terminated.
+     *
+     * @return self
+     */
+    public function setTerminatedOn($terminated_on)
+    {
+        if (is_null($terminated_on)) {
+            throw new \InvalidArgumentException('non-nullable terminated_on cannot be null');
+        }
+        $this->container['terminated_on'] = $terminated_on;
+
+        return $this;
+    }
+
+    /**
      * Gets pricing_profile_sell_rate
      *
      * @return object|null
@@ -360,6 +408,33 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
+     * Gets activated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getActivatedOn()
+    {
+        return $this->container['activated_on'];
+    }
+
+    /**
+     * Sets activated_on
+     *
+     * @param \DateTime|null $activated_on The date and time when the partnership was activated.
+     *
+     * @return self
+     */
+    public function setActivatedOn($activated_on)
+    {
+        if (is_null($activated_on)) {
+            throw new \InvalidArgumentException('non-nullable activated_on cannot be null');
+        }
+        $this->container['activated_on'] = $activated_on;
+
+        return $this;
+    }
+
+    /**
      * Gets merchant_account
      *
      * @return int|null
@@ -382,6 +457,33 @@ class WalleejoinPartnership implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable merchant_account cannot be null');
         }
         $this->container['merchant_account'] = $merchant_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets invitation_email_address
+     *
+     * @return string|null
+     */
+    public function getInvitationEmailAddress()
+    {
+        return $this->container['invitation_email_address'];
+    }
+
+    /**
+     * Sets invitation_email_address
+     *
+     * @param string|null $invitation_email_address The email address the merchant was invited with.
+     *
+     * @return self
+     */
+    public function setInvitationEmailAddress($invitation_email_address)
+    {
+        if (is_null($invitation_email_address)) {
+            throw new \InvalidArgumentException('non-nullable invitation_email_address cannot be null');
+        }
+        $this->container['invitation_email_address'] = $invitation_email_address;
 
         return $this;
     }

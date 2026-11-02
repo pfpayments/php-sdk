@@ -31,11 +31,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -61,6 +61,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => 'string',
         'primary_account_number' => 'string',
         'recurring_indicator' => '\PostFinanceCheckout\Sdk\Model\RecurringIndicator',
+        'transaction_link_identifier' => 'string',
         'scheme_transaction_reference' => 'string',
         'token_requestor_id' => 'string',
         'cryptogram' => '\PostFinanceCheckout\Sdk\Model\CardCryptogramCreate'
@@ -80,6 +81,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => null,
         'primary_account_number' => null,
         'recurring_indicator' => null,
+        'transaction_link_identifier' => null,
         'scheme_transaction_reference' => null,
         'token_requestor_id' => null,
         'cryptogram' => null
@@ -97,6 +99,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => false,
         'primary_account_number' => false,
         'recurring_indicator' => false,
+        'transaction_link_identifier' => false,
         'scheme_transaction_reference' => false,
         'token_requestor_id' => false,
         'cryptogram' => false
@@ -194,6 +197,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => 'cardVerificationCode',
         'primary_account_number' => 'primaryAccountNumber',
         'recurring_indicator' => 'recurringIndicator',
+        'transaction_link_identifier' => 'transactionLinkIdentifier',
         'scheme_transaction_reference' => 'schemeTransactionReference',
         'token_requestor_id' => 'tokenRequestorId',
         'cryptogram' => 'cryptogram'
@@ -211,6 +215,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => 'setCardVerificationCode',
         'primary_account_number' => 'setPrimaryAccountNumber',
         'recurring_indicator' => 'setRecurringIndicator',
+        'transaction_link_identifier' => 'setTransactionLinkIdentifier',
         'scheme_transaction_reference' => 'setSchemeTransactionReference',
         'token_requestor_id' => 'setTokenRequestorId',
         'cryptogram' => 'setCryptogram'
@@ -228,6 +233,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         'card_verification_code' => 'getCardVerificationCode',
         'primary_account_number' => 'getPrimaryAccountNumber',
         'recurring_indicator' => 'getRecurringIndicator',
+        'transaction_link_identifier' => 'getTransactionLinkIdentifier',
         'scheme_transaction_reference' => 'getSchemeTransactionReference',
         'token_requestor_id' => 'getTokenRequestorId',
         'cryptogram' => 'getCryptogram'
@@ -296,6 +302,7 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('card_verification_code', $data ?? [], null);
         $this->setIfExists('primary_account_number', $data ?? [], null);
         $this->setIfExists('recurring_indicator', $data ?? [], null);
+        $this->setIfExists('transaction_link_identifier', $data ?? [], null);
         $this->setIfExists('scheme_transaction_reference', $data ?? [], null);
         $this->setIfExists('token_requestor_id', $data ?? [], null);
         $this->setIfExists('cryptogram', $data ?? [], null);
@@ -361,6 +368,10 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
 
         if (!preg_match("/([0-9 ]+)/", $this->container['primary_account_number'])) {
             $invalidProperties[] = "invalid value for 'primary_account_number', must be conform to the pattern /([0-9 ]+)/.";
+        }
+
+        if (!is_null($this->container['transaction_link_identifier']) && (mb_strlen($this->container['transaction_link_identifier']) > 100)) {
+            $invalidProperties[] = "invalid value for 'transaction_link_identifier', the character length must be smaller than or equal to 100.";
         }
 
         if (!is_null($this->container['scheme_transaction_reference']) && (mb_strlen($this->container['scheme_transaction_reference']) > 100)) {
@@ -569,6 +580,37 @@ class TokenizedCardDataCreate implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable recurring_indicator cannot be null');
         }
         $this->container['recurring_indicator'] = $recurring_indicator;
+
+        return $this;
+    }
+
+    /**
+     * Gets transaction_link_identifier
+     *
+     * @return string|null
+     */
+    public function getTransactionLinkIdentifier()
+    {
+        return $this->container['transaction_link_identifier'];
+    }
+
+    /**
+     * Sets transaction_link_identifier
+     *
+     * @param string|null $transaction_link_identifier A reference specific to linking card transaction lifecycle events within the payment scheme.
+     *
+     * @return self
+     */
+    public function setTransactionLinkIdentifier($transaction_link_identifier)
+    {
+        if (is_null($transaction_link_identifier)) {
+            throw new \InvalidArgumentException('non-nullable transaction_link_identifier cannot be null');
+        }
+        if ((mb_strlen($transaction_link_identifier) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $transaction_link_identifier when calling TokenizedCardDataCreate., must be smaller than or equal to 100.');
+        }
+
+        $this->container['transaction_link_identifier'] = $transaction_link_identifier;
 
         return $this;
     }

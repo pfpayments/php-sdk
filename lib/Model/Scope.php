@@ -31,11 +31,11 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package     PostFinanceCheckout\Sdk
- * @author      wallee AG
+ * @author      PostFinance Ltd
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
 class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -62,6 +62,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'string',
         'features' => '\PostFinanceCheckout\Sdk\Model\Feature[]',
         'themes' => 'string[]',
+        'trusted_external_origins' => 'string[]',
         'port' => 'int',
         'preprod_domain_name' => 'string',
         'domain_name' => 'string',
@@ -86,6 +87,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => null,
         'features' => null,
         'themes' => null,
+        'trusted_external_origins' => null,
         'port' => 'int32',
         'preprod_domain_name' => null,
         'domain_name' => null,
@@ -108,6 +110,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => false,
         'features' => false,
         'themes' => false,
+        'trusted_external_origins' => false,
         'port' => false,
         'preprod_domain_name' => false,
         'domain_name' => false,
@@ -210,6 +213,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'url',
         'features' => 'features',
         'themes' => 'themes',
+        'trusted_external_origins' => 'trustedExternalOrigins',
         'port' => 'port',
         'preprod_domain_name' => 'preprodDomainName',
         'domain_name' => 'domainName',
@@ -232,6 +236,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'setUrl',
         'features' => 'setFeatures',
         'themes' => 'setThemes',
+        'trusted_external_origins' => 'setTrustedExternalOrigins',
         'port' => 'setPort',
         'preprod_domain_name' => 'setPreprodDomainName',
         'domain_name' => 'setDomainName',
@@ -254,6 +259,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         'url' => 'getUrl',
         'features' => 'getFeatures',
         'themes' => 'getThemes',
+        'trusted_external_origins' => 'getTrustedExternalOrigins',
         'port' => 'getPort',
         'preprod_domain_name' => 'getPreprodDomainName',
         'domain_name' => 'getDomainName',
@@ -327,6 +333,7 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('features', $data ?? [], null);
         $this->setIfExists('themes', $data ?? [], null);
+        $this->setIfExists('trusted_external_origins', $data ?? [], null);
         $this->setIfExists('port', $data ?? [], null);
         $this->setIfExists('preprod_domain_name', $data ?? [], null);
         $this->setIfExists('domain_name', $data ?? [], null);
@@ -600,6 +607,33 @@ class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable themes cannot be null');
         }
         $this->container['themes'] = $themes;
+
+        return $this;
+    }
+
+    /**
+     * Gets trusted_external_origins
+     *
+     * @return string[]|null
+     */
+    public function getTrustedExternalOrigins()
+    {
+        return $this->container['trusted_external_origins'];
+    }
+
+    /**
+     * Sets trusted_external_origins
+     *
+     * @param string[]|null $trusted_external_origins Trusted external origins (e.g. merchant shops) for browser API access (CORS on /api/) and absolute target redirect URLs.
+     *
+     * @return self
+     */
+    public function setTrustedExternalOrigins($trusted_external_origins)
+    {
+        if (is_null($trusted_external_origins)) {
+            throw new \InvalidArgumentException('non-nullable trusted_external_origins cannot be null');
+        }
+        $this->container['trusted_external_origins'] = $trusted_external_origins;
 
         return $this;
     }
